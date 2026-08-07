@@ -182,7 +182,7 @@ Todo el sistema corre prácticamente gratis además de la suscripción de Claude
 | 2 | Skills `enterprise-ui-ux-design`, `qa-testing-practices`, `professional-technical-docs`, `course-study-helper` | ✅ Hecho |
 | 2 | Subagentes de orquestación (`code-reviewer`, `qa-checker`, `docs-writer`) | ✅ Hecho |
 | 3 | Decisión de framework para Hermes (Hermes Agent vs OpenClaw) | ✅ Decidido — Hermes Agent |
-| 3 | Setup real de Hermes Agent en la Raspberry Pi (con Claude Code) | Pendiente |
+| 3 | Setup real de Hermes en la Raspberry Pi | ✅ Hecho (2026-08-07) — corriendo 24/7, ruteo por SOUL.md + scripts fijos, modelo gpt-4.1-mini vía OpenRouter. Detalle completo del stack pendiente de reporte del propio Hermes |
 | 4 | Cargar temarios/apuntes/fechas reales de los 7 cursos al vault | Pendiente — a propósito, al final |
 | 5 (futuro) | Evaluar si esto se convierte en producto — "StudyBase" | post-semestre |
 
