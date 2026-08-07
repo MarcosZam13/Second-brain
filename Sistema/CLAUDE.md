@@ -6,8 +6,9 @@ Este vault es la fuente de verdad para universidad y proyectos personales. Regla
 
 - `/Cursos/{curso}/temario.md` — contenido del curso
 - `/Cursos/{curso}/entregas.md` — fechas y estado de entregables (tabla)
-- `/Cursos/{curso}/apuntes/` — notas de estudio
+- `/Cursos/{curso}/apuntes/` — notas de estudio e instrucciones/rúbricas del profesor
 - `/Cursos/{curso}/examenes/` — material específico de examen
+- `/Cursos/{curso}/entregables/` — tus propios borradores/respuestas de tareas (diario, reportes, proyectos) — separado de `apuntes/`, que es material del profesor, no tuyo
 - `/Proyectos/{GymBase|Tacha|CaneleApp}/` — contexto y documentación de cada proyecto
 - `/Sistema/skills/` — skills reusables (clean-code-practices, gitflow-scrum, y los que se agreguen)
 - `/Sistema/tickets.md` — registro único de prefijos de ticket por curso/proyecto y último número usado (ver `gitflow-scrum`)
@@ -23,6 +24,7 @@ Este vault es la fuente de verdad para universidad y proyectos personales. Regla
 7. Para cualquier operación de git (branch, commit, PR), aplicar `Sistema/skills/gitflow-scrum/SKILL.md` — el código de ticket sale siempre de `Sistema/tickets.md`, nunca se inventa mirando el log.
 8. Antes de crear una nota nueva, buscar si ya existe algo relacionado — no duplicar.
 8.1. Si aparece un documento nuevo en `Sistema/inbox/` (PDF, doc, foto de apuntes, propio o subido por Hermes), aplicar `Sistema/skills/document-intake/SKILL.md` para convertirlo en nota(s) del curso correspondiente.
+8.2. Si el usuario pide ayuda para trabajar en una tarea específica (ir respondiendo un reporte, escribiendo una entrada de diario, avanzando un proyecto), el resultado va a `Cursos/{curso}/entregables/{tema-en-kebab-case}.md` — nunca en `apuntes/`, que es material del profesor. Antes de empezar, buscar si ya existe la nota de instrucciones/rúbrica en `apuntes/` y usarla como referencia de qué se está evaluando. Frontmatter: `curso`, `tema`, `fecha`, `tipo: entregable`, `entregable_de` (wikilink a la nota de instrucciones si existe), `estado: borrador` o `entregado`, `tags`. Ir marcando contra la rúbrica qué está cubierto y qué falta a medida que se avanza, no solo al final.
 9. Nunca borrar notas — si algo queda obsoleto, moverlo a una carpeta `_archivo/` dentro del curso/proyecto correspondiente.
 10. Al agregar una fecha de entrega nueva en `entregas.md`, ofrecer sincronizarla al calendario (MCP de Google Calendar ya conectado) o a Todoist (MCP ya conectado) según corresponda.
 11. Para tareas grandes (cerrar un ticket, preparar un PR), considerar usar los subagentes en `Sistema/agents/` (code-reviewer, qa-checker, docs-writer) en vez de hacer todo en una sola pasada — ver `Sistema/agents/README.md`.
