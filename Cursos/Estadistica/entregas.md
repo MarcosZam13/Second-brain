@@ -1,3 +1,13 @@
+---
+entregas_pendientes:
+  - {fecha: "2026-08-19", entregable: "Quiz 1", peso: "6%"}
+  - {fecha: "2026-09-02", entregable: "Quiz 2", peso: "6%"}
+  - {fecha: "2026-09-23", entregable: "Quiz 3", peso: "6%"}
+  - {fecha: "2026-10-07", entregable: "Quiz 4", peso: "6%"}
+  - {fecha: "2026-11-04", entregable: "Quiz 5", peso: "6%"}
+  - {fecha: "2026-11-18", entregable: "Examen remoto (regresión)", peso: "20%"}
+---
+
 # Entregas y fechas
 
 Ver también: [[Cursos/Estadistica/temario]]

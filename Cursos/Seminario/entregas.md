@@ -1,3 +1,15 @@
+---
+entregas_pendientes:
+  - {fecha: "2026-08-18", entregable: "Reporte audiovisual #1", peso: "10%"}
+  - {fecha: "2026-09-08", entregable: "Reporte audiovisual #2", peso: "10%"}
+  - {fecha: "2026-09-22", entregable: "Diario de realidad nacional #1", peso: "15%"}
+  - {fecha: "2026-09-29", entregable: "Proyecto investigación — avance", peso: "5%"}
+  - {fecha: "2026-11-03", entregable: "Reporte audiovisual #3", peso: "10%"}
+  - {fecha: "2026-11-03", entregable: "Diario de realidad nacional #2", peso: "15%"}
+  - {fecha: "2026-11-10", entregable: "Proyecto investigación — exposición oral", peso: "10%"}
+  - {fecha: "2026-11-17", entregable: "Proyecto investigación — informe final", peso: "25%"}
+---
+
 # Entregas y fechas
 
 Ver también: [[Cursos/Seminario/temario]]
