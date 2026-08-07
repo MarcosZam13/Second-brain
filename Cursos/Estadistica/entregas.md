@@ -1,4 +1,5 @@
 ---
+curso: Estadistica
 entregas_pendientes:
   - {fecha: "2026-08-19", entregable: "Quiz 1", peso: "6%"}
   - {fecha: "2026-09-02", entregable: "Quiz 2", peso: "6%"}

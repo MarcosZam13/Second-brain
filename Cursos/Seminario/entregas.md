@@ -1,4 +1,5 @@
 ---
+curso: Seminario
 entregas_pendientes:
   - {fecha: "2026-08-18", entregable: "Reporte audiovisual #1", peso: "10%"}
   - {fecha: "2026-09-08", entregable: "Reporte audiovisual #2", peso: "10%"}
