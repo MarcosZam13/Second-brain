@@ -31,9 +31,13 @@ Esta convención es la que el usuario usa al soltar un archivo manualmente, y la
 2. Buscar primero si ya existe una nota relacionada en `Cursos/{curso}/apuntes/` o `examenes/` (regla general del vault: no duplicar).
 3. Decidir destino: `apuntes/` (contenido de estudio general) vs `examenes/` (material específico de examen) según el contenido, no según la carpeta de origen.
 4. Extraer y estructurar el contenido en un `.md` limpio (aplicar `professional-technical-docs` para el estilo de escritura), con el frontmatter del punto 4.
-5. Archivar el original: moverlo a `Cursos/{curso}/_fuentes/{nombre-original}` (nunca se borra, regla general del vault — carpeta con prefijo `_` igual que `_archivo/`).
-6. Commit siguiendo `gitflow-scrum`: `docs({CURSO-CODE}-n): agregar apuntes de {tema}` — un commit por documento procesado, no bundlear varios.
-7. Si el PDF pesa más de ~50MB, avisar al usuario antes de commitear (podría necesitar compresión o tratamiento aparte) en vez de subirlo sin más.
+5. Enlazar la nota con `[[wikilinks]]` — no es para que Hermes busque mejor (busca por contenido/embeddings vía ChromaDB, no camina el grafo), es para orden y navegación en Obsidian:
+   - Siempre enlazar a `temario.md` y `entregas.md` del mismo curso.
+   - Usar el path completo desde la raíz del vault (`[[Cursos/{curso}/temario]]`, `[[Cursos/{curso}/entregas]]`) — `temario.md`/`entregas.md` se repiten en cada curso, así que el nombre corto sería ambiguo.
+   - Si el tema se cruza con otra nota ya existente (mismo concepto en otro curso, o una nota previa del mismo curso), enlazarla también.
+6. Archivar el original: moverlo a `Cursos/{curso}/_fuentes/{nombre-original}` (nunca se borra, regla general del vault — carpeta con prefijo `_` igual que `_archivo/`).
+7. Commit siguiendo `gitflow-scrum`: `docs({CURSO-CODE}-n): agregar apuntes de {tema}` — un commit por documento procesado, no bundlear varios.
+8. Si el PDF pesa más de ~50MB, avisar al usuario antes de commitear (podría necesitar compresión o tratamiento aparte) en vez de subirlo sin más.
 
 ## 4. Frontmatter estándar en los `.md` generados
 

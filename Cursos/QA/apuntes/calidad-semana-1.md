@@ -11,6 +11,8 @@ tags: [calidad, aseguramiento-calidad, definicion-calidad, evolucion-calidad, sq
 
 Aseguramiento de la calidad del software, II Semestre 2026. Contacto: Marcos Rodríguez (ma.rodriguez@itcr.ac.cr).
 
+Ver también: [[Cursos/QA/temario]] · [[Cursos/QA/entregas]]
+
 ## Presentación del curso
 
 **Objetivo del curso:** experimentar los procesos de calidad del software mediante actividades de planeación, validación y verificación, para producir artefactos y sistemas que satisfagan los requerimientos en forma oportuna y económica.
