@@ -1,2 +1,0 @@
-Esto "reemplaza" la nota vieja de `criptografía asimétrica` — el profe dijo: no uses $HOME ni comillas simples 'raras', y esto tiene
-un salto de línea también.
