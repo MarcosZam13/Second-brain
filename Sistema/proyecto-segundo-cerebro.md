@@ -183,7 +183,8 @@ Todo el sistema corre prácticamente gratis además de la suscripción de Claude
 | 2 | Subagentes de orquestación (`code-reviewer`, `qa-checker`, `docs-writer`) | ✅ Hecho |
 | 3 | Decisión de framework para Hermes (Hermes Agent vs OpenClaw) | ✅ Decidido — Hermes Agent |
 | 3 | Setup real de Hermes en la Raspberry Pi | ✅ Hecho (2026-08-07) — corriendo 24/7, ruteo por SOUL.md + scripts fijos, modelo gpt-4.1-mini vía OpenRouter. Detalle completo del stack pendiente de reporte del propio Hermes |
-| 4 | Cargar temarios/apuntes/fechas reales de los 7 cursos al vault | Pendiente — a propósito, al final |
+| 4 | Cargar temarios/apuntes/fechas reales de los 7 cursos al vault | En progreso — Seminario y Estadística ya cargados |
+| 4 | Automatizar `document-intake` con Claude Code Routine (`vault-inbox-intake`, cron cada hora, sin tocar Hermes) | ✅ Hecho (2026-08-07) — revisa `Sistema/inbox/` y abre PR, nunca mergea sola |
 | 5 (futuro) | Evaluar si esto se convierte en producto — "StudyBase" | post-semestre |
 
 Multiplataforma: todo lo construido (vault, Git, Claude Code, Hermes Agent) corre igual en Windows y Linux — nada queda atado a un solo sistema operativo salvo la Raspberry Pi (que ya es Linux).
