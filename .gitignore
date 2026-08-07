@@ -1,0 +1,19 @@
+# Obsidian
+.obsidian/workspace*
+.obsidian/cache
+.obsidian/plugins/*/data.json
+.trash/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+*.swp
+*.swo
+
+# Sync tools
+.sync/
+.stfolder/
+.stversions/
