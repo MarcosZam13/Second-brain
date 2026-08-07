@@ -56,11 +56,19 @@ Hermes **no genera el `.md` final** — eso lo hace Claude Code en la siguiente 
 
 1. Recibe el archivo por Telegram junto con curso/tema (preguntarle al usuario si no los dio).
 2. Lo renombra siguiendo la convención del punto 2.
-3. Lo sube directo a `Sistema/inbox/{nombre-convención}` vía la API de GitHub (no clona el repo), en un commit o PR según ya tenga configurado.
-4. **Borra el archivo temporal local inmediatamente después de confirmar el push** — la Pi no tiene espacio para acumular archivos, así que nunca debe quedar un documento sin subir "por si acaso".
+3. Lo sube directo a `Sistema/inbox/{nombre-convención}` vía la API de GitHub (Contents API), **no** haciendo `git add`/`commit` del PDF en el clon local — así el blob del archivo nunca ocupa espacio en la Pi, solo transita por HTTP.
+4. **Borra el archivo temporal local inmediatamente después de confirmar el upload** — la Pi tiene muy poco espacio libre, así que nunca debe quedar un documento sin subir "por si acaso".
 5. Confirma al usuario: `"📄 Subido a inbox: Seguridad_criptografia-simetrica_2026-08-07.pdf ✅ — Claude Code lo procesa en la próxima sesión."`
 
-## 6. Reglas generales
+## 6. El clon local de Hermes en la Pi
+
+Hermes sí mantiene un clon local del repo (para leer notas y responder preguntas), separado de la subida de PDFs del punto anterior. Para que ese clon no crezca sin control con el archivo de fuentes:
+
+- Configurar `git sparse-checkout` (modo `--no-cone`) excluyendo `Cursos/*/_fuentes/` — Hermes no necesita los PDFs originales localmente, solo el texto de `apuntes/`, `entregas.md`, `temario.md`, etc.
+- Preferir un clon shallow (`--depth 1`) ya que Hermes no necesita historial, solo el estado actual.
+- `git pull` normal alcanza para mantenerlo al día; no requiere traer los PDFs archivados aunque el repo remoto los tenga.
+
+## 7. Reglas generales
 
 - Nunca borrar el original — se archiva en `_fuentes/`, igual que las notas obsoletas van a `_archivo/`.
 - Un documento = un commit, con código de ticket del curso (`SEG`, `QA`, `WEB`, etc., mismo criterio de `gitflow-scrum`).
