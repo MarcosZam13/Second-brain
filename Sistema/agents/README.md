@@ -1,5 +1,7 @@
 # Subagentes — cómo activarlos en un proyecto
 
+Ver también: [[Sistema/CLAUDE|CLAUDE.md]] · [[Sistema/skills/clean-code-practices/SKILL|clean-code-practices]] · [[Sistema/skills/qa-testing-practices/SKILL|qa-testing-practices]] · [[Sistema/skills/professional-technical-docs/SKILL|professional-technical-docs]] · [[Sistema/skills/gitflow-scrum/SKILL|gitflow-scrum]]
+
 Estas plantillas viven acá como referencia central. Para usarlas en un proyecto real (Tacha, GymBase, CaneleApp, o un repo de un curso):
 
 1. Copiá la(s) plantilla(s) que necesités a `.claude/agents/` dentro del repo del proyecto.
@@ -10,9 +12,9 @@ Estas plantillas viven acá como referencia central. Para usarlas en un proyecto
 ```
 1. Implementás la feature (Claude Code + skill clean-code-practices activo)
 2. Antes de abrir el PR:
-   → code-reviewer revisa estructura/naming/scope
-   → qa-checker verifica que haya casos de prueba (happy/negativo/límite)
-   → docs-writer actualiza README/docs si hace falta
+   → [[Sistema/agents/code-reviewer|code-reviewer]] revisa estructura/naming/scope
+   → [[Sistema/agents/qa-checker|qa-checker]] verifica que haya casos de prueba (happy/negativo/límite)
+   → [[Sistema/agents/docs-writer|docs-writer]] actualiza README/docs si hace falta
 3. Abrís el PR siguiendo el formato de gitflow-scrum
 ```
 

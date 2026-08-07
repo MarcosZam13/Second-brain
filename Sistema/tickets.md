@@ -1,6 +1,8 @@
 # Registro de códigos de ticket
 
-Fuente de verdad única para los prefijos de ticket usados en branches/commits/PRs de este vault (ver `Sistema/skills/gitflow-scrum/SKILL.md`). Antes de crear un branch o commit con un código nuevo, consultar esta tabla; después de usarlo, actualizar "Último usado" acá mismo en el mismo commit.
+Ver también: [[Sistema/skills/gitflow-scrum/SKILL|gitflow-scrum]] · [[Sistema/CLAUDE|CLAUDE.md]]
+
+Fuente de verdad única para los prefijos de ticket usados en branches/commits/PRs de este vault (ver [[Sistema/skills/gitflow-scrum/SKILL|gitflow-scrum]]). Antes de crear un branch o commit con un código nuevo, consultar esta tabla; después de usarlo, actualizar "Último usado" acá mismo en el mismo commit.
 
 ## Cursos
 
@@ -26,7 +28,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 
 | Prefijo | Alcance | Último usado | Próximo |
 |---|---|---|---|
-| VAULT | Cambios al propio sistema del vault (skills, agentes, CLAUDE.md, estructura) | VAULT-16 | VAULT-17 |
+| VAULT | Cambios al propio sistema del vault (skills, agentes, CLAUDE.md, estructura) | VAULT-17 | VAULT-18 |
 
 ## Reglas
 

@@ -1,6 +1,8 @@
 # Segundo Cerebro + Hermes
 ### Sistema personal de organización académica, proyectos y workflow de desarrollo
 
+Ver también: [[Sistema/CLAUDE|CLAUDE.md (reglas de navegación)]] · [[Sistema/tickets|Registro de tickets]] · [[Sistema/skills/document-intake/SKILL|document-intake]] · [[Dashboard]]
+
 ---
 
 ## 1. El problema

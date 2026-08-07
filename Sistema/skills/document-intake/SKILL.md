@@ -5,6 +5,8 @@ description: Use this skill whenever a new document (PDF, DOCX, image of notes/s
 
 # Document intake — de PDF/doc suelto a nota estructurada del curso
 
+Ver también: [[Sistema/CLAUDE|CLAUDE.md]] · [[Sistema/inbox/README|Sistema/inbox]] · [[Sistema/tickets|tickets.md]] · [[Cursos/README|Cursos]]
+
 Objetivo: cualquier documento que entra al sistema (por el usuario en Claude Code, o por Hermes desde Telegram) sigue **la misma convención de nombre y termina en el mismo lugar**, para que después se pueda buscar de forma confiable — ya sea yo leyendo el vault o Hermes contestando "¿qué tengo de X tema?" desde el celular.
 
 ## 1. Zona de entrada única

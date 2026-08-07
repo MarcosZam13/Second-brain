@@ -1,5 +1,7 @@
 # Dashboard
 
+Ver también: [[Cursos/README|Cursos]] · [[Proyectos/README|Proyectos]] · [[Sistema/CLAUDE|Sistema (CLAUDE.md)]] · [[Sistema/proyecto-segundo-cerebro|Diseño del sistema]]
+
 ```dataviewjs
 // Colores por curso — orden fijo, nunca se reordena (si se agrega un curso
 // nuevo, va al final de esta lista; así el color de un curso ya existente

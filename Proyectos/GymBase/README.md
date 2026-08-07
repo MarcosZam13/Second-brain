@@ -1,5 +1,7 @@
 # GymBase
 
+Ver también: [[Proyectos/README|Proyectos]]
+
 **Repo:** https://github.com/MarcosZam13/Gymbase (privado)
 **Demo:** https://demogymbase.vercel.app (cliente: `iron-gym`)
 
