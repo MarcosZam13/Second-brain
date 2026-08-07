@@ -28,7 +28,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 
 | Prefijo | Alcance | Último usado | Próximo |
 |---|---|---|---|
-| VAULT | Cambios al propio sistema del vault (skills, agentes, CLAUDE.md, estructura) | VAULT-17 | VAULT-18 |
+| VAULT | Cambios al propio sistema del vault (skills, agentes, CLAUDE.md, estructura) | VAULT-18 | VAULT-19 |
 
 ## Reglas
 

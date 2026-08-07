@@ -2,6 +2,9 @@
 .obsidian/workspace*
 .obsidian/cache
 .obsidian/plugins/*/data.json
+# Excepción: settings de Dataview sí se sincronizan (incluye enableDataviewJs,
+# necesario para que Dashboard.md funcione en cualquier dispositivo/clon)
+!.obsidian/plugins/dataview/data.json
 .trash/
 
 # OS
