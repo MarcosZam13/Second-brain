@@ -21,6 +21,7 @@ Este vault es la fuente de verdad para universidad y proyectos personales. Regla
 6. Para documentación técnica (README, docs, comentarios), aplicar `Sistema/skills/professional-technical-docs/SKILL.md`.
 7. Para cualquier operación de git (branch, commit, PR), aplicar `Sistema/skills/gitflow-scrum/SKILL.md`.
 8. Antes de crear una nota nueva, buscar si ya existe algo relacionado — no duplicar.
+8.1. Si aparece un documento nuevo en `Sistema/inbox/` (PDF, doc, foto de apuntes, propio o subido por Hermes), aplicar `Sistema/skills/document-intake/SKILL.md` para convertirlo en nota(s) del curso correspondiente.
 9. Nunca borrar notas — si algo queda obsoleto, moverlo a una carpeta `_archivo/` dentro del curso/proyecto correspondiente.
 10. Al agregar una fecha de entrega nueva en `entregas.md`, ofrecer sincronizarla al calendario (MCP de Google Calendar ya conectado) o a Todoist (MCP ya conectado) según corresponda.
 11. Para tareas grandes (cerrar un ticket, preparar un PR), considerar usar los subagentes en `Sistema/agents/` (code-reviewer, qa-checker, docs-writer) en vez de hacer todo en una sola pasada — ver `Sistema/agents/README.md`.
