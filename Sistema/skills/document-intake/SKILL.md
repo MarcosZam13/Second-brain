@@ -36,8 +36,9 @@ Esta convención es la que el usuario usa al soltar un archivo manualmente, y la
    - Usar el path completo desde la raíz del vault (`[[Cursos/{curso}/temario]]`, `[[Cursos/{curso}/entregas]]`) — `temario.md`/`entregas.md` se repiten en cada curso, así que el nombre corto sería ambiguo.
    - Si el tema se cruza con otra nota ya existente (mismo concepto en otro curso, o una nota previa del mismo curso), enlazarla también.
 6. Archivar el original: moverlo a `Cursos/{curso}/_fuentes/{nombre-original}` (nunca se borra, regla general del vault — carpeta con prefijo `_` igual que `_archivo/`).
-7. Commit siguiendo `gitflow-scrum`: `docs({CURSO-CODE}-n): agregar apuntes de {tema}` — un commit por documento procesado, no bundlear varios.
+7. Commit siguiendo `gitflow-scrum`: `docs({CURSO-CODE}-n): agregar apuntes de {tema}` — un commit por documento procesado, no bundlear varios. El código de ticket sale de `Sistema/tickets.md` (nunca inventar uno mirando el log); actualizar ahí el "Último usado" en el mismo commit. Excepción: cuando varios documentos alimentan exclusivamente los mismos `temario.md`/`entregas.md` del curso (ej. programa + cronograma subidos juntos), está bien agruparlos en un solo commit — el criterio es "un commit por unidad de contenido resultante", no literalmente un PDF por commit.
 8. Si el PDF pesa más de ~50MB, avisar al usuario antes de commitear (podría necesitar compresión o tratamiento aparte) en vez de subirlo sin más.
+9. **Documentos casi-duplicados → una sola nota.** Si varios PDFs del mismo lote comparten formato y estructura casi idénticos y solo cambia el contenido puntual (ej. tres "reportes audiovisuales" con la misma rúbrica pero distinto documental/preguntas cada uno), no crear un `.md` por PDF — combinarlos en una sola nota con una sección por documento, y un solo `fuente:` en el frontmatter como lista (YAML array) apuntando a los PDFs archivados. Esto evita repetir la misma rúbrica/estructura 3 veces y mantiene el principio de "no duplicar" del vault. Señal para aplicar esto: si al escribir la segunda nota estás copiando la mayoría de la estructura de la primera, parar y fusionar.
 
 ## 4. Frontmatter estándar en los `.md` generados
 
@@ -53,6 +54,14 @@ tags: [criptografia, seguridad]
 ```
 
 Este frontmatter es lo que permite buscar/filtrar después, tanto a mí como a Hermes (vía la API de GitHub, filtrando por curso/tema/tags en vez de tener que leer todo el vault).
+
+Cuando una nota se arma a partir de más de un PDF (varios documentos combinados por el punto 9, o un `temario.md`/`entregas.md` alimentado por programa+cronograma), `fuente:` es una lista YAML en vez de un string único:
+
+```yaml
+fuente:
+  - _fuentes/Seguridad_reporte-1_2026-08-07.pdf
+  - _fuentes/Seguridad_reporte-2_2026-08-07.pdf
+```
 
 ## 5. Qué hace Hermes (spec para pasarle tal cual)
 

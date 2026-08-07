@@ -32,13 +32,9 @@ Rules:
 
 ## 2. Ticket/requirement codes
 
-Every piece of work needs a code before a branch exists. If the professor/team doesn't provide a ticketing system, define a lightweight convention per project up front, e.g.:
+Every piece of work needs a code before a branch exists. `Sistema/tickets.md` is the single source of truth for which prefix belongs to which course/project and what the next free number is — check it before naming a branch or writing a commit, and update the "Último usado" column in the same commit that consumes the number. Never invent or guess a number by re-reading git log; the table is authoritative (log is only the fallback if the table has drifted).
 
-- `TACHA-{n}` for Tacha
-- `GYM-{n}` for GymBase
-- `{COURSE-ACRONYM}-{n}` for university projects (e.g. `WEB-03` for requirement 3 of the web dev course)
-
-Keep a simple table in the repo (`docs/requirements.md` or the project's vault page) mapping code → requirement description → status. This is what makes the branch/commit codes meaningful instead of arbitrary numbers.
+If a course/project doesn't have a row yet in `Sistema/tickets.md`, add one first (3-5 letter prefix derived from the folder name) instead of picking an ad-hoc code.
 
 ## 3. Commit messages
 
