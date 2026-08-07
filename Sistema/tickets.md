@@ -11,7 +11,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 | SEG | Seguridad | — | SEG-1 |
 | WEB | Desarrollo Web | — | WEB-1 |
 | CYS | Computación y Sociedad | — | CYS-1 |
-| EST | Estadística | — | EST-1 |
+| EST | Estadística | EST-1 | EST-2 |
 | SO | Sistemas Operativos | — | SO-1 |
 
 ## Proyectos personales
@@ -26,7 +26,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 
 | Prefijo | Alcance | Último usado | Próximo |
 |---|---|---|---|
-| VAULT | Cambios al propio sistema del vault (skills, agentes, CLAUDE.md, estructura) | VAULT-5 | VAULT-6 |
+| VAULT | Cambios al propio sistema del vault (skills, agentes, CLAUDE.md, estructura) | VAULT-6 | VAULT-7 |
 
 ## Reglas
 
