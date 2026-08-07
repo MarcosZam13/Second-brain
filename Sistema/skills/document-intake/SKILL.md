@@ -25,9 +25,26 @@ Ejemplo: `Seguridad_criptografia-simetrica_2026-08-07.pdf`
 
 Esta convención es la que el usuario usa al soltar un archivo manualmente, y la misma que Hermes debe aplicar al renombrar lo que recibe por Telegram antes de subirlo.
 
+### 2.1. Archivo de contexto acompañante (cuando hay algo que decir más allá de curso/tema)
+
+El nombre de archivo solo transporta curso+tema+fecha. Si el usuario le da a Hermes por Telegram **instrucciones o contexto adicional** al subir un documento — "esto ya está escrito, solo archivalo tal cual", "el segundo PDF es de Seguridad, el tercero de QA", "esto reemplaza la nota vieja de tal tema", "es un borrador, no lo proceses como apunte del profesor" — ese contexto se pierde en cuanto termina la conversación de Telegram, porque quien procesa el inbox después (yo en una sesión, o la Claude Code Routine que corre sola cada 6h) no tiene memoria de ese chat.
+
+Por eso: cuando Hermes reciba contexto que no sea simplemente "este es el curso/tema", debe escribirlo en un archivo de texto acompañante, mismo nombre base que el documento, extensión `.contexto.txt`:
+
+```
+Seguridad_criptografia-simetrica_2026-08-07.pdf
+Seguridad_criptografia-simetrica_2026-08-07.contexto.txt   ← solo si hubo algo que decir
+```
+
+Contenido: el texto tal cual lo escribió el usuario (o un resumen fiel si vino por audio/transcripción), sin reformatear. Si no hay nada más allá de curso/tema, **no crear el archivo** — no generar ruido innecesario en el inbox.
+
+Quien procese el documento (yo o la Routine) debe buscar y leer este archivo antes de clasificar, y borrarlo junto con el original al archivar (no queda huérfano en el inbox, y su contenido relevante debe reflejarse en el frontmatter/cuerpo de la nota resultante o en la decisión tomada).
+
+Para varios documentos subidos juntos en un mismo mensaje de Telegram (ej. 5 archivos de 5 cursos distintos): cada uno debe llevar su propio nombre con curso/tema correcto — eso ya alcanza para distinguirlos sin necesidad de `.contexto.txt`, salvo que además haya alguna instrucción especial sobre alguno de ellos en particular.
+
 ## 3. Qué hace Claude Code cuando encuentra algo en `Sistema/inbox/`
 
-1. Leer el documento y el nombre de archivo para identificar curso y tema.
+1. Leer el documento y el nombre de archivo para identificar curso y tema. Buscar si existe un archivo `{mismo-nombre}.contexto.txt` junto al documento (ver punto 2.1) y leerlo antes de seguir — puede cambiar cómo se clasifica o procesa el documento.
 2. Buscar primero si ya existe una nota relacionada en `Cursos/{curso}/apuntes/` o `examenes/` (regla general del vault: no duplicar).
 3. Decidir destino: `apuntes/` (contenido de estudio general) vs `examenes/` (material específico de examen) según el contenido, no según la carpeta de origen.
 4. Extraer y estructurar el contenido en un `.md` limpio (aplicar `professional-technical-docs` para el estilo de escritura), con el frontmatter del punto 4.
@@ -70,8 +87,9 @@ Hermes **no genera el `.md` final** — eso lo hace Claude Code en la siguiente 
 1. Recibe el archivo por Telegram junto con curso/tema (preguntarle al usuario si no los dio).
 2. Lo renombra siguiendo la convención del punto 2.
 3. Lo sube directo a `Sistema/inbox/{nombre-convención}` vía la API de GitHub (Contents API), **no** haciendo `git add`/`commit` del PDF en el clon local — así el blob del archivo nunca ocupa espacio en la Pi, solo transita por HTTP.
-4. **Borra el archivo temporal local inmediatamente después de confirmar el upload** — la Pi tiene muy poco espacio libre, así que nunca debe quedar un documento sin subir "por si acaso".
-5. Confirma al usuario: `"📄 Subido a inbox: Seguridad_criptografia-simetrica_2026-08-07.pdf ✅ — Claude Code lo procesa en la próxima sesión."`
+4. Si el usuario dio algo más que curso/tema (instrucciones, aclaraciones, "esto reemplaza tal nota", etc.), subir también `{nombre-convención}.contexto.txt` con ese texto, por la misma API de Contents (mismo criterio que el PDF: no toca disco más de lo necesario, es un string corto). Ver punto 2.1 del skill de `document-intake` — no crear este archivo si no hay nada que decir más allá de curso/tema.
+5. **Borra el archivo temporal local inmediatamente después de confirmar el upload** — la Pi tiene muy poco espacio libre, así que nunca debe quedar un documento sin subir "por si acaso".
+6. Confirma al usuario: `"📄 Subido a inbox: Seguridad_criptografia-simetrica_2026-08-07.pdf ✅ — Claude Code lo procesa en la próxima sesión."` (agregar "con contexto ✅" si también subió el `.contexto.txt`).
 
 ## 6. El clon local de Hermes en la Pi
 

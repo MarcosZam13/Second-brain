@@ -70,6 +70,7 @@ Un malentendido común (y que vale la pena tener clarísimo): **esto no es un so
 - Para tareas simples y fechas: escribe **directo** a Todoist/Calendario (esto no necesita revisión, es de bajo riesgo y alta frecuencia).
 - Responde "¿qué tengo pendiente?" leyendo Todoist/Calendario en el momento.
 - Confirma cada acción con un mensaje corto: "PR abierto: Seguridad/apuntes-unidad3 ✅" o "Tarea creada en Todoist ✅".
+- Si el usuario da contexto/instrucciones más allá de curso+tema al subir un documento, lo sube como archivo `.contexto.txt` acompañante junto al documento — necesario porque ahora el procesamiento del inbox lo puede hacer una Claude Code Routine que corre horas después, sin memoria de la conversación de Telegram (ver punto 2.1 de `Sistema/skills/document-intake/SKILL.md` para el detalle exacto).
 
 **Qué NO hace (a propósito):**
 - No razona profundo, no genera código, no escribe documentación larga. Eso es trabajo de Claude Code cuando te sentás a la compu.
