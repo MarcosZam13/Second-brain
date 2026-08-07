@@ -12,6 +12,6 @@ II Semestre 2026. Cada curso vive en su propia carpeta con `temario.md`, `entreg
 | Seguridad | Pendiente de cargar | [[Cursos/Seguridad/temario\|temario]] · [[Cursos/Seguridad/entregas\|entregas]] |
 | Desarrollo Web | Pendiente de cargar | [[Cursos/DesarrolloWeb/temario\|temario]] · [[Cursos/DesarrolloWeb/entregas\|entregas]] |
 | Computación y Sociedad | Pendiente de cargar | [[Cursos/CompuYSociedad/temario\|temario]] · [[Cursos/CompuYSociedad/entregas\|entregas]] |
-| Sistemas Operativos | Pendiente de cargar | [[Cursos/SistemasOperativos/temario\|temario]] · [[Cursos/SistemasOperativos/entregas\|entregas]] |
+| Sistemas Operativos | Cargado | [[Cursos/SistemasOperativos/temario\|temario]] · [[Cursos/SistemasOperativos/entregas\|entregas]] |
 
 Cuando se cargue contenido de un curso que todavía está "Pendiente", actualizar esta tabla a "Cargado".
