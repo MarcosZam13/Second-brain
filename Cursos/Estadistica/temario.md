@@ -47,6 +47,10 @@ La prueba parcial remota es grupal (informe, 30% de esa nota) + comprobación es
 
 **Regresión:** regresión lineal simple (cuadrados mínimos, coeficientes, intervalos de predicción, correlación); regresión no lineal (estimación y predicción); regresión lineal múltiple.
 
+## Apuntes disponibles
+
+- [[Cursos/Estadistica/apuntes/inferencia-estadistica-guia-unidades1-2|Guía teórico-práctica — Inferencia Estadística (Unidades 1 y 2)]] — conceptos preliminares, distribuciones de probabilidad, estimación puntual/verosimilitud, intervalos de confianza y pruebas de hipótesis para media/proporción/varianza.
+
 ## Bibliografía
 
 **Obligatoria:**
