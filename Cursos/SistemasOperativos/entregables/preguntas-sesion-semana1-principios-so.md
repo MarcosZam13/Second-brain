@@ -12,15 +12,23 @@ tags: [preguntas-analisis, tutor-socratico, bitacora-ia]
 
 Ver también: [[Cursos/SistemasOperativos/apuntes/estructura-sistemas-computo-unidad1]] · [[Cursos/SistemasOperativos/entregas]]
 
-**Entrega:** PDF nombrado `S1_Preguntas_NombreApellido1Apellido2`, antes del inicio de la sesión de Semana 2 — jueves **2026-08-13**.
+**Entrega:** PDF nombrado `S1_Preguntas_MarcosZamoraSanchez`, antes del inicio de la sesión de Semana 2 — jueves **2026-08-13**.
+
+## Portada
+
+- **Nombre completo:** Marcos Zamora Sánchez
+- **Curso:** IC-6600 Principios de Sistemas Operativos
+- **Profesor:** Jorge Alfaro Velasco
+- **Fecha:** 2026-08-13
 
 ## Checklist contra la rúbrica
 
 - [ ] Calidad y corrección conceptual de las 10 respuestas e incisos (60%) — faltan 3 puntos puntuales, ver abajo
 - [x] Evidencia de razonamiento propio — palabras propias, no copiadas de la IA (20%)
 - [x] Bitácora de uso de IA — 3-5 líneas por pregunta usada, o nota de "no fue necesario" (20%)
-- [ ] Portada (nombre completo, curso, fecha) y respuestas numeradas 1-10 con sus incisos
-- [ ] Exportar a PDF con el nombre de archivo indicado
+- [x] Portada (nombre completo, curso, fecha) — contenido listo, ver arriba
+- [ ] Respuestas numeradas 1-10 con sus incisos (ya están así en este borrador, verificar al pasar a PDF)
+- [ ] Exportar a PDF con el nombre `S1_Preguntas_MarcosZamoraSanchez.pdf`
 
 **Últimos 3 pendientes de corrección conceptual:**
 - [ ] 1(a) — línea ~30, todavía describe decodificación como "traducir lo que el SO tiene que hacer" en vez de opcode+operandos → señales de control.
