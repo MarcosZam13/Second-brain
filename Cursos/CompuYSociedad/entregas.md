@@ -9,6 +9,8 @@ entregas_pendientes:
 Ver también: [[Cursos/CompuYSociedad/temario]]
 
 > Primera clase asíncrona — el curso todavía no tiene programa/temario cargado en el vault, esta es la única fecha conocida hasta ahora.
+>
+> Ya sincronizada como tarea en Todoist (labels `compuysociedad` + `universidad`).
 
 | Fecha | Entregable | Peso | Estado |
 |---|---|---|---|
