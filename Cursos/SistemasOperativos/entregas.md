@@ -17,7 +17,7 @@ Ver también: [[Cursos/SistemasOperativos/temario]]
 
 > Clases los jueves. Semana 1 = jueves **2026-08-06** (confirmado por el usuario). El resto de las fechas se calculó a partir de ahí, una semana de clase = jueves a jueves; cuando el programa solo daba "último día de la semana" (Unidad 5), se usó el domingo de esa semana ISO (lunes–domingo).
 >
-> Las 7 fechas de abajo ya están sincronizadas como tareas en Todoist (labels `sistemasoperativos` + `universidad`).
+> Las 8 fechas de abajo ya están sincronizadas como tareas en Todoist (labels `sistemasoperativos` + `universidad`); la de 2026-08-13 también está en Google Calendar (evento de día completo).
 
 | Fecha | Entregable | Peso | Estado |
 |---|---|---|---|
