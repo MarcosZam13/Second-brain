@@ -6,7 +6,8 @@ tipo: apunte
 fuente:
   - _fuentes/SistemasOperativos_estructura-sistemas-computo-unidad1_2026-08-07.png
   - _fuentes/SistemasOperativos_todo-list-semana1_2026-08-07.docx
-tags: [unidad1, estructura-sistemas-computo, todo-list, actividad-equipos, computo-heterogeneo]
+  - _fuentes/SistemasOperativos_preguntas-semana1-principios-so_2026-08-09.pdf
+tags: [unidad1, estructura-sistemas-computo, todo-list, actividad-equipos, computo-heterogeneo, preguntas-analisis, tutor-socratico]
 ---
 
 # Unidad 1 — Estructura de los Sistemas de Cómputo (Semana 1)
@@ -27,6 +28,57 @@ Base sobre la que se construyen los SO: la estructura de los sistemas de cómput
 ## Política de uso de IA generativa (aplica a todo el curso)
 
 El curso **no prohíbe** el uso de IA generativa; se evalúa su uso crítico, transparente y bien documentado. Entregar respuestas copiadas directamente de una IA sin la bitácora correspondiente, o sin evidencia de razonamiento propio, se considera **entrega incompleta** y afecta el criterio "Evidencia de razonamiento propio". Este modelo se mantiene y amplía en las siguientes unidades (Indagatoria, Proyectos Programados).
+
+## Preguntas de la sesión — Semana 1 (Actividad Individual, IA como Tutor Socrático)
+
+**Entrega:** PDF nombrado `S1_Preguntas_NombreApellido1Apellido2`, antes del inicio de la sesión de Semana 2 (jueves **2026-08-13**), según TEC Digital.
+
+**Objetivo:** afianzar los conceptos de la Semana 1 (arquitectura básica, SO como intermediario, ciclo de instrucción, interrupciones, DMA, cómputo heterogéneo) mediante preguntas de análisis, usando IA como tutor socrático (que ayude a razonar sin dar la respuesta final) en vez de sustituto del razonamiento propio.
+
+### Instrucciones
+
+1. Consultar un chat de IA en modo tutor socrático antes de responder cada pregunta (ej.: *"Ayúdame a entender por qué el modo Kernel necesita restringir el acceso al hardware, sin darme la respuesta completa"*).
+2. Responder cada pregunta e inciso con palabras propias, sin copiar/parafrasear literalmente lo que entregó la IA.
+3. Agregar al final un apartado **"Bitácora de uso de IA"** (3-5 líneas por pregunta en que se usó): qué se preguntó, qué se obtuvo, y qué se validó/ajustó/descartó y por qué.
+4. Si no se usó IA en alguna pregunta, indicarlo brevemente ("No fue necesario, resuelto con el material de clase").
+
+### Preguntas de análisis
+
+Los bloques II y IV profundizan en lo visto en clase; los bloques I y III incluyen incisos "de anticipación" (pipeline, planificación, ISA) que no requieren dominio aún, solo razonar con lo visto hasta ahora.
+
+**I. Ciclo de Instrucción y Procesador**
+
+1. **Decodificación y diseño del procesador** — viabilidad de eliminar la etapa de decodificación con instrucciones simples de formato fijo; comparar CISC vs. RISC; impacto en hardware/compilador/consumo/diseño del SO; escenario donde sería o no recomendable; ¿simplifica o solo redistribuye la complejidad?
+2. **Contador de Programa (PC), bifurcaciones y pipeline** *(de anticipación)* — por qué el PC no siempre se incrementa linealmente; impacto de una predicción de salto incorrecta; relación con cambios de contexto, planificación por quantum y sistemas multitarea intensivos; ¿el hardware condiciona las políticas de planificación del SO?
+3. **Longitud del set de instrucciones (ISA)** *(de anticipación)* — comparar ISA amplio vs. reducido en rendimiento/consumo/tamaño de código/paralelización; influencia en llamadas al sistema, portabilidad del kernel y compatibilidad; ¿cuál es más adecuado para un SO de propósito general vs. un sistema embebido de tiempo real?
+
+**II. Memoria y Jerarquía de Almacenamiento**
+
+4. **Separación de memoria de instrucciones y datos** — Harvard vs. Von Neumann; impacto en seguridad (código malicioso), rendimiento y concurrencia; escenario donde previene una vulnerabilidad; ¿decisión arquitectónica o también estratégica del SO?
+5. **Jerarquía de memoria en sistemas embebidos** — por qué se eliminan niveles de caché/memoria virtual; impacto en predictibilidad, latencia y complejidad del SO; comparación con el modelo tradicional multinivel; ¿mejora o limita la escalabilidad?
+6. **Memoria caché y localidad** — principios de localidad temporal y espacial; su influencia en el diseño de la caché; relación con page faults, algoritmos de reemplazo y afinidad de procesos; escenario de mal diseño que degrade el rendimiento.
+
+**E/S y Acceso a Datos**
+
+7. **DMA y contención del bus** — cuellos de botella con múltiples dispositivos usando DMA simultáneamente; cómo el SO mitiga la contención; relación con planificación de I/O y priorización; estrategia de optimización para un servidor de alto tráfico.
+8. **Modos de transferencia de datos** — comparar E/S programada, por interrupciones y DMA en entornos multitarea; escenario adecuado para cada mecanismo; diseño de un sistema híbrido combinándolos según carga.
+
+**IV. Sistemas Operativos y Gestión de Recursos**
+
+9. **Recuperación del control del CPU** — mecanismos (interrupciones, timer, modo kernel); impacto del cambio de contexto en el rendimiento; relación con el algoritmo de planificación; escenario donde un mal manejo del timer genere injusticia en la asignación de CPU.
+10. **Interrupciones de hardware vs. software** — comparar sincronización y control; ventajas/desventajas en gestión de procesos; escenarios donde el SO preferiría una sobre otra; ¿cuál es más determinista?
+
+### Formato de entrega y evaluación
+
+Portada breve (nombre completo, curso, fecha); respuestas numeradas 1-10 con sus incisos; apartado final de Bitácora de uso de IA claramente identificado.
+
+| Criterio | Peso |
+|---|---|
+| Calidad y corrección conceptual de las respuestas (10 bloques e incisos) | 60% |
+| Evidencia de razonamiento propio (palabras propias, no copiadas de la IA) | 20% |
+| Calidad y honestidad de la Bitácora de uso de IA | 20% |
+
+El curso no prohíbe IA generativa; se evalúa su uso crítico, transparente y documentado — entregar respuestas copiadas sin bitácora o sin evidencia de razonamiento propio se considera entrega incompleta. Este modelo de trabajo con IA se mantiene y amplía en unidades posteriores (Indagatoria, Proyectos Programados).
 
 ## TO-DO List — Semana 1
 
