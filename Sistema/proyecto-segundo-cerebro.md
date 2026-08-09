@@ -188,7 +188,7 @@ Todo el sistema corre prácticamente gratis además de la suscripción de Claude
 | 3 | Setup real de Hermes en la Raspberry Pi | ✅ Hecho (2026-08-07) — corriendo 24/7, ruteo por SOUL.md + scripts fijos, modelo gpt-4.1-mini vía OpenRouter. Detalle completo del stack pendiente de reporte del propio Hermes |
 | 4 | Cargar temarios/apuntes/fechas reales de los 7 cursos al vault | En progreso — Seminario y Estadística ya cargados |
 | 4 | Automatizar `document-intake` con Claude Code Routine (`vault-inbox-intake`, cron cada 6h, sin tocar Hermes) | ✅ Hecho (2026-08-07) — revisa `Sistema/inbox/` y abre PR, nunca mergea sola. Corre 100% en la nube de Anthropic (no en la compu ni la Pi), sale del pool de uso del plan Pro. Frecuencia bajada de cada hora a cada 6h para no toparse con el tope diario de corridas de Routines (no confirmado el número exacto para Pro — revisar en claude.ai/settings/usage si hace falta ajustar) |
-| 5 | Sesiones de trabajo diarias con check-in proactivo de Hermes (22:00) — ver sección 9 | 📝 Diseñado (2026-08-09) — pendiente de implementar |
+| 5 | Sesiones de trabajo diarias con check-in proactivo de Hermes (22:00) — ver sección 9 | 📋 Spec lista (2026-08-09) — pendiente de implementar en el repo de Hermes |
 | 6 (futuro) | Evaluar si esto se convierte en producto — "StudyBase" | post-semestre |
 
 Multiplataforma: todo lo construido (vault, Git, Claude Code, Hermes Agent) corre igual en Windows y Linux — nada queda atado a un solo sistema operativo salvo la Raspberry Pi (que ya es Linux).
@@ -209,10 +209,7 @@ Multiplataforma: todo lo construido (vault, Git, Claude Code, Hermes Agent) corr
 2. **Progreso parcial persistido (`Cursos/{curso}/entregables/*.md`).** Ya existe la convención (`estado: borrador`/`entregado` + checklist contra la rúbrica, ver regla 8.2 de `Sistema/CLAUDE.md`) — el hueco real es que solo se llena si el avance pasó por una sesión de Claude Code. Falta el hábito de, al cerrar una sesión (aunque quede a medias), pedir explícitamente actualizar el entregable con el estado real para que "¿qué me falta de X?" tenga algo concreto que leer.
 3. **Check-in proactivo a las 22:00 (Hermes, no Claude Code).** Claude Code solo corre cuando se abre el vault, así que el ping periódico tiene que vivir en Hermes (ya corre 24/7 en la Pi con Telegram + Todoist directo). Sería un cron nuevo: a las 22:00 Hermes pregunta por Telegram qué de la sesión del día se completó, y con la respuesta marca las subtareas correspondientes en Todoist — mismo patrón de bajo riesgo que ya usa para tareas simples (ver sección 3, "Qué SÍ hace").
 
-**Pendiente de decidir antes de implementar:**
-- Formato exacto de la subtarea de sesión (¿link directo al entregable, o solo el nombre del tema?).
-- Si Hermes debe también anexar lo que el usuario reporte como avance parcial directo al `entregable.md` correspondiente (requeriría que Hermes escriba al vault vía PR, no directo — ver sección 3).
-- Hora del check-in configurable vs. fija en 22:00.
+**Spec lista para implementar:** [[Sistema/hermes-checkin-22h-spec|hermes-checkin-22h-spec.md]] (2026-08-09) — cubre el modelo de la tarea de sesión, el flujo completo del cron de las 22:00 y qué queda por decidir con el código real de Hermes (mecanismo de scheduling, persistencia de estado conversacional corto, mapeo subtarea → entregable). Pendiente de que la sesión de Claude Code en la Raspberry Pi la implemente en el repo de Hermes — no toca este vault.
 
 ---
 
