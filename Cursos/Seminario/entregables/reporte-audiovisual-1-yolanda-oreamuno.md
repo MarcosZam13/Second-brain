@@ -68,3 +68,7 @@ También creo que cuestionaría la mediocridad cultural de la que hablaba en su 
 ## Bitácora de uso de IA
 
 Antes de ver el documental le pedí a la IA contexto general sobre quién fue Yolanda Oreamuno y de qué trata su ensayo *El ambiente tico y los mitos tropicales* (1939), ya que no conocía bien su obra — esto me sirvió para saber qué buscar mientras veía el documental. Después de verlo, tomé mis propias notas y anoté las citas que más me llamaron la atención. Le pasé esas notas a la IA para que me ayudara a redactar las 3 respuestas integrando lo que apunté del documental con el ensayo de 1939, conectando ideas que yo tenía sueltas (la falta de placa, las citas, lo de la mujer y el estudio) con el concepto central de la lectura (la crítica a la "paz" superficial y a los mitos costarricenses). Me falta revisar la redacción final con mis propias palabras antes de entregar, y decidir si hace falta formato APA 7 para las citas del documental.
+
+## Notas de progreso
+
+**2026-08-09:** Ya está hecho el reporte audiovisual del seminario, solo falta entregarlo.
