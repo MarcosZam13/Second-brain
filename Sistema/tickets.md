@@ -8,7 +8,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 
 | Prefijo | Curso | Último usado | Próximo |
 |---|---|---|---|
-| SEM | Seminario de Estudios Costarricenses | SEM-4 | SEM-5 |
+| SEM | Seminario de Estudios Costarricenses | SEM-5 | SEM-6 |
 | QA | Aseguramiento de la Calidad del Software | QA-1 | QA-2 |
 | SEG | Seguridad | — | SEG-1 |
 | WEB | Desarrollo Web | WEB-2 | WEB-3 |
@@ -20,7 +20,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 
 | Prefijo | Proyecto | Último usado | Próximo |
 |---|---|---|---|
-| TACHA | Tacha | — | TACHA-1 |
+| TACHA | Tacha | TACHA-1 | TACHA-2 |
 | GYM | GymBase | — | GYM-1 |
 | CANELE | CaneleApp | — | CANELE-1 |
 
@@ -28,7 +28,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 
 | Prefijo | Alcance | Último usado | Próximo |
 |---|---|---|---|
-| VAULT | Cambios al propio sistema del vault (skills, agentes, CLAUDE.md, estructura) | VAULT-21 | VAULT-22 |
+| VAULT | Cambios al propio sistema del vault (skills, agentes, CLAUDE.md, estructura) | VAULT-22 | VAULT-23 |
 
 ## Reglas
 
