@@ -41,12 +41,16 @@ Ver también: [[Cursos/SistemasOperativos/apuntes/estructura-sistemas-computo-un
 
 a. ¿Es viable eliminar la etapa de decodificación con instrucciones simples de formato fijo?
 Se puede llegar a simplificar el hecho de hacer instrucciones simples con un formato fijo, pero no es viable eliminar la etapa de decodificación, ya que es el que le traduce exactamente el SO qué tiene que hacer en lenguaje máquina.
+
 b. Comparar implicaciones en CISC vs. RISC.
-Básicamente el RISC se basa en instrucciones más simples y uniformes, mientras que el CISC son instrucciones más complejas y de una longitud variable
+Básicamente el RISC se basa en instrucciones más simples y uniformes, mientras que el CISC son instrucciones más complejas y de una longitud variable.
+
 c. Impacto en complejidad del hardware, rol del compilador, consumo energético, diseño del SO.
 El hardware es el más sencillo a nivel de complejidad, ya que se encarga que recibir o enviar procesos, en cambio por ejemplo el compilador sería el más complejo y el que hace más cosa, ya que tiene que descomponer operaciones, dar orden, etc. Luego la energía normalmente depende de cuántas instrucciones se estén ejecutando o cuáles instrucciones extras se necesitan para resolver algo. Y el diseño del SO también tiene su complejidad ya que necesita instrucciones atómicas, y llevar una buena sincronización u orden para evitar el riesgo de la condición de carrera.
+
 d. Escenario concreto donde sería o no recomendable, justificado técnicamente.
 Si vemos el escenario por ejemplo de un sistema multitarea intensivo conviene más instrucciones simples y rápidas en vez de complejas ya que necesitamos que se hagan muchas instrucciones a la vez, pero si hay que cuidar y se necesitan instrucciones atómicas para evitar problemas de condición de carrera.
+
 e. ¿Simplifica realmente el sistema o solo redistribuye la complejidad?
 La complejidad se redistribuye entre el compilador y el kernel, no llega a desaparecer.
 
@@ -54,12 +58,16 @@ La complejidad se redistribuye entre el compilador y el kernel, no llega a desap
 
 a. ¿Por qué el PC no siempre se incrementa linealmente?
 El PC no siempre avanza en línea recta porque el programa mismo no es lineal: los ifs, loops, llamadas a función e interrupciones obligan a saltar a otra dirección de memoria.
+
 b. Impacto de una predicción de salto incorrecta en el rendimiento.
 Cuando el pipeline predice mal, ya venía adelantando instrucciones que no correspondían, entonces hay que botarlas todas que a eso se le conoce como flush y hay que arrancar de nuevo desde la dirección correcta, lo que desperdicia ciclos de reloj.
+
 c. Relación con cambios de contexto, planificación por quantum y sistemas multitarea intensivos.
 Se relaciona porque cada cambio de contexto también rompe el historial de saltos que el hardware venía prediciendo para ese proceso. Con quantum corto hay más cambios de contexto, entonces se paga más seguido esa penalización.
+
 d. Escenario con múltiples procesos generando muchas bifurcaciones — ¿cómo afecta el desempeño global?
 Si hay muchos procesos generando bifurcaciones , el encargado de predecir tiene que volver a aprenderse el patrón de cada proceso cada vez que retoma, lo cual baja la tasa de aciertos y el rendimiento del sistema aunque cada proceso individual no sea complejo.
+
 e. ¿El diseño del hardware condiciona indirectamente las políticas de planificación del SO?
 Sí, el hardware condiciona la planificación: si cambiar de proceso sale caro para el pipeline, el SO va a preferir quantums más largos o reducir cambios de contexto innecesarios.
 
@@ -67,10 +75,13 @@ Sí, el hardware condiciona la planificación: si cambiar de proceso sale caro p
 
 a. Comparar ISA amplio (A) vs. reducido (B) en rendimiento, consumo, tamaño de código, paralelización.
 El reducido (B) suele ser más rápido por instrucción y consume menos energía por ser hardware más simple, pero necesita más instrucciones para hacer lo mismo, entonces el código pesa más. El amplio (A) genera código más compacto porque una instrucción hace más trabajo.
+
 b. Influencia del diseño del ISA en llamadas al sistema, portabilidad del kernel, compatibilidad hacia atrás.
 El ISA influye en las syscalls porque estas dependen de instrucciones específicas para pasar de modo usuario a kernel , entonces entre más simple el ISA, más predecible ese mecanismo. Hablando de portabilidad, un kernel pensado para un ISA reducido es más fácil de portar. Y en compatibilidad, los ISA complejos como x86 arrastran instrucciones viejas por años.
+
 c. ¿Cuál es más adecuada para un SO de propósito general vs. un sistema embebido de tiempo real?
 Un SO de propósito general se beneficia más de un ISA amplio porque necesita flexibilidad para correr de todo. En cambio un sistema embebido de tiempo real se beneficia más de uno reducido porque necesita predictibilidad y bajo consumo.
+
 d. Justificar críticamente la elección.
 Para tiempo real elegiría el reducido, porque ahí importa más que cada instrucción tarde un tiempo constante y no que haga muchas cosas complejas un retraso inesperado es peor que ser lento pero constante. Y para lo cotidiano elegiría mejor el ISA amplio.
 
@@ -195,8 +206,8 @@ Básicamente intenté usar a la IA como un profesor que me fuera explicando y gu
 ### Notas específicas por pregunta
 
 - **Pregunta 1 (Decodificación y Diseño del Procesador):** acá tuve la corrección más importante — al principio confundí lo que hace la etapa de decodificación con lo que hace el compilador (pensaba que decodificación "traduce" acciones del SO a lenguaje máquina). La IA me hizo pensar en qué momento del proceso el programa ya es código máquina puro, y ahí caí en que decodificación lee opcode + operandos y genera señales de control, no traduce desde más arriba.
-- **Pregunta 4 (Separación de Memoria de Instrucciones y Datos):** para el inciso (c) le pedí a la IA un ejemplo concreto de vulnerabilidad que la separación de memoria previene, porque no se me ocurría uno — de ahí salió el ejemplo de buffer overflow y protecciones NX/DEP.
-- **Preguntas 2, 3, 5-10:** seguí el proceso general de arriba — planteé mi respuesta primero con lo que ya sabía o lo que saqué del apunte de clase, y usé la IA para validar que el razonamiento estuviera bien encaminado, sin que aparecieran correcciones de fondo como en la pregunta 1.
+- **Pregunta 4 (Separación de Memoria de Instrucciones y Datos):** para el inciso (c) le pedí a la IA un ejemplo concreto de vulnerabilidad que la separación de memoria previene, porque no se me ocurría uno de ahí salió el ejemplo de buffer overflow y protecciones NX/DEP.
+- **Preguntas 2, 3, 5-10:** seguí el proceso general de arriba, planteé mi respuesta primero con lo que ya sabía o lo que saqué del apunte de clase, y usé la IA para validar que el razonamiento estuviera bien encaminado, sin que aparecieran correcciones de fondo como en la pregunta 1 fueron más que todo ayudas para aprenderme los conceptos.
 
 ### Conceptos y acrónimos que me ayudaron a entender
 
