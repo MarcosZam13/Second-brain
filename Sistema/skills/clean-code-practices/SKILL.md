@@ -7,11 +7,27 @@ description: Use this skill whenever writing, reviewing, or restructuring code f
 
 The standard: **someone with zero context should be able to open this repo, read the structure, and understand what's going on within 5 minutes — without asking Marcos anything.** This is the bar interviewers and future teammates actually use when they open a candidate's code.
 
+For Next.js/React/TypeScript projects specifically (the Desarrollo Web course project, GymBase, Tacha, CaneleApp), also apply [[Sistema/skills/nextjs-enterprise-patterns/SKILL|nextjs-enterprise-patterns]] and its companions ([[Sistema/skills/component-architecture/SKILL|component-architecture]], [[Sistema/skills/constants-standards/SKILL|constants-standards]], [[Sistema/skills/unit-testing-standards/SKILL|unit-testing-standards]]) on top of this — they cover feature-based architecture, ViewModel separation, magic-number/string elimination, and Page-Object-Model testing that this generic skill doesn't go into.
+
 ## 1. Naming
 
 - Names say what something IS or DOES, never how it's implemented. `getActiveUsers()`, not `loopUsersAndFilter()`.
 - Booleans read as yes/no questions: `isLoading`, `hasPermission`, `canEdit`.
-- No abbreviations unless they're domain-standard (`id`, `url` are fine; `usrCfg` is not).
+- No abbreviations unless they're domain-standard (`id`, `url` are fine; `usrCfg` is not). Concrete forbidden list — any developer reading the code should never have to trace back to a declaration to know what it means:
+
+  | Avoid | Use instead |
+  |---|---|
+  | `err` | `error` |
+  | `res` | `response` |
+  | `req` | `request` |
+  | `cb` | `callback` |
+  | `ctx` | `context` |
+  | `val` | `value` |
+  | `idx` | `index` (`i` is fine for a plain loop counter) |
+  | `msg` | `message` |
+  | `evt` | `event` |
+  | `data` alone | prefix with domain: `patientData`, `shoppingItems` |
+
 - Consistent vocabulary across the whole codebase: pick one term (`fetch` vs `get` vs `retrieve`) and use it everywhere — mixing them makes readers think there's a semantic difference when there isn't.
 - File names match their default export/main content: `UserCard.tsx` exports `UserCard`.
 

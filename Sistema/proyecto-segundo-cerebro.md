@@ -125,6 +125,7 @@ Estos son los que arman tu "librería de agentes". Cada uno vive en `/Sistema/sk
 | `professional-technical-docs` | READMEs, docs de arquitectura y comentarios que no "suenan a IA" | ✅ Hecho |
 | `course-study-helper` | Responde/quiz sobre el material de un curso específico, sin mezclar cursos | ✅ Hecho |
 | `document-intake` | Convierte PDFs/docs sueltos (míos o subidos por Hermes) en notas `.md` estructuradas, con convención de nombre y frontmatter compartido para búsqueda | ✅ Hecho |
+| `nextjs-enterprise-patterns` (+ `component-architecture`, `constants-standards`, `unit-testing-standards`) | Arquitectura Next.js/React (feature folders, ViewModel, SDD, constants, estado compartido, testing POM) extraída y adaptada de un repo de referencia empresarial que compartió el profesor de Desarrollo Web — 4 skills separados, `nextjs-enterprise-patterns` como router. Complementa `clean-code-practices`; el POM también se sumó a `qa-testing-practices` | ✅ Hecho (2026-08-11) |
 | `proyecto-{nombre}` | Contexto aislado por proyecto para no mezclar stacks (GymBase ≠ Tacha ≠ CaneleApp) | Pendiente — se arma cuando se cargue contenido real |
 
 **Orquestación (subagentes):** en `/Sistema/agents/` hay 3 plantillas de subagentes listas para copiar a `.claude/agents/` en cualquier repo de proyecto:

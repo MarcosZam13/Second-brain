@@ -93,10 +93,21 @@ What's most likely to break, and why it matters most
 What "done testing" means (e.g. all critical/high cases pass, no open Critical bugs)
 ```
 
-## 5. Applying this in practice
+## 5. Automating UI test cases — Page Object Model
+
+When a test case from §1 gets automated (not just executed manually), don't let the automation script scatter raw element queries and clicks inline in the test body. Separate **how to interact with the screen** from **what the test asserts**:
+
+- A Page Object owns locators (by role/label, not brittle CSS selectors) and user actions (`fillEmail`, `submit`) as a small readable API.
+- The test itself only calls the Page Object's actions and asserts on its queries — it reads like the numbered steps from the manual test case, not like a sequence of low-level DOM calls.
+- The Page Object never contains assertions; the test owns those.
+
+This keeps automated tests mapping 1:1 back to the manual test case they replace, and means a UI change only breaks one Page Object instead of every test file that touched that screen. For the full pattern with React/Testing Library specifics (file layout, factory naming, Arrange-Act-Assert), see [[Sistema/skills/unit-testing-standards/SKILL|unit-testing-standards]] — same idea, framework-specific implementation.
+
+## 6. Applying this in practice
 
 When asked to do QA work under this skill:
 1. Identify the requirement/ticket first — every test case and bug report ties back to one.
 2. Write test cases covering functional + negative + boundary at minimum before calling coverage "done."
 3. For bug reports, always include reproduction steps — if you can't reproduce it yourself, say so explicitly rather than guessing.
 4. Cross-reference with `gitflow-scrum`: QA branches (`qa/{TICKET-ID}-...`) and their test cases should map to the same ticket as the feature PR they validate.
+5. When automating a UI test case, apply the Page Object Model from §5 — don't scatter raw queries across the suite.

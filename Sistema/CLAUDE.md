@@ -22,7 +22,7 @@ Ver también: [[Dashboard]] · [[Sistema/proyecto-segundo-cerebro|Diseño comple
 
 1. Si la pregunta es sobre un curso o examen específico, buscar SOLO dentro de esa carpeta de `/Cursos/{curso}/` — no mezclar contenido de otros cursos salvo que se pida explícitamente comparar. Usar [[Sistema/skills/course-study-helper/SKILL|course-study-helper]]. Si es para repasar un quiz/examen que se repite periódicamente y el usuario quiere el repaso guardado + una suite interactiva, aplicar [[Sistema/skills/quiz-repaso/SKILL|quiz-repaso]] en su lugar.
 2. Si es sobre un proyecto, usar solo `/Proyectos/{proyecto}/` como contexto — no mezclar stacks entre proyectos.
-3. Para cualquier tarea de código, aplicar [[Sistema/skills/clean-code-practices/SKILL|clean-code-practices]].
+3. Para cualquier tarea de código, aplicar [[Sistema/skills/clean-code-practices/SKILL|clean-code-practices]]. Si el proyecto es Next.js/React/TypeScript (curso de Desarrollo Web, GymBase, Tacha, CaneleApp), aplicar además [[Sistema/skills/nextjs-enterprise-patterns/SKILL|nextjs-enterprise-patterns]] como router — carga [[Sistema/skills/component-architecture/SKILL|component-architecture]] al tocar UI/features, [[Sistema/skills/constants-standards/SKILL|constants-standards]] ante cualquier string/número sin explicar, y [[Sistema/skills/unit-testing-standards/SKILL|unit-testing-standards]] al escribir tests.
 4. Para cualquier tarea de diseño de UI/UX, aplicar [[Sistema/skills/enterprise-ui-ux-design/SKILL|enterprise-ui-ux-design]].
 5. Para QA, test cases o bug reports, aplicar [[Sistema/skills/qa-testing-practices/SKILL|qa-testing-practices]].
 6. Para documentación técnica (README, docs, comentarios), aplicar [[Sistema/skills/professional-technical-docs/SKILL|professional-technical-docs]].
