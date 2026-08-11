@@ -11,7 +11,7 @@ tags: [calidad, aseguramiento-calidad, definicion-calidad, evolucion-calidad, sq
 
 Aseguramiento de la calidad del software, II Semestre 2026. Contacto: Marcos Rodríguez (ma.rodriguez@itcr.ac.cr).
 
-Ver también: [[Cursos/QA/temario]] · [[Cursos/QA/entregas]]
+Ver también: [[Cursos/QA/temario]] · [[Cursos/QA/entregas]] · [[Cursos/QA/repasos/calidad-semana-1|Repaso para el quiz]]
 
 ## Presentación del curso
 

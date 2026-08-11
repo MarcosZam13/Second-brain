@@ -9,7 +9,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 | Prefijo | Curso | Último usado | Próximo |
 |---|---|---|---|
 | SEM | Seminario de Estudios Costarricenses | SEM-5 | SEM-6 |
-| QA | Aseguramiento de la Calidad del Software | QA-3 | QA-4 |
+| QA | Aseguramiento de la Calidad del Software | QA-4 | QA-5 |
 | SEG | Seguridad | — | SEG-1 |
 | WEB | Desarrollo Web | WEB-3 | WEB-4 |
 | CYS | Computación y Sociedad | CYS-2 | CYS-3 |

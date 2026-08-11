@@ -12,7 +12,7 @@ Ver también: [[Cursos/QA/temario]]
 
 | Fecha | Entregable | Peso | Estado |
 |---|---|---|---|
-| 2026-08-12 (miércoles) | [[Cursos/QA/apuntes/calidad-semana-1\|Quiz de QA — Semana 1 (Definición y evolución del concepto de calidad)]] | no especificado | pendiente |
+| 2026-08-12 (miércoles) | [[Cursos/QA/repasos/calidad-semana-1\|Quiz de QA — Semana 1 (Definición y evolución del concepto de calidad)]] | no especificado | pendiente |
 
 <!--
 Cuando agregues una fecha aquí, pedile a Claude Code:
