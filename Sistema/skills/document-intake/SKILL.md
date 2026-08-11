@@ -2,7 +2,7 @@
 name: document-intake
 description: Use this skill whenever a new document (PDF, DOCX, image of notes/slides) shows up in Sistema/inbox/ — dropped there directly by the user or relayed by Hermes from Telegram — and needs to become a structured note inside /Cursos/{curso}/. Also read this before telling Hermes how to relay documents, since it defines the shared filename convention, storage rules, and frontmatter schema both systems rely on.
 ---
-
+	 
 # Document intake — de PDF/doc suelto a nota estructurada del curso
 
 Ver también: [[Sistema/CLAUDE|CLAUDE.md]] · [[Sistema/inbox/README|Sistema/inbox]] · [[Sistema/tickets|tickets.md]] · [[Cursos/README|Cursos]]
