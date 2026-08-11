@@ -9,7 +9,7 @@ tags: [introduccion, web, roles, herramientas, proyecto-curso, flujo-ia]
 
 # Introducción al curso — Desarrollo Web
 
-Ver también: [[Cursos/DesarrolloWeb/temario]] · [[Cursos/DesarrolloWeb/entregas]] · [[Cursos/DesarrolloWeb/apuntes/gitflow-curso]]
+Ver también: [[Cursos/DesarrolloWeb/temario]] · [[Cursos/DesarrolloWeb/entregas]] · [[Cursos/DesarrolloWeb/apuntes/gitflow-curso]] · [[Cursos/DesarrolloWeb/apuntes/base-proyectos-arquitectura-enterprise|arquitectura enterprise del repo base del profesor]]
 
 ## Objetivo y enfoque
 
@@ -90,3 +90,5 @@ Secuencia sugerida por el profesor para trabajar features con ayuda de IA, aplic
 4. Pedirle al agente que **cree el componente**.
 5. Aplicar la **skill de unit testing**.
 6. Al terminar de aplicar el feedback (si lo hubo), **pasar la tarea a QA**.
+
+Este flujo es exactamente el que sigue el repo base que el profesor comparte a nivel empresarial (spec en `specs/SPEC.md`, ViewModel + Page Object Model para testing) — ver [[Cursos/DesarrolloWeb/apuntes/base-proyectos-arquitectura-enterprise|análisis completo]] y la skill reutilizable [[Sistema/skills/nextjs-enterprise-patterns/SKILL|nextjs-enterprise-patterns]].
