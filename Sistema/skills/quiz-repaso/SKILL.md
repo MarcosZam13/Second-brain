@@ -35,8 +35,12 @@ El usuario pide ayuda para repasar/estudiar de cara a un quiz o examen de un cur
 2. Leer el/los apunte(s) fuente en `Cursos/{curso}/apuntes/` relevantes al alcance.
 3. Escribir la nota `.md` en `Cursos/{curso}/repasos/` (ver estructura arriba).
 4. Diseñar y publicar el HTML interactivo con la misma suite de preguntas que la nota (ver sección de diseño arriba).
-5. Commitear la nota `.md` (el HTML vive en Claude, no en el repo) siguiendo `gitflow-scrum` — branch/PR con el código de ticket del curso (`Sistema/tickets.md`), no `VAULT` (el ticket `VAULT` es para cambios al sistema del vault mismo, como este skill).
-6. Pasar el link del artifact al usuario.
+5. **Enlazar el repaso desde los dos lugares que otros sistemas consultan, no solo crearlo aislado:**
+   - En `Cursos/{curso}/entregas.md`, la fila de esa entrega debe apuntar al repaso (`Cursos/{curso}/repasos/{tema}`), no al apunte fuente — `entregas.md` es el índice que Hermes y otros sistemas externos leen para "qué hay que hacer", así que si el link no se actualiza, el contenido de estudio queda invisible para ellos aunque el archivo exista.
+   - En el apunte fuente (`repaso_de`), agregar un link de vuelta al repaso en su línea "Ver también" — navegación en las dos direcciones, no solo repaso → apunte.
+   - Este paso se saltó la primera vez que se usó este skill (QA, Semana 1, 2026-08-10) y causó que Hermes no encontrara el repaso al preguntársele por el quiz un día antes — no repetir el error.
+6. Commitear la nota `.md` + los links actualizados (el HTML vive en Claude, no en el repo) siguiendo `gitflow-scrum` — branch/PR con el código de ticket del curso (`Sistema/tickets.md`), no `VAULT` (el ticket `VAULT` es para cambios al sistema del vault mismo, como este skill).
+7. Pasar el link del artifact al usuario.
 
 ## Repetición semanal
 
