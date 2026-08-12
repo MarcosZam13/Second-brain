@@ -1,8 +1,15 @@
+---
+curso: Seguridad
+entregas_pendientes: []
+---
+
 # Entregas y fechas
+
+Ver también: [[Cursos/Seguridad/temario]]
 
 | Fecha | Entregable | Peso | Estado |
 |---|---|---|---|
-|  |  |  | pendiente |
+| Sin fechas cargadas todavía | — | — | — |
 
 <!--
 Cuando agregues una fecha aquí, pedile a Claude Code:

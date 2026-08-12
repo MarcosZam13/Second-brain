@@ -21,7 +21,7 @@ Ver también: [[Cursos/SistemasOperativos/temario]]
 
 | Fecha | Entregable | Peso | Estado |
 |---|---|---|---|
-| 2026-08-13 (semana 2) | [[Cursos/SistemasOperativos/apuntes/estructura-sistemas-computo-unidad1\|Preguntas de la Sesión — Semana 1]] (IA como Tutor Socrático, individual) | parte del 40% (actividades de aprendizaje) | pendiente |
+| 2026-08-13 (semana 2) | [[Cursos/SistemasOperativos/entregables/preguntas-sesion-semana1-principios-so\|Preguntas de la Sesión — Semana 1]] (IA como Tutor Socrático, individual) | parte del 40% (actividades de aprendizaje) | borrador |
 | 2026-08-20 (semana 3) | [[Cursos/SistemasOperativos/apuntes/estructura-sistemas-computo-unidad1\|Actividad en Equipos]] — solución basada en Principios de los SO (presentación final) | parte del 40% (actividades de aprendizaje) | pendiente |
 | 2026-09-10 (semana 6) | Indagatoria — presentación (documento + exposición **en inglés**); la presentación puede extenderse hasta el jueves 2026-09-17 (semana 7) | 10% | pendiente |
 | 2026-09-24 (semana 8) | I Prueba de Curso | parte del 20% | pendiente |
