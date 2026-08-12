@@ -1,8 +1,15 @@
+---
+curso: DesarrolloWeb
+entregas_pendientes: []
+---
+
 # Entregas y fechas
+
+Ver también: [[Cursos/DesarrolloWeb/temario]]
 
 | Fecha | Entregable | Peso | Estado |
 |---|---|---|---|
-|  |  |  | pendiente |
+| Sin fechas cargadas todavía | — | — | — |
 
 <!--
 Cuando agregues una fecha aquí, pedile a Claude Code:

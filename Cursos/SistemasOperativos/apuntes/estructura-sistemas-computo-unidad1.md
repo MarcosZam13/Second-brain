@@ -12,7 +12,7 @@ tags: [unidad1, estructura-sistemas-computo, todo-list, actividad-equipos, compu
 
 # Unidad 1 — Estructura de los Sistemas de Cómputo (Semana 1)
 
-Ver también: [[Cursos/SistemasOperativos/temario]] · [[Cursos/SistemasOperativos/entregas]]
+Ver también: [[Cursos/SistemasOperativos/temario]] · [[Cursos/SistemasOperativos/entregas]] · [[Cursos/SistemasOperativos/entregables/preguntas-sesion-semana1-principios-so|Borrador de Preguntas de Sesión]]
 
 ## Resumen de la unidad (TEC Digital)
 
