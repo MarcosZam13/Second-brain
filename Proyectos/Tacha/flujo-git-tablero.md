@@ -100,3 +100,5 @@ Repo creado y pusheado: [github.com/MarcosZam13/tacha](https://github.com/Marcos
 - [ ] Invitar a los 6 compañeros como colaboradores del repo (`gh repo add-collaborator MarcosZam13/tacha {usuario}` o desde GitHub → Settings → Collaborators) — pendiente hasta tener sus usuarios de GitHub
 - [ ] Crear el proyecto en Jira y volver a esta nota con la URL/clave
 - [ ] Primera reunión de equipo: confirmar o reabrir Next.js/Tailwind (definidos unilateralmente, ver [[Proyectos/Tacha/documentacion-v1#10. Pendientes de definición|sección 10 del documento]]) y cerrar el resto de pendientes
+- [ ] Corregir inconsistencias del mockup (`docs/mockup-web-v2.html`) contra los requerimientos ya cerrados en el documento de proyecto
+- [ ] Extraer los primitivos base de UI (Button, Input/FormField, Modal, Spinner, Checkbox) al mockup ya corregido — a propósito no se hace antes, para no construir sobre un diseño con inconsistencias conocidas
