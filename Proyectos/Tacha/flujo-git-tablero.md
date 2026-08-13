@@ -89,8 +89,12 @@ Una vez creado el proyecto en Jira:
 2. El equipo pasa a escribir historias de usuario y requerimientos ahí, partiendo del documento de producto ([[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] → sección 4, Requerimientos funcionales).
 3. Los PRs enlazan la clave de Jira en el campo **Ticket** de la plantilla (sección 3).
 
-## 5. Pendiente
+## 5. Estado
 
-- [ ] Invitar a los 6 compañeros como colaboradores del repo (`gh repo add-collaborator` o desde GitHub → Settings → Collaborators)
+Repo creado y pusheado: [github.com/MarcosZam13/tacha](https://github.com/MarcosZam13/tacha) (privado). Labels de PR ya creados. Plantilla de PR y `CONTRIBUTING.md` ya en el repo.
+
+## 6. Pendiente
+
+- [ ] Invitar a los 6 compañeros como colaboradores del repo (`gh repo add-collaborator MarcosZam13/tacha {usuario}` o desde GitHub → Settings → Collaborators) — pendiente hasta tener sus usuarios de GitHub
 - [ ] Crear el proyecto en Jira y volver a esta nota con la URL/clave
 - [ ] Primera reunión de equipo: confirmar o reabrir Next.js/Tailwind (definidos unilateralmente, ver [[Proyectos/Tacha/documentacion-v1#10. Pendientes de definición|sección 10 del documento]]) y cerrar el resto de pendientes
