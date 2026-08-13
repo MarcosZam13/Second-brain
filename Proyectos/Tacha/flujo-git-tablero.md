@@ -93,7 +93,7 @@ Una vez creado el proyecto en Jira:
 
 ## 5. Estado
 
-Repo creado y pusheado: [github.com/MarcosZam13/tacha](https://github.com/MarcosZam13/tacha) (privado). Labels de PR ya creados. Plantilla de PR y `CONTRIBUTING.md` ya en el repo.
+Repo creado y pusheado: [github.com/MarcosZam13/tacha](https://github.com/MarcosZam13/tacha) (privado). Labels de PR ya creados. Plantilla de PR, `CONTRIBUTING.md` y el sistema de agentes (`AGENTS.md` + `.agents/skills/` + puentes para Claude Code/Cursor/Copilot) ya en el repo, en `main` y `develop`.
 
 ## 6. Pendiente
 
