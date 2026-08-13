@@ -3,7 +3,7 @@ proyecto: Tacha
 tema: Documento de Proyecto — v1.0 (Propuesta formal)
 fecha: 2026-08-09
 tipo: documentacion
-estado: propuesta-formal-v1 — pendiente de revisión del equipo
+estado: propuesta-formal-v1 — stack definido para arrancar el repo (Marcos), resto pendiente de revisión del equipo
 fuente: _fuentes/Tacha_documentacion-v1_2026-08-09.docx
 tags: [documentacion, propuesta, requerimientos, arquitectura, tacha]
 ---
@@ -180,13 +180,13 @@ Reglas de negocio que deben vivir en la base de datos (funciones/triggers), no e
 
 | Capa | Elección | Justificación |
 |---|---|---|
-| Frontend | React (framework exacto — Next.js vs. Vite — pendiente de decisión del equipo) | Next.js aporta SSR/routing robusto y suele ser lo esperado en cursos de desarrollo web; Vite es más simple para un equipo grande sin experiencia previa. Decidir antes de empezar a codear. |
+| Frontend | React + Next.js — **definido** (por Marcos, para destrabar la creación del repo; sujeto a confirmación del equipo completo) | Next.js aporta SSR/routing robusto y suele ser lo esperado en cursos de desarrollo web. |
 | Responsive/PWA | CSS responsive (Flexbox/Grid) + `manifest.json` + service worker (Workbox o plugin nativo del framework elegido) | Requerimiento no funcional central |
 | Backend / API | Supabase (Postgres) vía PostgREST + funciones RPC | Complejidad justa para el modelo de datos; RLS para separar datos por household y por lista privada |
 | Tiempo real | Supabase Realtime | Necesario para el tachado colaborativo instantáneo |
 | Estado remoto en cliente | TanStack Query | Cache, invalidación y optimistic updates |
 | Auth | Supabase Auth | — |
-| Estilos | Pendiente de decisión del equipo — recomendado: Tailwind CSS (curva de aprendizaje más pareja para un equipo de 6 con niveles distintos de experiencia) | Más estándar y documentado que alternativas pensadas para compatibilidad nativa, que aquí no se necesita al ser 100% web |
+| Estilos | Tailwind CSS — **definido** (misma salvedad que el framework) | Curva de aprendizaje más pareja para un equipo de 6 con niveles distintos de experiencia; más estándar y documentado que alternativas pensadas para compatibilidad nativa, que aquí no se necesita al ser 100% web |
 | Web scraping | Node.js (Puppeteer/Playwright) o Python (BeautifulSoup/Scrapy) — pendiente de decisión del equipo, según quién lo implemente | Es el componente de mayor riesgo técnico del proyecto, vale la pena decidirlo temprano |
 
 > Nota de decisión explícita: se descartó GraphQL (Hasura o pg_graphql) como capa de API. El modelo de datos es jerárquico y no tiene el problema de over/under-fetching que GraphQL resuelve; PostgREST + RPC de Postgres cubre la necesidad con menor complejidad operativa.
@@ -248,8 +248,8 @@ Apps de lista de compras analizadas como referencia de patrones de UX (no de ide
 
 ## 10. Pendientes de definición
 
-- Framework de React definitivo (Next.js vs. Vite) — decisión del equipo completo
-- Librería de estilos definitiva (Tailwind recomendado, a confirmar)
+- ~~Framework de React definitivo (Next.js vs. Vite)~~ — **Next.js**, definido para destrabar la creación del repo (ver sección 7); llevar a confirmación del equipo completo en la primera reunión.
+- ~~Librería de estilos definitiva~~ — **Tailwind CSS**, misma salvedad que el punto anterior.
 - Herramienta de web scraping (Node/Puppeteer vs. Python) y quién del equipo lo lidera
 - Qué supermercados costarricenses son técnicamente viables de scrapear (revisar robots.txt de cada uno)
 - Enfoque final del inventario doméstico ([[#4.10 Inventario doméstico — pendiente de diseño|sección 4.10]]) — decidir antes de comprometerlo o descartarlo del todo
