@@ -23,3 +23,8 @@ Grabar un video respondiendo la pregunta: **"¿Cómo podemos ganar dinero con la
 
 - **Formato:** video.
 - **Fecha límite:** lunes **2026-08-10**, en la noche (hora exacta no especificada por el profesor).
+
+## Notas de progreso
+
+- **2026-08-09:** sin grabar todavía — plan de grabarlo al día siguiente.
+- **2026-08-10:** entregado (ver [[Cursos/CompuYSociedad/entregas|entregas.md]]).
