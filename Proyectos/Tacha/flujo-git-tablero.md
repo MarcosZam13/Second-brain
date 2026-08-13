@@ -15,16 +15,18 @@ Repo de código: `MarcosZam13/tacha` (privado, GitHub). Este documento es lo que
 
 ## 1. Branching y tickets
 
-Se sigue [[Sistema/skills/gitflow-scrum/SKILL|gitflow-scrum]] tal cual: branches cortos por ticket, nunca directo sobre `main`.
+**No** se usa el modelo genérico de [[Sistema/skills/gitflow-scrum/SKILL|gitflow-scrum]] tal cual — Tacha es el proyecto del curso de Desarrollo Web, y el profesor exige un modelo de ramas específico (documentado en [[Cursos/DesarrolloWeb/apuntes/gitflow-curso|gitflow-curso.md]]). Lo que corre en el repo real es ese modelo, adaptado a kebab-case y con código de ticket para trazabilidad:
 
 ```
-main                                 → producción / lo que se entrega
-feature/TACHA-{n}-descripcion-corta
-fix/TACHA-{n}-descripcion-corta
-qa/TACHA-{n}-descripcion-corta
+main                              → producción (equivalente a "Master" del diagrama del profesor)
+develop                           → integración de desarrollo, nace de main — rama default del repo
+ticket/TACHA-{n}-descripcion      → tarea puntual, nace de develop, vuelve a develop
+entregable-{n}                    → una entrega formal del curso (entregable-1, entregable-2...), nace de develop
+qa-fix/TACHA-{n}-descripcion      → corrige hallazgos de QA sobre un entregable, nace de entregable-{n}, vuelve a entregable-{n}
+hotfix/TACHA-{n}-descripcion      → corrección urgente sobre producción, nace de main, vuelve a main
 ```
 
-El código de ticket sale de [[Sistema/tickets|tickets.md]] (prefijo `TACHA`, ya registrado) mientras el equipo no tenga Jira operativo; en cuanto Jira esté armado (sección 3), el número de ticket pasa a ser la clave de la historia en Jira (ej. `TACHA-14`) y `tickets.md` deja de ser la fuente para este proyecto — se sigue usando solo para los cursos del vault.
+El código de ticket sale de [[Sistema/tickets|tickets.md]] (prefijo `TACHA`, ya registrado) mientras el equipo no tenga Jira operativo; en cuanto Jira esté armado (sección 4), el número de ticket pasa a ser la clave de la historia en Jira (ej. `TACHA-14`) y `tickets.md` deja de ser la fuente para este proyecto — se sigue usando solo para los cursos del vault.
 
 ## 2. Labels de PR (estado del branch)
 
