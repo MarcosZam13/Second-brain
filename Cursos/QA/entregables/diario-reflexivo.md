@@ -53,6 +53,8 @@ No es un resumen técnico de contenido (eso ya está en los apuntes de cada sema
 
 **e. ¿Qué habilidades sociales he puesto en práctica?**
 
+> **Nota (2026-08-15):** las partes de contenido de curso (no de proyecto/equipo) de la Entrada 1 de abajo se reutilizaron, divididas por semana, en el [[Cursos/QA/entregables/diario-aprendizaje-semanal|Diario de Aprendizaje Semanal]] — fue una confusión inicial entre ambos documentos. Esta entrada de acá sigue siendo válida para este diario (queda para cuando arranque el proyecto), no se borró nada.
+
 ## Entrada 1 — Semanas 1-2: Fundamentos de calidad y arranque del proyecto
 
 **a. ¿Qué he hecho? ¿Qué pasos he seguido?**
