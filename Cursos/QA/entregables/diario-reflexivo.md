@@ -53,22 +53,29 @@ No es un resumen técnico de contenido (eso ya está en los apuntes de cada sema
 
 **e. ¿Qué habilidades sociales he puesto en práctica?**
 
-## Entrada 1 — Semanas 1-2: {pendiente título}
+## Entrada 1 — Semanas 1-2: Fundamentos de calidad y arranque del proyecto
 
-Ganchos de contenido de estas dos semanas (para ayudar a redactar, no para copiar tal cual):
-- Semana 1: Crosby/Juran/Deming/Ishikawa/ISO 9000, las 6 etapas de evolución del concepto de calidad, la actividad "¿qué tiene más calidad?".
-- Semana 2: casos reales de bugs (737 MAX, Fujitsu, Knight Capital, Therac-25, CrowdStrike, Note 7), la actividad de la torre de globos, control vs. aseguramiento, fallo/defecto/error, costos de calidad.
-- Arranque del proyecto: formación de equipos, primer contacto con la asignación de empresa/proyecto (si ya ocurrió).
+**a. ¿Qué he hecho? ¿Qué pasos he seguido?**
 
-**a. ¿Qué he hecho? ¿Qué pasos he seguido?** *(pendiente)*
+En estas dos semanas estudié qué es la calidad y el aseguramiento de la calidad: vimos cómo ha evolucionado el concepto tanto en la vida cotidiana como en el software, las distintas visiones de autores como Crosby, Juran, Deming e Ishikawa, y el estándar ISO 9000. También vimos específicamente qué es el control de calidad, su diferencia con el aseguramiento (el control se enfoca en el producto, el aseguramiento en el proceso), las 4 funciones del control de calidad (reportes, pruebas, auditoría, monitoreo), y varios casos reales de fallas de software (Boeing 737 MAX, Therac-25, Knight Capital, entre otros) que muestran la importancia de tener un buen proceso de calidad. Además, hicimos actividades prácticas en clase como la de "¿qué tiene más calidad?" y la torre de globos, que ayudan a aplicar estos conceptos de forma más concreta.
 
-**b. ¿Cuáles dificultades se han presentado? ¿Cómo las he superado?** *(pendiente)*
+Del lado del proyecto, ya formamos el equipo de trabajo y estamos en proceso de armar el repositorio de GitHub para empezar a organizarnos.
 
-**c. ¿Qué he aprendido? ¿Cómo se relaciona con mi contexto?** *(pendiente)*
+**b. ¿Cuáles dificultades se han presentado? ¿Cómo las he superado?**
 
-**d. ¿Cómo he contribuido al progreso del grupo?** *(pendiente)*
+La principal dificultad ha sido encontrar un repositorio de GitHub que cumpla con todos los requisitos que necesitamos para el proyecto — todavía estamos en ese proceso de búsqueda con el equipo. En cuanto al contenido del curso, hasta ahora todo ha estado relativamente fácil; el reto más que nada es acostumbrarme a estudiar todas las semanas de forma constante.
 
-**e. ¿Qué habilidades sociales he puesto en práctica?** *(pendiente)*
+**c. ¿Qué he aprendido? ¿Cómo se relaciona con mi contexto?**
+
+He aprendido qué es calidad, control de calidad y aseguramiento de la calidad, su historia, sus procesos y sus beneficios. En mis proyectos personales y universitarios ya venía aplicando algo de aseguramiento de la calidad en cada etapa del proceso, pero no había pensado en el control de calidad desde el diseño — siempre esperaba a que una funcionalidad estuviera terminada para recién ahí hacerle QA. Aplicar bien el control de calidad desde antes puede ser interesante y me puede ahorrar tiempo de desarrollo más adelante.
+
+**d. ¿Cómo he contribuido al progreso del grupo?**
+
+En esta etapa inicial, mi contribución ha sido ayudar a buscar el repositorio de GitHub que necesitamos para el proyecto.
+
+**e. ¿Qué habilidades sociales he puesto en práctica?**
+
+Comunicación con el equipo para coordinar la búsqueda del repositorio.
 
 ## Pendiente
 

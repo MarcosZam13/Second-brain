@@ -9,12 +9,12 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 | Prefijo | Curso | Último usado | Próximo |
 |---|---|---|---|
 | SEM | Seminario de Estudios Costarricenses | SEM-6 | SEM-7 |
-| QA | Aseguramiento de la Calidad del Software | QA-7 | QA-8 |
+| QA | Aseguramiento de la Calidad del Software | QA-8 | QA-9 |
 | SEG | Seguridad | — | SEG-1 |
 | WEB | Desarrollo Web | WEB-4 | WEB-5 |
 | CYS | Computación y Sociedad | CYS-3 | CYS-4 |
 | EST | Estadística | EST-2 | EST-3 |
-| SO | Sistemas Operativos | SO-10 | SO-11 |
+| SO | Sistemas Operativos | SO-11 | SO-12 |
 
 ## Proyectos personales
 
