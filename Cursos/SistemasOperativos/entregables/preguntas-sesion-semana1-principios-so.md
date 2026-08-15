@@ -4,7 +4,7 @@ tema: Preguntas de la Sesión — Semana 1 (IA como Tutor Socrático)
 fecha: 2026-08-09
 tipo: entregable
 entregable_de: "[[Cursos/SistemasOperativos/apuntes/estructura-sistemas-computo-unidad1]]"
-estado: borrador
+estado: entregado
 tags: [preguntas-analisis, tutor-socratico, bitacora-ia]
 ---
 

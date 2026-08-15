@@ -14,6 +14,8 @@ Ver también: [[Cursos/SistemasOperativos/apuntes/historia-componentes-so-unidad
 
 **Entrega:** PDF nombrado `S2_Preguntas_MarcosZamoraSanchez`, antes del inicio de la sesión de Semana 3 — jueves **2026-08-20**.
 
+**Estado (2026-08-15):** contenido listo. Falta exportar a PDF con el nombre de archivo requerido y subirlo antes del jueves.
+
 ## Portada
 
 - **Nombre completo:** Marcos Zamora Sánchez
