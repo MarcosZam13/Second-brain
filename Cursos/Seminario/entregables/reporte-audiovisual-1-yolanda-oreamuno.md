@@ -4,7 +4,7 @@ tema: Reporte audiovisual #1 — Yolanda Oreamuno
 fecha: 2026-08-09
 tipo: entregable
 entregable_de: "[[Cursos/Seminario/apuntes/reportes-audiovisuales]]"
-estado: borrador
+estado: entregado
 tags: [reporte-audiovisual, entregable, yolanda-oreamuno]
 ---
 
