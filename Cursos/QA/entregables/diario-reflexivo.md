@@ -16,7 +16,7 @@ Ver también: [[Cursos/QA/apuntes/proyecto-qa-guia|Guía del Proyecto]] · [[Cur
 **Modalidad:** individual, en paralelo al resto de fases del proyecto en equipo.
 **Formato:** documento digital publicado en un sitio accesible (plataforma libre — Word/Drive/blog/Notion, etc.), visible para la profesora y el resto de estudiantes desde la semana 1. El enlace debe quedar publicado en TEC-Digital antes de la semana 6.
 **Cadencia real (corregida):** entradas **quincenales**, no semanales — cada entrada cubre **dos semanas**. Se requieren mínimo **8 entradas** en total a lo largo del curso (16 semanas ÷ 2).
-**Próxima entrega:** primera entrada, cubriendo Semanas 1-2, para el martes **2026-08-18**.
+**Estado real (corrección 2026-08-15):** este diario está atado a las fases del proyecto (ver [[Cursos/QA/apuntes/proyecto-qa-guia|Guía del Proyecto]]) y el proyecto **todavía no ha arrancado** (el equipo sigue buscando el repositorio de GitHub). La Entrada 1 de abajo ya está redactada como borrador, pero **no se entrega el 2026-08-18** como se pensaba antes — la fecha real de entrega queda pendiente de confirmar con la profesora/TEC-Digital una vez arranque el proyecto formalmente. No confundir con el [[Cursos/QA/entregables/diario-aprendizaje-semanal|Diario de aprendizaje semanal]], que es un documento distinto (carpeta de Drive compartida con la profesora, una entrada por semana sobre lo aprendido en clase) y sí está activo desde ya.
 
 ## Preguntas fijas que debe responder cada entrada (obligatorias, las 5)
 
@@ -83,3 +83,4 @@ Comunicación con el equipo para coordinar la búsqueda del repositorio.
 - [ ] Elegir la plataforma donde se va a publicar el diario (debe ser accesible para profesora y compañeros)
 - [ ] Publicar el enlace en TEC-Digital antes de semana 6
 - [ ] Confirmar si la evaluación entre pares del Informe de pruebas también aplica al Diario (la guía no lo aclara — parece que no)
+- [ ] Confirmar con la profesora/TEC-Digital la fecha real de la primera entrada, ya que depende de que arranque el proyecto (ver corrección arriba)

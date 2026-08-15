@@ -17,13 +17,15 @@ Ver también: [[Cursos/QA/apuntes/calidad-semana-1|Calidad — Semana 1]] · [[C
 
 ## Objetivo del proyecto
 
-Experimentar los procesos de calidad del software (planeación, validación, verificación) aplicados a un **proyecto real de software de una empresa**, en equipos de hasta 4 personas asignados por la profesora, diseñando y ejecutando un plan de pruebas.
+Experimentar los procesos de calidad del software (planeación, validación, verificación) aplicados a un **repositorio de GitHub que el equipo elige y que cumple ciertas características/requisitos** (criterios exactos aún por precisar — confirmar con la profesora o TEC-Digital y documentar acá una vez claros), en equipos de hasta 4 personas, diseñando y ejecutando un plan de pruebas sobre ese repo.
+
+> **Corrección (2026-08-15):** el documento fuente (guía institucional genérica) describe esto como un "proyecto real de software de una empresa" con reunión con contraparte y posible convenio de confidencialidad (ver Fase 1 en la tabla de abajo) — eso **no aplica a esta edición del curso**. La versión real es más simple: buscar/elegir un repositorio de GitHub que cumpla los requisitos que pida la profesora y aplicarle los procesos de calidad del curso, sin empresa ni contraparte externa de por medio. La Fase 1 de la tabla de abajo (y cualquier mención a "empresa"/"convenio de confidencialidad" en este documento) queda obsoleta hasta que se confirme lo contrario.
 
 ## Las 5 fases
 
 | Fase | Entregable(s) | Modalidad | Nota |
 |---|---|---|---|
-| 1. Identificación del problema y definición de objetivos | Plan del proyecto | Equipo | Reunión inicial con la contraparte de la empresa; puede requerir firmar convenio de confidencialidad |
+| 1. Identificación del problema y definición de objetivos | Plan del proyecto | Equipo | ~~Reunión inicial con la contraparte de la empresa; puede requerir firmar convenio de confidencialidad~~ — no aplica en esta edición, ver corrección arriba. En su lugar: elegir el repositorio de GitHub que cumpla los requisitos pedidos |
 | 2. Planeación | Plan de pruebas (≥60 casos de prueba, ≥2 tipos de prueba distintos) | Equipo | Máximo 10% de las pruebas pueden ser manuales |
 | 3. Diseño, Desarrollo y Evaluación | Proyecto de pruebas (código) + Informe de pruebas | Equipo | Automatizar al menos el 90% de los casos de prueba |
 | 4. Comunicación | Presentación de resultados | Equipo | Exposición **en inglés** ante profesora + docente de inglés, ~20 min + 10 min preguntas (parte de la estrategia FUI — Fomento del Uso del Inglés) |
