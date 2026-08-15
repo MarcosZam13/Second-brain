@@ -1,8 +1,6 @@
 ---
 curso: QA
-entregas_pendientes:
-  - {fecha: "por confirmar", entregable: "Diario Reflexivo (bitácora) — Entrada 1, Semanas 1-2 (pausado hasta que arranque el proyecto)", peso: "5% (parte del Proyecto)"}
-  - {fecha: "continuo, semana a semana", entregable: "Diario de Aprendizaje Semanal (carpeta de Drive) — Semana 1 y 2 pendientes de subir", peso: "no especificado"}
+entregas_pendientes: []
 ---
 
 # Entregas y fechas
