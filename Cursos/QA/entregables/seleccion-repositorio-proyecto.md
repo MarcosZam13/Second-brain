@@ -26,6 +26,22 @@ Se consultó la API de GitHub (estrellas, forks, issues abiertos, `pushedAt`, ta
 | **[chatwoot/chatwoot](https://github.com/chatwoot/chatwoot)** | Ruby on Rails + Vue | 35,894 | 8,617 | 1,337 | 2026-08-14 | Login de agentes + widget de cliente | Sí | Comunidad enorme y muy activa (PRs mergeados a diario), pero stack local más pesado (Postgres + Redis + Sidekiq) — más setup |
 | **[firefly-iii/firefly-iii](https://github.com/firefly-iii/firefly-iii)** | Laravel/PHP + Vue (islas) | 24,322 | 2,250 | 161 | 2026-08-15 (mismo día) | Login/registro + 2FA, también actúa como proveedor OAuth | Sí, `docker-compose` oficial | API documentada con OpenAPI/Swagger. Ojo: el mantenimiento está muy concentrado en un solo desarrollador (20,800 commits vs. 131 del siguiente humano) — la comunidad de PRs es menor que en los otros dos |
 
+## ¿De qué se trata cada uno?
+
+- **Documenso** — alternativa open source a DocuSign. Se sube un PDF, se marcan dónde van las firmas/campos, se envía a los firmantes por correo, y ellos firman desde el navegador (con verificación de identidad). Tiene dashboard de documentos, plantillas reutilizables, auditoría de quién firmó y cuándo, y API para integrarlo con otros sistemas.
+- **Chatwoot** — plataforma de atención al cliente omnicanal, alternativa a Intercom/Zendesk/Salesforce Service Cloud. Centraliza en una sola bandeja los mensajes que llegan por chat en vivo (widget embebido en una web), correo, WhatsApp, Facebook, Instagram, etc. Los agentes responden desde ahí, se pueden asignar conversaciones, usar respuestas automáticas/bots, y ver reportes de tiempos de respuesta.
+- **Firefly III** — gestor de finanzas personales (tipo Mint/YNAB, pero open source y self-hosted). Se llevan cuentas bancarias, tarjetas, ingresos y gastos categorizados, presupuestos, metas de ahorro, transacciones recurrentes, y genera reportes/gráficos de a dónde se va el dinero.
+
+**Por qué importa para el proyecto de QA — cada uno da flujos distintos para diseñar los ≥60 casos de prueba:**
+
+| Repo | Flujos típicos a probar |
+|---|---|
+| Documenso | Auth + subida/procesamiento de archivos + firma — bueno para validaciones de estado de documento, permisos, generación de PDFs |
+| Chatwoot | Mensajería en tiempo real + multi-canal + roles de agente — bueno para permisos, websockets/realtime, integraciones |
+| Firefly III | CRUD financiero con reglas de negocio (cálculos, categorías, presupuestos) — más fácil de probar con datos numéricos, menos dependencias externas (no requiere integrarse con WhatsApp/email como los otros dos) |
+
+Si el equipo prefiere algo más simple de levantar y probar sin depender de servicios externos, **Firefly III** es probablemente el más directo. Si prefieren algo con interfaz más moderna en React, **Documenso**.
+
 ## Descartados en la exploración
 
 - **BookStackApp/BookStack** (PHP/Laravel) — la descripción del repo en GitHub dice *"NOW MANAGED ON CODEBERG"* y muestra 0 issues abiertos: el proyecto se mudó de plataforma, así que ya no cumple el criterio 3 (historial de bugs gestionado activamente en GitHub).
