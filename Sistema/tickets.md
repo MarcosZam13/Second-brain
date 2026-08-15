@@ -23,6 +23,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 | TACHA | Tacha | TACHA-6 | TACHA-7 |
 | GYM | GymBase | — | GYM-1 |
 | CANELE | CaneleApp | — | CANELE-1 |
+| COMPDES | COMPDES 2027 | — | COMPDES-1 |
 
 ## Sistema (el vault mismo)
 
