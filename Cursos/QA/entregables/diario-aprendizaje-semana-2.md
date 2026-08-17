@@ -4,7 +4,7 @@ tema: Diario de Aprendizaje Semanal — Semana 2
 fecha: 2026-08-12
 tipo: entregable
 entregable_de: "[[Cursos/QA/entregables/diario-aprendizaje-semanal]]"
-estado: borrador
+estado: entregado
 tags: [diario-aprendizaje, drive, reflexion-semanal]
 ---
 
@@ -32,4 +32,4 @@ Aplicar bien el control de calidad desde antes (desde el diseño) puede ser inte
 
 ---
 
-*Borrador — pendiente de revisión final de Marcos antes de exportar a PDF y subir a la carpeta de Drive.*
+*Exportado a PDF y subido a la carpeta de Drive el 2026-08-17.*

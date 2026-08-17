@@ -4,7 +4,7 @@ tema: Diario de Aprendizaje Semanal (carpeta de Drive compartida con la profesor
 fecha: 2026-08-15
 tipo: entregable
 entregable_de: "asignación verbal de la profesora — sin documento/PDF de rúbrica todavía"
-estado: borrador
+estado: entregado
 tags: [diario-aprendizaje, drive, reflexion-semanal, distinto-del-diario-reflexivo-de-proyecto]
 ---
 
@@ -25,11 +25,10 @@ Ver también: [[Cursos/QA/temario]] · [[Cursos/QA/apuntes/calidad-semana-1|Cali
 
 ## Pendiente
 
-- [ ] Crear la carpeta de Drive con la estructura de subcarpetas por semana
-- [ ] Compartir la carpeta con la profesora (permiso de lectura/comentario)
+- [x] Crear la carpeta de Drive con la estructura de subcarpetas por semana
+- [x] Compartir la carpeta con la profesora (permiso de lectura/comentario)
 - [ ] Confirmar si hay una fecha límite específica de entrega/publicación del enlace, o si es continuo semana a semana
-- [ ] Marcos revisa y personaliza [[Cursos/QA/entregables/diario-aprendizaje-semana-1|Semana 1]] y [[Cursos/QA/entregables/diario-aprendizaje-semana-2|Semana 2]] antes de exportarlas a PDF — son un borrador inicial, no una entrega final tal cual
-- [ ] Exportar Semana 1 y Semana 2 a PDF (un documento por semana, un PDF por subcarpeta) y subirlas a Drive una vez creada la carpeta
+- [x] Exportar Semana 1 y Semana 2 a PDF y subirlas a Drive (2026-08-17)
 
 ## Entradas
 
