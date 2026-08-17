@@ -23,17 +23,17 @@ Ver también: [[Cursos/SistemasOperativos/apuntes/estructura-sistemas-computo-un
 
 ## Checklist contra la rúbrica
 
-- [ ] Calidad y corrección conceptual de las 10 respuestas e incisos (60%) — faltan 3 puntos puntuales, ver abajo
+- [x] Calidad y corrección conceptual de las 10 respuestas e incisos (60%)
 - [x] Evidencia de razonamiento propio — palabras propias, no copiadas de la IA (20%)
 - [x] Bitácora de uso de IA — 3-5 líneas por pregunta usada, o nota de "no fue necesario" (20%)
 - [x] Portada (nombre completo, curso, fecha) — contenido listo, ver arriba
-- [ ] Respuestas numeradas 1-10 con sus incisos (ya están así en este borrador, verificar al pasar a PDF)
-- [ ] Exportar a PDF con el nombre `S1_Preguntas_MarcosZamoraSanchez.pdf`
+- [x] Respuestas numeradas 1-10 con sus incisos
+- [x] Exportar a PDF con el nombre `S1_Preguntas_MarcosZamoraSanchez.pdf`
 
-**Últimos 3 pendientes de corrección conceptual:**
-- [ ] 1(a) — línea ~30, todavía describe decodificación como "traducir lo que el SO tiene que hacer" en vez de opcode+operandos → señales de control.
-- [ ] 1(c) — línea ~34, la frase sobre qué se simplifica en el hardware sigue sin ser clara.
-- [ ] 3(a) — línea ~56, falta cubrir el aspecto de paralelización que pide la consigna.
+**Correcciones conceptuales (resueltas antes de entregar, 2026-08-13):**
+- [x] 1(a) — decodificación corregida a opcode+operandos → señales de control.
+- [x] 1(c) — aclarada la frase sobre qué se simplifica en el hardware.
+- [x] 3(a) — cubierto el aspecto de paralelización que pedía la consigna.
 
 ## I. Ciclo de Instrucción y Procesador
 

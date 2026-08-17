@@ -4,7 +4,7 @@ tema: Preguntas de la Sesión — Semana 2 (IA como Tutor Socrático)
 fecha: 2026-08-12
 tipo: entregable
 entregable_de: "[[Cursos/SistemasOperativos/apuntes/historia-componentes-so-unidad2]]"
-estado: borrador
+estado: entregado
 tags: [preguntas-analisis, tutor-socratico, bitacora-ia]
 ---
 
@@ -14,7 +14,7 @@ Ver también: [[Cursos/SistemasOperativos/apuntes/historia-componentes-so-unidad
 
 **Entrega:** PDF nombrado `S2_Preguntas_MarcosZamoraSanchez`, antes del inicio de la sesión de Semana 3 — jueves **2026-08-20**.
 
-**Estado (2026-08-15):** contenido listo. Falta exportar a PDF con el nombre de archivo requerido y subirlo antes del jueves.
+**Estado (2026-08-17):** entregado — exportado a PDF y subido antes de la fecha límite (jueves 2026-08-20).
 
 ## Portada
 
@@ -25,12 +25,12 @@ Ver también: [[Cursos/SistemasOperativos/apuntes/historia-componentes-so-unidad
 
 ## Checklist contra la rúbrica
 
-- [ ] Calidad y corrección conceptual de las respuestas — los 10 bloques y sus incisos (60%)
-- [ ] Evidencia de razonamiento propio — palabras propias, no copiadas de la IA (20%)
-- [ ] Calidad y honestidad de la Bitácora de uso de IA (20%)
-- [ ] Portada (nombre completo, curso, fecha)
-- [ ] Respuestas numeradas 1-10 con sus incisos
-- [ ] Exportar a PDF con el nombre `S2_Preguntas_MarcosZamoraSanchez.pdf`
+- [x] Calidad y corrección conceptual de las respuestas — los 10 bloques y sus incisos (60%)
+- [x] Evidencia de razonamiento propio — palabras propias, no copiadas de la IA (20%)
+- [x] Calidad y honestidad de la Bitácora de uso de IA (20%)
+- [x] Portada (nombre completo, curso, fecha)
+- [x] Respuestas numeradas 1-10 con sus incisos
+- [x] Exportar a PDF con el nombre `S2_Preguntas_MarcosZamoraSanchez.pdf`
 
 ## I. Historia, Definición y Objetivos del Sistema Operativo
 
