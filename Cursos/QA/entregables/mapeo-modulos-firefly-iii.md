@@ -56,6 +56,6 @@ Con Auth + Profile + Account + Transaction + Budget + Category ya hay superficie
 
 ## Pendiente
 
-- [ ] Clonar el repo y confirmar localmente que cada módulo de alta prioridad es alcanzable (login funcional, se pueden crear cuentas/transacciones de prueba)
-- [ ] Revisar `routes/api.php` en detalle para confirmar qué endpoints de la API pública existen por módulo (insumo para pruebas automatizadas vía API, no solo UI)
+- [x] Clonar el repo y confirmar localmente que cada módulo de alta prioridad es alcanzable — stack levantado con Docker Compose oficial (`firefly-iii-docker/`), `firefly_iii_core` healthy, login accesible en `http://localhost/login` (verificado 2026-08-17)
+- [x] Revisar `routes/api.php` en detalle para confirmar qué endpoints de la API pública existen por módulo — confirmado: grupos de rutas dedicados para Accounts, Transactions, Budget/BudgetLimit, Categories, Bills, Recurrence, Rules, Tags, TransactionCurrency, PiggyBank, UserGroup, Webhooks, Insights, Search, System (verificado 2026-08-17). Nota: no hay spec OpenAPI/Swagger dentro del repo — la documentación de API vive en api-docs.firefly-iii.org, fuera del repo clonado
 - [ ] Con el equipo, confirmar qué módulos de media/baja prioridad entran en el alcance final del Plan de pruebas
