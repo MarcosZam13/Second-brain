@@ -12,7 +12,7 @@ tags: [proyecto, seleccion-repositorio, github, fase1]
 
 Ver también: [[Cursos/QA/apuntes/criterios-seleccion-repositorio-github|Criterios para Seleccionar Proyectos en GitHub]] · [[Cursos/QA/apuntes/proyecto-qa-guia|Guía del Proyecto]] · [[Cursos/QA/entregables/diario-reflexivo|Diario Reflexivo del Proyecto]] · [[Cursos/QA/entregas]]
 
-**Estado:** exploración inicial hecha con Claude Code (`gh` CLI + GitHub API), verificando datos en vivo el 2026-08-15. Falta decisión final del equipo — esto es un punto de partida, no la elección cerrada.
+**Estado:** exploración inicial hecha con Claude Code (`gh` CLI + GitHub API), verificando datos en vivo el 2026-08-15. **Decisión final del equipo (2026-08-17): [firefly-iii/firefly-iii](https://github.com/firefly-iii/firefly-iii).**
 
 ## Metodología
 
@@ -53,7 +53,8 @@ Si el equipo prefiere algo más simple de levantar y probar sin depender de serv
 
 ## Pendiente
 
-- [ ] Decisión final del equipo (Marcos, Mario, Joseph, + integrante que falte) — esta lista es punto de partida, no la elección cerrada
-- [ ] Clonar el repo elegido y confirmar que corre localmente sin problemas (criterio explícito del PDF)
-- [ ] Revisar en detalle accesibilidad (WCAG/ARIA) y estándares de codificación (ESLint/PEP8 según stack) del repo elegido
-- [ ] Una vez elegido, actualizar [[Cursos/QA/apuntes/proyecto-qa-guia]] y [[Cursos/QA/entregables/diario-reflexivo]] con el repo final
+- [x] Decisión final del equipo — **Firefly III**, 2026-08-17
+- [ ] Clonar el repo y confirmar que corre localmente sin problemas (`docker-compose` oficial — criterio explícito del PDF)
+- [ ] Revisar en detalle accesibilidad (WCAG/ARIA) y estándares de codificación (PSR-12/PHP, ESLint para las islas Vue) del repo
+- [x] Mapear módulos de Firefly III — ver [[Cursos/QA/entregables/mapeo-modulos-firefly-iii]] (verificado contra el código fuente, no solo el README)
+- [x] Borrador del Plan del proyecto (Fase 1) iniciado — ver [[Cursos/QA/entregables/plan-del-proyecto]] (falta revisión del equipo, fuentes IEEE, formato)
