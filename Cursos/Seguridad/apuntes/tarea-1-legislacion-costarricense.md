@@ -21,11 +21,12 @@ Ver también: [[Cursos/Seguridad/entregas]] · [[Cursos/Seguridad/temario]] · [
 
 Identificar y aplicar las leyes costarricenses que regulan el desarrollo de software, analizar un sistema real frente a esos marcos legales y argumentar decisiones técnicas con fundamentación jurídica.
 
-## ⚠️ Decisión pendiente: elegir rol
+## Rol elegido: The Devs — La Defensa
 
-Hay que elegir **uno** de 3 roles antes de poder redactar el entregable — todavía no confirmado cuál le toca al usuario (o a la pareja):
+Confirmado con el usuario (2026-08-18). Misión: demostrar ante el tribunal que MediSync CR cumple TODOS los marcos legales aplicables. Ver el borrador en [[Cursos/Seguridad/entregables/tarea-1-legislacion|entregables/tarea-1-legislacion]].
 
-1. **The Devs — La Defensa**: demostrar que MediSync CR cumple TODOS los marcos legales aplicables.
+Los otros dos roles quedan documentados aquí solo como referencia del caso completo:
+
 2. **The PRODHAB — La Fiscalía**: actuar como inspectores, demostrar infracciones específicas citando artículos concretos.
 3. **El MICITT — Los Jueces Técnicos**: panel técnico-legal, evaluar si MediSync toca infraestructura crítica, hacer preguntas a ambos grupos y sentenciar.
 
