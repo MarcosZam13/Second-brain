@@ -40,13 +40,15 @@ Qué se hizo en el proyecto + autocrítica + habilidades sociales + apoyo visual
 
 **Rúbrica confirmada 2026-08-18** (imagen recibida del profesor, archivada en `Cursos/QA/_fuentes/QA_diario-reflexivo-rubrica_2026-08-18.png` — coincide con los criterios ya listados abajo; 100 pts totales).
 
-- [ ] Formato: documento organizado, con índice, márgenes, interlineado consistente, un "titular" por apartado (10 pts) — los 3 apartados de la Entrada 1 ya tienen título propio y son cortos (1 página c/u); falta maquetar el documento final (índice, márgenes) al exportar
-- [x] Redacción: sin errores gramaticales/ortográficos, lenguaje comprensible (10 pts) — revisada, sin errores
+**Revisado contra el PDF real exportado, 2026-08-18** (`QA_diario-reflexivo-entrada-1_2026-08-18.pdf`):
+
+- [ ] Formato: documento organizado, con índice, márgenes, interlineado consistente, un "titular" por apartado (10 pts) — los 3 apartados ya tienen título propio y ocupan ~1 página c/u; falta un índice corto al inicio
+- [~] Redacción: sin errores gramaticales/ortográficos, lenguaje comprensible (10 pts) — 2 errores puntuales encontrados y corregidos en esta nota ("si"→"sí", falta el verbo "es" en Semana 2) — **falta aplicar la corrección en el documento real antes de subirlo**
 - [~] Esfuerzo y regularidad: entradas quincenales puntuales, mínimo 8 en total (10 pts) — 1 de 8 entradas hecha (Semanas 1-2), a tiempo; se completa a medida que avanza el curso
-- [x] Apropiación de aprendizaje: reflexión autocrítica real, no genérica (30 pts) — cada uno de los 3 apartados tiene su propia autocrítica corta y específica
-- [x] Búsqueda de información complementaria: citas/referencias de calidad cuando aplique (20 pts) — 1 referencia real por apartado (Crosby; Leveson & Turner sobre Therac-25; comparación de candidatos del proyecto)
-- [x] Apoyo visual: imágenes, diagramas, capturas, etc. (15 pts) — diagrama de evolución, tabla QA vs QC, tabla de candidatos evaluados; convertir a imagen real (no solo texto/tabla markdown) al exportar
-- [ ] Accesibilidad: publicado y accesible para profesora y compañeros (5 pts) — falta elegir plataforma y publicar
+- [x] Apropiación de aprendizaje: reflexión autocrítica real, no genérica (30 pts) — las 3 autocríticas son específicas y en voz propia
+- [~] Búsqueda de información complementaria: citas/referencias de calidad cuando aplique (20 pts) — Semana 1 y 2 tienen referencia real; **"Avance del proyecto" no tiene ninguna** — falta agregar una
+- [~] Apoyo visual: imágenes, diagramas, capturas, etc. (15 pts) — Semana 1 y 2 tienen imagen real; **"Avance del proyecto" no tiene ninguna**; además la imagen de Semana 1 (@jrgsanta, 2019) no lleva crédito en el texto — la rúbrica pide respetar derechos de autor explícitamente
+- [~] Accesibilidad: publicado y accesible para profesora y compañeros (5 pts) — ya existe carpeta de Drive con link; falta confirmar que esté compartida también con compañeros, no solo la profesora
 - [ ] Enlace publicado en TEC-Digital antes de semana 6
 
 ## Formato por entrada (machote)
@@ -65,52 +67,49 @@ Qué se hizo en el proyecto + autocrítica + habilidades sociales + apoyo visual
 
 ## Entrada 1 — Semanas 1-2
 
+**Versión final, redactada por Marcos y exportada a PDF el 2026-08-18** (fuente: `Cursos/QA/_fuentes/QA_diario-reflexivo-entrada-1_2026-08-18.pdf`). Reemplaza el borrador anterior (ver historial más abajo) — este es el texto real que se sube a Drive, con 2 correcciones de redacción aplicadas (marcadas abajo).
+
 ### 🧵 La calidad no es un rumor — Semana 1
 
-Esta semana le puse nombre a algo que ya venía haciendo sin saberlo. Vimos qué es la calidad y su aseguramiento: cómo evolucionó el concepto (de lo artesanal a la mejora continua), y las visiones de Crosby, Juran, Deming, Ishikawa e ISO 9000. Resultó que ya aplicaba aseguramiento de calidad en mis proyectos, solo que de forma intuitiva, sin el marco teórico para nombrarlo o hacerlo consciente.
+Esta primera semana estuvo muy interesante porque logré entender muchas cosas que venía tal vez haciendo sin necesidad de entender o saber bien el contexto. Entonces esta clase me gustó mucho porque vimos qué es la calidad y el aseguramiento de la misma: desde cómo evolucionó el concepto (de lo artesanal a la mejora continua), y las visiones de Crosby, Juran, Deming, Ishikawa e ISO 9000. Resultó que ya aplicaba aseguramiento de calidad en mis proyectos, solo que tal vez solo por instinto, pero ese concepto de mejora continua me llamó mucho la atención.
 
-**Autocrítica:** mi actitud ha sido intuitiva, no deliberada — sé "hacer las cosas bien" por costumbre, pero no tengo el hábito de verificarlo contra criterios explícitos. Ni siquiera le aplico control de calidad a mi propio hábito de estudio: sigo dejando el repaso para el final de la semana.
+**Autocrítica:** es interesante porque sé que tengo que "hacer las cosas bien" por costumbre, pero aun así no tengo el hábito de verificarlo constantemente. Entonces conozco y aplico la calidad, pero no he aplicado tanto aseguramiento del mismo.
 
 **Referencia:** Crosby, P. B. (1979). *Quality Is Free: The Art of Making Quality Certain*. McGraw-Hill.
 
-**Apoyo visual:**
-```
-Artesanal → Industrialización → Control final → Control en proceso → Control en diseño → Mejora continua
-```
-*Evolución del concepto de calidad (6 etapas). Convertir en infografía/imagen al exportar.*
+**Apoyo visual:** ilustración de un proceso de inspección (normalizar, medir, supervisar, certificar) conectado a la calidad. *Crédito pendiente de agregar en el documento final: Ilustración de @jrgsanta (2019) — falta el crédito explícito, la rúbrica pide respetar derechos de autor.*
 
 ### 💥 Cuando un bug cuesta vidas — Semana 2
 
-Vimos control de calidad: se enfoca en el producto (el aseguramiento se enfoca en el proceso), sus 4 funciones (reportes, pruebas, auditoría, monitoreo), y casos reales como Boeing 737 MAX y Therac-25, donde un control de calidad ausente o mal diseñado costó vidas humanas, no solo dinero.
+En esta segunda semana vimos control de calidad, lo cual de forma resumida se enfoca en el producto (en cambio el aseguramiento se enfoca en el proceso), sus 4 funciones (reportes, pruebas, auditoría, monitoreo), y casos reales como Boeing 737 MAX y Therac-25, donde un control de calidad ausente o mal diseñado costó vidas humanas, no solo dinero.
 
-**Autocrítica:** siempre esperaba a que una funcionalidad estuviera "terminada" para recién ahí hacerle QA — un hábito reactivo que estos casos me mostraron que puede ser peligroso, no solo ineficiente. Es el mismo patrón que reconozco en mi forma de estudiar: reviso todo al final, no en el camino.
+**Autocrítica:** aquí esta semana siento que **sí** me hizo reflexionar mucho, sobre todo después de ver tantos casos de errores que cuestan vidas o millones, porque yo siempre esperaba a que una funcionalidad estuviera "terminada" para recién ahí hacerle QA, lo cual **es** un hábito que tengo que cambiar, porque ya vimos en estos casos que puede ser peligroso, y no solo ineficiente. *(corregido 2026-08-18: faltaba la tilde en "sí" y el verbo "es" — texto original decía "siento que si me hizo" y "lo cual un hábito".)*
 
 **Referencia:** Leveson, N., & Turner, C. S. (1993). An investigation of the Therac-25 accidents. *IEEE Computer, 26*(7), 18–41.
 
-**Apoyo visual:**
+**Apoyo visual:** diagrama circular "Quality Inspection" (inspeccionar materiales → identificar defectos → implementar controles → satisfacción del cliente → reducir devoluciones → mantener reputación → ventaja competitiva), fuente 6sigma.us.
 
-| Aspecto | Control de calidad | Aseguramiento de la calidad |
-|---|---|---|
-| Enfoque | Producto | Proceso |
-| Responsable | Una persona/rol de inspección | Todo el equipo |
-| Tasa de rechazo | Se acepta un % de fallo | Se espera 0 rechazos |
-| Momento | Al final (post-producción) | Desde el diseño |
+### 🎯 Elegimos rival a vencer: Firefly III — Avance del proyecto
 
-### 🎯 Elegimos rival: bienvenido, Firefly III — Avance del proyecto
+Hablando un poco del proyecto, ya empezamos a definir la idea del proyecto: primero evaluamos 3 repositorios candidatos (Documenso, Chatwoot, Firefly III) contra los 9 criterios del curso y elegimos **Firefly III**, que es básicamente un gestor de finanzas personales open source. Yo lideré la comparación de candidatos y después mapeé sus módulos principales contra el código fuente real para dejarle al equipo una base sólida para el Plan de pruebas.
 
-El equipo ya arrancó: evaluamos 3 repositorios candidatos (Documenso, Chatwoot, Firefly III) contra los 9 criterios del curso y elegimos **Firefly III**, un gestor de finanzas personales open source. Yo lideré la comparación de candidatos y después mapeé sus módulos principales contra el código fuente real (no solo el README) para dejarle al equipo una base sólida para el Plan de pruebas.
+**Autocrítica:** esta primera parte fue bastante fácil e interesante — buscar algún repo que cumpliera con los requisitos y que además nos gustara fue lo más complicado, pero al final nos pusimos de acuerdo muy rápido.
 
-**Autocrítica:** me costó no dejarme llevar por el repo más popular (Chatwoot, con la comunidad más grande) — tuve que recordarme evaluar contra los criterios reales del curso, no contra qué se veía más "impresionante" a simple vista.
+**Habilidades sociales:** comunicación con el equipo para coordinar la decisión, y capacidad de presentar la comparación de forma que la decisión fuera más fácil de tomar en grupo.
 
-**Habilidades sociales:** comunicación con el equipo para coordinar la decisión, y capacidad de síntesis para presentar la comparación de forma que la decisión fuera fácil de tomar en grupo.
+**Apoyo visual:** ⚠️ **falta en el PDF actual** — a diferencia de Semana 1 y 2, este apartado no tiene ni referencia ni imagen. Sugerencia: convertir esta tabla en imagen y citar la fuente de la comparación.
 
-**Apoyo visual:**
+| Candidato       | Stack              | Veredicto                                                                   |
+| --------------- | ------------------ | --------------------------------------------------------------------------- |
+| Documenso       | Next.js/TypeScript | Descartado — el equipo prefirió algo sin dependencias externas              |
+| Chatwoot        | Rails + Vue        | Descartado — stack local más pesado (Postgres + Redis + Sidekiq)            |
+| **Firefly III** | Laravel + Vue      | **Elegido** — CRUD financiero con reglas de negocio, sin servicios externos |
 
-| Candidato | Stack | Veredicto |
-|---|---|---|
-| Documenso | Next.js/TypeScript | Descartado — el equipo prefirió algo sin dependencias externas |
-| Chatwoot | Rails + Vue | Descartado — stack local más pesado (Postgres + Redis + Sidekiq) |
-| **Firefly III** | Laravel + Vue | **Elegido** — CRUD financiero con reglas de negocio, sin servicios externos |
+### 📝 Bitácora de uso de IA
+
+Para este trabajo simplemente estuve haciendo apuntes de cada clase; para redactar cada entrada me senté a escribir el aprendizaje de cada semana y la autocrítica que me hice después de cada clase. Lo único que le pedí a la IA fue que me ordenara el documento, le agregara títulos divertidos, y que me ayudara con las referencias y a elegir alguna imagen para cada entrada.
+
+**Link de Drive donde se va subiendo cada diario:** https://drive.google.com/drive/folders/1-35NryXj7H9ANBebpx5K0vSvEruruYE?usp=drive_link
 
 ## Versión anterior de la Entrada 1 (formato de 5 preguntas, archivada 2026-08-18)
 
@@ -147,8 +146,12 @@ Comunicación con el equipo para coordinar la búsqueda y decisión del reposito
 
 - [x] Respuestas reales de Marcos a las 5 preguntas de la Entrada 1 — actualizadas 2026-08-17 con la decisión de repositorio (Firefly III)
 - [x] Reescribir Entrada 1 al formato corto de 3 apartados (Semana 1, Semana 2, Avance de proyecto) que pidió el profesor, con autocrítica/referencia/apoyo visual en cada uno (2026-08-18)
-- [ ] Elegir la plataforma donde se va a publicar el diario (debe ser accesible para profesora y compañeros)
-- [ ] Al exportar: agregar índice y verificar márgenes/interlineado; convertir la tabla/diagrama de cada apartado en imagen real
+- [x] Marcos redactó y exportó la versión final en PDF, con imágenes propias y bitácora de uso de IA (2026-08-18)
+- [ ] **Corregir en el documento real** (no solo acá): "si me hizo" → "sí me hizo"; "lo cual un hábito" → "lo cual es un hábito" (Semana 2)
+- [ ] Agregar referencia + imagen al apartado "Avance del proyecto" (hoy es el único de los 3 sin ninguna de las dos)
+- [ ] Agregar crédito de la imagen de Semana 1 ("Ilustración: @jrgsanta, 2019") — respeta el punto de derechos de autor de la rúbrica
+- [ ] Confirmar que la carpeta de Drive esté compartida también con los compañeros, no solo la profesora
+- [ ] Agregar un índice corto al inicio del documento
 - [ ] Publicar el enlace en TEC-Digital antes de semana 6
 - [ ] Confirmar si la evaluación entre pares del Informe de pruebas también aplica al Diario (la guía no lo aclara — parece que no)
 - [ ] Confirmar con la profesora/TEC-Digital la fecha real de la primera entrada, ya que depende de que arranque el proyecto (ver corrección arriba)
