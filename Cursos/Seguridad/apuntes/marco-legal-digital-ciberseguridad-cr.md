@@ -10,7 +10,7 @@ tags: [ley8968, ley6683, prodhab, arco, sanciones, legislacion]
 
 # Informe técnico-jurídico — Marco Legal Digital y Ciberseguridad en Costa Rica
 
-Ver también: [[Cursos/Seguridad/apuntes/tarea-1-legislacion-costarricense|Tarea 1 — Legislación]] · [[Cursos/Seguridad/apuntes/tema-1-importancia-seguridad-software|Tema 1]]
+Ver también: [[Cursos/Seguridad/apuntes/tarea-1-legislacion-costarricense|Tarea 1 — Legislación]] · [[Cursos/Seguridad/apuntes/tema-1-importancia-seguridad-software|Tema 1]] · [[Cursos/Seguridad/apuntes/quiz1-estado-ciberseguridad-cr-2025|Quiz 1 — Estado de la Ciberseguridad en CR 2025]]
 
 Documento de profundización legal — **cubre en detalle solo Ley 8968 y Ley 6683** (el propio informe declara que no tiene información sobre Ley 9048, Ley 7975 ni la Estrategia Nacional de Ciberseguridad del MICITT — para eso usar [[Cursos/Seguridad/apuntes/tema-1-importancia-seguridad-software|Tema 1]] y [[Cursos/Seguridad/apuntes/tarea-1-legislacion-costarricense|Tarea 1]]). Útil sobre todo para fundamentar con artículos concretos el rol de **Devs** en la Tarea 1.
 

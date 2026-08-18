@@ -10,7 +10,7 @@ tags: [tema1, cia, historia, etica, legislacion, unidad1]
 
 # Tema 1 — La importancia de la Seguridad del Software
 
-Ver también: [[Cursos/Seguridad/temario]] · [[Cursos/Seguridad/apuntes/reglas-clase|Reglas de clase]] · [[Cursos/Seguridad/apuntes/tarea-1-legislacion-costarricense|Tarea 1 — Legislación]]
+Ver también: [[Cursos/Seguridad/temario]] · [[Cursos/Seguridad/apuntes/reglas-clase|Reglas de clase]] · [[Cursos/Seguridad/apuntes/tarea-1-legislacion-costarricense|Tarea 1 — Legislación]] · [[Cursos/Seguridad/apuntes/quiz1-estado-ciberseguridad-cr-2025|Quiz 1 — Estado de la Ciberseguridad en CR 2025]]
 
 Diapositivas de la profesora que cubren completo el primer bloque de contenidos del programa oficial ("La importancia de la Seguridad en el Software"). Cubre introducción, historia, definición, complejidad/extensibilidad/conectividad, ética y legislación costarricense — probablemente el material acumulado de varias clases (el grupo va por semana 3 pero contando desde "semana 1" del profesor).
 
