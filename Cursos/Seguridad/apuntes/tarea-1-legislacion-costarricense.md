@@ -10,7 +10,7 @@ tags: [legislacion, ley8968, ley9048, ley6683, ley7975, prodhab, micitt, tarea]
 
 # Tarea 1 — Legislación Costarricense: "El Contrato Roto"
 
-Ver también: [[Cursos/Seguridad/entregas]] · [[Cursos/Seguridad/temario]]
+Ver también: [[Cursos/Seguridad/entregas]] · [[Cursos/Seguridad/temario]] · [[Cursos/Seguridad/apuntes/marco-legal-digital-ciberseguridad-cr|Informe técnico-jurídico ampliado (Ley 8968 y 6683 con artículos y sanciones)]]
 
 **Subtítulo:** Cuando el software toca la ley costarricense
 **Valor:** 5% del rubro de Tareas
