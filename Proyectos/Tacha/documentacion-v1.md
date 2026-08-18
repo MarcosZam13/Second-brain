@@ -17,6 +17,8 @@ Ver también: [[Proyectos/Tacha/README|README]] · [[Proyectos/README|Proyectos]
 > Reunión de equipo completa el domingo 2026-08-16 (~2.5h): se confirmó el stack y la base de datos (sección 7) — queda pendiente solo la confirmación del profesor. Se cerraron varias de las preguntas de la [[#10. Pendientes de definición|sección 10]] original; el resto de definiciones nuevas quedan en esa misma sección.
 >
 > Además, el 2026-08-18 se agregaron dos requerimientos nuevos propuestos por Marcos — [[#4.11 Grupos de productos (aceptado 2026-08-18, sujeto a confirmación del equipo)|grupos de productos]] y [[#4.5.1 Mis productos personalizados (aceptado 2026-08-18, sujeto a confirmación del equipo)|mis productos personalizados]] — aceptados para destrabar el diseño de interfaz de hoy (mismo criterio que se usó con Next.js/Tailwind antes de la reunión del 2026-08-16, ver sección 7): quedan como parte del alcance de trabajo, sujetos a confirmación cuando el equipo completo los repase.
+>
+> El mismo 2026-08-18, en una segunda reunión, el equipo desglosó los requerimientos en épicas/historias de usuario/criterios de aceptación — ver [[Proyectos/Tacha/historias-usuario|historias-usuario.md]] (v2.1, borrador). Ese desglose sacó a la luz requerimientos del profesor para la landing pública y la autenticación que no estaban documentados acá (sección 4.12), afinó cómo se resuelve la unificación de marca en el catálogo (secciones 4.5, 4.8), y corrigió el alcance real de la reconciliación de cantidades (secciones 4.3, 4.9.1, 4.11).
 
 ## 1. Resumen ejecutivo
 
@@ -52,6 +54,7 @@ Tacha es una aplicación web para que un grupo de usuarios (familias, o grupos d
 | Inventario doméstico | Sí — opcional, no obligatorio | Decidido en reunión 2026-08-16: se ofrece como herramienta, nunca se le exige al usuario. Ver [[#4.10 Inventario doméstico]] |
 | Grupos de productos | Sí | Agregar varios productos frecuentes a la lista de un solo toque, sin buscar uno por uno. Ver [[#4.11 Grupos de productos (aceptado 2026-08-18, sujeto a confirmación del equipo)]] |
 | Mis productos personalizados | Sí | Ver, editar y agregar productos propios no cubiertos por el scraping. Ver [[#4.5.1 Mis productos personalizados (aceptado 2026-08-18, sujeto a confirmación del equipo)]] |
+| Landing pública, About y autenticación extendida | Sí | Requerimiento del profesor + reunión de equipo 2026-08-18: página pública para visitantes ("Mirones"), reCAPTCHA, OAuth (Google/Facebook), JWT, recuperación de contraseña. Ver [[#4.12 Acceso público y autenticación extendida (landing, about, auth)|4.12]] |
 | Geolocalización / geofencing | Fuera de alcance | Descartado por complejidad para el contexto del curso |
 
 ### Roadmap post-curso (opcional, si el equipo decide continuar)
@@ -69,6 +72,7 @@ Tacha es una aplicación web para que un grupo de usuarios (familias, o grupos d
 - Un usuario puede pertenecer a uno o más households (familias), cada uno con su propio rol (admin/miembro) — pero no está obligado a pertenecer a ninguno para usar el resto de la app.
 - Perfil básico: nombre, foto opcional, household(s) a los que pertenece (puede ser ninguno).
 - Solo el admin de un household invita nuevos miembros.
+- **Invitación por link (detallado 2026-08-18):** el admin genera un link de invitación al household (mismo mecanismo que ya se usaba para listas privadas, sección 4.4), en vez de invitar por correo uno por uno. El admin puede consultar la lista de familiares y eliminar a un miembro. La tabla de miembros soporta modificar, filtrar y paginar desde el backend (no cargar todo el household de una vez si crece).
 - Pendiente de decidir (no cerrado el 2026-08-16): qué pasa con las listas de un usuario que empezó solo cuando se une o crea un household después — ¿se ofrecen para asociar retroactivamente, o quedan siempre personales y las de household se crean aparte? Ver [[#10. Pendientes de definición]].
 
 ### 4.2 Lista general y dashboard financiero
@@ -82,12 +86,25 @@ Tacha es una aplicación web para que un grupo de usuarios (familias, o grupos d
 - **Edición rápida de un item ya en la lista (antes de comprarlo):** cambiar cantidad, cambiar de variante (tamaño o marca, ej. pasar de "caja 1L" a "galón" del mismo producto) o quitar el item — todo en 1-2 toques desde la fila misma, sin abrir una pantalla aparte. Es la misma necesidad de baja fricción que motiva los [[#4.11 Grupos de productos (aceptado 2026-08-18, sujeto a confirmación del equipo)|grupos de productos]]: cuanto más rápido se agregan y ajustan varios items, menos fricción para usar la lista todos los días.
 - Dashboard financiero: gasto total por día/semana/mes, desglose por categoría de producto, desglose por supermercado, desglose por persona (quién ha comprado más/gastado más), y productos específicos más comprados o más costosos. El usuario debe ver siempre presente el aviso de que los precios son estimados (ver [[#4.6 Historial de compras]]).
 
+#### 4.2.1 Interacciones concretas de la fila de producto (detallado 2026-08-18, desde el desglose de historias de usuario)
+
+Ver [[Proyectos/Tacha/historias-usuario|historias-usuario.md]] para las HU/CA originales de este detalle.
+
+- Barra de búsqueda arriba de la lista con resultados en tiempo real; al seleccionar un resultado, se agrega con cantidad por defecto = 1, sin recargar la pantalla.
+- Cantidad con controles "+"/"-" junto al número; "+" incrementa de a 1, "-" decrementa de a 1 sin poder bajar de 1 (para bajar a 0, se usa eliminar, no el "-").
+- Tocar la fila (fuera del checkbox y de los controles de cantidad) abre el detalle del producto: marca(s), presentación/variante y precio de referencia.
+- Eliminar tiene su propio ícono; al eliminar se remueve de inmediato y aparece un toast breve "Producto eliminado" con opción de deshacer.
+- El checkbox de tachado es reversible: tocarlo de nuevo destacha el producto sin perder su lugar en la lista.
+- **Jerarquía visual de la fila (para no saturarla):** siempre visibles: nombre + tamaño, cantidad, precio. En una segunda línea, texto más chico: tag de origen (general/sublista/receta/grupo) — solo si hay mezcla de orígenes en la lista, si todo es de la lista general no se muestra; y "encargado" (quién debe comprar ese item) — solo si esa función está activada, es opcional y se activa por lista (general, sublista o privada) desde configuración. El ícono del supermercado solo aparece cuando hay un filtro de "más barato" o "más cercano" activo.
+- **Presupuesto estimado (nuevo 2026-08-18):** un número grande y editable, calculado por defecto como la suma de los precios mínimos de cada item de la lista entre todos los supermercados rastreados — es el ancla que el usuario ajusta rápido por día/semana/mes para auto-administrarse. Si el usuario filtra o selecciona un supermercado específico, el estimado se recalcula usando el rango de precios de ese supermercado en particular. Es un dato distinto del gasto real editable de la [[#4.6 Historial de compras|sección 4.6]]: el estimado mira hacia adelante (antes de comprar), el gasto real mira hacia atrás (después de comprar) — el dashboard financiero muestra ambos uno al lado del otro para que el usuario vea si se desvió.
+
 ### 4.3 Sublistas por fecha (con calendario)
 
 - Vista de calendario para crear y visualizar listas asociadas a una fecha (viaje, evento familiar).
 - Cada sublista tiene su propio total de gasto, independiente del total general.
 - Estado de la sublista: pendiente, completada (todos los items comprados), o cancelada (el usuario puede cancelar explícitamente una sublista que ya no se va a comprar, sin que cuente como pendiente eternamente ni se borre el registro).
 - Sesión de compra combinada (opcional): al iniciar una compra desde una sublista, se puede fusionar visualmente con la lista general — agrupando por producto en tres bloques (solo en general / repetidos en ambas, como filas independientes por lista / solo en la sublista), sin fusionar los registros de datos. Cada fila conserva su propia lista de origen, cantidad y estado.
+- **Corrección 2026-08-18:** esta fusión **no** pasa por la reconciliación asistida de la [[#4.9.1 Reconciliación de cantidades al combinar listas (decisión 2026-08-16, alcance corregido 2026-08-18)|sección 4.9.1]] — un item de sublista ya es una unidad concreta de un `product_catalog_variants` (mismo producto+tamaño), así que si el mismo producto está en ambas listas, sumar cantidades es directo, sin ambigüedad. La reconciliación solo hace falta cuando el origen es una medida cruda sin unidad de catálogo asociada (recetas/plan semanal, ver 4.9.1).
 
 ### 4.4 Listas privadas (independientes del household)
 
@@ -103,8 +120,9 @@ Una lista privada:
 
 - Catálogo global compartido entre todos los usuarios + productos propios por household (si un household necesita algo muy específico que no está en el catálogo global).
 - El catálogo global se puebla principalmente mediante el pipeline de web scraping ([[#4.7 Web scraping — motor de datos (prioridad alta del proyecto)|sección 4.7]]); el ingreso manual queda como fallback/complemento.
-- **Decisión 2026-08-16 — catálogo estilo Uber Eats:** buscar "leche" debe mostrar tarjetas con foto, nombre, marca y las distintas presentaciones/tamaños disponibles (caja 1L, caja 200ml, galón, etc.), no una sola fila de texto. Cada combinación producto+marca+tamaño es una variante propia del catálogo, no una anotación libre — ver [[#6. Modelo de datos (resumen conceptual)]] para la tabla de variantes.
-- Implicación directa para el scraping (sección 4.7): el pipeline debe capturar también la URL de imagen del producto, no solo nombre/precio/categoría — riesgo a validar con quien lidere ese módulo, ya que no todos los sitios de supermercados exponen imágenes igual de fácil.
+- **Decisión 2026-08-16 — catálogo estilo Uber Eats:** buscar "leche" debe mostrar tarjetas con foto, nombre y las distintas presentaciones/tamaños disponibles (caja 1L, caja 200ml, galón, etc.), no una sola fila de texto.
+- **Corrección 2026-08-18 — "producto madre" y marca como detalle, no como variante:** en la reunión del 2026-08-18 el equipo notó que tener una variante de catálogo por cada combinación producto+marca+tamaño (ej. 10 productos distintos solo para "leche") es tedioso de elegir para un usuario común, y peor para adultos mayores — además el súper puede no tener esa marca puntual el día que el usuario compra. Se unifica por **tamaño**, no por marca: `product_catalog` pasa a ser el "producto madre" (ej. "Leche"), y `product_catalog_variants` sigue siendo por tamaño (ej. "Leche — caja 1L", "Leche — galón") pero ya **no** incluye la marca en su identidad. La marca se mueve al detalle del producto: un listado corto de marcas disponibles (con logo) y, al lado de cada una, el precio aproximado por supermercado. El tamaño sí se mantiene como variantes de catálogo independientes (leche en caja, en bolsa o en galón aparecen por separado), porque el tamaño sí es cantidad real que entra en las finanzas y en la reconciliación de la [[#4.9.1 Reconciliación de cantidades al combinar listas (decisión 2026-08-16, alcance corregido 2026-08-18)|sección 4.9.1]] — la marca no.
+- Implicación directa para el scraping (sección 4.7): el pipeline sigue capturando datos a nivel de marca+tamaño+súper (es lo que realmente hay en las páginas scrapeadas, incluida la URL de imagen), pero el catálogo los agrupa por producto madre + tamaño para mostrarlos — riesgo a validar con quien lidere ese módulo.
 - Búsqueda y navegación priorizan categoría por encima de todo: filtro/browse por categoría como primer nivel, y las listas se ordenan y agrupan por categoría (no alfabético ni por fecha de agregado) para que el usuario pueda recorrer la tienda en un orden lógico al comprar.
 
 #### 4.5.1 Mis productos personalizados (aceptado 2026-08-18, sujeto a confirmación del equipo)
@@ -124,6 +142,7 @@ Ya existía la idea de "producto propio por household" (primer bullet de esta se
 - El historial se puede ver y filtrar por día, semana o mes, mostrando el total gastado de ese periodo — y ese total (igual que el de cada sesión individual) es editable directamente, sin tener que entrar producto por producto, porque el usuario suele terminar gastando distinto de lo que la app calculó.
 - Editar qué se compró realmente (cantidad y tamaño/variante, ej. "1 galón" en vez de "2 cajas pequeñas") tiene que ser rápido y de baja fricción en el momento del tachado — esta distinción sí importa para las finanzas aunque no se capture precio por item.
 - Si una sesión queda sin total ingresado por un tiempo, se recuerda al usuario; si se ignora, queda visible en el historial como "sin total", editable en cualquier momento.
+- **Filtrado de compra (agregado 2026-08-18):** además del filtro por periodo (día/semana/mes), el historial se puede filtrar por supermercado y por categoría de producto.
 - **Aviso obligatorio y siempre visible al usuario:** los precios no son fijos ni garantizados — Tacha no está asociado a ningún supermercado, los precios del catálogo vienen de scraping y pueden no coincidir con lo que se cobra en caja. Debe quedar claro en el dashboard y cerca de cualquier precio sugerido.
 - Alimenta directamente el dashboard financiero de la [[#4.2 Lista general y dashboard financiero|sección 4.2]].
 
@@ -141,6 +160,7 @@ Ya existía la idea de "producto propio por household" (primer bullet de esta se
 
 - A partir de los precios obtenidos por scraping, sugerir el supermercado más barato para los productos pendientes de una lista.
 - Complementa el historial propio de compra: si el usuario ya tiene el hábito de comprar cierto producto en cierto lugar, se muestran ambas señales (precio de mercado vs. hábito personal).
+- **Precio por producto — rango, no promedio (decidido 2026-08-18):** ya que la marca se unificó al producto madre (sección 4.5), el precio de un producto+tamaño en un supermercado se muestra como **rango** entre las marcas disponibles ahí (ej. "₡800–₡1200"), no como promedio — un promedio esconde que el usuario puede llevarse la opción barata. Por defecto (sin filtro de supermercado activo) se muestra el rango agregado entre todos los supermercados rastreados; si el usuario filtra o selecciona un supermercado específico, el rango se recalcula solo con ese supermercado. En el detalle del producto se muestra el desglose completo: precio aproximado por cada supermercado, con su ícono, de forma visual (no una tabla plana).
 
 ### 4.9 Recetas y planificador semanal de comidas
 
@@ -155,19 +175,20 @@ Ya existía la idea de "producto propio por household" (primer bullet de esta se
 
 > Nota de alcance: el planificador semanal es un módulo grande — vale la pena asignarlo como módulo propio en el reparto de trabajo del equipo ([[#12. Propuesta de división de trabajo (borrador, a confirmar en equipo)|sección 12]]), separado del módulo de "recetas" simple.
 
-### 4.9.1 Reconciliación de cantidades al combinar listas (decisión 2026-08-16)
+### 4.9.1 Reconciliación de cantidades al combinar listas (decisión 2026-08-16, alcance corregido 2026-08-18)
 
 Problema discutido en la reunión: al agregar una receta o el plan semanal completo a la lista general, las cantidades no siempre se pueden sumar de forma automática y confiable. Con unidades sueltas (ej. "3 cebollas") la suma es trivial. Con productos por volumen/peso que existen en múltiples presentaciones (ej. leche: caja de 1L, caja de 200ml, galón de 3.78L) la app **no puede decidir bien por el usuario** — si ya tiene apuntada 1 caja pequeña y la receta necesita 2 litros más el plan semanal, la decisión de comprar otra caja pequeña vs. un galón (más barato por litro) depende de matices que la app no conoce con certeza.
 
-**Decisión del equipo: la app calcula el déficit, el usuario elige la presentación.** No se intenta adivinar ni auto-convertir a la presentación "óptima". Flujo:
+> **Corrección de alcance (2026-08-18):** esta reconciliación **solo aplica a recetas y al plan semanal**, no a sublistas ([[#4.3 Sublistas por fecha (con calendario)|4.3]]) ni a [[#4.11 Grupos de productos (aceptado 2026-08-18, sujeto a confirmación del equipo)|grupos de productos]] (4.11). La diferencia: un ingrediente de receta es una **medida cruda** ("500ml de leche") sin unidad de catálogo asociada, mientras que un item de lista, de sublista o de grupo **ya es una unidad concreta** de un `product_catalog_variants` ("1 caja de 1L"). Combinar dos cosas que ya son unidades concretas del mismo producto+tamaño es una suma directa, sin ambigüedad — la ambigüedad nace específicamente de convertir una medida cruda en una decisión de compra, y eso solo pasa con recetas/plan semanal.
+
+**Decisión del equipo: la app calcula el déficit, el usuario elige qué hacer — y en el momento en que realmente lo sabe, no antes.** Flujo en dos etapas (revisado 2026-08-18, ver [[Proyectos/Tacha/historias-usuario|historias-usuario.md]]):
 
 1. Todo producto por volumen/peso normaliza su cantidad a una unidad base (ml, g) en el catálogo, independientemente de en qué presentación se vende — ver `product_catalog_variants` en [[#6. Modelo de datos (resumen conceptual)]].
-2. Al combinar (receta → lista, semana → lista, o sublista → general), se suma en unidad base y se compara contra lo que el usuario ya tenía apuntado en esa lista para el mismo producto.
-3. Se le muestra al usuario una vista de comparación, no un merge silencioso: "Ya tenías apuntado: 1 caja pequeña (1L). La receta necesita: 2L más. Elegí qué agregar" — con las presentaciones existentes del producto en el catálogo como opciones (otra caja pequeña, un galón, etc.), idealmente ordenadas por precio por unidad si hay datos de scraping disponibles ([[#4.8 Sugerencias de dónde comprar|4.8]]).
-4. Cuando la cantidad no cae exacta en una presentación empacada (ej. necesita 2.5 unidades de un paquete), la sugerencia redondea hacia arriba a la presentación completa más cercana — nunca hacia abajo, para no dejar al usuario corto.
-5. La reconciliación se reutiliza para el mismo tipo de combinación de la [[#4.3 Sublistas por fecha (con calendario)|sección 4.3]] (fusión de sublista con la general) y de los [[#4.11 Grupos de productos (aceptado 2026-08-18, sujeto a confirmación del equipo)|grupos de productos]] hacia la lista, no solo para recetas — es un motor genérico de "agregar varios productos a la vez a una lista", no una regla exclusiva de recetas.
+2. **Al combinar (receta → lista, o semana → lista):** no hay modal de decisión. Se suma en unidad base contra lo que el usuario ya tenía apuntado, y si no alcanza, se muestra un **tag pasivo e informativo** bajo el item ya existente en la lista: "+ se necesitan 500ml más para Receta X" — nada que decidir todavía, porque a esta altura el usuario ni siquiera fue a comprar.
+3. **Al tachar ese item específico:** ahí es cuando el usuario sabe qué hizo realmente. Aparece un paso corto y rápido tipo "¿Qué hiciste?" con acciones de un toque: "Agregué otra igual", "Cambié a una más grande/otra presentación" (mostrando las opciones del catálogo, idealmente ordenadas por precio — [[#4.8 Sugerencias de dónde comprar|4.8]]), o "Ya tenía suficiente" (descarta el tag sin agregar nada). No se le pregunta al usuario que prediga el futuro al armar la lista — se le pregunta cuando ya compró.
+4. No se intenta adivinar ni auto-convertir a la presentación "óptima" en ningún momento — la app nunca decide sola cuál presentación comprar.
 
-Esto convierte un problema de cálculo que "no siempre puede salir bien" en una decisión asistida: la app hace el trabajo aritmético, la persona decide el matiz de compra.
+Esto convierte un problema de cálculo que "no siempre puede salir bien" en una decisión asistida en el momento correcto: la app hace el trabajo aritmético y lo muestra sin interrumpir, la persona decide el matiz de compra recién cuando de verdad lo sabe.
 
 ### 4.10 Inventario doméstico
 
@@ -188,10 +209,37 @@ Enfoque recomendado para reducir la fricción (a validar con el equipo, especial
 
 - Un grupo de productos es una lista corta y nombrada por el usuario (ej. "Mercado quincenal", "Desayunos de la semana") de productos del catálogo (globales, de household, o [[#4.5.1 Mis productos personalizados (aceptado 2026-08-18, sujeto a confirmación del equipo)|personalizados]]), cada uno con una cantidad/variante por defecto.
 - Botón "Agregar grupo a lista", igual en espíritu al "Agregar receta a lista" de la sección 4.9 — agrega todos los productos del grupo de una sola vez, sin tener que buscar producto por producto en el catálogo.
-- Reutiliza el mismo motor de reconciliación de cantidades de la [[#4.9.1 Reconciliación de cantidades al combinar listas (decisión 2026-08-16)|sección 4.9.1]]: si algún producto del grupo ya está en la lista con otra presentación, se le muestra al usuario la misma comparación "ya tenías X / el grupo necesita Y" en vez de sumar a ciegas.
+- **Corrección 2026-08-18:** a diferencia de recetas/plan semanal, un producto de grupo ya es una unidad concreta de catálogo (mismo caso que sublistas, ver [[#4.9.1 Reconciliación de cantidades al combinar listas (decisión 2026-08-16, alcance corregido 2026-08-18)|4.9.1]]) — si ya está en la lista, se suma la cantidad directamente, sin pantalla de reconciliación.
 - Un grupo se crea/edita desde una sección propia ("Mis grupos"), con alta rápida de productos (mismo patrón de búsqueda estilo catálogo de la sección 4.5, no un formulario largo).
 - **Visibilidad (decidido 2026-08-18):** mismo patrón `owner_id` + `household_id` nullable que las listas (sección 4.1/4.2) y que [[#4.5.1 Mis productos personalizados (aceptado 2026-08-18, sujeto a confirmación del equipo)|productos personalizados]] — un grupo es personal por defecto, y se puede compartir con el household si el usuario pertenece a uno. Se reusa el patrón existente en vez de inventar un modelo de acceso distinto.
 - No incluye por ahora recordatorios ni periodicidad automática (el "cada 15 días" queda como hábito del usuario, no como una function que la app programe) — se deja como idea de roadmap si el equipo quiere retomarla más adelante, no como parte de esta propuesta.
+
+### 4.12 Acceso público y autenticación extendida (landing, about, auth)
+
+> Requerimiento del profesor del curso + desglose de la reunión de equipo del 2026-08-18. Detalle completo en historias de usuario y criterios de aceptación en [[Proyectos/Tacha/historias-usuario|historias-usuario.md]] — acá solo el resumen funcional.
+
+**Landing pública (rol Visitante / "Mirones"):** la app debe poder verse sin loguearse, en vez de mandar directo a la pantalla de login. Incluye:
+- Barra de navegación pública y sección principal (hero) con llamada a la acción.
+- Sección introductoria con opción "Leer más" hacia información ampliada.
+- Testimonios (carrusel si aplica).
+- Formulario de contacto protegido con reCAPTCHA.
+- Demo/video de uso de la plataforma.
+- Footer: información institucional, redes sociales, términos y condiciones, logotipo.
+- Página "Acerca de" (About): misión y visión, información de la organización, formulario de contacto propio (reCAPTCHA).
+
+**Registro:**
+- Manual: nombre, correo, contraseña + repetir contraseña; validación de coincidencia en tiempo real; medidor visual de fortaleza de contraseña; verificación de correo por código/link con expiración y opción de reenvío; checkbox de aceptación de términos y condiciones (no marcado por defecto).
+- Social (Google/Facebook, OAuth): mismo resultado que el manual, con paso adicional para completar datos que el proveedor no entrega y el mismo checkbox de términos y condiciones. Si el correo ya existe, se informa y se sugiere iniciar sesión en vez de registrarse de nuevo.
+
+**Login:**
+- Protegido con reCAPTCHA.
+- Mostrar/ocultar contraseña (ícono de ojo).
+- Mensajes de error genéricos para credenciales inválidas (no revelar cuál campo falló) y específicos para cuenta no verificada/bloqueada/inactiva.
+- Sesión protegida con token (JWT) con expiración; cierre de sesión automático por inactividad, con tiempo configurable y aviso al usuario.
+
+**Recuperación de contraseña:** solicitud por correo, envío de link/código con expiración, vista de nueva contraseña con el mismo feedback de fortaleza que el registro, mensaje de confirmación genérico (no revela si el correo existe, por seguridad).
+
+**Implicación de modelo de datos:** reCAPTCHA, OAuth, JWT y expiración de sesión los resuelve Supabase Auth de forma nativa — no requieren tablas propias. Sí hace falta una tabla para las invitaciones de household por link (ver [[#4.1 Gestión de usuarios, familias y perfiles|4.1]]) — ver [[#6. Modelo de datos (resumen conceptual)]].
 
 ## 5. Requerimientos no funcionales
 
@@ -210,14 +258,16 @@ Enfoque recomendado para reducir la fricción (a validar con el equipo, especial
 | `households` | Hogar/familia, contenedor raíz |
 | `household_members` | Perfiles con rol (admin/miembro) dentro de un household |
 | `categories` | Categorías de productos, globales |
-| `product_catalog` | Producto "base" con nombre, marca y categoría; `household_id` nullable (NULL = catálogo global, con valor = producto propio) |
-| `product_catalog_variants` | **Nueva (2026-08-16):** presentación/tamaño concreto de un producto (ej. "leche entera — caja 1L", "leche entera — galón"), con `base_unit` (ml/g/unidad) y `base_quantity` normalizada — es lo que se busca y muestra estilo catálogo con imagen (ver [[#4.5 Catálogo de productos y categorías|4.5]]), y lo que hace posible la reconciliación de cantidades de la [[#4.9.1 Reconciliación de cantidades al combinar listas (decisión 2026-08-16)|sección 4.9.1]] |
-| `product_catalog_staging` | Datos crudos obtenidos por scraping (incluye URL de imagen), antes de normalizar/deduplicar hacia `product_catalog` / `product_catalog_variants` |
-| `product_prices` | Precio de una variante de producto en un supermercado en una fecha dada. `source`: `scraped` o `manual` — **manual es nuevo (aceptado 2026-08-18)**, para cuando el propio usuario ingresa el precio de un [[#4.5.1 Mis productos personalizados (aceptado 2026-08-18, sujeto a confirmación del equipo)|producto personalizado]]; las sugerencias de dónde comprar ([[#4.8 Sugerencias de dónde comprar|4.8]]) deben poder distinguir ambas fuentes, no tratarlas con la misma confianza |
+| `product_catalog` | **"Producto madre"** (ej. "Leche") con nombre y categoría; `household_id` nullable (NULL = catálogo global, con valor = producto propio). Ya **no** incluye marca en su identidad — corrección 2026-08-18, ver [[#4.5 Catálogo de productos y categorías|4.5]] |
+| `product_catalog_variants` | Presentación/tamaño concreto de un producto madre (ej. "Leche — caja 1L", "Leche — galón"), con `base_unit` (ml/g/unidad) y `base_quantity` normalizada — es lo que se busca y muestra estilo catálogo con imagen, y lo que hace posible la reconciliación de cantidades de la [[#4.9.1 Reconciliación de cantidades al combinar listas (decisión 2026-08-16, alcance corregido 2026-08-18)|sección 4.9.1]] |
+| `product_brands` | **Nueva (2026-08-18):** marca concreta de un `product_catalog_variants` (ej. "Dos Pinos", "Coronado"), con logo — vive como detalle del producto, no como variante propia del catálogo (ver [[#4.5 Catálogo de productos y categorías|4.5]]) |
+| `product_catalog_staging` | Datos crudos obtenidos por scraping (marca + tamaño + súper + URL de imagen, tal como aparece en el sitio scrapeado), antes de normalizar/deduplicar hacia `product_catalog` / `product_catalog_variants` / `product_brands` |
+| `product_prices` | Precio de una variante+marca de producto en un supermercado en una fecha dada — el scraping sigue siendo granular por marca, el catálogo solo agrega esa granularidad para mostrar un rango (mínimo–máximo) por variante+súper (ver [[#4.8 Sugerencias de dónde comprar|4.8]]). `source`: `scraped` o `manual` — **manual es nuevo (aceptado 2026-08-18)**, para cuando el propio usuario ingresa el precio de un [[#4.5.1 Mis productos personalizados (aceptado 2026-08-18, sujeto a confirmación del equipo)|producto personalizado]]; las sugerencias de dónde comprar deben poder distinguir ambas fuentes, no tratarlas con la misma confianza |
 | `stores` | Catálogo de supermercados por household |
 | `lists` | Lista general, sublista por fecha, o lista privada (`type`: general / date / private); `status`: active / completed / cancelled; `owner_id` siempre presente (dueño individual); `household_id` **nullable** — NULL cuando el usuario no pertenece a household o la lista es privada, con valor solo para listas `general`/`date` de un usuario en un household (decisión 2026-08-16, ver [[#4.1 Gestión de usuarios, familias y perfiles|4.1]] y [[#4.2 Lista general y dashboard financiero|4.2]]) |
-| `list_items` | Item dentro de una lista, referenciando una `product_catalog_variants`, con `quantity_requested`, `quantity_bought`, estado, quién compró, dónde y cuándo |
+| `list_items` | Item dentro de una lista, referenciando una `product_catalog_variants`, con `quantity_requested`, `quantity_bought`, estado, quién compró, dónde y cuándo, y `assigned_to` **(nuevo 2026-08-18)** nullable — "encargado" de comprar ese item, opcional y activable por lista (general, sublista o privada) desde configuración, ver [[#4.2.1 Interacciones concretas de la fila de producto (detallado 2026-08-18, desde el desglose de historias de usuario)|4.2.1]] |
 | `list_collaborators` | Control de acceso a listas privadas — independiente de `household_members`. Columnas: `list_id`, `user_id` (o email de invitado), `invited_at`, `accepted_at` |
+| `household_invite_links` | **Nueva (2026-08-18):** invitación a un household por link, en vez de por correo uno por uno — `household_id`, `token`, `created_by`, `expires_at`. Ver [[#4.1 Gestión de usuarios, familias y perfiles|4.1]] |
 | `purchase_sessions` | Agrupa compras por household + supermercado + día, con total editable |
 | `recipes` | Receta con porciones base |
 | `recipe_ingredients` | Ingrediente de una receta, ligado al catálogo de productos |
@@ -227,7 +277,7 @@ Enfoque recomendado para reducir la fricción (a validar con el equipo, especial
 
 Reglas de negocio que deben vivir en la base de datos (funciones/triggers), no en el cliente:
 
-- Merge automático de cantidades solo cuando el producto duplicado en una lista es exactamente la misma variante (mismo `product_catalog_variants.id`) — no hay merge automático entre variantes distintas del mismo producto base, eso pasa por la reconciliación asistida de la [[#4.9.1 Reconciliación de cantidades al combinar listas (decisión 2026-08-16)|sección 4.9.1]].
+- Merge automático de cantidades solo cuando el producto duplicado en una lista es exactamente la misma variante (mismo `product_catalog_variants.id`) — no hay merge automático entre variantes distintas del mismo producto base, eso pasa por la reconciliación asistida de la [[#4.9.1 Reconciliación de cantidades al combinar listas (decisión 2026-08-16, alcance corregido 2026-08-18)|sección 4.9.1]].
 - Auto-completado de sublista/lista privada cuando todos sus items están comprados.
 - Asignación/reutilización de sesión de compra activa por household + store + día.
 - Normalización/deduplicación de productos scrapeados antes de pasar de staging al catálogo real (incluye asignar cada fila de staging a un `product_catalog` + `product_catalog_variants` correspondiente).
@@ -314,14 +364,19 @@ Apps de lista de compras analizadas como referencia de patrones de UX (no de ide
 - Qué pasa con las listas personales de un usuario que se une a un household después de haber usado la app solo (sección 4.1) — ¿se ofrecen para asociar, o quedan separadas siempre?
 - ~~Grupos de productos y Mis productos personalizados~~ — **aceptados el 2026-08-18** (secciones 4.11 y 4.5.1) para destrabar el diseño de hoy, incluida la visibilidad personal/household; siguen sujetos a confirmación cuando el equipo completo los repase, igual que el resto de decisiones tomadas por Marcos antes de una reunión formal.
 - Nombre/ícono de la app — se propone mantener "Tacha" salvo que el equipo completo prefiera cambiarlo.
+- **Contenido institucional de la landing/About (agregado 2026-08-18):** misión, visión, información de la organización, redes sociales, texto de términos y condiciones — contenido real que alguien del equipo tiene que redactar, no es una decisión técnica (sección 4.12).
+- **Duración del timeout de sesión por inactividad** (agregado 2026-08-18) — el requerimiento del profesor pide que sea configurable, pero falta fijar el valor por defecto (sección 4.12).
+- **Credenciales de OAuth (Google/Facebook) y de reCAPTCHA** (agregado 2026-08-18) — hay que registrar la app en ambos proveedores antes de poder implementar el registro social y el reCAPTCHA (sección 4.12).
+- Desglosar en HU/CA el resto de módulos listados en [[Proyectos/Tacha/historias-usuario|historias-usuario.md]] (sublistas, listas privadas, catálogo, historial, recetas, planificador, inventario, grupos) — hoy solo están desglosados landing/auth y la lista general.
 
 ## 11. Próximos pasos inmediatos
 
 - Confirmación del profesor sobre stack y base de datos (sección 7)
 - Generación de interfaz de alta fidelidad con Stitch AI a partir de [[Proyectos/Tacha/DESIGN|DESIGN.md]], sobre los requerimientos ya cerrados en este documento
-- Diseñar el schema SQL completo (tablas + RLS + funciones de negocio), incorporando `product_catalog_variants` y `lists.household_id` nullable (sección 6)
-- Cerrar el resto de la [[#10. Pendientes de definición|sección 10]] (scraping técnico, supermercados viables, listas solo → household)
+- Diseñar el schema SQL completo (tablas + RLS + funciones de negocio), incorporando `product_catalog_variants`, `product_brands`, `household_invite_links` y `lists.household_id` nullable (sección 6)
+- Cerrar el resto de la [[#10. Pendientes de definición|sección 10]] (scraping técnico, supermercados viables, listas solo → household, contenido institucional, timeout de sesión, credenciales OAuth/reCAPTCHA)
 - Corregir el mockup (`mockups/mockup-web-v2.html`) y la nueva generación de Stitch contra los requerimientos cerrados en este documento
+- Continuar el desglose de historias de usuario en [[Proyectos/Tacha/historias-usuario|historias-usuario.md]] para los módulos que faltan
 
 ## 12. División de trabajo
 
