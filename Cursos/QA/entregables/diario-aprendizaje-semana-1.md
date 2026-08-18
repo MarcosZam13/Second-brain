@@ -32,4 +32,4 @@ Darme cuenta de que ya aplicaba aseguramiento de la calidad de forma intuitiva e
 
 ---
 
-*Exportado a PDF y subido a la carpeta de Drive el 2026-08-17.*
+*Exportado a PDF y subido a la carpeta de Drive el 2026-08-17. Copia del PDF archivada en `Cursos/QA/_fuentes/QA_diario-aprendizaje-semana-1_2026-08-18.pdf`.*

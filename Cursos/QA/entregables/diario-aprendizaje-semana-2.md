@@ -32,4 +32,4 @@ Aplicar bien el control de calidad desde antes (desde el diseño) puede ser inte
 
 ---
 
-*Exportado a PDF y subido a la carpeta de Drive el 2026-08-17.*
+*Exportado a PDF y subido a la carpeta de Drive el 2026-08-17. Copia del PDF archivada en `Cursos/QA/_fuentes/QA_diario-aprendizaje-semana-2_2026-08-18.pdf`.*

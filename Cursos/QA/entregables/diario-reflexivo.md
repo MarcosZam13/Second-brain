@@ -30,13 +30,15 @@ No es un resumen técnico de contenido (eso ya está en los apuntes de cada sema
 
 ## Checklist contra la rúbrica
 
-- [ ] Formato: documento organizado, con índice, márgenes, interlineado consistente, un "titular" por entrada (10 pts)
-- [ ] Redacción: sin errores gramaticales/ortográficos, lenguaje comprensible (10 pts)
-- [ ] Esfuerzo y regularidad: entradas quincenales puntuales, mínimo 8 en total (10 pts)
-- [ ] Apropiación de aprendizaje: reflexión autocrítica real, no genérica (30 pts — el criterio de mayor peso)
-- [ ] Búsqueda de información complementaria: citas/referencias de calidad cuando aplique (20 pts)
-- [ ] Apoyo visual: imágenes, diagramas, capturas, etc. (15 pts)
-- [ ] Accesibilidad: publicado y accesible para profesora y compañeros (5 pts)
+**Rúbrica confirmada 2026-08-18** (imagen recibida del profesor, archivada en `Cursos/QA/_fuentes/QA_diario-reflexivo-rubrica_2026-08-18.png` — coincide con los criterios ya listados abajo; 100 pts totales).
+
+- [ ] Formato: documento organizado, con índice, márgenes, interlineado consistente, colores diferenciados por integrante del equipo, un "titular" por entrada (10 pts) — pendiente hasta exportar al documento final (Word/Drive/Notion); la Entrada 1 ya tiene su "titular"
+- [x] Redacción: sin errores gramaticales/ortográficos, lenguaje comprensible (10 pts) — Entrada 1 revisada, sin errores
+- [~] Esfuerzo y regularidad: entradas quincenales puntuales, mínimo 8 en total (10 pts) — 1 de 8 entradas hecha (Semanas 1-2), a tiempo; se completa a medida que avanza el curso
+- [x] Apropiación de aprendizaje: reflexión autocrítica real, no genérica (30 pts) — Entrada 1 ampliada 2026-08-18 con autocrítica explícita sobre actitud reactiva y hábito de estudio
+- [x] Búsqueda de información complementaria: citas/referencias de calidad cuando aplique (20 pts) — agregadas 7 referencias (ISO 9000, Crosby, Deming, Juran, IEEE 610, Leveson & Turner, JATR) 2026-08-18
+- [x] Apoyo visual: imágenes, diagramas, capturas, etc. (15 pts) — agregada tabla comparativa QA vs QC y diagrama de evolución de la calidad 2026-08-18; convertir a imagen real (no solo tabla markdown) al exportar
+- [ ] Accesibilidad: publicado y accesible para profesora y compañeros (5 pts) — falta elegir plataforma y publicar
 - [ ] Enlace publicado en TEC-Digital antes de semana 6
 
 ## Formato por entrada (machote)
@@ -71,6 +73,31 @@ La principal dificultad fue encontrar un repositorio de GitHub que cumpliera con
 
 He aprendido qué es calidad, control de calidad y aseguramiento de la calidad, su historia, sus procesos y sus beneficios. En mis proyectos personales y universitarios ya venía aplicando algo de aseguramiento de la calidad en cada etapa del proceso, pero no había pensado en el control de calidad desde el diseño — siempre esperaba a que una funcionalidad estuviera terminada para recién ahí hacerle QA. Aplicar bien el control de calidad desde antes puede ser interesante y me puede ahorrar tiempo de desarrollo más adelante.
 
+Autocrítica: mi actitud por defecto frente a la calidad ha sido reactiva — la trataba como un paso posterior al desarrollo en lugar de una aptitud a construir desde el principio. Eso revela un valor que tengo que ajustar: priorizaba "avanzar rápido" sobre "avanzar bien", que es exactamente el patrón que estudiamos en los casos de Boeing 737 MAX y Therac-25 (control mal diseñado o ausente, con consecuencias graves). También me cuestiono mi disciplina de estudio: reconozco que mi hábito de dejar el repaso para el final de la semana es, en sí mismo, un defecto de proceso — no estoy aplicándome a mí mismo el control de calidad "desde el diseño" que estoy aprendiendo a valorar en el software.
+
+**Referencias consultadas para profundizar el tema:**
+- ISO 9000:2015 — *Sistemas de gestión de la calidad: Fundamentos y vocabulario*.
+- Crosby, P. B. (1979). *Quality Is Free: The Art of Making Quality Certain*. McGraw-Hill.
+- Deming, W. E. (1986). *Out of the Crisis*. MIT Press.
+- Juran, J. M., & Godfrey, A. B. (1999). *Juran's Quality Handbook* (5.ª ed.). McGraw-Hill.
+- IEEE Std 610.12-1990 — *IEEE Standard Glossary of Software Engineering Terminology*.
+- Leveson, N., & Turner, C. S. (1993). An investigation of the Therac-25 accidents. *IEEE Computer, 26*(7), 18–41.
+- Joint Authorities Technical Review (2019). *Boeing 737 MAX Flight Control System: Observations, Findings, and Recommendations*.
+
+**Apoyo visual (incluir como imagen/tabla al exportar a Word/Drive, no solo como texto):**
+
+| Aspecto | Control de calidad | Aseguramiento de la calidad |
+|---|---|---|
+| Enfoque | Producto | Proceso |
+| Responsable | Una persona/rol de inspección | Todo el equipo |
+| Tasa de rechazo | Se acepta un % de fallo | Se espera 0 rechazos |
+| Momento | Al final (post-producción) | Desde el diseño |
+
+```
+Artesanal → Industrialización → Control final → Control en proceso → Control en diseño → Mejora continua
+```
+*Evolución del concepto de calidad (6 etapas), Semana 1.*
+
 **d. ¿Cómo he contribuido al progreso del grupo?**
 
 Investigué y evalué candidatos de repositorio contra los 9 criterios del curso, armé una comparación con la información encontrada (estrellas, actividad, stack, facilidad de instalación) y se la compartí al equipo para apoyar la decisión final. Ya elegido el repositorio, adelanté el mapeo de sus módulos y un primer borrador del Plan del proyecto para que el equipo tenga un punto de partida que revisar en vez de empezar desde cero.
@@ -82,7 +109,10 @@ Comunicación con el equipo para coordinar la búsqueda y decisión del reposito
 ## Pendiente
 
 - [x] Respuestas reales de Marcos a las 5 preguntas de la Entrada 1 — actualizadas 2026-08-17 con la decisión de repositorio (Firefly III)
-- [ ] Elegir la plataforma donde se va a publicar el diario (debe ser accesible para profesora y compañeros)
+- [x] Ampliar Entrada 1 con autocrítica, referencias y apoyo visual para cerrar los gaps de la rúbrica (2026-08-18)
+- [ ] Elegir la plataforma donde se va a publicar el diario (debe ser accesible para profesora y compañeros) — distinta de la carpeta de Drive del [[Cursos/QA/entregables/diario-aprendizaje-semanal|Diario de Aprendizaje Semanal]], que es otro documento
+- [ ] Al exportar: agregar índice, verificar márgenes/interlineado, y confirmar con el equipo el esquema de colores por integrante que pide la rúbrica (¿es un documento compartido por todo el equipo o cada quien lleva el suyo?)
+- [ ] Convertir la tabla QA vs QC y el diagrama de evolución en imágenes/gráficos reales dentro del documento exportado, no dejarlos como texto plano
 - [ ] Publicar el enlace en TEC-Digital antes de semana 6
 - [ ] Confirmar si la evaluación entre pares del Informe de pruebas también aplica al Diario (la guía no lo aclara — parece que no)
 - [ ] Confirmar con la profesora/TEC-Digital la fecha real de la primera entrada, ya que depende de que arranque el proyecto (ver corrección arriba)
