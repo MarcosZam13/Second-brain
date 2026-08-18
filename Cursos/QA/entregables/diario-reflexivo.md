@@ -4,7 +4,7 @@ tema: Diario Reflexivo (bitácora) — Proyecto
 fecha: 2026-08-14
 tipo: entregable
 entregable_de: "[[Cursos/QA/apuntes/proyecto-qa-guia]]"
-estado: borrador
+estado: entregado
 tags: [diario-reflexivo, bitacora, proyecto, reflexion]
 ---
 
@@ -147,6 +147,7 @@ Comunicación con el equipo para coordinar la búsqueda y decisión del reposito
 - [x] Respuestas reales de Marcos a las 5 preguntas de la Entrada 1 — actualizadas 2026-08-17 con la decisión de repositorio (Firefly III)
 - [x] Reescribir Entrada 1 al formato corto de 3 apartados (Semana 1, Semana 2, Avance de proyecto) que pidió el profesor, con autocrítica/referencia/apoyo visual en cada uno (2026-08-18)
 - [x] Marcos redactó y exportó la versión final en PDF, con imágenes propias y bitácora de uso de IA (2026-08-18)
+- [x] Entregado (2026-08-18) — los puntos de abajo son ajustes menores para una próxima revisión, no bloquean la entrega
 - [ ] **Corregir en el documento real** (no solo acá): "si me hizo" → "sí me hizo"; "lo cual un hábito" → "lo cual es un hábito" (Semana 2)
 - [ ] Agregar referencia + imagen al apartado "Avance del proyecto" (hoy es el único de los 3 sin ninguna de las dos)
 - [ ] Agregar crédito de la imagen de Semana 1 ("Ilustración: @jrgsanta, 2019") — respeta el punto de derechos de autor de la rúbrica
