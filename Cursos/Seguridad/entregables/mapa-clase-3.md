@@ -8,60 +8,55 @@ estado: borrador
 tags: [mapa-mental, cia, stride]
 ---
 
-# Mapa Clase 3 — árbol CIA + STRIDE
+# Mapa Clase 3 — árbol CIA + STRIDE (versión apunte de clase)
 
 Ver también: [[Cursos/Seguridad/entregas]] · [[Cursos/Seguridad/apuntes/tema-1-importancia-seguridad-software|Tema 1 (fuente)]]
 
 Entrega: 2026-08-19, 23:45 — 1 página, **hecho a mano**, mapa mental o diagrama, foto en PNG/JPG.
 
-**Enfoque acordado con el usuario (2026-08-18):** concentrarse en el árbol de la Triada CIA y en STRIDE, bien desarrollados y claros — es lo que realmente se vio en clase. STRIDE se tocó solo por encima (probablemente hay material adicional en TEC-Digital que todavía no está en el vault), así que aquí se menciona a nivel de "qué significa cada letra", no el proceso completo de threat modeling. Si aparece la diapositiva original, ajusto esta nota contra ella.
+Escrito como si fueran apuntes tomados en el momento, no como documentación formal — para que lo puedas copiar y entender de un vistazo.
 
-## Estructura del árbol (nodo central en el medio de la página, dos ramas grandes)
+## Cómo se ve el dibujo
 
 ```
-                    SEGURIDAD DEL SOFTWARE
-                     /                    \
-              TRIADA CIA                 STRIDE
-           /    |      \              (amenazas comunes)
-   Confiden-  Integri-  Disponi-      S T R I D E
-   cialidad   dad       bilidad
+                SEGURIDAD DEL SOFTWARE
+                  /                \
+           CIA (3 pilares)        STRIDE (6 formas de atacar)
 ```
 
-### Rama 1 — Triada CIA (rama principal, la más desarrollada)
+## Rama 1 — CIA
 
-**Confidencialidad** — "proteger los datos por diseño"
-- Cifrado
-- Autenticación / autorización
-- VPN, segmentación de redes
+**C — Confidencialidad**
+→ que nadie que no deba, vea la info
+- cifrado, login/permisos, VPN
 
-**Integridad** — "que el software haga solo lo que debe hacer"
-- Firmas digitales / funciones hash
-- Control de versiones
-- Registros de auditoría (logs)
+**I — Integridad**
+→ que nadie toque o cambie los datos sin permiso
+- hash/firma digital, control de versiones, logs (queda registro de quién tocó qué)
 
-**Disponibilidad** — "software resiliente y confiable"
-- Redundancia
-- Copias de respaldo (backups)
-- Protección anti-DoS
+**A — Disponibilidad** *(Availability — en inglés, por eso es "A" y no "D")*
+→ que el sistema esté ahí cuando lo necesito, no se me caiga
+- backups, redundancia (tener de repuesto), protegerse de ataques que saturan el sistema (DoS)
 
-### Rama 2 — STRIDE (mención clara pero breve, sin entrar al proceso completo)
+*Frase para acordarme: si me roban la info → falló Confidencialidad. Si me la cambian → falló Integridad. Si no puedo entrar → falló Disponibilidad.*
 
-Framework para nombrar tipos de amenaza — cada letra es una categoría de ataque a tener en mente:
+## Rama 2 — STRIDE (6 formas típicas de que te ataquen)
 
-| Letra | Amenaza | En una frase |
-|---|---|---|
-| **S** | Spoofing | Suplantación — hacerse pasar por alguien/algo que no es |
-| **T** | Tampering | Manipulación — alterar datos sin autorización |
-| **R** | Repudiation | Repudio — negar haber hecho una acción |
-| **I** | Information disclosure | Fuga de información — exponer datos que no debían verse |
-| **D** | Denial of service | Denegación de servicio — tumbar o saturar el sistema |
-| **E** | Elevation of privilege | Escalación de privilegios — obtener más acceso del permitido |
+- **S**poofing → alguien se hace pasar por mí (o por el sistema)
+- **T**ampering → me cambian los datos sin que yo me dé cuenta
+- **R**epudiation → alguien hace algo malo y después dice "yo no fui" (por eso importan los logs)
+- **I**nfo disclosure → se filtra info que no debía salir
+- **D**enial of service → tumban el sistema a punta de tráfico/saturación
+- **E**levation of privilege → un usuario normal logra volverse "admin" sin permiso
 
-**Tip para el dibujo:** las 6 letras funcionan bien como un hexágono chiquito o una lista vertical al lado de un candado/escudo — no hace falta dibujar el proceso de threat modeling completo (DFD, priorización, etc.), solo el acrónimo con su significado, ya que en clase se vio por encima.
+*Truco para acordarme: son básicamente las 6 formas en que pueden romper la Triada CIA de arriba — spoofing/tampering rompen integridad, info disclosure rompe confidencialidad, DoS rompe disponibilidad, elevation of privilege abre la puerta a todo lo demás.*
+
+(Nota: en clase se vio STRIDE por encima, no el proceso completo de threat modeling — por eso me quedo solo con el significado de cada letra.)
 
 ## Checklist antes de entregar
 
-- [ ] Árbol de la Triada CIA bien desarrollado (3 ramas + mecanismos de cada una)
-- [ ] STRIDE con las 6 letras y su significado en una frase corta
+- [ ] Árbol CIA con las 3 letras y su frase de "qué significa que falle"
+- [ ] STRIDE con las 6 letras y su frase corta
+- [ ] Nombre, curso y fecha arriba de la hoja
 - [ ] Hecho a mano, cabe en 1 página
 - [ ] Foto legible en PNG o JPG
