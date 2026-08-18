@@ -23,7 +23,8 @@ Ver [[Proyectos/Tacha/documentacion-v1#10. Pendientes de definición|sección 10
 ## Dónde está cada cosa
 
 - [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] — documento de proyecto completo (resumen, requerimientos funcionales/no funcionales, modelo de datos, arquitectura, dirección de diseño, división de trabajo).
-- [[Proyectos/Tacha/DESIGN|DESIGN.md]] — guía de diseño (personalidad, tokens, inventario de pantallas, prompts listos) para generar interfaz en Stitch AI.
+- `Tacha_documentacion-v1_2026-08-18.docx` — versión Word de `documentacion-v1.md`, para compartir con el equipo/profesor fuera de Obsidian/GitHub.
+- [[Proyectos/Tacha/DESIGN|DESIGN.md]] — guía de diseño (personalidad, tokens, navegación, inventario de las 15 pantallas del alcance v1, componentes, estados y un prompt listo por pantalla) para generar interfaz en Stitch AI.
 - `mockups/mockup-web-v2.html` — prototipo HTML interactivo (desktop + mobile web, modo claro/oscuro). v2, el propio equipo lo marca como "por mejorar mucho" — se espera que evolucione una vez estén cerrados los requerimientos.
 - `_fuentes/` — el `.docx` original tal como lo entregó el equipo, sin editar.
 
