@@ -5,7 +5,7 @@ entregas_pendientes:
     entregable: "Mapa Clase 3 (mapa mental a mano, 1 página)"
     estado: pendiente
   - fecha: "2026-09-01"
-    entregable: "Tarea 1 — Legislación"
+    entregable: "Tarea 1 — Legislación (El Contrato Roto)"
     estado: pendiente
 ---
 
@@ -22,7 +22,7 @@ Ver también: [[Cursos/Seguridad/temario]] · [[Cursos/Seguridad/apuntes/reglas-
 | Fecha | Entregable | Peso | Estado |
 |---|---|---|---|
 | 2026-08-19 (miércoles), 23:45 | Mapa Clase 3 — mapa mental/diagrama de 1 página de la materia de la Clase 3, **hecho a mano**, subir foto en PNG o JPG. Recurrente cada miércoles (ver [[Cursos/Seguridad/apuntes/reglas-clase\|reglas de clase]]) | 0.50 pts (de 40 en categoría Tareas) | pendiente |
-| 2026-09-01 (martes), 23:45 | Tarea 1 — Legislación (descripción completa en Documentos > Tareas > Tarea 1 de la plataforma, todavía no revisada) | 5.00 pts (de 40 en categoría Tareas) | pendiente |
+| 2026-09-01 (martes), 23:50 | Tarea 1 — Legislación, "El Contrato Roto" — simulación con 3 roles (Devs/PRODHAB/MICITT) sobre el caso MediSync CR y las leyes 8968, 9048, 6683 y 7975. **Falta elegir rol.** Puede hacerse en parejas (ambos suben). Ver [[Cursos/Seguridad/apuntes/tarea-1-legislacion-costarricense\|instrucciones completas]] | 5% del rubro Tareas (~5.00 pts de 40) | pendiente — falta elegir rol |
 
 <!--
 Cuando agregues una fecha aquí, pedile a Claude Code:
