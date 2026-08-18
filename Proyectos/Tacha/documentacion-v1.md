@@ -3,18 +3,18 @@ proyecto: Tacha
 tema: Documento de Proyecto — v1.0 (Propuesta formal)
 fecha: 2026-08-09
 tipo: documentacion
-estado: propuesta-formal-v1 — stack definido para arrancar el repo (Marcos), resto pendiente de revisión del equipo
+estado: stack + DB confirmados por todo el equipo en reunión del 2026-08-16, pendiente de confirmación del profesor — resto de decisiones de esa reunión incorporadas, ver sección 10
 fuente: _fuentes/Tacha_documentacion-v1_2026-08-09.docx
 tags: [documentacion, propuesta, requerimientos, arquitectura, tacha]
 ---
 
 # Documento de Proyecto — Tacha
 
-Ver también: [[Proyectos/Tacha/README|README]] · [[Proyectos/README|Proyectos]]
+Ver también: [[Proyectos/Tacha/README|README]] · [[Proyectos/README|Proyectos]] · [[Proyectos/Tacha/DESIGN|DESIGN.md]]
 
-**Estado:** Propuesta formal — v1.0 · **Curso:** Introducción al Desarrollo Web · **Equipo:** 6 integrantes · **Última actualización:** Agosto 2026
+**Estado:** Propuesta formal — v1.0 · **Curso:** Introducción al Desarrollo Web · **Equipo:** 6 integrantes · **Última actualización:** 2026-08-18 (decisiones de la reunión de equipo del 2026-08-16)
 
-> Pendiente de revisión por el resto del equipo antes de cerrarse — ver [[#10. Pendientes de definición]].
+> Reunión de equipo completa el domingo 2026-08-16 (~2.5h): se confirmó el stack y la base de datos (sección 7) — queda pendiente solo la confirmación del profesor. Se cerraron varias de las preguntas de la [[#10. Pendientes de definición|sección 10]] original; el resto de definiciones nuevas quedan en esa misma sección.
 
 ## 1. Resumen ejecutivo
 
@@ -38,16 +38,16 @@ Tacha es una aplicación web para que un grupo de usuarios (familias, o grupos d
 
 | Feature | Incluido | Notas |
 |---|---|---|
-| Gestión de usuarios, familias y perfiles | Sí | Auth + creación/pertenencia a household |
-| Lista general con dashboard financiero | Sí | Gasto por día/producto/categoría/súper/persona |
-| Sublistas por fecha (calendario) | Sí | Estado: pendiente / completada / cancelada; fusión opcional con la general |
-| Listas privadas (no familiares) | Sí | Independientes del household, con invitados propios (ver [[#4.4 Listas privadas (independientes del household)]]) |
-| Catálogo de productos y categorías | Sí | Poblado inicialmente por web scraping |
+| Gestión de usuarios, familias y perfiles | Sí | Auth + creación/pertenencia a household — **pertenecer a un household es opcional**, ver [[#4.1 Gestión de usuarios, familias y perfiles]] |
+| Lista general con dashboard financiero | Sí | Gasto por día/producto/categoría/súper/persona; existe también para un usuario sin household (uso solo) |
+| Sublistas por fecha (calendario) | Sí | Estado: pendiente / completada / cancelada; fusión opcional con la general; también disponible sin household |
+| Listas privadas (no familiares) | Sí | Independientes del household siempre, con invitados propios (ver [[#4.4 Listas privadas (independientes del household)]]) |
+| Catálogo de productos y categorías | Sí | Poblado inicialmente por web scraping; con imagen, marca y variantes de tamaño (ver [[#4.5 Catálogo de productos y categorías]]) |
 | Web scraping de productos/precios | Sí — prioridad alta | Motor central del proyecto, ver [[#4.7 Web scraping — motor de datos (prioridad alta del proyecto)]] |
 | Sugerencias de dónde comprar | Sí | Basado en precios obtenidos por scraping + historial propio |
-| Historial de compras | Sí | Sesiones de compra por household/súper/día |
+| Historial de compras | Sí | Sesiones de compra por household/súper/día, edición rápida (ver [[#4.6 Historial de compras]]) |
 | Recetas y planificador semanal de comidas | Sí | Ver [[#4.9 Recetas y planificador semanal de comidas]] |
-| Inventario doméstico | Pendiente de diseño | Ver [[#4.10 Inventario doméstico — pendiente de diseño]] — se define el enfoque antes de comprometerlo |
+| Inventario doméstico | Sí — opcional, no obligatorio | Decidido en reunión 2026-08-16: se ofrece como herramienta, nunca se le exige al usuario. Ver [[#4.10 Inventario doméstico]] |
 | Geolocalización / geofencing | Fuera de alcance | Descartado por complejidad para el contexto del curso |
 
 ### Roadmap post-curso (opcional, si el equipo decide continuar)
@@ -61,18 +61,21 @@ Tacha es una aplicación web para que un grupo de usuarios (familias, o grupos d
 ### 4.1 Gestión de usuarios, familias y perfiles
 
 - Autenticación de usuarios (Supabase Auth).
-- Un usuario puede pertenecer a uno o más households (familias), cada uno con su propio rol (admin/miembro).
-- Perfil básico: nombre, foto opcional, household(s) a los que pertenece.
+- **Decisión 2026-08-16: pertenecer a un household es opcional.** La app es completamente usable sin estar asociado a ninguna familia — un usuario solo tiene su propia lista general y sus sublistas por fecha, además de las listas privadas (que ya eran independientes del household). Ver implicación de modelo de datos en [[#6. Modelo de datos (resumen conceptual)]].
+- Un usuario puede pertenecer a uno o más households (familias), cada uno con su propio rol (admin/miembro) — pero no está obligado a pertenecer a ninguno para usar el resto de la app.
+- Perfil básico: nombre, foto opcional, household(s) a los que pertenece (puede ser ninguno).
 - Solo el admin de un household invita nuevos miembros.
+- Pendiente de decidir (no cerrado el 2026-08-16): qué pasa con las listas de un usuario que empezó solo cuando se une o crea un household después — ¿se ofrecen para asociar retroactivamente, o quedan siempre personales y las de household se crean aparte? Ver [[#10. Pendientes de definición]].
 
 ### 4.2 Lista general y dashboard financiero
 
-- Lista general infinita por household, con productos organizados por categoría.
+- **Los 3 tipos de lista (general, sublista por fecha, privada) existen siempre; solo la general y la sublista por fecha se asocian a un household, y únicamente si el usuario pertenece a uno** (decisión 2026-08-16). Sin household, esas dos siguen existiendo pero son personales (`household_id` nulo, `owner_id` = el usuario). Las listas privadas nunca se asocian a un household — ver [[#4.4 Listas privadas (independientes del household)]].
+- Lista general infinita por household (o personal si no hay household), con productos organizados por categoría — el orden por categoría se prioriza para que reproduzca un recorrido lógico de compra (ver [[#4.5 Catálogo de productos y categorías]]).
 - Catálogo de productos seleccionable con autocompletado (no texto libre exacto), cada producto con categoría asignada; posibilidad de crear producto nuevo con su categoría si no existe.
-- Etiqueta de tamaño por item (ej. "1L", "paquete de 12"), específica de cada instancia en la lista.
-- Unificación automática de cantidades cuando dos o más miembros agregan el mismo producto a la misma lista, con desglose de quién pidió cuánto.
-- Tachado con registro de: quién compró, dónde, cuándo, cantidad — se distingue cantidad pedida de cantidad realmente comprada.
-- Dashboard financiero: gasto total por día/semana/mes, desglose por categoría de producto, desglose por supermercado, desglose por persona (quién ha comprado más/gastado más), y productos específicos más comprados o más costosos.
+- Etiqueta de tamaño por item (ej. "1L", "paquete de 12"), específica de cada instancia en la lista — corresponde a una variante del catálogo, ver [[#4.5 Catálogo de productos y categorías]].
+- Unificación automática de cantidades cuando dos o más miembros agregan el mismo producto **con la misma unidad/tamaño** a la misma lista, con desglose de quién pidió cuánto. Cuando la unificación cruza recetas o el plan semanal (tamaños/unidades no directamente comparables, ej. litros vs. caja), no se sigue esta regla automática — se aplica la reconciliación asistida de la [[#4.9 Recetas y planificador semanal de comidas|sección 4.9]].
+- Tachado con registro de: quién compró, dónde, cuándo, cantidad — se distingue cantidad pedida de cantidad realmente comprada. La edición de qué se compró (cantidad/tamaño real) tiene que ser rápida, sin fricción, porque alimenta directamente las finanzas (ver [[#4.6 Historial de compras]]).
+- Dashboard financiero: gasto total por día/semana/mes, desglose por categoría de producto, desglose por supermercado, desglose por persona (quién ha comprado más/gastado más), y productos específicos más comprados o más costosos. El usuario debe ver siempre presente el aviso de que los precios son estimados (ver [[#4.6 Historial de compras]]).
 
 ### 4.3 Sublistas por fecha (con calendario)
 
@@ -95,11 +98,17 @@ Una lista privada:
 
 - Catálogo global compartido entre todos los usuarios + productos propios por household (si un household necesita algo muy específico que no está en el catálogo global).
 - El catálogo global se puebla principalmente mediante el pipeline de web scraping ([[#4.7 Web scraping — motor de datos (prioridad alta del proyecto)|sección 4.7]]); el ingreso manual queda como fallback/complemento.
+- **Decisión 2026-08-16 — catálogo estilo Uber Eats:** buscar "leche" debe mostrar tarjetas con foto, nombre, marca y las distintas presentaciones/tamaños disponibles (caja 1L, caja 200ml, galón, etc.), no una sola fila de texto. Cada combinación producto+marca+tamaño es una variante propia del catálogo, no una anotación libre — ver [[#6. Modelo de datos (resumen conceptual)]] para la tabla de variantes.
+- Implicación directa para el scraping (sección 4.7): el pipeline debe capturar también la URL de imagen del producto, no solo nombre/precio/categoría — riesgo a validar con quien lidere ese módulo, ya que no todos los sitios de supermercados exponen imágenes igual de fácil.
+- Búsqueda y navegación priorizan categoría por encima de todo: filtro/browse por categoría como primer nivel, y las listas se ordenan y agrupan por categoría (no alfabético ni por fecha de agregado) para que el usuario pueda recorrer la tienda en un orden lógico al comprar.
 
 ### 4.6 Historial de compras
 
-- Sesiones de compra agrupadas por household + supermercado + día, con total editable (no se captura precio por item individual).
+- Sesiones de compra agrupadas por household + supermercado + día, con total editable (no se captura precio por item individual) — **confirmado en la reunión 2026-08-16** como la mejor solución práctica: pedir precio por producto sería más exacto para el desglose por categoría, pero es demasiada fricción; el total editable a mano es el balance elegido, aceptando que introduce una desviación entre el total real y el desglose por categoría/producto que se muestra en el dashboard.
+- El historial se puede ver y filtrar por día, semana o mes, mostrando el total gastado de ese periodo — y ese total (igual que el de cada sesión individual) es editable directamente, sin tener que entrar producto por producto, porque el usuario suele terminar gastando distinto de lo que la app calculó.
+- Editar qué se compró realmente (cantidad y tamaño/variante, ej. "1 galón" en vez de "2 cajas pequeñas") tiene que ser rápido y de baja fricción en el momento del tachado — esta distinción sí importa para las finanzas aunque no se capture precio por item.
 - Si una sesión queda sin total ingresado por un tiempo, se recuerda al usuario; si se ignora, queda visible en el historial como "sin total", editable en cualquier momento.
+- **Aviso obligatorio y siempre visible al usuario:** los precios no son fijos ni garantizados — Tacha no está asociado a ningún supermercado, los precios del catálogo vienen de scraping y pueden no coincidir con lo que se cobra en caja. Debe quedar claro en el dashboard y cerca de cualquier precio sugerido.
 - Alimenta directamente el dashboard financiero de la [[#4.2 Lista general y dashboard financiero|sección 4.2]].
 
 ### 4.7 Web scraping — motor de datos (prioridad alta del proyecto)
@@ -130,15 +139,30 @@ Una lista privada:
 
 > Nota de alcance: el planificador semanal es un módulo grande — vale la pena asignarlo como módulo propio en el reparto de trabajo del equipo ([[#12. Propuesta de división de trabajo (borrador, a confirmar en equipo)|sección 12]]), separado del módulo de "recetas" simple.
 
-### 4.10 Inventario doméstico — pendiente de diseño
+### 4.9.1 Reconciliación de cantidades al combinar listas (decisión 2026-08-16)
 
-Se identificó como idea valiosa pero con un problema de UX real, no resuelto: pedirle al usuario que registre manualmente fechas de vencimiento o cantidades exactas de cada producto en casa es tedioso y probablemente no se usaría de forma consistente.
+Problema discutido en la reunión: al agregar una receta o el plan semanal completo a la lista general, las cantidades no siempre se pueden sumar de forma automática y confiable. Con unidades sueltas (ej. "3 cebollas") la suma es trivial. Con productos por volumen/peso que existen en múltiples presentaciones (ej. leche: caja de 1L, caja de 200ml, galón de 3.78L) la app **no puede decidir bien por el usuario** — si ya tiene apuntada 1 caja pequeña y la receta necesita 2 litros más el plan semanal, la decisión de comprar otra caja pequeña vs. un galón (más barato por litro) depende de matices que la app no conoce con certeza.
 
-Enfoques a evaluar antes de comprometerlo a v1 (para decidir en una sesión de diseño aparte):
+**Decisión del equipo: la app calcula el déficit, el usuario elige la presentación.** No se intenta adivinar ni auto-convertir a la presentación "óptima". Flujo:
 
-- **Inferencia pasiva:** en vez de que el usuario registre inventario a mano, se infiere qué probablemente queda en casa a partir del historial de compras + una estimación de "vida útil típica" por categoría de producto (ej. lácteos ~1 semana, enlatados ~meses) — sin pedir fechas de vencimiento reales.
-- **Registro binario ligero:** un toggle simple de "se me acabó" sobre productos ya comprados antes, que dispara sugerencia de volver a agregarlo a la lista — mínima fricción, sin cantidades ni fechas.
-- **Descartar del alcance actual** y dejarlo como propuesta futura, dado que resolverlo bien requiere investigación de UX que puede no caber en el tiempo del curso.
+1. Todo producto por volumen/peso normaliza su cantidad a una unidad base (ml, g) en el catálogo, independientemente de en qué presentación se vende — ver `product_catalog_variants` en [[#6. Modelo de datos (resumen conceptual)]].
+2. Al combinar (receta → lista, semana → lista, o sublista → general), se suma en unidad base y se compara contra lo que el usuario ya tenía apuntado en esa lista para el mismo producto.
+3. Se le muestra al usuario una vista de comparación, no un merge silencioso: "Ya tenías apuntado: 1 caja pequeña (1L). La receta necesita: 2L más. Elegí qué agregar" — con las presentaciones existentes del producto en el catálogo como opciones (otra caja pequeña, un galón, etc.), idealmente ordenadas por precio por unidad si hay datos de scraping disponibles ([[#4.8 Sugerencias de dónde comprar|4.8]]).
+4. Cuando la cantidad no cae exacta en una presentación empacada (ej. necesita 2.5 unidades de un paquete), la sugerencia redondea hacia arriba a la presentación completa más cercana — nunca hacia abajo, para no dejar al usuario corto.
+5. La reconciliación se reutiliza para el mismo tipo de combinación de la [[#4.3 Sublistas por fecha (con calendario)|sección 4.3]] (fusión de sublista con la general), no solo para recetas.
+
+Esto convierte un problema de cálculo que "no siempre puede salir bien" en una decisión asistida: la app hace el trabajo aritmético, la persona decide el matiz de compra.
+
+### 4.10 Inventario doméstico
+
+**Decisión 2026-08-16: se incluye en v1 como función opcional, nunca obligatoria.** Se identificó como idea valiosa pero con un problema de UX real: pedirle al usuario que registre manualmente fechas de vencimiento o cantidades exactas de cada producto en casa es tedioso y probablemente no se usaría de forma consistente — el equipo no quiere que el usuario sienta que tiene que mantenerlo al día para que el resto de la app funcione. Se dan las herramientas, pero ninguna otra funcionalidad (listas, recetas, finanzas) depende de que el inventario esté completo o actualizado.
+
+Enfoque recomendado para reducir la fricción (a validar con el equipo, especialmente con quien lidera este módulo — ver [[#12. Propuesta de división de trabajo (borrador, a confirmar en equipo)|sección 12]]): **combinar los dos enfoques ligeros en vez de elegir uno solo.**
+
+- **Inferencia pasiva como motor:** a partir del historial de compras + una "vida útil típica" por categoría (lácteos ~1 semana, enlatados ~meses, etc.), la app estima en silencio qué probablemente ya se acabó — sin pedir fechas de vencimiento reales ni cantidades exactas.
+- **Registro binario ligero como única interacción del usuario:** esa inferencia se expone como una sugerencia de un toque ("¿Se te acabó la leche?") sobre productos ya comprados antes, en vez de una pantalla de inventario separada que hay que mantener. Un toque confirma (se agrega a la lista) o descarta (se pospone la estimación); nunca hay que ingresar cantidad ni fecha a mano.
+- Esto evita construir dos features (inventario "de verdad" + sugerencias pasivas) cuando una sola, bien diseñada, cubre el caso de uso sin pedirle disciplina de registro al usuario.
+- Descartarlo del todo sigue siendo una opción de respaldo si el enfoque combinado no alcanza a diseñarse/construirse bien en el tiempo del curso — pero la decisión actual del equipo es incluirlo, no dejarlo pendiente.
 
 ## 5. Requerimientos no funcionales
 
@@ -150,19 +174,20 @@ Enfoques a evaluar antes de comprometerlo a v1 (para decidir en una sesión de d
 
 ## 6. Modelo de datos (resumen conceptual)
 
-> Nota de control de acceso: con las listas privadas, la lógica de "¿puede este usuario ver/editar esta lista?" ya no es solo pertenencia a un household — se vuelve una función más general que revisa membresía de household o membresía en `list_collaborators`, según el tipo de lista.
+> Nota de control de acceso: la lógica de "¿puede este usuario ver/editar esta lista?" no es solo pertenencia a un household — se vuelve una función general que revisa, según el caso: `owner_id` (dueño directo, incluye el caso de usuario sin household), membresía de household (si `lists.household_id` no es nulo), o membresía en `list_collaborators` (listas privadas). Con la decisión 2026-08-16 de permitir uso sin household, `owner_id` deja de ser exclusivo de listas privadas y pasa a estar siempre presente en `lists`.
 
 | Entidad | Descripción |
 |---|---|
 | `households` | Hogar/familia, contenedor raíz |
 | `household_members` | Perfiles con rol (admin/miembro) dentro de un household |
 | `categories` | Categorías de productos, globales |
-| `product_catalog` | Catálogo de productos con categoría; `household_id` nullable (NULL = catálogo global, con valor = producto propio) |
-| `product_catalog_staging` | Datos crudos obtenidos por scraping, antes de normalizar/deduplicar hacia `product_catalog` |
-| `product_prices` | Precio de un producto en un supermercado en una fecha dada, obtenido por scraping — alimenta las sugerencias de dónde comprar |
+| `product_catalog` | Producto "base" con nombre, marca y categoría; `household_id` nullable (NULL = catálogo global, con valor = producto propio) |
+| `product_catalog_variants` | **Nueva (2026-08-16):** presentación/tamaño concreto de un producto (ej. "leche entera — caja 1L", "leche entera — galón"), con `base_unit` (ml/g/unidad) y `base_quantity` normalizada — es lo que se busca y muestra estilo catálogo con imagen (ver [[#4.5 Catálogo de productos y categorías|4.5]]), y lo que hace posible la reconciliación de cantidades de la [[#4.9.1 Reconciliación de cantidades al combinar listas (decisión 2026-08-16)|sección 4.9.1]] |
+| `product_catalog_staging` | Datos crudos obtenidos por scraping (incluye URL de imagen), antes de normalizar/deduplicar hacia `product_catalog` / `product_catalog_variants` |
+| `product_prices` | Precio de una variante de producto en un supermercado en una fecha dada, obtenido por scraping — alimenta las sugerencias de dónde comprar y el ordenamiento por precio-por-unidad de la reconciliación |
 | `stores` | Catálogo de supermercados por household |
-| `lists` | Lista general, sublista por fecha, o lista privada (`type`: general / date / private); `status`: active / completed / cancelled; `owner_id` para listas privadas |
-| `list_items` | Item dentro de una lista, con `quantity_requested`, `quantity_bought`, `size_label`, estado, quién compró, dónde y cuándo |
+| `lists` | Lista general, sublista por fecha, o lista privada (`type`: general / date / private); `status`: active / completed / cancelled; `owner_id` siempre presente (dueño individual); `household_id` **nullable** — NULL cuando el usuario no pertenece a household o la lista es privada, con valor solo para listas `general`/`date` de un usuario en un household (decisión 2026-08-16, ver [[#4.1 Gestión de usuarios, familias y perfiles|4.1]] y [[#4.2 Lista general y dashboard financiero|4.2]]) |
+| `list_items` | Item dentro de una lista, referenciando una `product_catalog_variants`, con `quantity_requested`, `quantity_bought`, estado, quién compró, dónde y cuándo |
 | `list_collaborators` | Control de acceso a listas privadas — independiente de `household_members`. Columnas: `list_id`, `user_id` (o email de invitado), `invited_at`, `accepted_at` |
 | `purchase_sessions` | Agrupa compras por household + supermercado + día, con total editable |
 | `recipes` | Receta con porciones base |
@@ -171,22 +196,22 @@ Enfoques a evaluar antes de comprometerlo a v1 (para decidir en una sesión de d
 
 Reglas de negocio que deben vivir en la base de datos (funciones/triggers), no en el cliente:
 
-- Merge de cantidades al agregar producto duplicado en una lista.
+- Merge automático de cantidades solo cuando el producto duplicado en una lista es exactamente la misma variante (mismo `product_catalog_variants.id`) — no hay merge automático entre variantes distintas del mismo producto base, eso pasa por la reconciliación asistida de la [[#4.9.1 Reconciliación de cantidades al combinar listas (decisión 2026-08-16)|sección 4.9.1]].
 - Auto-completado de sublista/lista privada cuando todos sus items están comprados.
 - Asignación/reutilización de sesión de compra activa por household + store + día.
-- Normalización/deduplicación de productos scrapeados antes de pasar de staging al catálogo real.
+- Normalización/deduplicación de productos scrapeados antes de pasar de staging al catálogo real (incluye asignar cada fila de staging a un `product_catalog` + `product_catalog_variants` correspondiente).
 
 ## 7. Arquitectura técnica propuesta
 
 | Capa | Elección | Justificación |
 |---|---|---|
-| Frontend | React + Next.js — **definido** (por Marcos, para destrabar la creación del repo; sujeto a confirmación del equipo completo) | Next.js aporta SSR/routing robusto y suele ser lo esperado en cursos de desarrollo web. |
+| Frontend | React + Next.js — **confirmado por todo el equipo el 2026-08-16** (propuesto inicialmente por Marcos para destrabar la creación del repo) | Next.js aporta SSR/routing robusto y suele ser lo esperado en cursos de desarrollo web. |
 | Responsive/PWA | CSS responsive (Flexbox/Grid) + `manifest.json` + service worker (Workbox o plugin nativo del framework elegido) | Requerimiento no funcional central |
-| Backend / API | Supabase (Postgres) vía PostgREST + funciones RPC | Complejidad justa para el modelo de datos; RLS para separar datos por household y por lista privada |
+| Backend / API | Supabase (Postgres) vía PostgREST + funciones RPC — **confirmado por todo el equipo el 2026-08-16** | Complejidad justa para el modelo de datos; RLS para separar datos por household y por lista privada |
 | Tiempo real | Supabase Realtime | Necesario para el tachado colaborativo instantáneo |
 | Estado remoto en cliente | TanStack Query | Cache, invalidación y optimistic updates |
 | Auth | Supabase Auth | — |
-| Estilos | Tailwind CSS — **definido** (misma salvedad que el framework) | Curva de aprendizaje más pareja para un equipo de 6 con niveles distintos de experiencia; más estándar y documentado que alternativas pensadas para compatibilidad nativa, que aquí no se necesita al ser 100% web |
+| Estilos | Tailwind CSS — **confirmado por todo el equipo el 2026-08-16** | Curva de aprendizaje más pareja para un equipo de 6 con niveles distintos de experiencia; más estándar y documentado que alternativas pensadas para compatibilidad nativa, que aquí no se necesita al ser 100% web |
 | Web scraping | Node.js (Puppeteer/Playwright) o Python (BeautifulSoup/Scrapy) — pendiente de decisión del equipo, según quién lo implemente | Es el componente de mayor riesgo técnico del proyecto, vale la pena decidirlo temprano |
 
 > Nota de decisión explícita: se descartó GraphQL (Hasura o pg_graphql) como capa de API. El modelo de datos es jerárquico y no tiene el problema de over/under-fetching que GraphQL resuelve; PostgREST + RPC de Postgres cubre la necesidad con menor complejidad operativa.
@@ -248,29 +273,33 @@ Apps de lista de compras analizadas como referencia de patrones de UX (no de ide
 
 ## 10. Pendientes de definición
 
-- ~~Framework de React definitivo (Next.js vs. Vite)~~ — **Next.js**, definido para destrabar la creación del repo (ver sección 7); llevar a confirmación del equipo completo en la primera reunión.
-- ~~Librería de estilos definitiva~~ — **Tailwind CSS**, misma salvedad que el punto anterior.
-- Herramienta de web scraping (Node/Puppeteer vs. Python) y quién del equipo lo lidera
-- Qué supermercados costarricenses son técnicamente viables de scrapear (revisar robots.txt de cada uno)
-- Enfoque final del inventario doméstico ([[#4.10 Inventario doméstico — pendiente de diseño|sección 4.10]]) — decidir antes de comprometerlo o descartarlo del todo
-- Nombre/ícono de la app — se propone mantener "Tacha" salvo que el equipo completo prefiera cambiarlo
+- ~~Framework de React definitivo (Next.js vs. Vite)~~ — **Next.js**, confirmado por todo el equipo en la reunión 2026-08-16.
+- ~~Librería de estilos definitiva~~ — **Tailwind CSS**, confirmado el 2026-08-16.
+- ~~Base de datos~~ — **Supabase**, confirmado por todo el equipo el 2026-08-16.
+- ~~Enfoque del inventario doméstico~~ — **incluido en v1, opcional** (sección 4.10), decidido el 2026-08-16; el diseño de detalle del enfoque combinado propuesto sigue abierto.
+- **Confirmación del profesor** sobre stack + DB — el equipo ya decidió, falta la aprobación formal del curso antes de tratarlo como cerrado.
+- Herramienta de web scraping (Node/Puppeteer vs. Python) y quién del equipo lo lidera — Daniel lidera el módulo (sección 12), falta la decisión técnica puntual.
+- Qué supermercados costarricenses son técnicamente viables de scrapear (revisar robots.txt de cada uno), y si esos sitios exponen imagen de producto de forma consistente (nuevo requisito del catálogo, sección 4.5) — riesgo a validar temprano con Daniel.
+- Qué pasa con las listas personales de un usuario que se une a un household después de haber usado la app solo (sección 4.1) — ¿se ofrecen para asociar, o quedan separadas siempre?
+- Nombre/ícono de la app — se propone mantener "Tacha" salvo que el equipo completo prefiera cambiarlo.
 
 ## 11. Próximos pasos inmediatos
 
-- Revisión de este documento por todo el equipo — agregar comentarios, dudas, y ajustes antes de cerrarlo
-- Reunión de equipo para cerrar las decisiones de la [[#10. Pendientes de definición|sección 10]]
-- Diseñar el schema SQL completo (tablas + RLS + funciones de negocio)
-- Definir división de trabajo entre los 6 integrantes según los módulos de este documento
+- Confirmación del profesor sobre stack y base de datos (sección 7)
+- Generación de interfaz de alta fidelidad con Stitch AI a partir de [[Proyectos/Tacha/DESIGN|DESIGN.md]], sobre los requerimientos ya cerrados en este documento
+- Diseñar el schema SQL completo (tablas + RLS + funciones de negocio), incorporando `product_catalog_variants` y `lists.household_id` nullable (sección 6)
+- Cerrar el resto de la [[#10. Pendientes de definición|sección 10]] (scraping técnico, supermercados viables, listas solo → household)
+- Corregir el mockup (`mockups/mockup-web-v2.html`) y la nueva generación de Stitch contra los requerimientos cerrados en este documento
 
-## 12. Propuesta de división de trabajo (borrador, a confirmar en equipo)
+## 12. División de trabajo
 
-Esta división es un punto de partida — el equipo debe ajustarla según intereses y experiencia previa de cada integrante.
+Definida en la reunión de equipo del 2026-08-16 — reemplaza el borrador anterior.
 
-| Módulo | Alcance |
-|---|---|
-| Auth + households + perfiles | Login, creación/invitación de miembros, roles |
-| Listas (general + fecha + privadas) + tachado | El core colaborativo de la app |
-| Dashboard financiero | Gráficos y agregaciones de gasto |
-| Web scraping + catálogo | El pipeline de datos, probablemente el módulo más grande |
-| Recetas + planificador semanal | Recetas, calendario de comidas, conexión con listas |
-| Diseño/UI + PWA | Sistema de componentes, responsive, instalabilidad |
+| Integrante | Módulo | Alcance |
+|---|---|---|
+| Daniel | Web scraping + catálogo | Terminar el pipeline de scraping y el catálogo (productos, variantes, imágenes) — el módulo de mayor riesgo técnico |
+| Melany | Diseño UI + inventario | Sistema de componentes/diseño visual e implementación del inventario doméstico opcional (sección 4.10) |
+| Laura | Dashboard financiero | Gráficos y agregaciones de gasto (sección 4.2, 4.6) |
+| Esteban | Auth, households, perfiles | Login, creación/invitación de miembros, roles (sección 4.1) |
+| Roberto | Recetas y planificador semanal | Recetas, calendario de comidas, conexión con listas (sección 4.9) |
+| Marcos | Listas y PWA | Lista general, sublistas, listas privadas, tachado, PWA/responsive (secciones 4.2–4.4) |

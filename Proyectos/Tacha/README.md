@@ -1,8 +1,8 @@
 # Tacha
 
-Ver también: [[Proyectos/README|Proyectos]] · [[Proyectos/Tacha/documentacion-v1|Documentación v1]]
+Ver también: [[Proyectos/README|Proyectos]] · [[Proyectos/Tacha/documentacion-v1|Documentación v1]] · [[Proyectos/Tacha/DESIGN|DESIGN.md]]
 
-**Curso:** Introducción al Desarrollo Web · **Equipo:** 6 integrantes · **Estado:** propuesta formal v1.0; repo de código ya creado (`MarcosZam13/tacha`, privado); resto de decisiones (sección 10 del documento) pendiente de revisión por el equipo.
+**Curso:** Introducción al Desarrollo Web · **Equipo:** 6 integrantes · **Estado:** stack (Next.js, Tailwind, Supabase) y DB confirmados por todo el equipo en reunión del 2026-08-16, pendiente confirmación del profesor; repo de código ya creado (`MarcosZam13/tacha`, privado); resto de pendientes en [[Proyectos/Tacha/documentacion-v1#10. Pendientes de definición|sección 10 del documento]].
 
 ## Qué es
 
@@ -23,6 +23,7 @@ Ver [[Proyectos/Tacha/documentacion-v1#10. Pendientes de definición|sección 10
 ## Dónde está cada cosa
 
 - [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] — documento de proyecto completo (resumen, requerimientos funcionales/no funcionales, modelo de datos, arquitectura, dirección de diseño, división de trabajo).
+- [[Proyectos/Tacha/DESIGN|DESIGN.md]] — guía de diseño (personalidad, tokens, inventario de pantallas, prompts listos) para generar interfaz en Stitch AI.
 - `mockups/mockup-web-v2.html` — prototipo HTML interactivo (desktop + mobile web, modo claro/oscuro). v2, el propio equipo lo marca como "por mejorar mucho" — se espera que evolucione una vez estén cerrados los requerimientos.
 - `_fuentes/` — el `.docx` original tal como lo entregó el equipo, sin editar.
 
