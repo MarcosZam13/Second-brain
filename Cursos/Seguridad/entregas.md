@@ -13,7 +13,9 @@ entregas_pendientes:
 
 Ver también: [[Cursos/Seguridad/temario]]
 
-> Cargado a partir de una captura de la plataforma de tareas (TEC-Digital), no del programa del curso — todavía no tenemos el programa/temario completo. La lista de "Tareas" en la plataforma mostraba `– / 40` puntos totales y la captura solo alcanzó a mostrar 2 de probablemente más asignaciones; falta confirmar si hay más.
+> Cargado a partir de una captura de la plataforma de tareas (TEC-Digital), no del programa del curso — todavía no tenemos el programa/temario completo. La categoría "Tareas" de la plataforma suma `– / 40` puntos; confirmado con el usuario 2026-08-18 que la captura no estaba cortada, solo hay estas 2 asignaciones cargadas por ahora.
+>
+> Ya sincronizadas como tareas en Todoist (labels `seguridad` + `universidad`) y como eventos en Google Calendar.
 
 | Fecha | Entregable | Peso | Estado |
 |---|---|---|---|
