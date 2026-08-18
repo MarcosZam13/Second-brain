@@ -8,7 +8,9 @@ estado: entregado
 tags: [diario-aprendizaje, drive, reflexion-semanal]
 ---
 
-# Diario de Aprendizaje Semanal — Semana 1
+# Diario de Aprendizaje Semanal — Semana 1 (histórico)
+
+> **Superado 2026-08-18** — este contenido se consolidó, corregido contra la rúbrica, en el apartado "🧵 La calidad no es un rumor" de la Entrada 1 de [[Cursos/QA/entregables/diario-reflexivo|el Diario Reflexivo]]. Se conserva como historial/borrador.
 
 Ver también: [[Cursos/QA/entregables/diario-aprendizaje-semanal|Diario de Aprendizaje Semanal (overview)]] · [[Cursos/QA/apuntes/calidad-semana-1|Calidad — Semana 1]] · [[Cursos/QA/entregas]]
 

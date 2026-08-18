@@ -8,7 +8,9 @@ estado: entregado
 tags: [diario-aprendizaje, drive, reflexion-semanal]
 ---
 
-# Diario de Aprendizaje Semanal — Semana 2
+# Diario de Aprendizaje Semanal — Semana 2 (histórico)
+
+> **Superado 2026-08-18** — este contenido se consolidó, corregido contra la rúbrica, en el apartado "💥 Cuando un bug cuesta vidas" de la Entrada 1 de [[Cursos/QA/entregables/diario-reflexivo|el Diario Reflexivo]]. Se conserva como historial/borrador.
 
 Ver también: [[Cursos/QA/entregables/diario-aprendizaje-semanal|Diario de Aprendizaje Semanal (overview)]] · [[Cursos/QA/apuntes/control-calidad-semana-2|Control de Calidad — Semana 2]] · [[Cursos/QA/entregas]]
 
