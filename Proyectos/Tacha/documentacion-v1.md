@@ -333,7 +333,7 @@ Definida en la reunión de equipo del 2026-08-16 — reemplaza el borrador anter
 | Melany | Diseño UI + inventario | Sistema de componentes/diseño visual e implementación del inventario doméstico opcional (sección 4.10) |
 | Laura | Dashboard financiero | Gráficos y agregaciones de gasto (sección 4.2, 4.6) |
 | Esteban | Auth, households, perfiles | Login, creación/invitación de miembros, roles (sección 4.1) |
-
-> [[#4.11 Grupos de productos (aceptado 2026-08-18, sujeto a confirmación del equipo)|Grupos de productos]] y [[#4.5.1 Mis productos personalizados (aceptado 2026-08-18, sujeto a confirmación del equipo)|productos personalizados]] ya están aceptados (sección 10), pero ambas features tocan más de un módulo — grupos vive del lado de listas (Marcos) pero depende del catálogo (Daniel) para buscar/seleccionar productos, y "mis productos" extiende directamente el catálogo de Daniel. Coordinar entre ambos antes de implementar, no asignarlo unilateralmente acá.
 | Roberto | Recetas y planificador semanal | Recetas, calendario de comidas, conexión con listas (sección 4.9) |
 | Marcos | Listas y PWA | Lista general, sublistas, listas privadas, tachado, PWA/responsive (secciones 4.2–4.4) |
+
+> [[#4.11 Grupos de productos (aceptado 2026-08-18, sujeto a confirmación del equipo)|Grupos de productos]] y [[#4.5.1 Mis productos personalizados (aceptado 2026-08-18, sujeto a confirmación del equipo)|productos personalizados]] ya están aceptados (sección 3), pero ambas features tocan más de un módulo — grupos vive del lado de listas (Marcos) pero depende del catálogo (Daniel) para buscar/seleccionar productos, y "mis productos" extiende directamente el catálogo de Daniel. Coordinar entre ambos antes de implementar, no asignarlo unilateralmente acá.
