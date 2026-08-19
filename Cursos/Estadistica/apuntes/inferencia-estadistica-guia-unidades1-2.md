@@ -6,14 +6,15 @@ tipo: apunte
 fuente:
   - _fuentes/Estadistica_guia-inferencia-estadistica-unidades1-2_2026-08-07.pdf
   - _fuentes/Estadistica_guia-unidad1-resuelta-semana1_2026-08-07.pdf
+  - _fuentes/Estadistica_guia-unidad2-resuelta-semana2_2026-08-18.pdf
 tags: [inferencia-estadistica, distribuciones-probabilidad, estimacion-puntual, verosimilitud, intervalos-confianza, pruebas-hipotesis]
 ---
 
 # Guía Teórico-Práctica — Inferencia Estadística (Unidades 1 y 2)
 
-Ver también: [[Cursos/Estadistica/temario]] · [[Cursos/Estadistica/entregas]]
+Ver también: [[Cursos/Estadistica/temario]] · [[Cursos/Estadistica/entregas]] · [[Cursos/Estadistica/repasos/quiz-1-semanas-1-2|Repaso para Quiz 1 (semanas 1-2)]]
 
-> Guía del profesor Elvis Mejías Ramírez (MA-3405, II Semestre 2026). Cubre la Unidad 1 (Introducción a la Inferencia Estadística) y la Unidad 2 (Estimación para una Población). El archivo `Estadistica_guia-unidad1-resuelta-semana1_2026-08-07.pdf` es la misma guía de Unidad 1 trabajada en la sesión de Semana 1, con las respuestas propias a los ejercicios de práctica ya resueltas a mano — no se transcriben acá, quedan en esa fuente archivada.
+> Guía del profesor Elvis Mejías Ramírez (MA-3405, II Semestre 2026). Cubre la Unidad 1 (Introducción a la Inferencia Estadística) y la Unidad 2 (Estimación para una Población). El archivo `Estadistica_guia-unidad1-resuelta-semana1_2026-08-07.pdf` es la misma guía de Unidad 1 trabajada en la sesión de Semana 1, con las respuestas propias a los ejercicios de práctica ya resueltas a mano. `Estadistica_guia-unidad2-resuelta-semana2_2026-08-18.pdf` es el mismo tipo de material pero de Semana 2: cierre de los ejercicios de máxima verosimilitud (problemas 8-17) y arranque de la Unidad 2 con la sección 2.1.1 (intervalos de confianza para una media), con 14 ejercicios de práctica resueltos a mano. Ninguno de los dos se transcribe acá, quedan en sus fuentes archivadas — el resumen accionable está en el repaso enlazado arriba.
 
 ## 1. Introducción a la Inferencia Estadística
 
