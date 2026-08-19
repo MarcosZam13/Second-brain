@@ -4,7 +4,7 @@ tema: Mapa Clase 3 — mapa mental a mano
 fecha: 2026-08-18
 tipo: entregable
 entregable_de: "[[Cursos/Seguridad/apuntes/reglas-clase]]"
-estado: borrador
+estado: entregado
 tags: [mapa-mental, cia, stride, complejidad]
 ---
 
@@ -65,11 +65,11 @@ Escrito como si fueran apuntes tomados en el momento, no como documentación for
 
 (Nota: en clase se vio STRIDE por encima, no el proceso completo de threat modeling — por eso me quedo solo con el significado de cada letra.)
 
-## Checklist antes de entregar
+## Checklist — entregado (2026-08-18)
 
-- [ ] Árbol CIA con las 3 letras y su frase de "qué significa que falle"
-- [ ] Rama de Complejidad/Extensibilidad/Conectividad con su solución cada una
-- [ ] STRIDE con las 6 letras y su frase corta
-- [ ] Nombre, curso y fecha arriba de la hoja
-- [ ] Hecho a mano, cabe en 1 página
-- [ ] Foto legible en PNG o JPG
+- [x] Árbol CIA con las 3 letras y su frase de "qué significa que falle"
+- [x] Rama de Complejidad/Extensibilidad/Conectividad con su solución cada una
+- [x] STRIDE con las 6 letras y su frase corta
+- [x] Nombre, curso y fecha arriba de la hoja
+- [x] Hecho a mano, cabe en 1 página
+- [x] Foto legible en PNG o JPG, subida a TEC-Digital
