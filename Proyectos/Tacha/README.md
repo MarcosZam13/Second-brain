@@ -22,9 +22,10 @@ Ver [[Proyectos/Tacha/documentacion-v1#10. Pendientes de definición|sección 10
 
 ## Dónde está cada cosa
 
-- [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] — documento de proyecto completo (resumen, requerimientos funcionales/no funcionales, modelo de datos, arquitectura, dirección de diseño, división de trabajo).
-- `Tacha_documentacion-v1_2026-08-18.docx` — versión Word de `documentacion-v1.md`, para compartir con el equipo/profesor fuera de Obsidian/GitHub.
-- [[Proyectos/Tacha/DESIGN|DESIGN.md]] — guía de diseño (personalidad, tokens, navegación, inventario de las 15 pantallas del alcance v1, componentes, estados y un prompt listo por pantalla) para generar interfaz en Stitch AI.
+- [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] — documento de proyecto completo, ahora en v2.1 (resumen, requerimientos funcionales/no funcionales, modelo de datos, arquitectura, dirección de diseño, división de trabajo).
+- `Tacha_documentacion-v2.1.docx` — versión Word de `documentacion-v1.md`, para compartir con el equipo/profesor fuera de Obsidian/GitHub. El nombre de archivo lleva el número de versión del contenido (v2.1), no el de la nota (`documentacion-v1.md` mantiene su nombre de archivo original en el vault por las wikilinks).
+- [[Proyectos/Tacha/historias-usuario|historias-usuario.md]] — historias de usuario y criterios de aceptación (v1.0, borrador), desglosando los requerimientos de `documentacion-v1.md` en épicas/HU/CA.
+- [[Proyectos/Tacha/DESIGN|DESIGN.md]] — guía de diseño (personalidad, tokens, navegación, inventario de las 19 pantallas del alcance v1, componentes, estados y un prompt listo por pantalla) para generar interfaz en Stitch AI.
 - `mockups/mockup-web-v2.html` — prototipo HTML interactivo (desktop + mobile web, modo claro/oscuro). v2, el propio equipo lo marca como "por mejorar mucho" — se espera que evolucione una vez estén cerrados los requerimientos.
 - `_fuentes/` — el `.docx` original tal como lo entregó el equipo, sin editar.
 

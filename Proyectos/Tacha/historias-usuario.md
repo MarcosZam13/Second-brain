@@ -1,15 +1,15 @@
 ---
 proyecto: Tacha
-tema: Historias de Usuario — v2.1 (borrador)
+tema: Historias de Usuario — v1.0 (borrador)
 fecha: 2026-08-18
 tipo: documentacion
 estado: borrador — reunión de equipo 2026-08-18, desglosando requerimientos en épicas/HU/CA; falta completar Sublistas, Listas privadas, Catálogo, Recetas, Planificador, Inventario y Grupos
 tags: [historias-usuario, requerimientos, tacha]
 ---
 
-# Historias de Usuario — Tacha (v2.1)
+# Historias de Usuario — Tacha (v1.0)
 
-Ver también: [[Proyectos/Tacha/README|README]] · [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] · [[Proyectos/Tacha/DESIGN|DESIGN.md]]
+Ver también: [[Proyectos/Tacha/README|README]] · [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] (v2.1) · [[Proyectos/Tacha/DESIGN|DESIGN.md]]
 
 > Borrador de la reunión de equipo del 2026-08-18, desglosando cada requerimiento de [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] en épicas, historias de usuario (HU) y criterios de aceptación (CA), para dejar claros los módulos/pestañas/funciones antes de construir. El formato final de HU/CA puede cambiar — esto es el desglose de trabajo, no reemplaza documentacion-v1.md como fuente de los requerimientos de producto. Los requerimientos nuevos que salieron de este desglose (landing pública, autenticación extendida, invitación a household por link) ya están incorporados en [[Proyectos/Tacha/documentacion-v1#4.12 Acceso público y autenticación extendida (landing, about, auth)|documentacion-v1.md sección 4.12]] y en [[Proyectos/Tacha/DESIGN|DESIGN.md]].
 

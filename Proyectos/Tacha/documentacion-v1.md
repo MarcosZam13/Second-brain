@@ -1,6 +1,6 @@
 ---
 proyecto: Tacha
-tema: Documento de Proyecto — v1.0 (Propuesta formal)
+tema: Documento de Proyecto — v2.1 (Propuesta formal)
 fecha: 2026-08-09
 tipo: documentacion
 estado: stack + DB confirmados por todo el equipo en reunión del 2026-08-16, pendiente de confirmación del profesor — resto de decisiones de esa reunión incorporadas, ver sección 10
@@ -12,7 +12,7 @@ tags: [documentacion, propuesta, requerimientos, arquitectura, tacha]
 
 Ver también: [[Proyectos/Tacha/README|README]] · [[Proyectos/README|Proyectos]] · [[Proyectos/Tacha/DESIGN|DESIGN.md]]
 
-**Estado:** Propuesta formal — v1.0 · **Curso:** Introducción al Desarrollo Web · **Equipo:** 6 integrantes · **Última actualización:** 2026-08-18 (decisiones de la reunión de equipo del 2026-08-16)
+**Estado:** Propuesta formal — v2.1 · **Curso:** Introducción al Desarrollo Web · **Equipo:** 6 integrantes · **Última actualización:** 2026-08-18 (decisiones de la reunión de equipo del 2026-08-16 + segunda reunión del 2026-08-18)
 
 > Reunión de equipo completa el domingo 2026-08-16 (~2.5h): se confirmó el stack y la base de datos (sección 7) — queda pendiente solo la confirmación del profesor. Se cerraron varias de las preguntas de la [[#10. Pendientes de definición|sección 10]] original; el resto de definiciones nuevas quedan en esa misma sección.
 >

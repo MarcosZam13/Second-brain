@@ -9,7 +9,7 @@ tags: [diseño, ui-ux, stitch, tacha]
 
 # DESIGN.md — Tacha
 
-Ver también: [[Proyectos/Tacha/README|README]] · [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] (secciones 3, 4, 6 y 9) · [[Proyectos/Tacha/historias-usuario|historias-usuario.md]] · [[Proyectos/Tacha/mockups/mockup-web-v2.html|mockups/mockup-web-v2.html]]
+Ver también: [[Proyectos/Tacha/README|README]] · [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] (v2.1, secciones 3, 4, 6 y 9) · [[Proyectos/Tacha/historias-usuario|historias-usuario.md]] (v1.0) · [[Proyectos/Tacha/mockups/mockup-web-v2.html|mockups/mockup-web-v2.html]] · `Tacha_documentacion-v2.1.docx` (versión Word)
 
 **Propósito de este documento:** dar a quien genere pantallas en Stitch AI (hoy: principalmente Melany — diseño UI, y Marcos — listas/PWA) el contexto completo — personalidad, tokens, navegación, inventario de pantallas, componentes y un prompt listo por pantalla — para que nada quede a medio definir. Cubre las 19 pantallas del alcance v1 completo de [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] (sección 3), incluidas [[Proyectos/Tacha/documentacion-v1#4.11 Grupos de productos (aceptado 2026-08-18, sujeto a confirmación del equipo)|grupos de productos]], [[Proyectos/Tacha/documentacion-v1#4.5.1 Mis productos personalizados (aceptado 2026-08-18, sujeto a confirmación del equipo)|mis productos personalizados]] y la [[Proyectos/Tacha/documentacion-v1#4.12 Acceso público y autenticación extendida (landing, about, auth)|landing pública y autenticación extendida]] que pidió el profesor, ya todas parte del alcance de trabajo. Es más fácil quitar o ajustar algo de acá después que generarlo desde cero a mitad de la sesión de Stitch.
 
