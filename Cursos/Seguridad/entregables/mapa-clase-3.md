@@ -5,23 +5,24 @@ fecha: 2026-08-18
 tipo: entregable
 entregable_de: "[[Cursos/Seguridad/apuntes/reglas-clase]]"
 estado: borrador
-tags: [mapa-mental, cia, stride]
+tags: [mapa-mental, cia, stride, complejidad]
 ---
 
-# Mapa Clase 3 — árbol CIA + STRIDE (versión apunte de clase)
+# Mapa Clase 3 — árbol CIA + Complejidad/Extensibilidad/Conectividad + STRIDE (versión apunte de clase)
 
 Ver también: [[Cursos/Seguridad/entregas]] · [[Cursos/Seguridad/apuntes/tema-1-importancia-seguridad-software|Tema 1 (fuente)]]
 
 Entrega: 2026-08-19, 23:45 — 1 página, **hecho a mano**, mapa mental o diagrama, foto en PNG/JPG.
 
-Escrito como si fueran apuntes tomados en el momento, no como documentación formal — para que lo puedas copiar y entender de un vistazo.
+Escrito como si fueran apuntes tomados en el momento, no como documentación formal. Agregué una tercera rama (Complejidad/Extensibilidad/Conectividad) para que la hoja quede más llena — es contenido real de la Clase 3, no relleno inventado.
 
 ## Cómo se ve el dibujo
 
 ```
-                SEGURIDAD DEL SOFTWARE
-                  /                \
-           CIA (3 pilares)        STRIDE (6 formas de atacar)
+                    SEGURIDAD DEL SOFTWARE
+              "cada línea de código: puerta o escudo"
+              /              |                    \
+        CIA (3 pilares)   3 FACTORES DE RIESGO   STRIDE (6 formas de atacar)
 ```
 
 ## Rama 1 — CIA
@@ -40,7 +41,18 @@ Escrito como si fueran apuntes tomados en el momento, no como documentación for
 
 *Frase para acordarme: si me roban la info → falló Confidencialidad. Si me la cambian → falló Integridad. Si no puedo entrar → falló Disponibilidad.*
 
-## Rama 2 — STRIDE (6 formas típicas de que te ataquen)
+## Rama 2 — Complejidad / Extensibilidad / Conectividad (por qué el software se vuelve inseguro)
+
+**Complejidad** → mientras más complicado y grande el código, más fácil esconder fallos entre tanta cosa
+→ solución: mantenerlo simple — *"lo que no está, no se puede hackear"*
+
+**Extensibilidad** → si dejo que le agreguen plugins/extensiones sin revisarlos, se puede colar código malo por ahí
+→ solución: aislar y revisar todo lo que se agrega (sandboxing)
+
+**Conectividad** → mientras más conectado esté el sistema (a internet, a otros sistemas), más puertas de entrada tiene un atacante
+→ solución: no confiar en nada por defecto, verificar siempre (**Zero Trust**)
+
+## Rama 3 — STRIDE (6 formas típicas de que te ataquen)
 
 - **S**poofing → alguien se hace pasar por mí (o por el sistema)
 - **T**ampering → me cambian los datos sin que yo me dé cuenta
@@ -56,6 +68,7 @@ Escrito como si fueran apuntes tomados en el momento, no como documentación for
 ## Checklist antes de entregar
 
 - [ ] Árbol CIA con las 3 letras y su frase de "qué significa que falle"
+- [ ] Rama de Complejidad/Extensibilidad/Conectividad con su solución cada una
 - [ ] STRIDE con las 6 letras y su frase corta
 - [ ] Nombre, curso y fecha arriba de la hoja
 - [ ] Hecho a mano, cabe en 1 página
