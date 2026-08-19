@@ -17,7 +17,7 @@ El curso reporta las fechas por número de semana, no por fecha calendario. Esta
 
 | Fecha | Entregable | Peso | Estado |
 |---|---|---|---|
-| 2026-08-19 (semana 3) | Quiz 1 | 6% | pendiente |
+| 2026-08-19 (semana 3) | [[Cursos/Estadistica/repasos/quiz-1-semanas-1-2\|Quiz 1]] | 6% | pendiente |
 | 2026-09-02 (semana 5) | Quiz 2 | 6% | pendiente |
 | Fecha pendiente | [[Cursos/Estadistica/apuntes/inferencia-estadistica-guia-unidades1-2\|Examen 1 (inferencia, 1-2 poblaciones)]] | 25% | pendiente |
 | 2026-09-23 (semana 8) | Quiz 3 | 6% | pendiente |
