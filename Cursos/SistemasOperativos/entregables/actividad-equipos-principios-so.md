@@ -5,24 +5,29 @@ fecha: 2026-08-12
 tipo: entregable
 entregable_de: "[[Cursos/SistemasOperativos/apuntes/estructura-sistemas-computo-unidad1]]"
 estado: borrador
+fuente:
+  - _fuentes/SistemasOperativos_actividad-equipos-fase1-3-documento_2026-08-18.docx
+  - _fuentes/SistemasOperativos_actividad-equipos-diagrama-bloques_2026-08-18.jpeg
+  - _fuentes/SistemasOperativos_actividad-equipos-distribucion-guion_2026-08-18.jpeg
+  - _fuentes/SistemasOperativos_actividad-equipos-presentacion-final_2026-08-18.pdf
 tags: [actividad-equipos, trabajo-grupal, fase1]
 ---
 
 # Actividad en Equipos — Solución basada en Principios de los SO
 
-Ver también: [[Cursos/SistemasOperativos/apuntes/estructura-sistemas-computo-unidad1]] · [[Cursos/SistemasOperativos/entregas]]
+Ver también: [[Cursos/SistemasOperativos/apuntes/estructura-sistemas-computo-unidad1]] · [[Cursos/SistemasOperativos/entregas]] · [[Cursos/SistemasOperativos/entregables/guion-presentacion-actividad-equipos|Guión de la presentación]]
 
 **Entrega (Fase 4 — presentación):** 2026-08-20 (inicio semana 3), ~5 min por grupo.
-**Estado actual:** propuesta (opción 1 — condiciones de carrera, venta de boletos de concierto) revisada por el profesor, quien sugirió agregar balanceo de cargas al diseño. Roles del equipo ya asignados.
+**Estado actual:** Fases 1-3 completas (documento del equipo + diagrama + slides de la presentación ya armados por Mario/Joseph). Falta cerrar el guión de exposición — ver [[Cursos/SistemasOperativos/entregables/guion-presentacion-actividad-equipos|guión]] para el reparto por diapositiva y el texto de cada parte.
 
 ## Checklist contra la rúbrica
 
-- [ ] Identificación del Problema — claridad, relevancia, justificación (10%)
-- [ ] Originalidad de la Solución — creatividad, innovación, justificación (20%)
-- [ ] Integración de Componentes del SO — coherencia, funcionalidad, eficiencia (25%)
-- [ ] Diseño Preliminar — claridad, estructura, viabilidad (20%)
-- [ ] Presentación de la Propuesta — claridad, organización, comunicación (15%)
-- [ ] Reflexión sobre el Aprendizaje — profundidad, conexión, autoevaluación (10%)
+- [x] Identificación del Problema — claridad, relevancia, justificación (10%)
+- [x] Originalidad de la Solución — creatividad, innovación, justificación (20%)
+- [x] Integración de Componentes del SO — coherencia, funcionalidad, eficiencia (25%)
+- [x] Diseño Preliminar — claridad, estructura, viabilidad (20%)
+- [ ] Presentación de la Propuesta — claridad, organización, comunicación (15%) — pendiente ensayar guión
+- [ ] Reflexión sobre el Aprendizaje — profundidad, conexión, autoevaluación (10%) — falta decidir qué punto dice Marcos
 
 ## Opciones de problema en evaluación (pendiente decisión del equipo)
 
@@ -96,8 +101,52 @@ En vez de dejar que todas las solicitudes de compra compitan libremente por el m
 
 ## Fase 3 — Diseño Preliminar (semana 2)
 
-*(pendiente — diagrama de bloques, algoritmos/procesos, recursos necesarios)*
+![[SistemasOperativos_actividad-equipos-diagrama-bloques_2026-08-18.jpeg]]
+
+**Flujo:** Usuarios/clientes (solicitudes concurrentes) → Balanceador de carga → Cola FIFO compartida (IPC, "sala de espera virtual") → Hilos Worker 1..N → Sección crítica (semáforo contador + mutex de asiento) → dos salidas: reserva confirmada (tarea asíncrona: pago, boleto QR/PDF, correo) o rechazado (agotado/ocupado, notificación de error inmediata). Un monitor de timeout recorre las reservas y libera el semáforo (`signal()`) si no hay pago en 5 min.
+
+### Algoritmos y procesos clave del software
+
+**Hilo Trabajador (Worker Thread) — reserva atómica**
+1. Extracción: consume una solicitud de la cola FIFO (IPC).
+2. Semáforo contador: `wait()` sobre el semáforo de inventario global. Si está en 0 → "Agotado". Si es >0 → decrementa 1 y avanza.
+3. Mutex de asiento: `lock()` sobre la celda de memoria del asiento específico.
+   - Si está libre: cambia estado a `RESERVADO`, guarda timestamp, `unlock()`, confirma al usuario y dispara el pago asíncrono.
+   - Si está ocupado: `unlock()`, `signal()` sobre el semáforo (devuelve el cupo) y notifica "Ocupado".
+
+**Monitor de Timeout — guardián de recursos**
+- Bucle periódico: recorre la memoria RAM cada N segundos.
+- Expiración: si un asiento está `RESERVADO` por más de 5 minutos sin pago, `lock()` → estado a `LIBRE` → `unlock()` → `signal()` sobre el semáforo global para reactivar esa entrada.
+
+**Proceso asíncrono — liberación de la ruta crítica**
+- En segundo plano: procesa el pago con la pasarela bancaria, genera la entrada en PDF/QR y envía la confirmación por correo, fuera de la sección crítica, para no bloquear el inventario en memoria.
+
+### Recursos necesarios
+
+| Categoría | Recurso / herramienta | Función / justificación en el SO |
+|---|---|---|
+| Lenguaje de programación | C/C++ (o Python con `multiprocessing`) | Manejo nativo de primitivas de sincronización y memoria compartida del SO |
+| Bibliotecas del SO | `pthread.h` (POSIX Threads) | Creación y administración del pool de hilos trabajadores |
+| Bibliotecas del SO | `semaphore.h` | Control atómico de los semáforos contadores de inventario |
+| Bibliotecas del SO | `time.h` / `sys/time.h` | Timestamps para el monitoreo y liberación por timeout |
+| Middleware / IPC | Redis o RabbitMQ | Cola FIFO compartida, desacopla el tráfico entrante de los hilos de procesamiento |
+| Herramientas de desarrollo | GCC / VS Code / Docker | Compilación, depuración y simulación del entorno distribuido en contenedores |
+| Hardware requerido | Procesador multicore (4+ núcleos) | Ejecución paralela real de los hilos trabajadores |
+| Hardware requerido | RAM de alta velocidad | Tabla de estado de asientos en memoria, lecturas/escrituras atómicas de baja latencia |
 
 ## Fase 4 — Presentación de la Propuesta (semana 3, entrega 2026-08-20)
 
-*(pendiente)*
+Slides ya armados por el equipo (título "Sala de Espera Virtual"): 1) portada, 2) problema + solución (4 pasos), 3) diagrama de bloques, 4) desafíos técnicos (starvation / reservas colgadas / deadlock potencial, cada uno con mitigación — mismo contenido de Fase 2), 5) reflexión sobre el aprendizaje (3 puntos), 6) cierre/preguntas.
+
+**Reparto de la exposición** (de la distribución del equipo, con el cambio ya anotado: Marcos toma *Desafíos técnicos* en vez de *Diagrama de bloques*):
+
+| # | Diapositiva | Tiempo | Quién |
+|---|---|---|---|
+| 1 | Portada | 0:15 | Mario |
+| 2 | Problema + Solución | 1:15 | Mario |
+| 3 | Diagrama de bloques | 1:30 | Joseph |
+| 4 | Desafíos técnicos | 1:00 | **Marcos** |
+| 5 | Reflexión (un punto c/u) | 0:45 | Mario, Marcos, Joseph |
+| 6 | Cierre | 0:15 | Mario |
+
+Guión con el texto de cada parte (todas las voces, mientras se decide cuál de los 3 puntos de reflexión dice Marcos): [[Cursos/SistemasOperativos/entregables/guion-presentacion-actividad-equipos|guion-presentacion-actividad-equipos.md]]
