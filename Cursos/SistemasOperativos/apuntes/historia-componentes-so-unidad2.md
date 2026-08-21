@@ -1,19 +1,22 @@
 ---
 curso: SistemasOperativos
-tema: Unidad 2 — Historia y componentes de los Sistemas Operativos (Semana 2)
+tema: Unidad 2 — Historia y componentes de los Sistemas Operativos (Semana 2-3)
 fecha: 2026-08-07
 tipo: apunte
 fuente:
   - _fuentes/SistemasOperativos_historia-componentes-so-unidad2_2026-08-07.pdf
   - _fuentes/SistemasOperativos_unidad2-semana2_2026-08-07.png
+  - _fuentes/SistemasOperativos_historia-componentes-so-unidad2_2026-08-21.pdf
 tags: [unidad2, historia-so, componentes-so, arquitecturas-so, modo-dual, llamadas-sistema]
 ---
 
-# Unidad 2 — Historia y componentes de los Sistemas Operativos (Semana 2)
+# Unidad 2 — Historia y componentes de los Sistemas Operativos (Semana 2-3)
 
 Ver también: [[Cursos/SistemasOperativos/temario]] · [[Cursos/SistemasOperativos/entregas]] · [[Cursos/SistemasOperativos/apuntes/estructura-sistemas-computo-unidad1]]
 
 Introducción a los SO, su función como intermediario, y los componentes principales que lo conforman. Basado en Tanenbaum, Silberschatz y Stallings.
+
+Unidad arrancada en semana 2 y cerrada en semana 3 con el mismo material (misma presentación, sin cambios de contenido).
 
 ## Objetivos de la unidad
 
