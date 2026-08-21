@@ -53,6 +53,7 @@ Si el equipo prefiere algo más simple de levantar y probar sin depender de serv
 
 ## Pendiente
 
+- [ ] Reunión del equipo con la profesora para revisar el repositorio elegido (Firefly III) y obtener el visto bueno — fecha por confirmar (mencionado por Marcos, 2026-08-21; no aparece todavía en ninguna guía ni en [[Cursos/QA/entregas]])
 - [x] Decisión final del equipo — **Firefly III**, 2026-08-17
 - [ ] Clonar el repo y confirmar que corre localmente sin problemas (`docker-compose` oficial — criterio explícito del PDF)
 - [ ] Revisar en detalle accesibilidad (WCAG/ARIA) y estándares de codificación (PSR-12/PHP, ESLint para las islas Vue) del repo
