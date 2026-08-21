@@ -20,7 +20,7 @@ Ver también: [[Proyectos/Tacha/README|README]] · [[Proyectos/Tacha/documentaci
 > **v2.2 (2026-08-21):** pasada de limpieza pedida por el usuario antes de importar a JIRA. Cambios:
 > - **Numeración completada:** los 7 ítems de la epic "Lista general" y 2 más ("Eliminar una receta", "Eliminar un grupo") no tenían número de HU ni de CA — ahora son HU-36a a HU-36g, HU-64b y HU-75b (formato de sufijo, igual que HU-34b/c o HU-70b-d, para no correr la numeración de todo el documento).
 > - **HU-54 fusionada con HU-56** — eran la misma idea (crear un producto que no está en el catálogo), solo cambiaba el punto de entrada. Ver nota en la epic Catálogo.
-> - **Tachar/destachar rediseñado (HU-36e):** decisión del usuario de no usar checkbox — la fila completa es el único control, el tachado se indica visualmente sobre el texto (tachado/atenuado), y la lista general se divide en dos secciones: "Pendientes" arriba y "Tachados hoy" abajo (solo lo tachado el día de hoy; lo de días anteriores vive en Historial de compras). Esto generó un conflicto con HU-36c (Ver detalle de producto, que antes se abría tocando la fila) — resuelto con un ícono dedicado, marcado para confirmar con el equipo.
+> - **Tachar/destachar rediseñado (HU-36e):** decisión del usuario de no usar checkbox — la fila completa es el único control, el tachado se indica visualmente sobre el texto (tachado/atenuado), y la lista general se divide en dos secciones: "Pendientes" arriba y "Tachados hoy" abajo (solo lo tachado el día de hoy; lo de días anteriores vive en Historial de compras). Esto generó un conflicto con HU-36c (Ver detalle de producto, que antes se abría tocando la fila) — **resuelto (2026-08-21): un ícono o botón específico al final de la fila abre el detalle**, en vez de tocar la fila completa.
 
 ## Roles
 
@@ -346,11 +346,10 @@ Como usuario, quiero incrementar o decrementar la cantidad de un producto en mi 
 - CA-03: Al tocar "-", la cantidad disminuye en 1, sin poder bajar de 1.
 - CA-04: El cambio se refleja de inmediato en la fila, sin necesidad de confirmación adicional. Tocar estos controles nunca dispara el tachado de la fila (ver HU-36e).
 
-**HU-36c: Ver detalle de producto** ⚠️ *(pendiente de confirmar con el equipo — ver conflicto abajo)*
+**HU-36c: Ver detalle de producto**
 Como usuario, quiero ver los detalles de un producto añadido a mi lista, para ver marcas, presentación y precios de diferentes supermercados.
-- CA-01: **(2026-08-21, revisado)** el detalle se abre tocando un ícono/chevron dedicado al final de la fila — la misma zona "excluida" que ya tienen los controles de cantidad — porque tocar el resto de la fila ahora tacha el producto (HU-36e).
+- CA-01: **(2026-08-21, confirmado)** el detalle se abre con un ícono o botón específico al final de la fila (misma zona "excluida" que ya tienen los controles de cantidad) — no tocando la fila, porque eso tacha el producto (HU-36e).
 - CA-02: La vista de detalle muestra marca, presentación/variante y precio de referencia (si existe).
-- **Conflicto detectado (2026-08-21):** la versión anterior de esta HU decía "tocar la fila (fuera del checkbox) abre el detalle" — eso ya no es compatible con que toda la fila tache el producto. Se resolvió arriba con un ícono dedicado, pero es una decisión de diseño real, no solo de redacción — confirmar con el equipo si prefieren esa solución u otra (ej. quitar el detalle de la lista y dejarlo accesible solo desde el Catálogo, ya que ahí ya existe vía HU-53).
 
 **HU-36d: Eliminar producto**
 Como usuario, quiero eliminar un producto de mi lista, para quitar algo que agregué por error o que ya no necesito.
@@ -743,4 +742,4 @@ Agregado 2026-08-19 al completar el desglose de HU/CA de todos los módulos pend
 1. **Perfil, Recetas (listado), Mi inventario y Configuración** no tienen pantalla generada todavía — agregar prompts a [[Proyectos/Tacha/DESIGN#7. Prompts listos para Stitch AI|DESIGN.md sección 7]] antes de la próxima ronda de generación (Mi inventario y Configuración sí tienen prompt ya, ver 7.10 ajustado y 7.20 nuevo).
 2. Incorporar en el prompt de 7.15 el paso nuevo de HU-34b y la opción "Salir del household" (HU-34c) cuando se regenere esa pantalla en Stitch.
 3. Ajustar el mockup y la próxima generación de Stitch de la Lista general y "modo compra" para: (a) quitar el checkbox — toda la fila es el único punto de tachado; (b) mostrar el tachado como texto tachado/atenuado sobre la fila, no como un ícono de check; (c) dividir la vista en dos secciones, "Pendientes" arriba y "Tachados hoy" abajo (ver HU-36e).
-4. Definir con el equipo cómo se resuelve el conflicto entre HU-36c (Ver detalle de producto) y HU-36e (tachar tocando toda la fila) — la propuesta actual es un ícono/chevron dedicado al final de la fila, a confirmar antes de generar el mockup.
+4. Incluir en el mockup el ícono/botón de detalle al final de la fila (HU-36c), confirmado como la forma de resolver el conflicto con el tachado de toda la fila (HU-36e).
