@@ -13,7 +13,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 | SEG | Seguridad | SEG-14 | SEG-15 |
 | WEB | Desarrollo Web | WEB-4 | WEB-5 |
 | CYS | Computación y Sociedad | CYS-4 | CYS-5 |
-| EST | Estadística | EST-5 | EST-6 |
+| EST | Estadística | EST-6 | EST-7 |
 | SO | Sistemas Operativos | SO-16 | SO-17 |
 
 ## Proyectos personales

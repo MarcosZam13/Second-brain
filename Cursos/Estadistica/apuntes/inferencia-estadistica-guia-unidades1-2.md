@@ -7,6 +7,7 @@ fuente:
   - _fuentes/Estadistica_guia-inferencia-estadistica-unidades1-2_2026-08-07.pdf
   - _fuentes/Estadistica_guia-unidad1-resuelta-semana1_2026-08-07.pdf
   - _fuentes/Estadistica_guia-unidad2-resuelta-semana2_2026-08-18.pdf
+  - _fuentes/Estadistica_guia-unidad2-resuelta-semana3_2026-08-21.pdf
 tags: [inferencia-estadistica, distribuciones-probabilidad, estimacion-puntual, verosimilitud, intervalos-confianza, pruebas-hipotesis]
 ---
 
@@ -14,7 +15,7 @@ tags: [inferencia-estadistica, distribuciones-probabilidad, estimacion-puntual, 
 
 Ver también: [[Cursos/Estadistica/temario]] · [[Cursos/Estadistica/entregas]] · [[Cursos/Estadistica/repasos/quiz-1-semanas-1-2|Repaso para Quiz 1 (semanas 1-2)]]
 
-> Guía del profesor Elvis Mejías Ramírez (MA-3405, II Semestre 2026). Cubre la Unidad 1 (Introducción a la Inferencia Estadística) y la Unidad 2 (Estimación para una Población). El archivo `Estadistica_guia-unidad1-resuelta-semana1_2026-08-07.pdf` es la misma guía de Unidad 1 trabajada en la sesión de Semana 1, con las respuestas propias a los ejercicios de práctica ya resueltas a mano. `Estadistica_guia-unidad2-resuelta-semana2_2026-08-18.pdf` es el mismo tipo de material pero de Semana 2: cierre de los ejercicios de máxima verosimilitud (problemas 8-17) y arranque de la Unidad 2 con la sección 2.1.1 (intervalos de confianza para una media), con 14 ejercicios de práctica resueltos a mano. Ninguno de los dos se transcribe acá, quedan en sus fuentes archivadas — el resumen accionable está en el repaso enlazado arriba.
+> Guía del profesor Elvis Mejías Ramírez (MA-3405, II Semestre 2026). Cubre la Unidad 1 (Introducción a la Inferencia Estadística) y la Unidad 2 (Estimación para una Población). El archivo `Estadistica_guia-unidad1-resuelta-semana1_2026-08-07.pdf` es la misma guía de Unidad 1 trabajada en la sesión de Semana 1, con las respuestas propias a los ejercicios de práctica ya resueltas a mano. `Estadistica_guia-unidad2-resuelta-semana2_2026-08-18.pdf` es el mismo tipo de material pero de Semana 2: cierre de los ejercicios de máxima verosimilitud (problemas 8-17) y arranque de la Unidad 2 con la sección 2.1.1 (intervalos de confianza para una media), con 14 ejercicios de práctica resueltos a mano. `Estadistica_guia-unidad2-resuelta-semana3_2026-08-21.pdf` continúa la Unidad 2 en Semana 3: sección 2.1.2 (IC para una proporción, 10 ejercicios resueltos) y 2.1.3 (IC para una varianza, 10 ejercicios resueltos). Ninguno se transcribe acá, quedan en sus fuentes archivadas — el resumen accionable está en el repaso enlazado arriba (semanas 1-2 únicamente; semana 3 todavía no entra en el Quiz 1, ver [[Cursos/Estadistica/entregas]]).
 
 ## 1. Introducción a la Inferencia Estadística
 
@@ -88,7 +89,7 @@ Tamaño de muestra para radio $\le r$: $n \ge \left(\frac{z_{\alpha/2}\cdot\sigm
 | Muestras grandes ($n\hat p\ge5$ y $n\hat q\ge5$) | $\hat p \pm z_{\alpha/2}\cdot\sqrt{\hat p\hat q/n}$ |
 | Muestras pequeñas | empírico vía binomial: $P(B\le n\hat p \mid p=p_i)=1-\alpha/2$, $P(B<n\hat p \mid p=p_s)=\alpha/2$ |
 
-Tamaño de muestra: $n \ge \left(\frac{z_{\alpha/2}\cdot\sqrt{\hat p\hat q}}{r}\right)^2$.
+Tamaño de muestra: $n \ge \left(\frac{z_{\alpha/2}\cdot\sqrt{\hat p\hat q}}{r}\right)^2$. **Si el enunciado no da ningún $\hat p$ previo para este cálculo** (ej. "¿de qué tamaño debe ser la muestra... sin importar el verdadero valor de p?"), se usa $\hat p=\hat q=0.5$ — es el caso que maximiza $\hat p\hat q$ y por lo tanto el $n$ resultante, garantizando el radio pedido sin importar el valor real de $p$.
 
 **Varianza** (requiere $X$ normal, $\chi^2 = \frac{(n-1)S^2}{\sigma^2}\sim\chi^2_{n-1}$):
 
@@ -124,3 +125,5 @@ Tamaño de muestra: $n \ge \left(\frac{z_{\alpha/2}\cdot\sqrt{\hat p\hat q}}{r}\
 ## Ejercicios de práctica
 
 La guía incluye baterías extensas de ejercicios (resueltos y sin resolver) por cada tema: conceptos preliminares, distribuciones binomial/normal/t/chi-cuadrado, estimación puntual y verosimilitud, e IC/pruebas de hipótesis para media, proporción y varianza. Quedan en el PDF fuente — no se transcriben acá para no duplicar contenido que ya está completo y ordenado en el original.
+
+**Semana 3 (IC proporción y varianza, resueltos a mano):** 10 ejercicios de IC para una proporción — incluyen los dos casos (muestra chica vía binomial / muestra grande vía normal), despejar tamaño de muestra con y sin $\hat p$ conocido, y "trabajar la fórmula al revés" (dado un IC, hallar $\hat p$, $n$ o el nivel de confianza usado). 10 ejercicios de IC para una varianza/desviación estándar — mismo patrón de "afirmación cae o no dentro del IC" que en semana 2, más varios de "al revés" (dado un extremo del IC, hallar el otro; dado el IC, hallar $s^2$ o el nivel de confianza). Quedan completos en `_fuentes/Estadistica_guia-unidad2-resuelta-semana3_2026-08-21.pdf`.
