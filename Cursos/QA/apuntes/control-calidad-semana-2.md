@@ -11,7 +11,7 @@ tags: [calidad, control-de-calidad, aseguramiento-calidad, defectos, fallo-error
 
 Aseguramiento de la calidad del software, II Semestre 2026. Elaborado por Marlen Treviño, modificado por Marcos Rodríguez (ma.rodriguez@itcr.ac.cr).
 
-Ver también: [[Cursos/QA/temario]] · [[Cursos/QA/entregas]] · [[Cursos/QA/apuntes/calidad-semana-1|Calidad — Semana 1]]
+Ver también: [[Cursos/QA/temario]] · [[Cursos/QA/entregas]] · [[Cursos/QA/apuntes/calidad-semana-1|Calidad — Semana 1]] · [[Cursos/QA/repasos/quiz-2-semanas-2-3|Repaso — Quiz 2 (Semanas 2-3)]]
 
 ## Por qué importa el control de calidad — casos reales
 

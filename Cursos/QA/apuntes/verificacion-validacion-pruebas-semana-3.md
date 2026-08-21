@@ -11,7 +11,7 @@ tags: [verificacion, validacion, pruebas, caso-de-prueba, proceso-de-pruebas, si
 
 Aseguramiento de la calidad del software, II Semestre 2026. Elaborado por Marlen Treviño, modificado por Marcos Rodríguez (ma.rodriguez@itcr.ac.cr).
 
-Ver también: [[Cursos/QA/temario]] · [[Cursos/QA/entregas]] · [[Cursos/QA/apuntes/control-calidad-semana-2|Control de Calidad — Semana 2]] · [[Cursos/QA/apuntes/plantillas-fichas-caso-prueba-defectos|Plantillas — Ficha de Caso de Prueba y Defecto]]
+Ver también: [[Cursos/QA/temario]] · [[Cursos/QA/entregas]] · [[Cursos/QA/apuntes/control-calidad-semana-2|Control de Calidad — Semana 2]] · [[Cursos/QA/apuntes/plantillas-fichas-caso-prueba-defectos|Plantillas — Ficha de Caso de Prueba y Defecto]] · [[Cursos/QA/repasos/quiz-2-semanas-2-3|Repaso — Quiz 2 (Semanas 2-3)]]
 
 ## Verificación y Validación (V&V)
 
