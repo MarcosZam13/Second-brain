@@ -85,6 +85,7 @@ Evaluar la calidad del software de Firefly III mediante la aplicación de un pro
 
 ## Pendiente
 
+- [ ] Construir árbol de problemas y árbol de objetivos (medios/fines) siguiendo [[Cursos/QA/apuntes/taller-arbol-problemas-objetivos]]; formalizar los objetivos específicos con tabla de metas e indicadores en el formato del taller
 - [ ] Revisión y validación del equipo de QA sobre requerimientos y objetivos
 - [ ] Buscar y citar mínimo 3 fuentes IEEE para contextualizar el problema social
 - [ ] Confirmar con la profesora si aplica formato IEEE o APA para este entregable específico (la guía institucional es inconsistente entre documentos — ver [[Cursos/QA/apuntes/proyecto-qa-guia]])
