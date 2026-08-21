@@ -3,15 +3,15 @@ proyecto: Tacha
 tema: DESIGN.md — guía de diseño para generación de interfaz con Stitch AI
 fecha: 2026-08-18
 tipo: documentacion
-estado: completo para generación en Stitch — cubre navegación (incluido el funnel público), pantallas, componentes y prompts de las 19 pantallas del alcance v1 (incluye grupos de productos, mis productos personalizados y landing/about/auth extendida, 2026-08-18)
+estado: completo para generación en Stitch — cubre navegación (incluido el funnel público), pantallas, componentes y prompts de las 22 pantallas del alcance v1 (incluye grupos de productos, mis productos personalizados, landing/about/auth extendida del 2026-08-18, y Mi inventario/Configuración/Perfil agregadas el 2026-08-19)
 tags: [diseño, ui-ux, stitch, tacha]
 ---
 
 # DESIGN.md — Tacha
 
-Ver también: [[Proyectos/Tacha/README|README]] · [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] (v2.1, secciones 3, 4, 6 y 9) · [[Proyectos/Tacha/historias-usuario|historias-usuario.md]] (v1.0) · [[Proyectos/Tacha/mockups/mockup-web-v2.html|mockups/mockup-web-v2.html]] · `Tacha_documentacion-v2.1.docx` (versión Word)
+Ver también: [[Proyectos/Tacha/README|README]] · [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] (v2.1, secciones 3, 4, 6 y 9) · [[Proyectos/Tacha/historias-usuario|historias-usuario.md]] (v2.0) · [[Proyectos/Tacha/mockups/mockup-web-v2.html|mockups/mockup-web-v2.html]] · `Tacha_documentacion-v2.1.docx` (versión Word)
 
-**Propósito de este documento:** dar a quien genere pantallas en Stitch AI (hoy: principalmente Melany — diseño UI, y Marcos — listas/PWA) el contexto completo — personalidad, tokens, navegación, inventario de pantallas, componentes y un prompt listo por pantalla — para que nada quede a medio definir. Cubre las 19 pantallas del alcance v1 completo de [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] (sección 3), incluidas [[Proyectos/Tacha/documentacion-v1#4.11 Grupos de productos (aceptado 2026-08-18, sujeto a confirmación del equipo)|grupos de productos]], [[Proyectos/Tacha/documentacion-v1#4.5.1 Mis productos personalizados (aceptado 2026-08-18, sujeto a confirmación del equipo)|mis productos personalizados]] y la [[Proyectos/Tacha/documentacion-v1#4.12 Acceso público y autenticación extendida (landing, about, auth)|landing pública y autenticación extendida]] que pidió el profesor, ya todas parte del alcance de trabajo. Es más fácil quitar o ajustar algo de acá después que generarlo desde cero a mitad de la sesión de Stitch.
+**Propósito de este documento:** dar a quien genere pantallas en Stitch AI (hoy: principalmente Melany — diseño UI, y Marcos — listas/PWA) el contexto completo — personalidad, tokens, navegación, inventario de pantallas, componentes y un prompt listo por pantalla — para que nada quede a medio definir. Cubre las 22 pantallas del alcance v1 completo de [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] (sección 3), incluidas [[Proyectos/Tacha/documentacion-v1#4.11 Grupos de productos (aceptado 2026-08-18, confirmado por el equipo 2026-08-19)|grupos de productos]], [[Proyectos/Tacha/documentacion-v1#4.5.1 Mis productos personalizados (aceptado 2026-08-18, confirmado por el equipo 2026-08-19)|mis productos personalizados]], la [[Proyectos/Tacha/documentacion-v1#4.12 Acceso público y autenticación extendida (landing, about, auth)|landing pública y autenticación extendida]] que pidió el profesor, y Mi inventario/Configuración/Perfil agregadas el 2026-08-19, ya todas parte del alcance de trabajo. Es más fácil quitar o ajustar algo de acá después que generarlo desde cero a mitad de la sesión de Stitch.
 
 ## 1. Personalidad de marca
 
@@ -64,7 +64,7 @@ Tomados directamente de `mockup-web-v2.html` (ya construido) — reusar tal cual
 
 ### 2.4 Forma, espaciado, iconos
 
-- Checkboxes cuadrados redondeados (~7px de radio), nunca circulares.
+- Checkboxes cuadrados redondeados (~7px de radio), nunca circulares. **Ajustado 2026-08-19:** el checkbox es el indicador visual de estado (tachado/pendiente), pero deja de ser el único punto táctil — toda la fila del producto (`item-row`) es tocable para tachar/destachar, tanto en la lista normal como en modo compra.
 - Cards con radio ~14px, chips/badges con radio ~8-20px (pill para chips de estado, más cerrado para badges inline).
 - Un solo color de acento saturado (teal) para acciones/estados activos; terracota reservado para etiquetas contextuales y montos — nunca compiten entre sí en la misma pantalla.
 - Iconografía outline consistente, un solo grosor de trazo — **sin emojis** en ninguna pantalla de producto.
@@ -81,7 +81,7 @@ Agregado 2026-08-18 — requerimiento del profesor + [[Proyectos/Tacha/historias
 
 Landing y About comparten navbar y footer públicos (no el sidebar/tabs de las secciones 3.1/3.2) — son las únicas pantallas de la app pensadas para verse sin ninguna sesión activa.
 
-Decisión de navegación (para que Stitch genere pantallas dentro de un mismo shell, no sueltas). El mockup original ya proponía 6 ítems de sidebar sin ubicar todavía [[Proyectos/Tacha/documentacion-v1#4.11 Grupos de productos (aceptado 2026-08-18, sujeto a confirmación del equipo)|grupos]], [[Proyectos/Tacha/documentacion-v1#4.5.1 Mis productos personalizados (aceptado 2026-08-18, sujeto a confirmación del equipo)|mis productos]] ni el [[Proyectos/Tacha/documentacion-v1#4.10 Inventario doméstico|inventario]] — se resuelve así, agrupando por lo que el usuario va a *hacer* en cada sección en vez de sumar un ítem de sidebar por feature:
+Decisión de navegación (para que Stitch genere pantallas dentro de un mismo shell, no sueltas). El mockup original ya proponía 6 ítems de sidebar sin ubicar todavía [[Proyectos/Tacha/documentacion-v1#4.11 Grupos de productos (aceptado 2026-08-18, confirmado por el equipo 2026-08-19)|grupos]], [[Proyectos/Tacha/documentacion-v1#4.5.1 Mis productos personalizados (aceptado 2026-08-18, confirmado por el equipo 2026-08-19)|mis productos]] ni el [[Proyectos/Tacha/documentacion-v1#4.10 Inventario doméstico|inventario]] — se resuelve así, agrupando por lo que el usuario va a *hacer* en cada sección en vez de sumar un ítem de sidebar por feature:
 
 ### 3.1 Desktop — sidebar fijo (6 ítems)
 
@@ -104,21 +104,21 @@ Decisión de navegación (para que Stitch genere pantallas dentro de un mismo sh
 
 ## 4. Inventario de pantallas (alcance v1 completo)
 
-Las 19 pantallas del alcance de [[Proyectos/Tacha/documentacion-v1#3. Alcance del proyecto (v1)|documentacion-v1.md sección 3]] — todas con prompt listo en la sección 7, ninguna queda para definir "después".
+Las 22 pantallas del alcance de [[Proyectos/Tacha/documentacion-v1#3. Alcance del proyecto (v1)|documentacion-v1.md sección 3]] — todas con prompt listo en la sección 7, ninguna queda para definir "después". (Eran 19 hasta el 2026-08-18; el 2026-08-19, al revisar el desglose completo de historias de usuario, se sumaron Mi inventario, Configuración y Perfil de usuario — huecos reales entre lo que ya estaba en los requerimientos y lo que tenía pantalla propia.)
 
 | # | Pantalla | Origen | Prioridad hoy | Referencia funcional |
 |---|---|---|---|---|
 | 1 | Onboarding — con/sin household | Nueva | Alta | [[Proyectos/Tacha/documentacion-v1#4.1 Gestión de usuarios, familias y perfiles|4.1]] |
 | 2 | Catálogo — producto madre estilo Uber Eats | Nueva | Alta | [[Proyectos/Tacha/documentacion-v1#4.5 Catálogo de productos y categorías|4.5]] |
-| 3 | Mis productos personalizados | Nueva | Alta | [[Proyectos/Tacha/documentacion-v1#4.5.1 Mis productos personalizados (aceptado 2026-08-18, sujeto a confirmación del equipo)|4.5.1]] |
+| 3 | Mis productos personalizados | Nueva | Alta | [[Proyectos/Tacha/documentacion-v1#4.5.1 Mis productos personalizados (aceptado 2026-08-18, confirmado por el equipo 2026-08-19)|4.5.1]] |
 | 4 | "¿Qué hiciste?" — resolución de faltante de receta al tachar | Nueva | Alta | [[Proyectos/Tacha/documentacion-v1#4.9.1 Reconciliación de cantidades al combinar listas (decisión 2026-08-16, alcance corregido 2026-08-18)|4.9.1]] |
 | 5 | Edición rápida de item (pre-compra) | Nueva | Alta | [[Proyectos/Tacha/documentacion-v1#4.2 Lista general y dashboard financiero|4.2]] |
 | 6 | Edición rápida de item comprado (tachado) | Nueva | Alta | [[Proyectos/Tacha/documentacion-v1#4.6 Historial de compras|4.6]] |
-| 7 | Mis grupos — listar/crear/editar | Nueva | Alta | [[Proyectos/Tacha/documentacion-v1#4.11 Grupos de productos (aceptado 2026-08-18, sujeto a confirmación del equipo)|4.11]] |
+| 7 | Mis grupos — listar/crear/editar | Nueva | Alta | [[Proyectos/Tacha/documentacion-v1#4.11 Grupos de productos (aceptado 2026-08-18, confirmado por el equipo 2026-08-19)|4.11]] |
 | 8 | Lista general + resumen financiero + presupuesto estimado | Existe (mockup v2), ajustar | Alta | [[Proyectos/Tacha/documentacion-v1#4.2.1 Interacciones concretas de la fila de producto (detallado 2026-08-18, desde el desglose de historias de usuario)|4.2.1]] |
 | 9 | Landing pública (Mirones) | Nueva | Alta | [[Proyectos/Tacha/documentacion-v1#4.12 Acceso público y autenticación extendida (landing, about, auth)|4.12]] |
 | 10 | Historial por día/semana/mes, total editable, filtros | Nueva | Media | [[Proyectos/Tacha/documentacion-v1#4.6 Historial de compras|4.6]] |
-| 11 | Inventario doméstico — sugerencias ligeras | Nueva | Media | [[Proyectos/Tacha/documentacion-v1#4.10 Inventario doméstico|4.10]] |
+| 11 | Inventario doméstico — widget de sugerencias en General | Nueva | Media | [[Proyectos/Tacha/documentacion-v1#4.10 Inventario doméstico|4.10]] |
 | 12 | Finanzas — dashboard detallado | Existe (mockup v2), ajustar | Media | [[Proyectos/Tacha/documentacion-v1#4.2 Lista general y dashboard financiero|4.2]] |
 | 13 | Listas privadas + calendario | Existe (mockup v2) | Baja | [[Proyectos/Tacha/documentacion-v1#4.4 Listas privadas (independientes del household)|4.4]] |
 | 14 | Recetas + planificador semanal | Existe (mockup v2) | Baja | [[Proyectos/Tacha/documentacion-v1#4.9 Recetas y planificador semanal de comidas|4.9]] |
@@ -127,6 +127,9 @@ Las 19 pantallas del alcance de [[Proyectos/Tacha/documentacion-v1#3. Alcance de
 | 17 | About (misión/visión, contacto) | Nueva | Baja | [[Proyectos/Tacha/documentacion-v1#4.12 Acceso público y autenticación extendida (landing, about, auth)|4.12]] |
 | 18 | Verificación de correo | Nueva | Baja | [[Proyectos/Tacha/documentacion-v1#4.12 Acceso público y autenticación extendida (landing, about, auth)|4.12]] |
 | 19 | Recuperación de contraseña | Nueva | Baja | [[Proyectos/Tacha/documentacion-v1#4.12 Acceso público y autenticación extendida (landing, about, auth)|4.12]] |
+| 20 | Mi inventario doméstico (vencimientos) | Nueva (2026-08-19) | Media | [[Proyectos/Tacha/documentacion-v1#4.10 Inventario doméstico|4.10]] |
+| 21 | Configuración (encargado por lista) | Nueva (2026-08-19) | Baja | [[Proyectos/Tacha/documentacion-v1#4.13 Configuración (agregado 2026-08-19)|4.13]] |
+| 22 | Perfil de usuario | Nueva (2026-08-19) | Baja | [[Proyectos/Tacha/documentacion-v1#4.1 Gestión de usuarios, familias y perfiles|4.1]] |
 
 Orden recomendado para generar hoy en Stitch: primero las 9 de prioridad Alta (incluye ahora la landing, porque es lo que ve todo visitante antes que cualquier otra cosa), luego ajustar las 3 "Existe (mockup v2)" contra los tokens/patrones nuevos de catálogo y categoría, y dejar Auth/household/About/verificación/recuperación para el final — son las más genéricas y las que menos definen la identidad del producto.
 
@@ -139,7 +142,7 @@ Ya identificados como pendientes de extraer en [[Proyectos/Tacha/flujo-git-table
 - **Modal**
 - **Spinner**
 - **Checkbox** (cuadrado redondeado — ver sección 2.4)
-- **item-row** (fila de producto en lista: checkbox + nombre + meta + badge)
+- **item-row** (fila de producto en lista: checkbox + nombre + meta + badge). **Ajustado 2026-08-19:** toda la fila es el área táctil para tachar, no solo el checkbox — el checkbox queda como indicador de estado.
 - **category-label** (encabezado de sección/categoría, uppercase, tracking amplio)
 - **stat-card** (dashboard financiero)
 - **chip / badge** (estado, tamaño, categoría)
@@ -147,14 +150,20 @@ Ya identificados como pendientes de extraer en [[Proyectos/Tacha/flujo-git-table
 
 Componentes nuevos que salen de las decisiones del 2026-08-16 y del 2026-08-18 (no existían antes, definir su primer diseño en esta ronda de Stitch):
 
-- **catalog-card** — tarjeta de resultado de búsqueda: imagen del **producto madre + tamaño** (ej. "Leche — 1L"), sin marca en la tarjeta misma — la marca ya no es parte de la identidad de la variante ([[Proyectos/Tacha/documentacion-v1#4.5 Catálogo de productos y categorías|4.5]]). Bloque repetible del catálogo estilo Uber Eats y también de **mis productos personalizados** ([[Proyectos/Tacha/documentacion-v1#4.5.1 Mis productos personalizados (aceptado 2026-08-18, sujeto a confirmación del equipo)|4.5.1]]), con una variante que agrega un badge "Agregado por mí".
+- **catalog-card** — tarjeta de resultado de búsqueda: imagen del **producto madre + tamaño** (ej. "Leche — 1L"), sin marca en la tarjeta misma — la marca ya no es parte de la identidad de la variante ([[Proyectos/Tacha/documentacion-v1#4.5 Catálogo de productos y categorías|4.5]]). Bloque repetible del catálogo estilo Uber Eats y también de **mis productos personalizados** ([[Proyectos/Tacha/documentacion-v1#4.5.1 Mis productos personalizados (aceptado 2026-08-18, confirmado por el equipo 2026-08-19)|4.5.1]]), con una variante que agrega un badge "Agregado por mí".
 - **product-detail-view** — al tocar un `catalog-card`, vista de detalle con: listado corto de marcas disponibles (logo + nombre) y, al lado de cada supermercado rastreado, su ícono + precio aproximado (rango, no promedio — ver [[Proyectos/Tacha/documentacion-v1#4.8 Sugerencias de dónde comprar|4.8]]). Es donde vive toda la información de marca que se sacó de la tarjeta.
 - **recipe-status-tag** — tag pasivo, no interactivo, bajo un item de la lista cuando una receta o el plan semanal necesitan más cantidad de la que ya está apuntada (ej. "+ 500ml necesarios para Receta X"). No dispara ninguna decisión por sí solo — la decisión ocurre al tachar (ver `list-item-edit-sheet` variante post-compra). Ver [[Proyectos/Tacha/documentacion-v1#4.9.1 Reconciliación de cantidades al combinar listas (decisión 2026-08-16, alcance corregido 2026-08-18)|4.9.1]].
 - **list-item-edit-sheet** — panel/hoja de edición rápida sobre un `item-row`, con dos variantes: **pre-compra** (cambiar cantidad, variante/tamaño, o quitar el item) y **post-compra/tachado** (cantidad realmente comprada + dónde + opcionalmente marca comprada, campo siempre opcional). Cuando el item tachado tiene un `recipe-status-tag` pendiente, la variante post-compra agrega el paso "¿Qué hiciste?" con acciones rápidas: "Agregué otra igual" / "Cambié a otra presentación" / "Ya tenía suficiente". Ambas variantes en 1-2 toques, sin salir de la lista.
 - **price-disclaimer-banner** — aviso persistente y no intrusivo de "precios estimados, no garantizados por ningún supermercado" ([[Proyectos/Tacha/documentacion-v1#4.6 Historial de compras|4.6]]) — debe aparecer cerca de cualquier precio sugerido sin volverse ruido visual repetido en cada pantalla.
 - **inventory-suggestion-chip** — sugerencia de un toque ("¿Se te acabó la leche?") con confirmar/descartar, nunca un formulario ([[Proyectos/Tacha/documentacion-v1#4.10 Inventario doméstico|4.10]]).
-- **group-card** — tarjeta de un grupo de productos guardado (nombre, cantidad de productos, ej. "Mercado quincenal — 8 productos"), con botón directo "Agregar a lista". Bloque repetible de "Mis grupos" ([[Proyectos/Tacha/documentacion-v1#4.11 Grupos de productos (aceptado 2026-08-18, sujeto a confirmación del equipo)|4.11]]).
+- **group-card** — tarjeta de un grupo de productos guardado (nombre, cantidad de productos, ej. "Mercado quincenal — 8 productos"), con botón directo "Agregar a lista". Bloque repetible de "Mis grupos" ([[Proyectos/Tacha/documentacion-v1#4.11 Grupos de productos (aceptado 2026-08-18, confirmado por el equipo 2026-08-19)|4.11]]).
 - **custom-product-badge** — badge pequeño "Agregado por mí" sobre `catalog-card` cuando el producto es personalizado (`source: manual`), para distinguirlo visualmente del catálogo scrapeado.
+
+Componentes nuevos que salen de la ampliación del 2026-08-19 (inventario real + configuración):
+
+- **expiry-chip** — chip de un solo toque para indicar cuánto le va a durar un producto ("Vence en pocos días" / "2-4 semanas" / "1-3 meses" / "No vence"), usado tanto al tachar un producto como en "Mi inventario" ([[Proyectos/Tacha/documentacion-v1#4.10 Inventario doméstico|4.10]]). Nunca un selector de fecha exacta — coherente con el resto del inventario, todo opcional y de un toque.
+- **inventory-item-row** — fila de "Mi inventario" (7.10b): nombre + foto pequeña + cuánto le queda (si hay fecha) + acción "Ya se acabó". Reusa la tipografía y el espaciado de `item-row`, pero sin checkbox de tachado (no es una lista de compras).
+- **list-settings-toggle** — interruptor simple por lista en la pantalla de Configuración (7.20), hoy solo para "Encargado" — pensado para poder sumar más ajustes por lista sin rediseñar el patrón.
 
 ## 6. Estados a cubrir por pantalla
 
@@ -215,15 +224,19 @@ Cada prompt asume que Stitch ya tiene cargada la personalidad (sección 1), los 
 
 ### 7.8 Lista general + resumen financiero
 
-> Ajuste sobre la pantalla ya prototipada en `mockup-web-v2.html` ("Desktop — Lista general + dashboard financiero"). Mantener el shell de sidebar (sección 3.1) y el patrón de `item-row` con checkbox cuadrado redondeado, siguiendo la jerarquía visual de 7.4. Agregar, arriba de la lista de productos: un botón "Agregar desde grupo" (abre 7.6) junto al buscador/agregar producto del catálogo, y — si el usuario tiene sugerencias pendientes de inventario — una fila horizontal descartable de `inventory-suggestion-chip` (ver 7.10) justo debajo del encabezado, antes de la lista de productos por categoría. El resumen de la cabecera muestra el **presupuesto estimado** como número grande editable (Fraunces, ej. "₡50,000 esta semana", con lápiz para editar) junto a 2-3 stat-cards compactos; el detalle completo del dashboard vive en Finanzas (7.11).
+> Ajuste sobre la pantalla ya prototipada en `mockup-web-v2.html` ("Desktop — Lista general + dashboard financiero"). Mantener el shell de sidebar (sección 3.1) y el patrón de `item-row` con checkbox cuadrado redondeado, siguiendo la jerarquía visual de 7.4. **Ajustado 2026-08-19: toda la fila del producto es tocable para tachar/destachar, no solo el checkbox** — el checkbox sigue mostrando el estado visualmente, pero el área táctil es la fila completa (excepto los controles de cantidad). Agregar, arriba de la lista de productos: un botón "Agregar desde grupo" (abre 7.6) junto al buscador/agregar producto del catálogo, y — si el usuario tiene sugerencias pendientes de inventario — una fila horizontal descartable de `inventory-suggestion-chip` (ver 7.10) justo debajo del encabezado, antes de la lista de productos por categoría. El resumen de la cabecera muestra el **presupuesto estimado** como número grande editable (Fraunces, ej. "₡50,000 esta semana", con lápiz para editar) junto a 2-3 stat-cards compactos; el detalle completo del dashboard vive en Finanzas (7.11). Un botón "Iniciar compra" en la cabecera lleva al modo compra: primero un selector simple de supermercado, y después la misma pantalla de lista (mismo tachado de fila completa) sin controles adicionales.
 
 ### 7.9 Historial de compras con total editable
 
 > Sub-tab "Historial" dentro de "Finanzas" (junto a "Dashboard", ver 7.11 para el shell compartido). Selector de periodo arriba (Día / Semana / Mes, como pills, la seleccionada en teal sólido). Debajo, el total del periodo en tipografía Fraunces grande, con un ícono de lápiz pequeño al lado para editarlo directamente (sin entrar producto por producto). Debajo del total, un `price-disclaimer-banner` discreto tipo "Los precios son estimados, Tacha no está afiliado a ningún supermercado". Debajo, lista de sesiones de compra del periodo (fecha, supermercado, monto), cada una también con su propio total editable inline. Sesiones sin total ingresado deben distinguirse visualmente (ej. badge terracota "Sin total") sin sentirse como un error.
 
-### 7.10 Inventario doméstico (sugerencias ligeras)
+### 7.10 Inventario doméstico — widget de sugerencias
 
-> Sección opcional dentro de la vista General (ver 7.8), nunca una pantalla obligatoria de por sí. Título discreto: "¿Se te está acabando algo?". Debajo, una fila horizontal scrolleable de `inventory-suggestion-chip`, cada uno con el nombre del producto y dos acciones rápidas: check (confirmar que sí, agregar a la lista) y X (descartar por ahora). Sin formularios, sin fechas, sin cantidades que ingresar a mano. Debe poder ignorarse completamente sin bloquear ninguna otra parte de la pantalla — tratarlo visualmente como una sugerencia opcional, no como una tarea pendiente.
+> Sección opcional dentro de la vista General (ver 7.8), nunca una pantalla obligatoria de por sí. Título discreto: "¿Se te está acabando algo?". Debajo, una fila horizontal scrolleable de `inventory-suggestion-chip`, cada uno con el nombre del producto y dos acciones rápidas: check (confirmar que sí, agregar a la lista) y X (descartar por ahora). Sin formularios, sin fechas obligatorias. Debe poder ignorarse completamente sin bloquear ninguna otra parte de la pantalla — tratarlo visualmente como una sugerencia opcional, no como una tarea pendiente. Un enlace discreto "Ver mi inventario completo" al final de la fila lleva a 7.10b.
+
+### 7.10b Mi inventario doméstico (ampliado 2026-08-19)
+
+> Pantalla propia, accesible desde "Más → Mi inventario" (mobile) o desde el enlace del widget (desktop, 7.10) — complementa al widget, no lo reemplaza. Personalidad cálida y hogareña, misma paleta y tipografía del resto de la app. Productos agrupados en tres secciones con encabezado tipo `category-label`: "Vence pronto" (terracota, urgencia visual sutil), "Este mes" y "Sin fecha estimada". Cada producto en una tarjeta o fila compacta con nombre, foto pequeña, y cuánto le queda si tiene fecha (ej. "vence en 3 días"). Cada fila tiene dos acciones: "Ya se acabó" (lo saca del inventario) y un ícono de editar que abre los mismos chips rápidos de vencimiento ("Vence en pocos días" / "2-4 semanas" / "1-3 meses" / "No vence") — nunca un selector de fecha exacta. Botón de cabecera "+ Agregar a mi inventario" que abre un flujo corto: buscar producto (mismo patrón que el catálogo) + los mismos chips rápidos, opcionales. Estado vacío: ilustración simple + "Todavía no tenemos nada estimado — se va llenando solo con lo que vas comprando".
 
 ### 7.11 Finanzas — dashboard detallado
 
@@ -243,7 +256,7 @@ Cada prompt asume que Stitch ya tiene cargada la personalidad (sección 1), los 
 
 ### 7.15 Crear o unirse a un household
 
-> Pantalla posterior a elegir "Crear o unirme a un household" en el onboarding (7.7). Dos acciones igual de visibles: "Crear un household nuevo" (nombre del household) y "Unirme con una invitación" (campo para pegar link o código de `household_invite_links`). Tono cálido y simple, sin sensación de configuración técnica — 1-2 campos por acción, nada más.
+> Pantalla posterior a elegir "Crear o unirme a un household" en el onboarding (7.7). Dos acciones igual de visibles: "Crear un household nuevo" (nombre del household) y "Unirme con una invitación" (campo para pegar link o código). Tono cálido y simple, sin sensación de configuración técnica — 1-2 campos por acción, nada más. **Paso adicional (agregado 2026-08-19) si el usuario ya tenía lista general y/o sublistas propias antes de unirse:** tras confirmar la creación o la unión, una pantalla corta pregunta "¿Qué querés hacer con tu lista actual?" con dos opciones igual de válidas como cards grandes tocables — "Mantenerla solo para mí" y "Compartirla con mi household" — con un texto breve aclarando que la decisión aplica a todas sus listas personales de una vez y no vuelve a preguntarse para listas que cree después.
 
 ### 7.16 Landing pública (Mirones)
 
@@ -260,6 +273,14 @@ Cada prompt asume que Stitch ya tiene cargada la personalidad (sección 1), los 
 ### 7.19 Recuperación de contraseña
 
 > Dos pantallas del mismo flujo, ver [[Proyectos/Tacha/documentacion-v1#4.12 Acceso público y autenticación extendida (landing, about, auth)|4.12]] (HU-28, HU-29). (a) Solicitud: formulario de un solo campo (correo) con botón "Enviar enlace de recuperación"; al enviar, siempre el mismo mensaje genérico de confirmación, sin revelar si el correo existe. (b) Nueva contraseña: accesible solo desde el link del correo — campos "Nueva contraseña" / "Repetir nueva contraseña" con la misma barra de fortaleza de 7.14, validación de coincidencia en tiempo real, y manejo de link expirado (mensaje + botón para reenviar la solicitud en vez de mostrar el formulario).
+
+### 7.20 Configuración (nueva 2026-08-19)
+
+> Pantalla accesible desde el perfil, ver [[Proyectos/Tacha/documentacion-v1#4.13 Configuración (agregado 2026-08-19)|4.13]]. Nada elaborado: título "Configuración", debajo una lista de las listas del usuario (general, sus sublistas, sus listas privadas) cada una con un interruptor simple "Encargado" (apagado por defecto), y un texto secundario breve explicando qué hace ("Permite asignar quién debe comprar cada producto en esta lista"). Sin secciones ni categorías adicionales por ahora — es el primer ajuste de lo que puede crecer después.
+
+### 7.21 Perfil de usuario (nueva 2026-08-19)
+
+> Pantalla accesible desde el sidebar (desktop) o "Más → Perfil" (mobile), ver [[Proyectos/Tacha/documentacion-v1#4.1 Gestión de usuarios, familias y perfiles|4.1]]. Cabecera con foto de perfil (o iniciales si no hay foto) y nombre, con opción de editar ambos. Debajo, accesos a "Cambiar contraseña" y a "Configuración" (7.20). Si el usuario pertenece a un household, una tarjeta "Mi household" con el nombre del household y acceso directo a gestionarlo (invitar, ver familiares, salir); si no pertenece a ninguno, un CTA discreto para crear o unirse a uno. Al final, "Cerrar sesión" como acción secundaria, siempre visible.
 
 ## 8. Cómo usar este documento con Stitch AI
 

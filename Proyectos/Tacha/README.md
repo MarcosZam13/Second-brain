@@ -10,7 +10,7 @@ App web colaborativa de listas de compras para grupos (familias o amigos): lista
 
 ## Stack
 
-Next.js · Supabase (Postgres + Auth + Realtime + RLS) vía PostgREST/RPC · TanStack Query · Tailwind CSS · PWA instalable. Next.js y Tailwind se definieron unilateralmente (Marcos) solo para poder crear el repo y arrancar la colaboración — quedan sujetos a confirmación en la primera reunión de equipo. Detalle y justificación en la [[Proyectos/Tacha/documentacion-v1#7. Arquitectura técnica propuesta|sección 7 de la documentación]].
+Next.js · Supabase (Postgres + Auth + Realtime + RLS) vía PostgREST/RPC · TanStack Query · Tailwind CSS · PWA instalable. Next.js y Tailwind se propusieron unilateralmente (Marcos) para poder crear el repo y arrancar la colaboración, y quedaron **confirmados por todo el equipo en la reunión del 2026-08-16** junto con el resto del stack. Detalle y justificación en la [[Proyectos/Tacha/documentacion-v1#7. Arquitectura técnica propuesta|sección 7 de la documentación]].
 
 ## Pendiente antes de empezar a codear
 
@@ -22,10 +22,10 @@ Ver [[Proyectos/Tacha/documentacion-v1#10. Pendientes de definición|sección 10
 
 ## Dónde está cada cosa
 
-- [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] — documento de proyecto completo, ahora en v2.1 (resumen, requerimientos funcionales/no funcionales, modelo de datos, arquitectura, dirección de diseño, división de trabajo).
-- `Tacha_documentacion-v2.1.docx` — versión Word de `documentacion-v1.md`, para compartir con el equipo/profesor fuera de Obsidian/GitHub. El nombre de archivo lleva el número de versión del contenido (v2.1), no el de la nota (`documentacion-v1.md` mantiene su nombre de archivo original en el vault por las wikilinks).
-- [[Proyectos/Tacha/historias-usuario|historias-usuario.md]] — historias de usuario y criterios de aceptación (v1.0, borrador), desglosando los requerimientos de `documentacion-v1.md` en épicas/HU/CA.
-- [[Proyectos/Tacha/DESIGN|DESIGN.md]] — guía de diseño (personalidad, tokens, navegación, inventario de las 19 pantallas del alcance v1, componentes, estados y un prompt listo por pantalla) para generar interfaz en Stitch AI.
+- [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] — documento de proyecto completo, ahora en v2.2 (resumen, requerimientos funcionales/no funcionales, modelo de datos, arquitectura, dirección de diseño, división de trabajo).
+- `Tacha_documentacion-v2.1.docx` — versión Word de `documentacion-v1.md`, para compartir con el equipo/profesor fuera de Obsidian/GitHub. **Desactualizada** respecto al contenido actual (v2.2) — pendiente regenerar. El nombre de archivo lleva el número de versión del contenido, no el de la nota (`documentacion-v1.md` mantiene su nombre de archivo original en el vault por las wikilinks).
+- [[Proyectos/Tacha/historias-usuario|historias-usuario.md]] — historias de usuario y criterios de aceptación (v2.2, completo y numerado — todos los módulos del alcance v1 desglosados, con síntesis de flujo de usuario al final), desglosando los requerimientos de `documentacion-v1.md` en épicas/HU/CA. Lista para importar a JIRA; pendiente el análisis de complejidad/viabilidad en 12 semanas con el equipo.
+- [[Proyectos/Tacha/DESIGN|DESIGN.md]] — guía de diseño (personalidad, tokens, navegación, inventario de las 22 pantallas del alcance v1, componentes, estados y un prompt listo por pantalla) para generar interfaz en Stitch AI.
 - `mockups/mockup-web-v2.html` — prototipo HTML interactivo (desktop + mobile web, modo claro/oscuro). v2, el propio equipo lo marca como "por mejorar mucho" — se espera que evolucione una vez estén cerrados los requerimientos.
 - `_fuentes/` — el `.docx` original tal como lo entregó el equipo, sin editar.
 
