@@ -16,7 +16,7 @@ tags: [actividad-equipos, trabajo-grupal, guion, presentacion]
 Ver también: [[Cursos/SistemasOperativos/entregables/actividad-equipos-principios-so|Actividad en Equipos (documento completo)]] · [[Cursos/SistemasOperativos/entregas]]
 
 **Entrega:** 2026-08-20 (inicio semana 3), ~5 min totales por grupo (slides ya armados, ver PDF en `_fuentes/`).
-**Pendiente:** cerrar qué punto de la Fase 5 (reflexión) dice Marcos — abajo están los 3 borrados para elegir. **La parte fija de Marcos es la diapositiva 4 (Desafíos técnicos).**
+**Decidido:** Marcos dice la diapositiva 4 (Desafíos técnicos) y el **Punto A** de la reflexión (Concurrencia real).
 
 Borrador de las 6 partes, para ensayar como equipo. Ajustar tono/tiempo según cómo suene en voz alta — los tiempos de la tabla son los que puso el equipo en la distribución.
 
@@ -54,9 +54,9 @@ Borrador de las 6 partes, para ensayar como equipo. Ajustar tono/tiempo según c
 
 ## 5. Reflexión sobre el aprendizaje (0:45 total — Mario, Marcos, Joseph, un punto cada uno)
 
-*(sin asignar todavía — 3 versiones borrador, elegir una para Marcos y confirmar quién dice las otras dos)*
+*(Marcos dice el Punto A — pendiente confirmar con Mario/Joseph quién dice B y C)*
 
-**Punto A — Concurrencia real**
+**Punto A — Concurrencia real (Marcos)**
 > "Para mí lo que más me quedó de este trabajo es que la exclusión mutua no es opcional. Sin semáforos ni mutex, un sistema con usuarios simultáneos no truena de forma obvia — falla en silencio, con sobreventa, y eso sale caro."
 
 **Punto B — Los componentes del SO trabajan juntos**
@@ -73,6 +73,6 @@ Borrador de las 6 partes, para ensayar como equipo. Ajustar tono/tiempo según c
 
 ## Próximos pasos
 
-- [ ] Elegir cuál de los 3 puntos de reflexión dice Marcos (y confirmar con Mario/Joseph los otros dos).
+- [x] Elegir cuál de los 3 puntos de reflexión dice Marcos → Punto A (confirmar con Mario/Joseph quién dice B y C).
 - [ ] Ensayar en voz alta contra el tiempo real (objetivo: ~5 min todo el equipo).
 - [ ] Ajustar el texto de la diapositiva 4 (Marcos) a como suene natural al practicarlo.
