@@ -2,6 +2,8 @@
 curso: SistemasOperativos
 entregas_pendientes:
   - {fecha: "2026-08-20", entregable: "Actividad en Equipos — Solución basada en Principios de los SO (presentación final)", peso: "parte del 40% actividades de aprendizaje"}
+  - {fecha: "2026-09-03", entregable: "Preguntas de Comprobación — Unidad 3 (Administración de Procesos)", peso: "parte del 40% actividades de aprendizaje"}
+  - {fecha: "2026-09-03", entregable: "Indagatoria Corta — Gestión de Procesos en un SO (documento + presentación + demo)", peso: "parte del 40% actividades de aprendizaje"}
   - {fecha: "2026-09-10", entregable: "Indagatoria — presentación (documento + exposición en inglés)", peso: "10%"}
   - {fecha: "2026-09-24", entregable: "I Prueba de Curso", peso: "parte del 20%"}
   - {fecha: "2026-10-01", entregable: "I Proyecto Programado — prototipo administración de procesos por colas", peso: "parte del 30%"}
@@ -23,7 +25,9 @@ Ver también: [[Cursos/SistemasOperativos/temario]]
 | 2026-08-13 (semana 2) | [[Cursos/SistemasOperativos/entregables/preguntas-sesion-semana1-principios-so\|Preguntas de la Sesión — Semana 1]] (IA como Tutor Socrático, individual) | parte del 40% (actividades de aprendizaje) | entregado |
 | 2026-08-20 (semana 3) | [[Cursos/SistemasOperativos/entregables/preguntas-sesion-semana2-historia-componentes-so\|Preguntas de la Sesión — Semana 2]] (IA como Tutor Socrático, individual) | parte del 40% (actividades de aprendizaje) | entregado |
 | 2026-08-20 (semana 3) | [[Cursos/SistemasOperativos/entregables/actividad-equipos-principios-so\|Actividad en Equipos]] — solución basada en Principios de los SO (presentación final) | parte del 40% (actividades de aprendizaje) | documento y slides listos — falta cerrar el [[Cursos/SistemasOperativos/entregables/guion-presentacion-actividad-equipos\|guión]] (punto de reflexión de Marcos) y ensayar |
-| 2026-09-10 (semana 6) | Indagatoria — presentación (documento + exposición **en inglés**); la presentación puede extenderse hasta el jueves 2026-09-17 (semana 7) | 10% | pendiente |
+| 2026-09-03 (semana 5) | [[Cursos/SistemasOperativos/entregables/actividad-comprobacion-procesos-unidad3\|Actividad de Comprobación]] — Administración de Procesos (Unidad 3, individual, 34 pts) | parte del 40% (actividades de aprendizaje) | pendiente |
+| 2026-09-03 (semana 5) | [[Cursos/SistemasOperativos/entregables/indagatoria-corta-gestion-procesos\|Indagatoria Corta]] — Gestión de Procesos en un SO (equipo; documento + presentación + demo) | parte del 40% (actividades de aprendizaje) | pendiente — falta que el equipo confirme el SO a indagar |
+| 2026-09-10 (semana 6) | [[Cursos/SistemasOperativos/entregables/indagatoria-curso\|Indagatoria del curso]] — presentación (documento + exposición **en inglés**); la presentación puede extenderse hasta el jueves 2026-09-17 (semana 7) | 10% | tema asignado: Grupo 3 / #10 — IA y Gestión de Recursos (planificación adaptativa, predicción de carga) — pendiente avanzar semana a semana |
 | 2026-09-24 (semana 8) | I Prueba de Curso | parte del 20% | pendiente |
 | 2026-10-01 (semana 9) | I Proyecto Programado — prototipo de administración de procesos mediante colas (GitHub) | parte del 30% | pendiente |
 | 2026-11-01 (fin semana 13) | [[Cursos/SistemasOperativos/apuntes/gestion-entrada-salida-unidad5\|Consigna Unidad 5]] — Gestión de Entrada y Salida (USB, SATA, PCIe) | parte del 40% (actividades de aprendizaje) | pendiente |

@@ -35,7 +35,7 @@ Reseña de qué son los SO, sus características y funciones, con discusión de 
 
 - **Unidad 1** — Introducción a los Sistemas de Cómputo (S1) → [[Cursos/SistemasOperativos/apuntes/estructura-sistemas-computo-unidad1|apunte]]
 - **Unidad 2** — Historia y componentes de los Sistemas Operativos (S2) → [[Cursos/SistemasOperativos/apuntes/historia-componentes-so-unidad2|apunte]]
-- **Unidad 3** — Gestión de Procesos (S3–S9)
+- **Unidad 3** — Gestión de Procesos (S3–S9) → [[Cursos/SistemasOperativos/apuntes/gestion-procesos-unidad3|apunte]]
 - **Unidad 4** — Gestión de Memoria (S10–S11)
 - **Unidad 5** — Gestión de Entrada y Salida (S12–S13) → [[Cursos/SistemasOperativos/apuntes/gestion-entrada-salida-unidad5|apunte]]
 - **Unidad 6** — Sistema de Archivos (S14–S15) → [[Cursos/SistemasOperativos/apuntes/sistema-archivos-unidad6|apunte]]
@@ -72,8 +72,8 @@ vii. **Protección y Seguridad** — Accesos, Autenticación, Cifrado
 |---|---|---|
 | 1 | Estructura de los sistemas de cómputo — arquitectura básica, SO como intermediario, interrupciones/DMA, SSD/NVMe | Asignación de temas de Indagatoria |
 | 2–3 | Conceptos básicos del SO (introducción, historia, componentes, llamadas al sistema); ciclo de ejecución de instrucciones | — |
-| 4 | Gestión de Procesos 1/3 — Kernel, descripción y control, estados de proceso | — |
-| 5 | Gestión de Procesos 2/3 — bloque de control de procesos | Foro control de procesos · asignación I Proyecto Programado |
+| 4 | Gestión de Procesos 1/3 — Kernel, descripción y control, estados de proceso | [[Cursos/SistemasOperativos/apuntes/gestion-procesos-unidad3\|Actividad de Comprobación]] e Indagatoria Corta asignadas (entrega semana 5) |
+| 5 | Gestión de Procesos 2/3 — bloque de control de procesos | Foro control de procesos · asignación I Proyecto Programado · entrega Actividad de Comprobación e Indagatoria Corta |
 | 6 | Gestión de Procesos 3/3 — threads, planificación del CPU, algoritmos de planificación | Mapa mental estados de procesos |
 | 6–7 | — | Presentación Indagatorias |
 | 8 | — | **I Prueba de Curso** |
