@@ -46,7 +46,7 @@ Plataforma web/móvil de gestión médica y citas (pacientes, médicos, clínica
 
 ## Guía de referencia legal rápida
 
-- **Ley N.° 8968 — Protección de Datos Personales:** los datos son del ciudadano, no de quien los recolecta. Consentimiento informado expreso, por escrito, previo. **Artículo 24** obliga a medidas técnicas/organizativas de seguridad. Reglamento define 3 niveles: Básico / Medio / **Alto** (datos sensibles: salud, religión, orientación sexual, etc.).
+- **Ley N.° 8968 — Protección de Datos Personales:** los datos son del ciudadano, no de quien los recolecta. Consentimiento informado expreso, por escrito, previo. **Artículo 10 ("Seguridad de los datos")** obliga a medidas técnicas/organizativas de seguridad — *corregido 2026-08-26: se había citado por error el Art. 24, que en realidad regula la Denuncia ante PRODHAB; verificado contra el texto oficial de la ley.* Reglamento define 3 niveles: Básico / Medio / **Alto** (datos sensibles: salud, religión, orientación sexual, etc.).
 - **PRODHAB:** ente estatal que vigila la Ley 8968, sanciona, puede imponer multas y ordenar cierre temporal de bases de datos; audita de oficio o por denuncia.
 - **Ley N.° 9048 — Reforma de Delitos Informáticos:** tipifica el acceso no autorizado a sistemas; aplica a ex-empleados que conservan credenciales o acceden tras el despido; el software que facilite o no prevenga esos accesos puede implicar responsabilidad del desarrollador.
 - **Ley N.° 6683 — Derechos de Autor y Derechos Conexos:** protege código fuente/objeto como obra intelectual desde su creación; se recomienda registro en el Registro Nacional.
