@@ -22,29 +22,55 @@ Ver también: [[Cursos/Seguridad/apuntes/tarea-2-threat-modeling-instrucciones|I
 2. **Usuarios:** los colegiados (votantes) y el comité/administrador electoral (audita vía el panel de administración).
 3. **Datos que procesa:** número de cédula, correo electrónico, token de un solo uso, ID del votante, opción de voto, cookie de sesión de administración.
 4. **3 suposiciones técnicas** (no dichas explícitamente, consistentes con el texto):
-   - Es una aplicación **web** (no app móvil nativa) — se infiere porque el panel de administración se protege con cookie de sesión de navegador.
+   - El **token es el único factor de autenticación** para emitir el voto — el texto no menciona contraseña ni segundo factor, solo el token recibido por correo.
    - Existe **una única base de datos relacional centralizada** — se infiere de "la misma tabla de la base de datos".
-   - El **correo institucional de cada votante ya está precargado** en el sistema (probablemente sincronizado desde el padrón del colegio), ya que el token se envía automáticamente sin un paso de registro previo descrito.
+   - La votación tiene **una ventana de tiempo definida** (apertura y cierre) — se infiere porque el sistema necesita un punto de corte para "consolidar resultados" y decidir que ya no se aceptan más votos, aunque el texto no menciona fechas ni plazos.
 
 *(Cubre criterio 1 de la rúbrica — completar/ajustar con lo que diga el resto del grupo.)*
 
 ## Paso 2 — Identificar activos críticos
 
 | Activo | Tipo | ¿Por qué es crítico? |
-|---|---|---|
+| --- | --- | --- |
 | Cédula del votante | Dato personal | Es la semilla del token (SHA-1 sin sal) — si se conoce, se puede regenerar el token de cualquier otro colegiado |
-| Token de votación de un solo uso | Credencial de acceso | Si se predice o intercepta, permite suplantar el voto de otra persona |
-| Registro voto–votante (misma tabla) | Dato sensible / integridad del proceso | Rompe el secreto del voto: se puede saber por quién votó cada colegiado específico |
-| Cookie de sesión del panel de administración | Credencial de sesión | Sin flag `HttpOnly`, es robable (ej. vía XSS) y da acceso total a la base de datos electoral |
-| Resultados de la elección | Activo de negocio / reputación institucional | Su manipulación o filtración anticipada invalida legalmente la elección y daña la credibilidad del colegio |
+| Token del votante | Credencial de acceso | Si se predice o intercepta, permite suplantar el voto de otra persona |
+| Voto | Información confidencial | Es la decisión electoral del colegiado; su exposición o alteración vulnera la integridad y el secreto del proceso |
+| Cookie de sesión | Credencial de acceso | Sin flag `HttpOnly`, es robable (ej. vía XSS) y da acceso de auditoría total a la base de datos electoral |
+| ID del votante | Información confidencial | Al guardarse en la misma tabla que el voto, permite vincular la identidad del colegiado con su elección, rompiendo el secreto del voto |
 
 **Priorización (presupuesto solo para 2):**
 
-Priorizaría **el token de votación** (arreglar su generación) y **el registro voto-votante** (separar la identidad de la opción elegida). Son la raíz de los dos fallos más graves del sistema: sin token predecible no hay suplantación de voto, y sin vínculo directo voto-identidad se preserva el secreto del voto — que es el requisito legal/ético mínimo de cualquier elección. Descartaría (por ahora) la cookie de sesión del panel — es una mala configuración puntual y rápida de corregir después, no requiere rediseño — y los resultados como activo aislado, porque su protección es consecuencia directa de resolver los dos primeros.
+Priorizaría **Token del votante** e **ID del votante**. El token es la raíz de la suplantación de identidad al votar; y proteger el ID del votante (separándolo del voto en el diseño de la base de datos) es lo que realmente preserva el secreto del voto — un voto sin identificador asociado deja de ser sensible por sí solo, así que no hace falta proteger "Voto" aparte. Descartaría **Cookie de sesión** (es una mala configuración puntual, rápida de corregir después, no requiere rediseño) y **Cédula del votante** (solo es explotable en la medida en que sirve para predecir el token — si se arregla la generación del token, la cédula por sí sola deja de ser el vector de este ataque).
 
 *(Cubre criterio 2 de la rúbrica.)*
 
 ## Paso 3 — Diagrama de flujo de datos (a hacer a mano)
+
+**Boceto de referencia para copiar a mano** (4 cajas + flechas, 3 líneas rojas cruzando las flechas marcadas):
+
+```
+ ┌───────────┐  ①  cédula   ┌───────────────┐  token  ②  ┌───────────────────┐
+ │  USUARIO  │ ───────────► │  SERVIDOR WEB  │ ─────────► │ SERVICIO DE CORREO │
+ │ (votante) │ ◄─────────── │  (VoteOnline)  │            │     (externo)      │
+ └───────────┘  token por   └───────────────┘            └───────────────────┘
+                  correo       │        ▲
+                          voto │        │ valida token
+                                ▼        │
+                        ┌────────────────────┐
+                        │   BASE DE DATOS     │
+                        │ (tabla única: ID    │
+                        │ votante + opción)   │
+                        └────────────────────┘
+                                 ▲
+                            ③   │ consultas directas
+                                 │
+                        ┌────────────────────┐
+                        │  PANEL DE ADMIN.    │
+                        │ (comité electoral)  │
+                        └────────────────────┘
+```
+
+**Marcar en rojo (①②③):** son los 3 límites de confianza — cruzan justo las flechas Usuario↔Servidor, Servidor↔Correo, y Panel de Admin↔Base de Datos. En la hoja física, basta poner una línea punteada roja perpendicular a cada una de esas 3 flechas.
 
 **Pendiente — dibujar a mano y pegar la foto acá.** Elementos a incluir:
 
@@ -62,13 +88,13 @@ Priorizaría **el token de votación** (arreglar su generación) y **el registro
 
 ## Paso 4 — Identificar amenazas
 
-| Amenaza | Activo afectado |
-|---|---|
-| Un administrador con acceso legítimo al panel consulta directamente la BD para ver qué opción votó un colegiado específico (voto e ID están en la misma tabla) — *insider* | Registro voto–votante / secreto del voto |
-| Un empleado con acceso al panel modifica manualmente el resultado de la votación antes del cierre de la elección — *insider* | Resultados de la elección |
-| El canal de correo (proveedor externo/tercero) es interceptado y el token de un solo uso es capturado antes de llegar al votante legítimo — *vector externo* | Token de un solo uso |
-| Un atacante externo calcula el hash SHA-1 sin sal de cédulas de otros colegiados (dato semi-público) para predecir y usar sus tokens de votación | Token de un solo uso / voto de terceros |
-| Un atacante roba la cookie de sesión del panel de administración (ej. vía XSS, al no tener flag `HttpOnly`) y obtiene acceso completo a la base de datos electoral | Base de datos completa / resultados y registros de voto |
+| Amenaza                                                                                                                                                                     | Activo afectado                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| Un administrador con acceso legítimo al panel consulta directamente la BD para ver qué opción votó un colegiado específico (voto e ID están en la misma tabla) — *insider*  | Voto / ID del votante                           |
+| Un empleado con acceso al panel modifica manualmente el resultado de la votación antes del cierre de la elección — *insider*                                                | Voto                                            |
+| El canal de correo (proveedor externo/tercero) es interceptado y el token de un solo uso es capturado antes de llegar al votante legítimo — *vector externo*                | Token del votante                               |
+| Un atacante externo calcula el hash SHA-1 sin sal de cédulas de otros colegiados (dato semi-público) para predecir y usar sus tokens de votación                            | Token del votante / Cédula del votante          |
+| Un atacante roba la cookie de sesión del panel de administración (ej. vía XSS, al no tener flag `HttpOnly`) y obtiene acceso de auditoría a toda la base de datos electoral | Cookie de sesión → expone Voto e ID del votante |
 
 *(Cubre criterio 4 — cumple la mezcla obligatoria: 2 insider + 1 vector externo + 2 libres.)*
 
@@ -86,13 +112,13 @@ Priorizaría **el token de votación** (arreglar su generación) y **el registro
 
 ## Paso 6 — Mitigaciones desde el diseño
 
-| Amenaza | Mitigación desde diseño |
-|---|---|
-| Admin ve el voto de un colegiado específico | Separación de datos por diseño: dos tablas desacopladas (una de "quién ya votó", sin la opción; otra de "opciones elegidas", sin identificador), vinculadas solo por un token efímero que se descarta al cerrar la elección |
-| Empleado modifica resultado antes del cierre | Registro de auditoría inmutable (append-only, con hash encadenado) + separación de roles: ningún administrador individual puede alterar resultados sin doble aprobación |
-| Interceptación del token vía correo | No depender de un canal sin cifrar como único factor: enlace de un solo uso con expiración corta + verificación adicional al usarlo (ej. reingresar la cédula) |
-| Predicción de tokens (SHA-1 sin sal) | Autenticación fuerte en la generación: token aleatorio criptográficamente seguro (no derivado de la cédula), o HMAC-SHA256 con clave secreta del servidor + salt único |
-| Robo de cookie de sesión sin `HttpOnly` | Cifrado y configuración segura de sesión desde el diseño: cookies con `HttpOnly` + `Secure` + `SameSite`, y mínimo privilegio en lo que el panel de administración puede hacer sin reautenticación |
+| Amenaza                                      | Mitigación desde diseño                                                                                                                                                                                                     |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Admin ve el voto de un colegiado específico  | Separación de datos por diseño: dos tablas desacopladas (una de "quién ya votó", sin la opción; otra de "opciones elegidas", sin identificador), vinculadas solo por un token efímero que se descarta al cerrar la elección |
+| Empleado modifica resultado antes del cierre | Registro de auditoría inmutable (append-only, con hash encadenado) + separación de roles: ningún administrador individual puede alterar resultados sin doble aprobación                                                     |
+| Interceptación del token vía correo          | No depender de un canal sin cifrar como único factor: enlace de un solo uso con expiración corta + verificación adicional al usarlo (ej. reingresar la cédula)                                                              |
+| Predicción de tokens (SHA-1 sin sal)         | Autenticación fuerte en la generación: token aleatorio criptográficamente seguro (no derivado de la cédula), o HMAC-SHA256 con clave secreta del servidor + salt único                                                      |
+| Robo de cookie de sesión sin `HttpOnly`      | Cifrado y configuración segura de sesión desde el diseño: cookies con `HttpOnly` + `Secure` + `SameSite`, y mínimo privilegio en lo que el panel de administración puede hacer sin reautenticación                          |
 
 *(Cubre criterio 6.)*
 
