@@ -4,7 +4,7 @@ Ver también: [[Proyectos/README|Proyectos]] · [[Proyectos/DojoBase/README|Dojo
 
 **Repo:** `corebase` — monorepo nuevo, a crear en `ProyectosPersonales/`.
 **Supabase:** org `CoreBase` · proyecto `pzyvvotltgipehsywqpi` (us-east-2, PG 17.6) — vacío, será la base de DojoBase.
-**Estado:** specs corregidos y cerrados (2026-08-28). Siguiente paso: documentación de producto de DojoBase, después kickoff de código.
+**Estado:** specs corregidos y cerrados (2026-08-28). Siguiente paso: `DESIGN.md` de DojoBase y scaffolding del monorepo.
 
 ## Qué es
 
@@ -14,11 +14,11 @@ CoreBase es **la plataforma**, no un producto. Es el monorepo y la capa comparti
 |---|---|---|
 | **CoreBase** | La capa compartida y reutilizable: `packages/core` (auth, tenant, billing, theming), `packages/ui` (primitivas), `packages/modules` (clases, contenido, rutinas, challenges, notificaciones), `packages/config`. Sin conocimiento de ningún vertical. | A construir |
 | **DojoBase** | `apps/dojobase` — SaaS para academias de artes marciales. **Es la prioridad.** | A construir |
-| **GymBase v2** | `apps/gymbase` — SaaS para gimnasios de fitness. Migra al core *después* de DojoBase. | v1 en producción en otro repo |
+| **GymBase v2** | `apps/gymbase` — SaaS para gimnasios de fitness. Migra al core *después* de DojoBase. | v1 archivado en otro repo, sin uso |
 
 ## Las tres decisiones que definen el proyecto
 
-1. **Se construye desde cero.** No se evoluciona el repo de GymBase v1. GymBase queda como *fuente de especificación* — la lógica de negocio está validada en producción y se lee, se entiende y se reescribe limpia; nunca se copia. Esto es lo que garantiza mini-componentes reales, cero hardcoding y un solo patrón por interacción desde el día uno.
+1. **Se construye desde cero.** No se evoluciona el repo de GymBase v1. GymBase v1 no está en uso y queda como *fuente de especificación* — su lógica de negocio ya pasó por uso real y por la retroalimentación del sensei: se lee, se entiende y se reescribe limpia; nunca se copia. Esto es lo que garantiza mini-componentes reales, cero hardcoding y un solo patrón por interacción desde el día uno.
 2. **Dos productos sobre un core, no un producto con feature flags.** El enfoque de v1 (`clients/gymbase/<tenant>/theme.config.ts` con 30 flags) funciona pero es exactamente lo que generó la deuda: un código ramificándose por condicionales de vertical.
 3. **Un proyecto de Supabase por producto.** CoreBase no es una base de datos: es un conjunto de migraciones y código que se *aplica* a la base de cada producto.
 
@@ -34,6 +34,7 @@ CoreBase es **la plataforma**, no un producto. Es el monorepo y la capa comparti
 | [[Proyectos/CoreBase/arquitectura\|arquitectura.md]] | Monorepo, nombres, regla de las 3 capas, stack, multi-tenancy, proyectos de Supabase, y toda la operación que ningún spec cubría (testing, CI, deploy, jobs, observabilidad, seed) |
 | [[Proyectos/CoreBase/schema\|schema.md]] | Schema de la capa core y de los módulos compartidos, corregido y completado contra las historias de usuario |
 | [[Proyectos/CoreBase/seguridad-jwt-rls\|seguridad-jwt-rls.md]] | Tenant vía JWT, helpers, RLS por tabla, matriz de acceso y checklist OWASP por PR. Corrige los 4 bloqueantes de SQL del spec original |
+| [[Proyectos/CoreBase/billing-onvo\|billing-onvo.md]] | Modelo de cobro: el MVP va con comprobante SINPE manual y ONVO Pay (marketplace con cuentas conectadas) queda modelado y listo para activarse por configuración |
 | [[Proyectos/CoreBase/revision-critica-specs\|revision-critica-specs.md]] | El análisis que fundamenta todo lo anterior: qué estaba roto en los specs, qué faltaba, y las 7 decisiones ya tomadas |
 | `_fuentes/` | Los 9 specs originales sin editar, como registro histórico |
 

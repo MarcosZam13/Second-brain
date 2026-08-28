@@ -13,7 +13,7 @@ Ver también: [[Proyectos/CoreBase/README|CoreBase]] · [[Proyectos/DojoBase/REA
 
 Revisión de los 9 documentos de spec (`_fuentes/`) contra el código real de GymBase (`ProyectosPersonales/Gymbase`), su `auditoria-gymbase.md`, `extraccion-tecnica-dojo.md` y `Context/_CONTEXTO-IA.md`.
 
-**Veredicto general:** el paquete de specs es sólido en dirección arquitectónica (separar core de vertical, JWT en vez de header, theming a tabla) y las correcciones de bugs heredados están bien identificadas. Los problemas están en **tres frentes**: (a) SQL que no funciona como está escrito, (b) el schema cubre ~70% de las historias de usuario, y (c) el encuadre del proyecto — el cronograma asume que esto es construcción nueva cuando en realidad es una migración de un cliente en producción.
+**Veredicto general:** el paquete de specs es sólido en dirección arquitectónica (separar core de vertical, JWT en vez de header, theming a tabla) y las correcciones de bugs heredados están bien identificadas. Los problemas están en **tres frentes**: (a) SQL que no funciona como está escrito, (b) el schema cubre ~70% de las historias de usuario, y (c) el encuadre del proyecto — lo que se está construyendo es un producto que hay que poder vender, no una reescritura de features para un usuario existente.
 
 ---
 
@@ -23,8 +23,8 @@ Las 7 decisiones del resumen final quedaron resueltas. Este documento se conserv
 
 | # | Decisión | Resuelto |
 |---|---|---|
-| 1 | Repo | **Desde cero**, repo nuevo `corebase`. Se descarta evolucionar `Gymbase` — decisión del usuario: proyecto personal, no se pierde nada, y arrancar limpio es lo que garantiza mini-componentes y cero hardcoding desde el día uno. GymBase v1 queda como **fuente de especificación y de lógica de negocio ya validada**, nunca como código a copiar |
-| 2 | Supabase | **Proyecto nuevo** — ya creado: org `CoreBase`, proyecto `CoreBase` (`pzyvvotltgipehsywqpi`, us-east-2, PG 17.6), vacío. Ver nota de nombres en arquitectura.md |
+| 1 | Repo | **Desde cero**, repo nuevo `corebase`. Se descarta evolucionar `Gymbase` — decisión del usuario: proyecto personal, no se pierde nada, y arrancar limpio es lo que garantiza mini-componentes y cero hardcoding desde el día uno. GymBase v1 **no está en uso** y queda como **fuente de especificación y de lógica de negocio ya validada**, nunca como código a copiar |
+| 2 | Supabase | **Proyecto nuevo** — ya creado: org `CoreBase`, proyecto `CoreBase` (`pzyvvotltgipehsywqpi`, us-east-2, PG 17.6), vacío. La base vieja de GymBase también está vacía y queda solo como respaldo |
 | 3 | Finanzas (B2) | Se reescribe el requisito: admin sin reportes ni `org_payment_connections`, pero sí ve el monto de la fila que aprueba |
 | 4 | Sparring (D2) | Se agrega confirmación del rival |
 | 5 | Asistencia (D1) | Se agrega no-show marcable por el instructor |
@@ -40,33 +40,34 @@ Severidad: 🔴 bloqueante (rompe si se implementa tal cual) · 🟠 gap (falta 
 
 ## A. Encuadre del proyecto (lo más importante)
 
-### A1 🔴 Dojo Shoto ya está en producción sobre GymBase — esto es una migración, no un producto nuevo
+### A1 ⚪ Corregido — no hay cliente en producción
 
-Los specs hablan de "primer cliente confirmado: Dojo Shoto" como si fuera un lanzamiento. Pero el `git log` de GymBase muestra tanda tras tanda de bugs del sensei, franjas, familias, planes: **Dojo Shoto es un cliente vivo, usando el producto hoy**, con datos reales en el proyecto Supabase `vwkxrjnxfjfzobzzoagj`.
+*Escrito originalmente como bloqueante, a partir del `git log` de GymBase (tandas de fixes "del sensei", franjas, familias). **El usuario aclaró el 2026-08-28 que GymBase v1 no está en uso**: Dojo Shoto es un cliente al que se le quiere vender DojoBase ya terminado, no un cliente operando hoy, y la base de datos vieja está vacía y queda solo como respaldo.*
 
-Consecuencias que ningún spec cubre:
+Consecuencias de la corrección, todas a favor:
 
-- DojoBase necesita un **proyecto Supabase nuevo** (el schema es incompatible: `member_ranks` vs `org_member_ranks`, JWT vs header `x-org-id`, `organizations` limpia). Eso no está decidido en ninguna parte.
-- Existe un **plan de migración de datos** obligatorio (miembros, rangos, pagos, historial de peleas de Dojo Shoto) que no aparece en el cronograma de 8 semanas.
-- Hasta que ese corte pase, **hay dos productos que mantener** — cualquier bug del sensei durante las 8 semanas se arregla en GymBase v1, no en DojoBase.
+- **No hay plan de migración de datos.** DojoBase arranca con una base vacía y datos de demo.
+- **No hay corte ni ventana de riesgo.** No hay que coordinar nada con un cliente en operación.
+- **No hay congelamiento de GymBase v1** — no se le va a tocar nada de todos modos.
+- **No hay dos productos que mantener en paralelo.** Toda la atención va a DojoBase.
 
-**Recomendación:** agregar semana 0 (plan de corte + migración de datos) y semana 9 (migración real + acompañamiento), y declarar congelamiento de features en GymBase v1 durante el período (solo fixes).
+Lo que sí queda del análisis original: **el objetivo sigue siendo un producto vendible, no una reescritura para un usuario existente.** Ver A2.
 
-### A2 🟡 El objetivo de negocio real no es Dojo Shoto, es el segundo dojo
+### A2 🟡 El objetivo es vender — y el primer prospecto es Dojo Shoto
 
-Dojo Shoto ya tiene todo lo que las 23 HU describen — funcionando. Reescribirlo no le entrega valor nuevo a él. Lo que hace vendible el producto es lo que hoy **no** se puede hacer: onboardear un dojo nuevo sin un deploy y sin un PR (hoy es `clients/gymbase/<tenant>/theme.config.ts` + build con `NEXT_PUBLIC_GYM_CLIENT`).
+Dojo Shoto es el primer cliente a cerrar, no un usuario a migrar. Eso pone la vara en un lugar distinto al de "portar features": el producto tiene que estar **presentable y completo el día de la demo**, porque la demo es la venta.
 
-Eso reordena la prioridad. Lo que desbloquea vender:
+Lo que hace que un dojo compre:
 
-1. Resolución de tenant en runtime (JWT) — spec 3.
-2. `tenant_themes` en tabla — spec 4.
-3. Alta de organización + invitación de miembros (HU-22, RF-19/20) — hoy es manual y ni siquiera está en el schema.
+1. **Que se vea como un producto**, no como un panel de administración. Es la razón principal por la que se rehace la UI.
+2. **Que resuelva su operación real** — clases, cinturones, ascensos, pagos. GymBase v1 ya probó cuáles son esas funciones; esa validación es el activo que se conserva.
+3. **Que onboardearlo sea inmediato.** Colores, logo y disciplinas de Dojo Shoto configurados en minutos delante de él, no en un PR.
 
-Eso es el producto mínimo vendible. Todo lo demás (sparring, promociones, torneos, peleas) ya existe y es **porte con limpieza**, no diseño. Sugiero re-cortar el cronograma alrededor de esto en vez de alrededor de módulos.
+Y lo que hace que haya un **segundo** dojo es lo mismo del punto 3, sin desarrollo de por medio: tenant por JWT, `tenant_themes` en tabla, y alta de organización con invitación de miembros. Eso es el producto mínimo vendible, y va primero.
 
 ### A3 🟡 8 semanas es optimista por un factor de ~2
 
-23 HU + monorepo nuevo + design system nuevo + billing con pasarela + migración de un cliente vivo, en solo. GymBase tardó mucho más en llegar a los mismos módulos. No es razón para no empezar — sí para que el cronograma diga qué se cae primero si hay atraso. Corte duro sugerido: torneos (ya fuera de alcance), grupos familiares (HU-23) y challenges (HU-16) son los tres primeros candidatos a v1.1.
+23 HU + monorepo nuevo + design system nuevo + billing + un producto presentable, en solo y en paralelo con la universidad. GymBase tardó mucho más en llegar a los mismos módulos. No es razón para no empezar — sí para que el cronograma diga qué se cae primero si hay atraso. Corte duro sugerido: torneos (ya fuera de alcance), grupos familiares (HU-23) y challenges (HU-16) son los tres primeros candidatos a v1.1.
 
 ---
 
@@ -214,9 +215,11 @@ El spec 2 lo justifica por "continuidad con hooks ya extraídos" — pero esos h
 
 Ningún spec menciona: estrategia de testing (GymBase ya tiene Vitest + Playwright configurados), CI, cuántos proyectos de Vercel, variables de entorno por app, seed de datos demo, monitoreo de errores, ni la app de marketing (`apps/marketing`, mencionada de pasada en 8b). Son las cosas que aparecen en la semana 6 y descarrilan el cronograma.
 
-### E6 🟠 Onvo con conexión por comercio: verificar antes de la semana 7
+### E6 ⚪ Resuelto — ONVO sí soporta conexión por comercio
 
-`org_payment_connections` asume que Onvo tiene un flujo tipo marketplace/connect donde cada dojo conecta su propia cuenta. Si Onvo no lo soporta (o exige contrato de agregador), el modelo de billing está mal desde el schema. Es una llamada o media hora de docs, y conviene hacerla **antes** de escribir la migración de billing, no en la semana 7.
+Investigado el 2026-08-28: ONVO tiene un producto de marketplace tipo Stripe Connect (cuentas conectadas, onboarding alojado, enrutamiento con `onBehalfOf`, comisión porcentual y tarifa fija semanal para la plataforma). **El modelo de datos del spec era correcto.** Detalle completo, campos reales de la API y el camino de activación en [[Proyectos/CoreBase/billing-onvo|billing-onvo.md]].
+
+Decisión asociada: **el MVP cobra por comprobante SINPE manual**, con el schema ya preparado para el enchufe. Integrar ONVO depende de la inscripción ante Hacienda, que es trámite y no desarrollo, y además conviene que el cobro automático sea opcional por dojo (un dojo chico puede preferir 0% de comisión).
 
 ---
 
@@ -233,9 +236,10 @@ Sin eso, "mejorar la UI" termina siendo el agente de UI improvisando pantalla po
 | # | Decisión | Recomendación |
 |---|---|---|
 | 1 | ¿Repo nuevo o evolucionar `Gymbase`? | Evolucionar, con la regla de no-import (E1) |
-| 2 | ¿Proyecto Supabase nuevo para DojoBase? | Sí — schema incompatible, y protege al cliente vivo (A1) |
+| 2 | ¿Proyecto Supabase nuevo para DojoBase? | Sí — el schema es incompatible y la base vieja está vacía de todos modos (A1) |
 | 3 | ¿Admin ciego a montos, de verdad? | No es alcanzable; reescribir el requisito (B2) |
 | 4 | ¿Confirmación del rival en sparring? | Agregarla, cuesta una columna (D2) |
 | 5 | ¿No-show marcable por el instructor? | Agregarlo, la integridad del cinturón lo pide (D1) |
 | 6 | ¿`member_fights` público o privado por default? | Privado + `upcoming` siempre visible (B6) |
 | 7 | ¿Qué se cae si el cronograma se atrasa? | Torneos → familias → challenges, en ese orden (A3) |
+| 8 | ¿ONVO soporta marketplace? | Sí. MVP manual con el enchufe puesto (E6) |

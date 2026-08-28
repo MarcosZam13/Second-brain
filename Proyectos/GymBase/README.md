@@ -2,7 +2,9 @@
 
 Ver también: [[Proyectos/README|Proyectos]] · [[Proyectos/CoreBase/README|CoreBase (plataforma)]] · [[Proyectos/DojoBase/README|DojoBase]]
 
-> **Actualización 2026-08-28 — el producto se parte en dos.** GymBase escaló demasiado como producto único con feature flags para gym y dojo a la vez. La decisión es separar: se construye [[Proyectos/CoreBase/README|CoreBase]] (capa compartida) y sobre ella [[Proyectos/DojoBase/README|DojoBase]] primero (es el que corre prisa — Dojo Shoto es cliente vivo), y GymBase v2 migra al core después. Todo lo que sigue en esta nota describe **GymBase v1**, que sigue en producción y se mantiene solo con fixes hasta el corte.
+> **Actualización 2026-08-28 — GymBase v1 queda archivado y el producto se parte en dos.** GymBase escaló demasiado como producto único con feature flags para gym y dojo a la vez. La decisión es separar: se construye [[Proyectos/CoreBase/README|CoreBase]] (capa compartida) y sobre ella [[Proyectos/DojoBase/README|DojoBase]] primero, y GymBase v2 después.
+>
+> **v1 no está en uso** — sin clientes operando y con la base de datos vacía. No se le agregan features ni fixes; queda como respaldo y, sobre todo, como **fuente de especificación**: sus decisiones de producto y sus casos borde ya pasaron por uso real. Todo lo que sigue describe v1 tal como quedó.
 
 **Repo:** https://github.com/MarcosZam13/Gymbase (privado)
 **Demo:** https://demogymbase.vercel.app (cliente: `iron-gym`)

@@ -19,17 +19,19 @@ DojoBase es una aplicación SaaS multi-tenant para academias de artes marciales,
 
 Resuelve: gestión de miembros, clases con asistencia por inscripción, rangos y promociones independientes por disciplina, retos amistosos de sparring con resultado por rounds e historial cruzado, historial de peleas oficiales con feed de próximas peleas, contenido educativo por carpetas, challenges de gamificación, y cobro de membresías con verificación de comprobantes SINPE.
 
-**Primer cliente:** Dojo Shoto, 4 disciplinas. Ya está en producción sobre GymBase v1 — lo que hace de DojoBase una **migración de un cliente vivo**, no un lanzamiento desde cero. El onboarding de cada dojo es manual (lo configura el equipo), sin registro público self-service en esta versión.
+**Primer prospecto:** Dojo Shoto, 4 disciplinas. **No es un cliente en operación** — GymBase v1 no está en uso. DojoBase se construye para vendérselo terminado, lo que significa que **la demo es la venta**: el producto tiene que estar presentable el día que se le muestra, no solo funcional. El onboarding de cada dojo es manual (lo configura el equipo), sin registro público self-service en esta versión.
 
 ### 1.1 Por qué existe este proyecto
 
-GymBase v1 ya hace casi todo lo que este documento describe, y Dojo Shoto lo usa a diario. Reescribirlo no le entrega valor nuevo **a él**. Lo que vuelve el producto vendible es lo que hoy no se puede hacer:
+GymBase v1 ya hace casi todo lo que este documento describe — pero no está en uso, y tal como está no es vendible. Lo que hay que resolver para que lo sea:
 
-1. **Onboardear un dojo nuevo sin un deploy.** Hoy cada cliente es una carpeta `clients/gymbase/<tenant>/theme.config.ts` y un build con una variable de entorno. Un dojo nuevo es un PR. Con `tenant_themes` en tabla y el tenant resuelto por JWT, es un insert.
-2. **Un producto que se vea como un producto.** v1 tiene 618 colores hex sueltos, cinco patrones de presentación de formularios, dos arquitecturas de formulario conviviendo y tres implementaciones de modal. Se nota entre pantallas, y se nota al venderlo.
+1. **Un producto que se vea como un producto.** v1 tiene 618 colores hex sueltos, cinco patrones de presentación de formularios, dos arquitecturas de formulario conviviendo y tres implementaciones de modal. Se nota entre pantallas, y se nota el día de la demo.
+2. **Onboardear un dojo nuevo sin un deploy.** Hoy cada cliente es una carpeta `clients/gymbase/<tenant>/theme.config.ts` y un build con una variable de entorno. Un dojo nuevo es un PR. Con `tenant_themes` en tabla y el tenant resuelto por JWT, es un insert — y se puede configurar delante del cliente.
 3. **Un core reutilizable.** Auth, tenant, roles, billing, theming y UI que sirvan para el siguiente producto sin arrastrar nada de gimnasios ni de dojos.
 
-Ese es el criterio para priorizar: lo que desbloquea vender al **segundo** dojo va primero.
+Lo que sí se conserva de v1 es el **conocimiento de negocio**: qué funciones necesita un dojo de verdad, y cómo se comportan los casos borde. Eso ya pasó por uso real y por la retroalimentación del sensei, y es el activo que evita redescubrirlo.
+
+Criterio para priorizar: primero lo que hace el producto **presentable y onboardeable**, después el porte de funcionalidad.
 
 ## 2. Alcance
 
@@ -118,6 +120,7 @@ Decidido de antemano para no improvisarlo bajo presión: **torneos → grupos fa
 - **RF-17** — El sistema envía recordatorios de pago próximo a vencer por push/in-app, sin duplicarlos.
 - **RF-18** — Cada organización configura su tema visual (colores, logo, tipografía, radio de bordes) sin cambios de código.
 - **RF-22** — El flujo de billing completo: definición de planes por admin/owner → elección y suscripción por el miembro → subida de comprobante → revisión por admin, con motivo visible en caso de rechazo.
+- **RF-22b** — El modo de cobro es configuración por organización. El MVP opera en **comprobante SINPE manual**; el cobro automático por pasarela (ONVO, modelo de marketplace) queda modelado y se activa por configuración, sin cambios de código ni de historial. Ver [[Proyectos/CoreBase/billing-onvo|billing-onvo.md]].
 - **RF-21** — Grupos familiares con plan por integrante, cobrados como unidad.
 
 ### Alta y acceso
@@ -163,18 +166,18 @@ Lo que sí cruza de la marca a la app, con reglas: la tipografía de display en 
 
 ## 9. Plan de trabajo
 
-El cronograma de 8 semanas del spec 07 asumía construcción nueva sin cliente vivo. Con las decisiones del 2026-08-28 se reordena en tres bloques, priorizando lo que desbloquea vender:
+El cronograma de 8 semanas del spec 07 se reordena en cuatro bloques, priorizando lo que hace el producto vendible antes que el porte de funcionalidad:
 
 | Bloque | Foco | Entregable |
 |---|---|---|
 | **0 — Fundación** | Monorepo, CoreBase (auth/tenant/JWT/RLS/billing), design system con tokens y catálogo cerrado de componentes, `DESIGN.md` | Login con claim de org y rol, `packages/ui` verificado con dos temas distintos, tests de RLS de la matriz de acceso |
 | **1 — Lo vendible** | Theming por tenant, alta de organización, invitación de miembros, disciplinas y rangos | **Un dojo nuevo se onboardea sin un deploy.** Es el hito de negocio |
 | **2 — Porte de funcionalidad** | Clases y asistencia → sparring completo → promociones y portal del miembro → billing → contenido y challenges → peleas oficiales y grupos familiares | Paridad con lo que Dojo Shoto usa hoy, reescrito limpio |
-| **3 — Corte** | Plan y script de migración de datos de Dojo Shoto, hardening OWASP completo, acompañamiento | Dojo Shoto operando en DojoBase |
+| **3 — Venta** | Seed de demo con los datos de Dojo Shoto (disciplinas, cinturones, clases de ejemplo), hardening OWASP completo, landing de venta | Demo lista para presentar y cerrar el primer cliente |
 
 Las semanas 3 y 4 del cronograma original (disciplinas/rangos y clases) siguen siendo **bloqueantes de casi todo lo posterior**: sparring, promociones y peleas dependen de que existan disciplinas y rangos. No conviene adelantar sparring si esa base no cerró limpio.
 
-**Durante todo el proceso, GymBase v1 se mantiene solo con fixes.** Cada feature nueva del lado viejo es trabajo que hay que rehacer del lado nuevo.
+**GymBase v1 no se toca en absoluto** — está archivado, sin uso y sin datos. No hay migración, no hay corte y no hay dos productos que mantener.
 
 **Modelo de agentes** (spec 07): un orquestador que mantiene el contexto completo y delega, más subagentes de contexto acotado — UI/componentes, QA/testing contra RF como criterios de aceptación, seguridad OWASP que revisa **antes de mergear** y no como auditoría final, y documentación que cierra cada tarea con el `CLAUDE.md` del paquete que tocó.
 
@@ -183,7 +186,7 @@ Las semanas 3 y 4 del cronograma original (disciplinas/rangos y clases) siguen s
 | Decisión | Alternativas | Elegida | Razón |
 |---|---|---|---|
 | Punto de partida | Evolucionar GymBase v1, construir desde cero | **Desde cero** | v1 arrastra 618 hex sueltos, 5 patrones de formulario y 3 de modal. Es proyecto personal: el costo de empezar limpio es tiempo, y compra consistencia real |
-| Arquitectura de producto | Feature flags sobre app única, apps separadas sobre core | **Apps sobre core** | Los flags ya están probados en producción, pero perpetúan el patrón que generó la deuda |
+| Arquitectura de producto | Feature flags sobre app única, apps separadas sobre core | **Apps sobre core** | Los flags ya están construidos y funcionan, pero perpetúan el patrón que generó la deuda |
 | Resolución de tenant | Header custom + middleware, JWT claim | **JWT claim** | Elimina dependencia de framework y habilita mobile sin rediseño. Costo aceptado: desfase de rol hasta el refresh, mitigado con TTL corto y verificación en vivo para finanzas |
 | Base de datos | Una compartida entre productos, una por producto | **Una por producto** | Mezclar dojos y gimnasios recrea el acoplamiento del que se sale |
 | Rango del miembro | Columna denormalizada, tabla por disciplina | **Tabla por disciplina** | La denormalizada de v1 se desincronizaba y su resincronización borraba franjas de disciplinas ajenas |

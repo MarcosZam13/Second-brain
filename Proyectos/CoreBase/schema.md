@@ -117,12 +117,20 @@ payment_proofs (
   created_at      timestamptz default now()
 )
 
+-- El MVP cobra manual; esta tabla queda lista para el enchufe de ONVO.
+-- Campos alineados con la API real de cuentas conectadas -- ver billing-onvo.md
 org_payment_connections (
-  org_id              uuid primary key references organizations on delete cascade,
-  provider            text not null check (provider in ('onvo')),
-  provider_account_id text not null,
-  status              text default 'active' check (status in ('active','disconnected')),
-  connected_at        timestamptz default now()
+  org_id                uuid primary key references organizations on delete cascade,
+  provider              text not null default 'onvo' check (provider in ('onvo')),
+  provider_account_id   text,                     -- id de la cuenta conectada
+  status                text not null default 'not_connected'
+                        check (status in ('not_connected','pending_onboarding','awaiting_approval',
+                                          'active','inactive','suspended','disconnected')),
+  app_fee_percent       numeric(5,2),             -- comision de la plataforma
+  onboarding_url        text,                     -- vence a los 7 dias, regenerable
+  onboarding_expires_at timestamptz,
+  connected_at          timestamptz,
+  updated_at            timestamptz default now()
 )
 
 -- ▲ NUEVA: HU-23 / RF-21 — hermanos entrenando bajo un plan compartido
@@ -149,7 +157,7 @@ membership_reminders_sent (
 
 **▲ Nota sobre grupos familiares:** el plan se asocia a la suscripción, y la suscripción al grupo. Un grupo puede tener varios miembros con planes distintos (v1 ya lo resolvió así: "plan por integrante dentro de la familia") — el grupo es la unidad de cobro y de descuento, no un plan único forzado.
 
-**▲ Pendiente de verificar antes de implementar billing:** que Onvo soporte conexión por comercio (cada dojo conecta su propia cuenta). Si exige contrato de agregador, `org_payment_connections` está mal modelada desde el schema. Es media hora de docs y hay que hacerla **antes** de escribir esta migración.
+**▲ ONVO verificado (2026-08-28):** sí soporta conexión por comercio, con un modelo de marketplace tipo Stripe Connect. El diseño era correcto. **El MVP igual cobra por comprobante SINPE manual** — integrar ONVO depende de la inscripción ante Hacienda (trámite, no desarrollo) y conviene que el cobro automático sea opcional por dojo. El modo de cobro es una fila de configuración (`payment_mode`), no una rama de código, y un pago de ONVO se registra igual como `payment_proof` verificado. Detalle completo en [[Proyectos/CoreBase/billing-onvo|billing-onvo.md]].
 
 ## 4. Notificaciones — `[module]`
 
@@ -272,7 +280,7 @@ content_favorites (                              -- ▲ HU-15b
 )
 ```
 
-**▲** El gating pasa de una columna `required_plan_id` (un solo plan) a la tabla `content_plans` (N planes), que es lo que v1 ya usa en producción y lo que el negocio realmente necesita: un video de técnica visible para "Combate" y "Competencia" pero no para "Niños".
+**▲** El gating pasa de una columna `required_plan_id` (un solo plan) a la tabla `content_plans` (N planes), que es lo que v1 ya resolvía así y lo que el negocio realmente necesita: un video de técnica visible para "Combate" y "Competencia" pero no para "Niños".
 
 ## 7. Rutinas — `[module]`
 

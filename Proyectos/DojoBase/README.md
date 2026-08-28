@@ -4,7 +4,7 @@ Ver también: [[Proyectos/README|Proyectos]] · [[Proyectos/CoreBase/README|Core
 
 **App:** `apps/dojobase` dentro del monorepo [[Proyectos/CoreBase/README|CoreBase]] (`corebase`).
 **Estado:** specs corregidos y cerrados (2026-08-28), con las 7 decisiones aplicadas. Siguiente artefacto: `DESIGN.md`.
-**Primer cliente:** Dojo Shoto — **ya en producción sobre GymBase v1**, con 4 disciplinas (karate, BJJ, MMA, krav magá). Esto hace que DojoBase sea una *migración de un cliente vivo*, no un lanzamiento desde cero (ver A1 de la revisión crítica).
+**Primer prospecto:** Dojo Shoto — 4 disciplinas (karate, BJJ, MMA, krav magá). **No es un cliente en operación**: GymBase v1 no está en uso y su base está vacía. DojoBase se construye para **venderle el producto terminado**, así que la demo es la venta — tiene que estar presentable, no solo funcional.
 
 ## Qué es
 
@@ -39,8 +39,7 @@ La capa compartida (auth, tenant, billing, theming, clases, contenido, notificac
 
 - **`DESIGN.md`** — el equivalente al de [[Proyectos/Tacha/DESIGN|Tacha]]: personalidad, navegación por rol (miembro / admin / owner), inventario de pantallas mapeado a HU, estados vacíos/carga/error y prompt por pantalla. Es el artefacto que falta para que "mejorar la UI" no sea improvisación pantalla por pantalla, y es lo siguiente en la fila.
 - **Análisis de complejidad y orden de sprints** — estimación por HU y dependencias, como el `analisis-complejidad-viabilidad.md` de Tacha.
-- **Plan de migración de datos de Dojo Shoto** — no existe en ningún spec y es bloqueante del corte.
-- **Verificar que Onvo soporte conexión por comercio** — si exige contrato de agregador, el modelo de billing cambia desde el schema. Media hora de docs, antes de escribir esa migración.
+- **Seed de demo de Dojo Shoto** — sus 4 disciplinas, escalas de cinturones, clases y miembros de ejemplo, para que la demo de venta se vea como su dojo y no como datos genéricos.
 
 ## Ticket prefix
 

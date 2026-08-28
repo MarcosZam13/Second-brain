@@ -17,9 +17,9 @@ Ver también: [[Proyectos/CoreBase/README|README]] · [[Proyectos/CoreBase/revis
 
 **Qué se descarta:** evolucionar el repo `Gymbase`, reusar su proyecto de Supabase, y el enfoque de feature flags sobre un producto único (`clients/gymbase/<tenant>/theme.config.ts`).
 
-**Por qué:** GymBase v1 funciona, pero llegó ahí acumulando: 618 colores hex sueltos, 5 patrones de presentación de formularios, 2 arquitecturas de formulario conviviendo, 3 implementaciones distintas de modal, sin separación de dominio ni a nivel de carpetas, y con la resolución de tenant atada a un header custom contra un dominio hardcodeado. Cada una de esas cosas se arrastra si se parte del código existente. Es un proyecto personal sin usuarios que dependan del código nuevo hasta el corte — el costo de empezar limpio es tiempo, y el retorno es un producto consistente, con mini-componentes reales y cero hardcoding, que es exactamente lo que hace la diferencia entre "funciona" y "vendible".
+**Por qué:** GymBase v1 funciona pero **no está en uso** — no hay clientes operando sobre él. Llegó a donde está acumulando: 618 colores hex sueltos, 5 patrones de presentación de formularios, 2 arquitecturas de formulario conviviendo, 3 implementaciones distintas de modal, sin separación de dominio ni a nivel de carpetas, y con la resolución de tenant atada a un header custom contra un dominio hardcodeado. Cada una de esas cosas se arrastra si se parte del código existente. Es un proyecto personal sin usuarios que dependan de nada de esto todavía — el costo de empezar limpio es tiempo, y el retorno es un producto consistente, con mini-componentes reales y cero hardcoding, que es exactamente lo que hace la diferencia entre "funciona" y "vendible".
 
-**Qué NO significa "desde cero":** no se tira el conocimiento. GymBase v1 es la **fuente de especificación**: la lógica de negocio ya está validada en producción con un cliente real (fórmula de ascensos, máquina de estados de sparring, flujo de comprobantes SINPE, recurrencia de clases, cálculo de asistencia por disciplina). Esa lógica se **lee, se entiende y se reescribe limpia** — nunca se copia y pega. Los tres documentos de extracción del repo viejo (`auditoria-gymbase.md`, `extraccion-tecnica-dojo.md`, `logica-promociones.md`) existen precisamente para eso.
+**Qué NO significa "desde cero":** no se tira el conocimiento. GymBase v1 es la **fuente de especificación**: su lógica de negocio ya pasó por el uso real y por la retroalimentación del sensei de Dojo Shoto (fórmula de ascensos, máquina de estados de sparring, flujo de comprobantes SINPE, recurrencia de clases, cálculo de asistencia por disciplina). Esa validación es el activo que se conserva. La lógica se **lee, se entiende y se reescribe limpia** — nunca se copia y pega. Los tres documentos de extracción del repo viejo (`auditoria-gymbase.md`, `extraccion-tecnica-dojo.md`, `logica-promociones.md`) existen precisamente para eso.
 
 **Regla operativa:** cuando haya que implementar algo que GymBase ya resuelve, el orden es (1) leer cómo lo resuelve hoy y por qué, (2) decidir si esa decisión sigue siendo correcta, (3) escribirlo de nuevo contra el design system y el schema nuevos. Nunca (1) copiar el archivo, (2) adaptarlo.
 
@@ -31,7 +31,7 @@ Cuatro nombres circulaban para tres cosas (`memberbase`, CoreBase, DojoBase, `@m
 |---|---|
 | **CoreBase** | La plataforma. El repo/monorepo (`corebase`), el scope npm (`@corebase/*`), la capa compartida, la organización y el proyecto de Supabase. |
 | **DojoBase** | Producto vendible #1 — academias de artes marciales. `apps/dojobase`. |
-| **GymBase** | Producto vendible #2 — gimnasios de fitness. `apps/gymbase`, se construye después. GymBase **v1** es el legacy en producción, en otro repo. |
+| **GymBase** | Producto vendible #2 — gimnasios de fitness. `apps/gymbase`, se construye después. GymBase **v1** es el legacy archivado en otro repo, sin uso. |
 
 Se descarta **MemberBase**: era el nombre interno de GymBase v1 y arrastra justamente la confusión "un producto para gyms y dojos a la vez" que este proyecto está resolviendo.
 
@@ -118,7 +118,7 @@ Piezas que el spec original no cubría y quedan definidas ahí: dónde vive la o
 |---|---|---|
 | DojoBase | `pzyvvotltgipehsywqpi` (hoy llamado "CoreBase", org `CoreBase`, us-east-2, PG 17.6) | Vacío, listo |
 | GymBase v2 | A crear cuando arranque | — |
-| GymBase v1 (legacy) | `vwkxrjnxfjfzobzzoagj` (otra cuenta, us-west-2) | En producción con Dojo Shoto |
+| GymBase v1 (legacy) | `vwkxrjnxfjfzobzzoagj` (otra cuenta, us-west-2) | Vacío, sin uso. Queda solo como respaldo |
 
 **Pendiente menor:** el proyecto se llama "CoreBase" pero va a contener los datos de DojoBase. Conviene renombrarlo a `dojobase` desde el dashboard antes de la primera migración, para que en seis meses no haya duda de qué base es cuál. Es un cambio de nombre, no afecta el ref ni las URLs.
 
@@ -142,6 +142,10 @@ GitHub Actions con: typecheck, lint (incluye las reglas anti-hex y anti-vertical
 ### Entornos y deploy
 
 Un proyecto de Vercel por app. `apps/dojobase` con dominio propio; `apps/marketing` separado. Variables de entorno por app, nunca compartidas entre productos.
+
+### Cobro
+
+El MVP cobra por comprobante SINPE manual. ONVO Pay (marketplace con cuentas conectadas) queda modelado y listo para activarse cuando la inscripción ante Hacienda esté hecha — ver [[Proyectos/CoreBase/billing-onvo|billing-onvo.md]]. El modo de cobro es una fila de configuración por organización, no una rama de código.
 
 ### Jobs programados
 
@@ -169,7 +173,7 @@ El claim de rol del JWT distingue los tres explícitamente; ninguna policy puede
 
 ## 9. Multi-disciplina
 
-Se mantiene el patrón validado en producción, con la corrección de la doble fuente de verdad:
+Se mantiene el patrón ya validado con uso real, con la corrección de la doble fuente de verdad:
 
 - Una organización tiene N disciplinas (`UNIQUE(org_id, name)`).
 - Un miembro tiene un rango **independiente por disciplina** (`member_ranks`), y esa es la **única** fuente de verdad. Se descarta la columna denormalizada `current_rank_id` de v1, que coexistía y se desincronizaba sin trigger que las mantuviera juntas.
@@ -187,6 +191,8 @@ No se debaten — son bugs conocidos del código actual que no se replican:
 - Sin `CREATE POLICY` sobre vistas — Postgres no lo soporta. Ver [[Proyectos/CoreBase/seguridad-jwt-rls|seguridad-jwt-rls.md]].
 - Nombres de tabla sin prefijo de vertical heredado (`scheduled_classes`, no `gym_scheduled_classes`).
 
-## 11. Qué pasa con GymBase v1 mientras tanto
+## 11. Qué pasa con GymBase v1
 
-Sigue en producción con Dojo Shoto e Iron Gym. Durante la construcción de DojoBase se mantiene **solo con fixes** — ninguna feature nueva, porque cada una es trabajo que hay que volver a hacer del otro lado. El corte de Dojo Shoto a DojoBase requiere un plan de migración de datos (miembros, rangos por disciplina, historial de pagos, peleas) que todavía no existe y es bloqueante del lanzamiento — se arma antes de la semana de corte, no durante.
+Nada. **No está en uso, no tiene clientes operando y su base de datos está vacía** — queda archivado como respaldo y como fuente de especificación. No se le agregan features, no se le hacen fixes, y no hay migración de datos que planificar.
+
+Esto simplifica el proyecto de forma importante respecto de lo que asumían los specs: no hay corte, no hay ventana de riesgo con un cliente, y no hay dos productos que mantener en paralelo. Toda la atención va a DojoBase, y el objetivo es que esté **listo para vender**, con Dojo Shoto como primer prospecto.
