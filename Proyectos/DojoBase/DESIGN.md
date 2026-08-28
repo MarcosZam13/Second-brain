@@ -3,7 +3,7 @@ proyecto: DojoBase
 tema: DESIGN.md — guía de diseño, sistema de componentes e inventario de pantallas
 fecha: 2026-08-28
 tipo: documentacion
-estado: v1.2 — 47 pantallas mapeadas a HU. v1.1 incorporó la revisión de los mockups (progresión por disciplina, ficha del alumno, mediciones); v1.2 suma lo del repaso de GymBase v1: sesión de sparring con cronómetro, anuncios, avisos y proyección de torneos
+estado: v1.3 — 48 pantallas mapeadas a HU. v1.1 incorporó la revisión de los mockups (progresión por disciplina, ficha del alumno, mediciones); v1.2 suma lo del repaso de GymBase v1: sesión de sparring con cronómetro, anuncios, avisos y proyección de torneos
 tags: [dojobase, diseño, ui-ux, design-system, componentes]
 ---
 
@@ -224,6 +224,36 @@ NEGOCIO
 
 "Más" abre una hoja de navegación con el resto. Los cuatro fijos son los de uso diario, en la zona del pulgar. **Pagos ocupa un lugar fijo en admin porque es la tarea que se hace todos los días** y que si se atrasa, molesta al alumno.
 
+### 3.5 Las tres vistas: owner, admin y alumno
+
+**No son tres audiencias distintas: son hasta tres sombreros sobre la misma persona.**
+
+Es el hallazgo que más cambia el diseño, y viene del propio GymBase v1: Dojo Shoto corre con `admins_pay: true` y `staff_as_members`, o sea que **el sensei entrena, tiene su cinturón y paga su mensualidad como cualquier alumno**. No es un administrador que mira un sistema desde afuera; es un practicante que además administra.
+
+| Rol | Sombreros |
+|---|---|
+| Alumno | El suyo |
+| Instructor (admin) | El suyo **+** la operación del dojo |
+| Dueño (owner) | El suyo **+** la operación **+** el negocio |
+
+Cada rol **suma** al anterior, no lo reemplaza.
+
+#### Qué se decide con eso
+
+**Una sola app, no tres.** GymBase v1 separaba `/portal`, `/admin` y `/owner` como si fueran productos distintos, y el sensei tenía que saltar entre ellos para ver si alguien pagó y después volver a ver su propia clase. Acá la navegación **acumula secciones**: primero lo personal, después *Gestión*, después *Negocio*. Un alumno ve un solo bloque; el dueño ve tres.
+
+**Nada se muestra deshabilitado.** Un alumno no ve los items de gestión en gris: no los ve. Un control que no se puede usar hace que la app se sienta más grande y más confusa de lo que es, sin darle nada a nadie.
+
+**Un solo inicio, con dos zonas.** El dueño no entra a un tablero de KPIs: entra a *su* inicio — su próxima clase, sus retos — y debajo, si es staff, un bloque de **El dojo hoy**: cuántos comprobantes esperan, cuántas clases hay, qué ascenso viene. Los números de negocio (ingresos, morosidad) **no** van ahí: viven en Finanzas, que es del owner.
+
+Que el sensei vea primero su propia clase no es un detalle de acomodo. Es lo que hace que la app se sienta suya y no del sistema que le vendieron.
+
+**"Ver como alumno".** El staff puede mirar la app exactamente como la ve un alumno. v1 lo tenía y es de las funciones más útiles para dar soporte: cuando alguien dice "no me aparece la clase", la respuesta es mirar lo mismo que él, no adivinar. Es solo de lectura y no cambia permisos — solo esconde las secciones de gestión.
+
+#### Lo que esto NO cambia
+
+La autorización no tiene nada que ver con la navegación. Que una sección esté oculta no protege nada: **cada pantalla verifica el rol en el servidor y cada consulta pasa por RLS**. "Ver como alumno" es una preferencia de interfaz; si el staff pide un dato de gestión estando en ese modo, lo obtiene igual, porque su rol real no cambió. Ocultar un botón nunca fue un control de acceso.
+
 ### 3.4 Reglas transversales
 
 - **Todo se navega también en mobile.** No hay pantalla "solo desktop": el sensei va a usar el celular en el tatami. La grilla de calificación de promociones es la más difícil y tiene su solución específica (ver 5.3).
@@ -234,7 +264,7 @@ NEGOCIO
 
 ## 4. Inventario de pantallas
 
-47 pantallas. Cada una mapeada a las HU que resuelve. Las `K` son kioscos (pantalla completa, sin navegación) y las `P` son públicas (sin sesión).
+48 pantallas. Cada una mapeada a las HU que resuelve. Las `K` son kioscos (pantalla completa, sin navegación) y las `P` son públicas (sin sesión).
 
 ### Acceso (5)
 
@@ -250,7 +280,7 @@ NEGOCIO
 
 | # | Pantalla | HU | Notas |
 |---|---|---|---|
-| M1 | Inicio | HU-11 | Próxima clase, retos pendientes de respuesta, feed de próximas peleas, estado de membresía si vence pronto |
+| M1 | Inicio | HU-11, HU-40 | Próxima clase, retos pendientes, feed de próximas peleas, aviso de membresía. Para el staff, debajo aparece **El dojo hoy** (D1) |
 | M2 | Clases — semana | HU-01 | Vista semanal, inscripción en un toque |
 | M3 | Detalle de clase | HU-02, HU-03 | Inscribirse/cancelar + lista de asistentes con su rango |
 | M4 | Sparring — mis retos | HU-05, HU-06, HU-09b | Tres secciones: por responder, activos, historial |
@@ -273,12 +303,13 @@ NEGOCIO
 | M21 | Anuncios del dojo | HU-35b | Feed de anuncios con portada, fijados arriba, comentarios y reacciones |
 | M22 | Mis avisos | HU-36b | Canales por tipo de evento y activación de push por dispositivo |
 | M23 | Editar perfil | HU-37 | Datos básicos y foto |
+| M24 | Ver como alumno | HU-41 | No es una pantalla: es un modo. El staff mira la app tal como la ve un alumno, para dar soporte sin adivinar |
 
 ### Admin (13)
 
 | # | Pantalla | HU | Notas |
 |---|---|---|---|
-| D1 | Panel | — | KPIs: miembros activos, clases de hoy, comprobantes pendientes, próximas promociones |
+| D1 | El dojo hoy | HU-40 | **No es una pantalla aparte**: es el bloque de gestión que aparece bajo el inicio personal del staff. Comprobantes esperando, clases de hoy, ascensos próximos. Sin números de negocio — esos son de Finanzas |
 | D2 | Miembros | HU-28 | Lista con rango por disciplina y estado de membresía |
 | D3 | Ficha de miembro | HU-27, HU-28 | Tabs: general, rangos, clases, promociones, peleas, pagos |
 | D4 | Calendario — mes | HU-04 | Vista mensual con ocupación |

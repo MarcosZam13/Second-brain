@@ -3,7 +3,7 @@ proyecto: DojoBase
 tema: Historias de usuario y criterios de aceptación
 fecha: 2026-08-28
 tipo: documentacion
-estado: v1.2 — 62 historias con criterios de aceptación, agrupadas en épicas por rol. Numeración heredada del spec 06; HU-24 en adelante son nuevas. v1.1 agrega progresión por disciplina, ficha del alumno y módulos opcionales (revisión de mockups); v1.2 agrega lo que salió del repaso de GymBase v1: sesión de sparring con cronómetro, clases recurrentes, anuncios, notificaciones por correo y proyección de torneos
+estado: v1.3 — 64 historias con criterios de aceptación, agrupadas en épicas por rol. Numeración heredada del spec 06; HU-24 en adelante son nuevas. v1.1 agrega progresión por disciplina, ficha del alumno y módulos opcionales (revisión de mockups); v1.2 agrega lo que salió del repaso de GymBase v1: sesión de sparring con cronómetro, clases recurrentes, anuncios, notificaciones por correo y proyección de torneos
 tags: [dojobase, historias-usuario, requerimientos]
 ---
 
@@ -531,6 +531,21 @@ Como owner, quiero una página pública del dojo editable desde la app, para pod
 - CA-02: La página es pública y usa el tema del dojo.
 - CA-03: Puedo despublicarla mientras la preparo.
 
+**HU-40: Ver el pulso del dojo sin salir de mi inicio** *(nueva)*
+Como instructor o dueño, quiero ver lo que necesita atención hoy debajo de mi propio inicio, para no tener que entrar a otra sección para saber si hay algo pendiente.
+- CA-01: Bajo mi inicio personal veo un bloque con los comprobantes esperando revisión, las clases de hoy y los ascensos próximos.
+- CA-02: Cada dato lleva a la pantalla donde se resuelve.
+- CA-03: **No aparecen números de negocio** (ingresos, morosidad): esos viven en Finanzas y son del dueño.
+- CA-04: Un alumno no ve este bloque en absoluto.
+- CA-05: Si no hay nada pendiente, el bloque lo dice — no se muestra vacío ni se esconde.
+
+**HU-41: Ver la app como la ve un alumno** *(nueva)*
+Como instructor o dueño, quiero mirar la app tal como la ve un alumno, para poder ayudar a alguien sin adivinar qué está viendo.
+- CA-01: Puedo activar y desactivar el modo desde mi menú de usuario.
+- CA-02: Con el modo activo desaparecen las secciones de gestión y de negocio de la navegación.
+- CA-03: Un aviso permanente indica que estoy en ese modo, para no confundirlo con un problema de permisos.
+- CA-04 **[servidor]**: **Es una preferencia de interfaz, no un cambio de permisos.** Mi rol real no cambia: si pido un dato de gestión estando en ese modo, lo obtengo. Ocultar una sección nunca fue un control de acceso.
+
 ---
 
 ## Rol: Sistema
@@ -570,6 +585,7 @@ Como sistema, quiero avisar a los inscritos antes de su clase, para bajar las au
 | Anuncios del dojo | HU-35, 35b | RF-13c |
 | Notificaciones por canal | HU-36, 36b | RF-17, RF-17b |
 | Perfil y página del dojo | HU-37, 39 | RF-18c |
+| Inicio del staff y ver como alumno | HU-40, 41 | RF-23 |
 | Proyección de torneo | HU-38 | — |
 | Ficha del alumno | HU-32, 32b, 32c | RF-12c, RF-12d |
 | Mediciones (opcional) | HU-33, 33b | RF-12e |

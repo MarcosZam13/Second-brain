@@ -86,6 +86,8 @@ Decidido de antemano para no improvisarlo bajo presión: **torneos → grupos fa
 | **Admin** | Gestión operativa completa: miembros, clases (es también el instructor), contenido, promociones, peleas oficiales, aprobación de comprobantes. Sin acceso a reportes de ingresos |
 | **Owner** | Todo lo de admin + dashboard financiero agregado + conexión de pagos + configuración del tema |
 
+**Los tres son la misma persona con más o menos sombreros, no tres audiencias.** En un dojo el sensei entrena, tiene su cinturón y paga su mensualidad como cualquier alumno — GymBase v1 lo confirmó con `admins_pay` y `staff_as_members` en Dojo Shoto. Por eso los roles acumulan y la app es una sola; el detalle de diseño está en la sección 3.5 de [[Proyectos/DojoBase/DESIGN|DESIGN.md]].
+
 **El instructor no es una entidad ni un flag separado**: es un admin de la organización asignado a una clase. Evita modelar una entidad nueva sin ganar nada — todo admin ya tiene los permisos operativos para dar clase.
 
 ## 4. Requerimientos funcionales
@@ -160,6 +162,10 @@ Decidido de antemano para no improvisarlo bajo presión: **torneos → grupos fa
 - **RF-22** — El flujo de billing completo: definición de planes por admin/owner → elección y suscripción por el miembro → subida de comprobante → revisión por admin, con motivo visible en caso de rechazo.
 - **RF-22b** — El modo de cobro es configuración por organización. El MVP opera en **comprobante SINPE manual**; el cobro automático por pasarela (ONVO, modelo de marketplace) queda modelado y se activa por configuración, sin cambios de código ni de historial. Ver [[Proyectos/CoreBase/billing-onvo|billing-onvo.md]].
 - **RF-21** — Grupos familiares con plan por integrante, cobrados como unidad.
+
+### Vistas por rol
+- **RF-23** — Los roles **acumulan**: instructor es alumno más operación, y dueño es instructor más negocio. La aplicación es una sola y la navegación suma secciones según el rol; no hay portales separados. El inicio de un miembro del staff es su inicio personal, con un bloque de gestión debajo.
+- **RF-23b** — El staff puede mirar la app como la ve un alumno. Es una preferencia de interfaz y **no altera permisos**: el rol real se conserva y el servidor responde según él.
 
 ### Alta y acceso
 - **RF-19** — El alta de una organización nueva es un proceso manual del equipo, no un autoregistro.
