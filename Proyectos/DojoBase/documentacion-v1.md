@@ -40,8 +40,8 @@ Criterio para priorizar: primero lo que hace el producto **presentable y onboard
 - Auth, organizaciones y roles (owner/admin/member) resueltos por JWT claim
 - Invitación y alta de miembros por parte del admin
 - Multi-disciplina con rangos y franjas independientes por arte marcial
-- Clases: calendario semanal para el miembro y mensual para el admin, cupos, inscripción como mecanismo de asistencia, cancelación de inscripción y de clase completa, clases privadas por plan
-- Sparring amistoso completo: reto → aceptación → resultado por rounds → confirmación del rival → historial head-to-head → expiración automática
+- Clases: calendario semanal para el miembro y mensual para el admin, **series recurrentes**, cupos, lista de espera, inscripción como mecanismo de asistencia, corrección de no-show, cancelación de inscripción y de clase completa, clases privadas por plan
+- Sparring amistoso completo: reto → aceptación → **sesión con cronómetro por rounds y descanso** → resultado → confirmación del rival → historial head-to-head → expiración automática
 - Promociones: eventos, criterios ponderados, calificación, resolución, reapertura, y **portal del miembro** con desglose por criterio
 - Historial de peleas oficiales + feed de próximas peleas
 - Contenido en carpetas anidadas, con gating por plan y favoritos
@@ -51,7 +51,11 @@ Criterio para priorizar: primero lo que hace el producto **presentable y onboard
 - Ficha completa del alumno con generación de ficha para torneo
 - Mediciones corporales como módulo opcional por dojo
 - Theming dinámico por tenant
-- Notificaciones in-app en tiempo real + push
+- Notificaciones en tres canales — in-app en tiempo real, push y **correo** — con preferencias por tipo de evento
+- Anuncios del dojo con comentarios y reacciones
+- Kiosco de proyección de torneos en tiempo real
+- Exportaciones de reportes en CSV, Excel y PDF
+- Página pública del dojo, editable desde la app
 - PWA instalable
 
 ### 2.2 Fuera de alcance (documentado para no perderlo)
@@ -60,6 +64,13 @@ Criterio para priorizar: primero lo que hace el producto **presentable y onboard
 - **App nativa en tiendas** — PWA primero. La arquitectura queda lista para el salto (tenant por JWT, sin dependencia de middleware de framework).
 - **Torneos con bracket automático** — el modelo de datos entra, la UI de armado de brackets no. Es lo primero que se prioriza si sobra tiempo, y lo primero que se cae si falta.
 - **Todo el perfil de gimnasio de fitness**: check-in por QR, métricas de salud/InBody, fotos de progreso, inventario, ventas, POS y marketplace. Eso es GymBase v2.
+
+### 2.2b Pendiente legal, no técnico
+
+**La facturación electrónica de Costa Rica queda fuera del MVP, pero hay que decidirla antes del
+primer cobro.** No es una feature opcional: es requisito legal para facturar. Se resuelve por fuera
+con un proveedor de facturación, o se integra después. Va junto con la inscripción ante Hacienda,
+que además es lo que habilita el cobro automático por pasarela.
 
 ### 2.3 Orden de recorte si el cronograma se atrasa
 
@@ -94,6 +105,8 @@ Decidido de antemano para no improvisarlo bajo presión: **torneos → grupos fa
 
 ### Sparring
 - **RF-05** — Todo reto de sparring está asociado a una disciplina específica.
+- **RF-05b** ▲ — Un reto define cantidad de rounds, duración de round y descanso. La app provee una **sesión con cronómetro** que recorre round, carga de resultado, descanso y resumen.
+- **RF-05c** ▲ — El cronómetro se calcula contra un instante de inicio, de modo que **sigue siendo correcto con la pantalla apagada o la app en segundo plano**, y avisa por sonido y vibración al faltar 10 segundos y al terminar el round.
 - **RF-06** — Flujo: creación (challenger) → aceptación o rechazo (rival) → carga de resultados por round (challenger) → cierre con ganador calculado.
 - **RF-06a** ▲ — La carga de puntaje se hace con botones de valor directo por peleador, con deshacer de la última anotación. Los valores disponibles se configuran por disciplina (por defecto 1 a 4).
 - **RF-06b** ▲ — **El rival confirma el resultado cargado.** El historial head-to-head cuenta únicamente enfrentamientos confirmados; los no confirmados se muestran como pendientes en el detalle del reto.
@@ -120,6 +133,12 @@ Decidido de antemano para no improvisarlo bajo presión: **torneos → grupos fa
 - **RF-12e** ▲ — El registro de mediciones corporales (peso, estatura, porcentaje de grasa y de masa muscular, más métricas extendidas) es un **módulo opcional que cada organización activa o no**. Cuando está activo, el peso más reciente alimenta la ficha de competencia.
 - **RF-12f** ▲ — La disponibilidad de cada módulo opcional se resuelve por configuración de la organización, sin despliegues ni ramas de código por cliente.
 
+### Clases recurrentes
+- **RF-04c** ▲ — Una clase puede crearse como **serie recurrente** con días, hora y fecha de fin. Editar la serie afecta solo a las ocurrencias futuras que no se hayan editado aparte; cancelar una ocurrencia no rompe la serie; eliminar la serie nunca borra ocurrencias pasadas con asistencia registrada.
+
+### Comunidad
+- **RF-13c** ▲ — El dojo publica anuncios con portada, categoría y opción de fijarlos; los miembros comentan y reaccionan. **Publicar es exclusivo de admin y owner** — es un tablón de anuncios, no un foro abierto. El admin puede ocultar un comentario sin borrarlo.
+
 ### Contenido y challenges
 - **RF-13** — Contenido organizado en carpetas anidadas configurables por admin/owner, con visibilidad por plan de membresía.
 - **RF-13b** — El miembro puede marcar contenido como favorito.
@@ -128,8 +147,14 @@ Decidido de antemano para no improvisarlo bajo presión: **torneos → grupos fa
 ### Billing
 - **RF-15** ▲ — **El admin puede aprobar o rechazar comprobantes de pago y ve el monto de la fila que revisa** (el comprobante SINPE lo muestra en la imagen), **pero no accede a reportes ni dashboards de ingresos agregados**.
 - **RF-16** — Solo el owner accede al dashboard financiero agregado y a la configuración de conexión de pagos.
-- **RF-17** — El sistema envía recordatorios de pago próximo a vencer por push/in-app, sin duplicarlos.
+- **RF-17** ▲ — El sistema notifica en tres canales — in-app, push y **correo** — según el tipo de evento, sin duplicar envíos. Los avisos de **pago** (por vencer, vencido, comprobante aprobado o rechazado) y el **resultado de promoción** van siempre por correo: un push se ignora y no llega si el alumno desinstaló la app.
+- **RF-17b** ▲ — El miembro elige qué canales quiere para cada tipo de evento. Sin esa opción, la única salida de alguien saturado es bloquear las notificaciones del navegador, y ahí pierde también las que le importan.
+- **RF-17c** ▲ — Existe un recordatorio de clase próxima con antelación configurable por clase.
 - **RF-18** — Cada organización configura su tema visual (colores, logo, tipografía, radio de bordes) sin cambios de código.
+- **RF-18b** ▲ — Al crear una disciplina, el sistema ofrece **escalas de rangos precargadas** editables, para no cargar veinte cinturones a mano.
+- **RF-18c** ▲ — El dojo tiene una **página pública editable desde la app** (historia, instructores, programas, logros, ubicación). Editable desde la app, no por código: de lo contrario cada dojo nuevo vuelve a ser un despliegue.
+- **RF-18d** ▲ — Los reportes del owner se exportan en CSV, Excel y PDF.
+- **RF-18e** ▲ — La app incluye política de privacidad y términos de servicio accesibles. Es **bloqueante del primer cobro**, no un detalle.
 - **RF-22** — El flujo de billing completo: definición de planes por admin/owner → elección y suscripción por el miembro → subida de comprobante → revisión por admin, con motivo visible en caso de rechazo.
 - **RF-22b** — El modo de cobro es configuración por organización. El MVP opera en **comprobante SINPE manual**; el cobro automático por pasarela (ONVO, modelo de marketplace) queda modelado y se activa por configuración, sin cambios de código ni de historial. Ver [[Proyectos/CoreBase/billing-onvo|billing-onvo.md]].
 - **RF-21** — Grupos familiares con plan por integrante, cobrados como unidad.
@@ -208,6 +233,9 @@ Las semanas 3 y 4 del cronograma original (disciplinas/rangos y clases) siguen s
 | Progresión de rangos | Franjas para todas las disciplinas, **estilo configurable por disciplina** | **Configurable** | Solo BJJ usa franjas; karate asciende directo y MMA no usa cinturones. Asumir un solo modelo le inventa a la escuela un sistema que no tiene |
 | Mediciones corporales | Fuera de alcance (perfil de gimnasio), **módulo opcional** | **Módulo opcional** | Un dojo también las quiere: la categoría de peso para competir depende del peso actual |
 | Feature flags | Config de build por cliente (v1), **filas de módulos por organización** | **Filas por organización** | Los flags de v1 ramificaban lógica de negocio y exigían un despliegue por cliente. Estos solo prenden o apagan un módulo que ya vive aislado |
+| Comunidad | Foro abierto, **tablón de anuncios con comentarios** | **Tablón** | Un foro libre exige moderación, reportes y reglas de convivencia — tres funciones fuera de alcance. Un dojo usa el canal para avisar, no para debatir |
+| Marcador de sparring | Formulario posterior, **sesión con cronómetro** | **Sesión con cronómetro** | v1 ya lo resuelve así y ningún spec lo había recogido: se anota durante el round, no después |
+| Proyección de torneo | Polling cada 15 s (v1), **Realtime** | **Realtime** | Un marcador proyectado que tarda 15 segundos en actualizarse se nota desde el otro lado del gimnasio |
 | Asistencia | Solo inscripción, inscripción + no-show corregible | **Inscripción + no-show** | La elegibilidad para ascender de cinturón se calcula sobre asistencia; sin corrección, se infla. En un dojo el cinturón es la reputación de la escuela |
 | Resultado de sparring | Auto-reportado por el challenger, **confirmado por el rival** | **Confirmado** | El head-to-head es social; un marcador de una sola parte no sobrevive al primer conflicto |
 | Historial de peleas | Público por default, **privado por default** | **Privado** | El feed social se sostiene con `upcoming` siempre visible; el resultado es del miembro |

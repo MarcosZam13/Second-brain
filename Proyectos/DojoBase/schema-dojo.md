@@ -155,6 +155,11 @@ sparring_challenges (
                      check (status in ('pending','accepted','declined','completed','cancelled')),
   winner_id          uuid references profiles,                -- ▲ el spec lo mencionaba al pasar
   opponent_confirmed boolean default false,                   -- ▲ decisión 4
+  -- ▲▲ La sesión tiene cronómetro. Hallazgo del repaso de v1: ningún spec lo
+  -- mencionaba, y es la mitad de la función. Ver la nota de abajo.
+  total_rounds       int not null default 3 check (total_rounds between 1 and 12),
+  round_seconds      int not null default 180 check (round_seconds between 30 and 900),
+  rest_seconds       int not null default 60 check (rest_seconds >= 0),
   scheduled_at       timestamptz,
   responded_at       timestamptz,                             -- ▲ base para la expiración
   completed_at       timestamptz,                             -- ▲
@@ -183,6 +188,26 @@ sparring_notes (
   created_at   timestamptz default now()
 )
 ```
+
+### ▲▲ El sparring tiene cronómetro — hallazgo del repaso de v1
+
+`SparringSessionModal.tsx` de v1 corre una máquina de cuatro fases a pantalla completa:
+**cronómetro del round → cargar resultado → descanso → resumen**, con `total_rounds` y
+`round_duration_seconds` configurables al crear el reto (3 rounds de 180 s por defecto).
+
+Esto cambia qué es la pantalla del marcador. No es un formulario para anotar puntos después: es
+**la herramienta que se usa durante el sparring**, con el celular apoyado al lado del tatami. El
+teclado de puntos encaja ahí dentro — se anota mientras corre el round.
+
+Requisitos que salen de eso, y que no son obvios hasta que se usa:
+
+- El cronómetro **sigue corriendo con la pantalla apagada o la app en segundo plano**: el tiempo se
+  calcula contra un instante de inicio, no con un contador que se descuenta. Un `setInterval` que
+  se pausa cuando el navegador suspende la pestaña arruina el round.
+- **Aviso sonoro y vibración** al faltar 10 segundos y al terminar el round. Nadie mira la pantalla
+  mientras pelea.
+- El paso a descanso es automático; el paso al round siguiente **lo confirma la persona**, porque
+  el descanso real nunca dura exactamente lo configurado.
 
 **Flujo (RF-06):** el challenger crea → el rival acepta o rechaza → el challenger carga los rounds → al cerrar, el server action calcula `winner_id` con la **función pura compartida** de suma de rounds → el rival confirma.
 
@@ -310,6 +335,9 @@ tournaments (
   name                      text not null,
   tournament_date           date,
   status                    text default 'draft' check (status in ('draft','active','completed')),
+  -- ▲ Token del kiosco de proyección: la pantalla de TV se abre sin sesión,
+  -- así que necesita su propia llave en vez de exponer el torneo a cualquiera.
+  projection_token          text unique,
   source_promotion_event_id uuid references promotion_events   -- puente ya existente en v1
 )
 
@@ -358,7 +386,20 @@ tournament_matches (
 
 **▲ Divisiones tipadas:** el spec dejaba `name` de texto libre. Con `min/max_weight_kg` y `min/max_rank_level` el sistema puede sugerir la división de cada participante en vez de que el admin la asigne a mano — es la diferencia entre un módulo usable y uno que nadie usa.
 
-**Alcance:** el modelo de datos entra ahora, pero **la UI de armado de brackets es lo primero que se cae** si el cronograma se atrasa (decisión 7). Registrar el torneo y sus resultados sin bracket automático ya tiene valor.
+### ▲ Kiosco de proyección (confirmado en el repaso)
+
+Pantalla pública de solo lectura, a pantalla completa y con zoom, para proyectar el bracket en vivo
+en un televisor durante el torneo. Existe en v1 (`TournamentProjection.tsx`) y se conserva, con dos
+cambios:
+
+- **Realtime de verdad**, no `setInterval` cada 15 segundos como en v1. Es exactamente la pantalla
+  que la auditoría marcó como "realtime falso donde más importa": un marcador proyectado que tarda
+  15 segundos en actualizarse se nota desde el otro lado del gimnasio.
+- **Acceso por `projection_token`**, no por sesión: la tableta o la laptop conectada al proyector no
+  debería tener que iniciar sesión como admin, y ese token solo abre la vista de lectura de ese
+  torneo.
+
+**Alcance:** el modelo de datos entra ahora, pero **la UI de armado de brackets es lo primero que se cae** si el cronograma se atrasa (decisión 7). Registrar el torneo y sus resultados sin bracket automático ya tiene valor. La proyección depende del bracket, así que se cae con él.
 
 ## 7. Cobertura contra las historias de usuario
 
@@ -380,5 +421,6 @@ Explícito para que ningún agente lo reintroduzca "porque ya existía":
 - **Check-in por QR** (`gym_qr_codes`, `gym_attendance_logs`, kiosko, ocupación en tiempo real). Es el perfil de gimnasio de fitness. En un dojo la asistencia es por inscripción a clase.
 - **Métricas de salud / InBody / fotos de progreso.** Perfil de gimnasio.
 - **Inventario, ventas, POS, marketplace, gastos.** No entra al MVP de DojoBase; si un dojo lo pide, se evalúa como módulo compartido después.
-- **`gym_about`, `gym_trainers`, `gym_achievements`, `gym_programs`** — la "página del dojo" de v1 con contenido hardcodeado y su editor de admin ya removido. Si vuelve, vuelve como contenido editable de verdad, no como código por cliente.
+- **Check-in por QR, ocupación en vivo, PRs y tests de 1RM** — perfil de gimnasio de fitness.
+- **La página pública del dojo tal como está en v1** (`gym_about` y familia): contenido hardcodeado por cliente, con el editor de admin removido. **La función sí vuelve** (ver el repaso), pero como contenido editable desde la app — si no, cada dojo nuevo vuelve a ser un despliegue, que es el problema que este proyecto existe para resolver.
 - **Las tablas legacy vacías** que v1 arrastra sin uso.

@@ -3,11 +3,11 @@ proyecto: DojoBase
 tema: Historias de usuario y criterios de aceptación
 fecha: 2026-08-28
 tipo: documentacion
-estado: v1.1 — 37 HU con CA, agrupadas en épicas por rol. Numeración heredada del spec 06; HU-24 en adelante son nuevas. v1.1 (2026-08-28) agrega progresión configurable por disciplina, ficha del alumno y módulos opcionales, salidos de la revisión de los mockups
+estado: v1.2 — 62 historias con criterios de aceptación, agrupadas en épicas por rol. Numeración heredada del spec 06; HU-24 en adelante son nuevas. v1.1 agrega progresión por disciplina, ficha del alumno y módulos opcionales (revisión de mockups); v1.2 agrega lo que salió del repaso de GymBase v1: sesión de sparring con cronómetro, clases recurrentes, anuncios, notificaciones por correo y proyección de torneos
 tags: [dojobase, historias-usuario, requerimientos]
 ---
 
-# Historias de Usuario — DojoBase (v1.1)
+# Historias de Usuario — DojoBase (v1.2)
 
 Ver también: [[Proyectos/DojoBase/README|README]] · [[Proyectos/DojoBase/documentacion-v1|documentacion-v1.md]] · [[Proyectos/DojoBase/schema-dojo|schema-dojo.md]] · [[Proyectos/CoreBase/schema|CoreBase/schema.md]] · [[Proyectos/CoreBase/seguridad-jwt-rls|seguridad-jwt-rls.md]]
 
@@ -149,6 +149,15 @@ Como admin, quiero crear clases con disciplina, instructor, cupo y horario, vien
 - CA-04: Veo el calendario en vista mensual, con la ocupación de cada clase.
 - CA-05: Puedo marcar una clase como privada y restringirla a planes específicos.
 
+**HU-02d: Programar una serie de clases recurrentes** *(nueva — confirmada en el repaso de v1)*
+Como admin, quiero crear una clase que se repite todas las semanas, para no cargar el mismo horario cada lunes.
+- CA-01: Al crear una clase puedo indicar que se repite, con días de la semana, hora y fecha de fin.
+- CA-02: Al editar la serie, el cambio aplica a las ocurrencias futuras.
+- CA-03 **[servidor]**: Editar la serie **no pisa** una ocurrencia que ya se había editado aparte.
+- CA-04: Cancelar una ocurrencia puntual **no rompe la serie**: la siguiente se genera igual.
+- CA-05: Al eliminar la serie elijo entre solo las futuras o todas.
+- CA-06 **[servidor]**: Eliminar una serie nunca borra ocurrencias pasadas que ya tienen asistencia registrada.
+
 **HU-04b: Corregir la asistencia después de la clase** *(nueva — decisión 5)*
 Como instructor, quiero marcar quién realmente no llegó, para que la asistencia registrada sea la real.
 - CA-01: Después de la hora de la clase, puedo marcar a cualquier inscrito como ausente, y revertirlo.
@@ -187,6 +196,16 @@ Como retador, quiero cargar los resultados por round del sparring aceptado, para
 - CA-03: Al cerrar el reto, el ganador se calcula automáticamente a partir de la suma de los rounds.
 - CA-04 **[servidor]**: El cálculo del ganador usa la misma función que el preview que veo en pantalla — el resultado mostrado y el guardado nunca difieren.
 - CA-05: Un empate en la suma de rounds es un resultado válido y se guarda como tal.
+
+**HU-07c: Correr la sesión de sparring con cronómetro** *(nueva — hallazgo del repaso de v1)*
+Como challenger, quiero que la app me lleve el tiempo de cada round y del descanso, para poder concentrarme en el sparring en vez de en el reloj.
+- CA-01: Al crear el reto defino cantidad de rounds, duración de cada uno y del descanso; si no los defino, son 3 rounds de 3 minutos con 1 de descanso.
+- CA-02: La sesión recorre las fases: cronómetro del round → cargar el resultado → descanso → round siguiente, y termina en un resumen.
+- CA-03: Puedo anotar puntos **mientras el round corre**, sin pausar nada.
+- CA-04 **[servidor / cliente]**: El tiempo se calcula contra el instante de inicio, no descontando un contador. **Con la pantalla apagada o la app en segundo plano, al volver el cronómetro muestra el tiempo correcto.**
+- CA-05: Suena un aviso y vibra al faltar 10 segundos y al terminar el round — nadie mira la pantalla mientras pelea.
+- CA-06: El paso a descanso es automático; el paso al round siguiente lo confirmo yo, porque el descanso real nunca dura lo configurado.
+- CA-07: Puedo pausar y retomar, y puedo terminar el reto antes de completar todos los rounds.
 
 **HU-07b: Confirmar el resultado** *(nueva — decisión 4)*
 Como miembro retado, quiero confirmar o disputar el resultado que cargó mi rival, para que el historial refleje lo que realmente pasó.
@@ -366,6 +385,22 @@ Como miembro, quiero marcar contenido como favorito, para volver a encontrarlo f
 - CA-02: Tengo una vista con solo mis favoritos.
 - CA-03: Si pierdo acceso a un contenido por cambio de plan, deja de aparecer en mis favoritos.
 
+### Epic: Anuncios del dojo
+
+**HU-35: Publicar un anuncio** *(nueva — confirmada en el repaso)*
+Como admin, quiero publicar anuncios con imagen para todo el dojo, para avisar de exámenes, cambios de horario y resultados.
+- CA-01: Publico con título, texto, categoría e imagen de portada opcional.
+- CA-02: Puedo fijar un anuncio arriba del resto.
+- CA-03: Puedo restringir un anuncio a planes específicos.
+- CA-04 **[servidor]**: **Solo admin y owner publican.** Un miembro que llame directamente al server action recibe error — es un tablón de anuncios, no un foro.
+
+**HU-35b: Comentar y reaccionar** *(nueva)*
+Como miembro, quiero comentar y reaccionar a los anuncios, para participar de la vida del dojo.
+- CA-01: Puedo comentar un anuncio y reaccionar una sola vez por anuncio.
+- CA-02: Veo los comentarios de mis compañeros con su nombre y rango.
+- CA-03: El admin puede **ocultar** un comentario sin borrarlo.
+- CA-04: Si el dojo no activó el módulo, la sección no existe en la navegación.
+
 ### Epic: Challenges
 
 **HU-16: Crear challenges**
@@ -429,6 +464,20 @@ Como miembro, quiero recibir un recordatorio antes de que venza mi membresía, p
 - CA-02: No recibo el mismo recordatorio dos veces para el mismo período.
 - CA-03: El recordatorio me lleva a la pantalla de pago.
 
+**HU-36: Recibir los avisos por el canal correcto** *(nueva — confirmada en el repaso)*
+Como miembro, quiero que los avisos importantes me lleguen por correo y no solo dentro de la app, para no perderme un vencimiento de pago.
+- CA-01: Los avisos de pago — por vencer, vencido, comprobante aprobado o rechazado — me llegan **siempre por correo**, además de in-app.
+- CA-02: El resultado de una promoción y la cancelación de una clase también llegan por correo.
+- CA-03: Los retos de sparring y los recordatorios de clase llegan por push e in-app.
+- CA-04: El correo incluye el dato concreto — monto, fecha, clase — y no solo "tenés una notificación".
+- CA-05 **[servidor]**: Un mismo aviso no se envía dos veces por el mismo canal para el mismo período.
+
+**HU-36b: Elegir qué avisos quiero** *(nueva)*
+Como miembro, quiero decidir por qué canal me llega cada tipo de aviso, para no tener que bloquear todo.
+- CA-01: Veo la lista de tipos de aviso y elijo canales para cada uno.
+- CA-02: Puedo activar o desactivar las notificaciones push **por dispositivo**.
+- CA-03 **[servidor]**: Los avisos de pago no se pueden desactivar por completo — el correo se mantiene, porque afecta la vigencia de la membresía.
+
 **HU-23: Agrupar a una familia bajo un plan compartido**
 Como admin u owner, quiero agrupar a varios miembros en un grupo familiar, para cobrarles como unidad en vez de por separado.
 - CA-01: Puedo crear un grupo familiar y asignarle miembros de la organización.
@@ -463,6 +512,25 @@ Como owner, quiero conectar la cuenta de pagos del dojo, para procesar cobros.
 - CA-02: Veo el estado de la conexión.
 - CA-03 **[servidor]**: Un admin no puede ver ni modificar esta configuración por ninguna vía.
 
+**HU-37: Editar mi perfil y mi foto** *(nueva — quedó pendiente en v1)*
+Como miembro, quiero editar mi nombre, teléfono y foto de perfil, para que mi ficha esté al día.
+- CA-01: Puedo editar mis datos básicos y subir una foto.
+- CA-02: La foto se ve en el avatar de toda la app, con el anillo de mi rango.
+- CA-03: Si no tengo foto, se muestran mis iniciales — nunca un espacio en blanco.
+
+**HU-38: Proyectar el torneo en una pantalla** *(nueva — confirmada en el repaso)*
+Como admin, quiero proyectar el bracket en un televisor durante el torneo, para que los presentes sigan las peleas.
+- CA-01: Abro una vista a pantalla completa, de solo lectura, con control de zoom.
+- CA-02: El marcador se actualiza **en tiempo real** al registrarse un resultado, sin recargar ni esperar.
+- CA-03: La pantalla se abre con un enlace propio, **sin necesidad de iniciar sesión** en la tableta o laptop del proyector.
+- CA-04 **[servidor]**: Ese enlace da acceso únicamente a la vista de lectura de ese torneo, a nada más.
+
+**HU-39: Ver la página pública del dojo** *(nueva — confirmada en el repaso)*
+Como owner, quiero una página pública del dojo editable desde la app, para poder compartirla con interesados.
+- CA-01: Edito historia, instructores, programas, logros y ubicación **desde la app**, sin tocar código.
+- CA-02: La página es pública y usa el tema del dojo.
+- CA-03: Puedo despublicarla mientras la preparo.
+
 ---
 
 ## Rol: Sistema
@@ -476,6 +544,12 @@ Como sistema, quiero ejecutar un proceso diario que resuelva todo lo que vence p
 - CA-03: Marca como vencidas las suscripciones que pasaron su período.
 - CA-04: Si el proceso falla, queda registro y el intento siguiente no duplica efectos.
 
+**HU-31b: Avisar de la clase que se acerca** *(nueva)*
+Como sistema, quiero avisar a los inscritos antes de su clase, para bajar las ausencias.
+- CA-01: Un proceso frecuente envía el recordatorio con la antelación configurada en cada clase.
+- CA-02 **[servidor]**: Cada clase recibe su recordatorio una sola vez, aunque el proceso corra muchas veces.
+- CA-03: Una clase cancelada no genera recordatorio.
+
 ---
 
 ## Trazabilidad HU → requerimiento
@@ -485,18 +559,22 @@ Como sistema, quiero ejecutar un proceso diario que resuelva todo lo que vence p
 | Autenticación y pertenencia | HU-22, 24, 25, 26 | RF-19, RF-20, RNF-02 |
 | Disciplinas y rangos | HU-00, 00b, 27 | RF-01, RF-02, RF-02b a RF-02d, RNF-06 |
 | Miembros | HU-28 | RF-20 |
-| Calendario y clases | HU-01, 02, 02b, 02c, 03, 04, 04b | RF-03, RF-03b, RF-03c, RF-04, RF-04b |
-| Sparring | HU-05 a HU-09c, 07b | RF-05, RF-06, RF-06b, RF-06c, RF-07, RF-08 |
+| Calendario y clases | HU-01, 02, 02b, 02c, 02d, 03, 04, 04b | RF-03 a RF-04c |
+| Sparring | HU-05 a HU-09c, 07b, 07c | RF-05 a RF-08 |
 | Peleas oficiales | HU-10, 11, 11b | RF-09, RF-10 |
 | Promociones | HU-12, 12b, 13, 13b, 14 | RF-11 a RF-12b |
 | Contenido | HU-15, 15b | RF-13, RF-13b |
 | Challenges | HU-16 | RF-14 |
 | Membresías y pagos | HU-16b, 16c, 17, 17b, 18, 19, 20, 23 | RF-15, RF-16, RF-17, RF-21, RF-22 |
 | Configuración | HU-21, 29, 30 | RF-18, RF-16 |
+| Anuncios del dojo | HU-35, 35b | RF-13c |
+| Notificaciones por canal | HU-36, 36b | RF-17, RF-17b |
+| Perfil y página del dojo | HU-37, 39 | RF-18c |
+| Proyección de torneo | HU-38 | — |
 | Ficha del alumno | HU-32, 32b, 32c | RF-12c, RF-12d |
 | Mediciones (opcional) | HU-33, 33b | RF-12e |
 | Módulos opcionales | HU-34 | RF-12f |
-| Procesos automáticos | HU-31 | RF-06c, RF-17 |
+| Procesos automáticos | HU-31, 31b | RF-06c, RF-17, RF-17c |
 
 ## Pendiente
 

@@ -258,6 +258,28 @@ notifications (
 )
 create index on notifications (recipient_id, read_at, created_at desc);
 
+-- ▲ Qué canales quiere el miembro para cada tipo de evento. Sin esto, la
+-- única salida de alguien harto de notificaciones es bloquearlas en el
+-- navegador, y ahí se pierden también las que sí le importan.
+notification_preferences (
+  member_id  uuid references profiles on delete cascade,
+  org_id     uuid not null references organizations on delete cascade,
+  type       text not null,
+  channels   text[] not null default '{in_app}',   -- 'in_app' | 'email' | 'push'
+  primary key (member_id, org_id, type)
+)
+
+-- ▲ Bitácora de envíos. Sirve para no duplicar y para responder
+-- "¿le llegó el aviso?" cuando un alumno reclama.
+notification_deliveries (
+  id              uuid primary key default gen_random_uuid(),
+  notification_id uuid references notifications on delete cascade,
+  channel         text not null check (channel in ('in_app','email','push')),
+  status          text not null check (status in ('sent','failed','skipped')),
+  error           text,
+  sent_at         timestamptz default now()
+)
+
 -- ▲ Nunca se definió en el spec 02 pese a referenciarse en el 05 como "ya existe"
 push_subscriptions (
   id         uuid primary key default gen_random_uuid(),
@@ -277,6 +299,61 @@ Un único punto de entrada server-side, `emitNotification({ orgId, recipientId, 
 **▲ Corrección al spec (D4):** el spec decía "si el destinatario no tiene sesión activa, dispara push", con la heurística de "sin conexión Realtime abierta". Saber eso desde el servidor requiere Realtime Presence con canal por usuario — infra adicional, no una consulta. Se simplifica: **insertar siempre y pushear siempre** si hay suscripción; el cliente deduplica marcando leída la que ya vio in-app. Se ahorra una pieza de infra completa sin perder comportamiento observable.
 
 **▲ Corrección de aislamiento (heredada de la auditoría):** `push_subscriptions` en v1 tiene `org_id NOT NULL` sin FK y **sin filtro de org en su única policy** — el aislamiento de tenant depende 100% de la aplicación. Acá lleva FK, `UNIQUE` y policy con doble condición.
+
+## 4b. Comunidad — `[module]`, opcional
+
+```sql
+community_posts (
+  id           uuid primary key default gen_random_uuid(),
+  org_id       uuid not null references organizations on delete cascade,
+  author_id    uuid not null references profiles,
+  title        text not null,
+  body         text not null,
+  category     text not null default 'general',
+  cover_url    text,
+  is_pinned    boolean default false,
+  is_visible   boolean default true,
+  published_at timestamptz,
+  created_at   timestamptz default now(),
+  updated_at   timestamptz default now()
+)
+create index on community_posts (org_id, is_pinned desc, published_at desc);
+
+community_comments (
+  id         uuid primary key default gen_random_uuid(),
+  org_id     uuid not null references organizations on delete cascade,
+  post_id    uuid not null references community_posts on delete cascade,
+  author_id  uuid not null references profiles,
+  body       text not null,
+  is_visible boolean default true,
+  created_at timestamptz default now()
+)
+
+community_reactions (
+  post_id    uuid references community_posts on delete cascade,
+  member_id  uuid references profiles on delete cascade,
+  type       text not null,
+  created_at timestamptz default now(),
+  primary key (post_id, member_id)   -- ▲ una reacción por persona por post
+)
+
+community_post_plans (            -- gating por plan, igual que el contenido
+  post_id uuid references community_posts on delete cascade,
+  plan_id uuid references membership_plans on delete cascade,
+  primary key (post_id, plan_id)
+)
+```
+
+**▲ No es un foro, es el tablón de anuncios.** La policy de v1 se llama
+`posts_insert_admin_only`: **solo admin y owner publican**; los miembros comentan y reaccionan.
+
+La distinción no es un detalle de permisos, cambia el producto entero. Un foro libre necesita
+moderación, reportes y reglas de convivencia — tres funciones que no están en el alcance. Un
+tablón con comentarios no necesita nada de eso, y es lo que un dojo realmente usa: el sensei avisa
+del examen de cinturón, del cambio de horario, del resultado del torneo.
+
+`is_visible` le da al admin la salida de ocultar un comentario sin borrarlo, que es toda la
+moderación que este modelo necesita.
 
 ## 5. Clases y asistencia — `[module]`
 
@@ -303,7 +380,15 @@ scheduled_classes (                              -- ▲ renombrada: sin prefijo 
   cancelled_reason   text,                       -- ▲
   is_private         boolean default false,      -- ▲ clases privadas, ya existe en v1
   allowed_plan_ids   uuid[],                     -- ▲
-  recurrence_group_id uuid,                      -- ▲ recurrencia, ya existe en v1
+  -- ▲ Recurrencia. Confirmada como obligatoria en el repaso de v1: un dojo
+  -- tiene el mismo horario todas las semanas, y crearlo a mano cada lunes es
+  -- justamente el trabajo que la app tiene que quitar.
+  recurrence_group_id uuid,                      -- agrupa las ocurrencias de una serie
+  recurrence_rule    text,                       -- días de la semana y hora
+  recurrence_until   date,                       -- hasta cuándo se generan ocurrencias
+  is_exception       boolean default false,      -- ▲ esta ocurrencia se editó aparte
+  reminder_minutes   int default 120,            -- ▲ antelación del recordatorio
+  reminder_sent_at   timestamptz,                -- ▲ idempotencia del recordatorio
   created_at         timestamptz default now()
 )
 create index on scheduled_classes (org_id, starts_at);
@@ -323,6 +408,15 @@ class_reservations (                             -- ▲ renombrada
 **▲ Corrección de la regla de asistencia (decisión 5).** El spec decía: inscribirse marca `attended = true` automáticamente, sin verificación posterior. Pero la elegibilidad para un examen de cinturón se calcula sobre la ventana de asistencia — con esa regla, un alumno se inscribe a todo, no va a nada, y aparece elegible para ascender. En un gimnasio es un detalle; en un dojo el cinturón es la moneda de reputación de la escuela.
 
 La regla queda: `attended` es **nullable**. Se pone en `true` al confirmarse la inscripción (la inscripción sigue siendo el mecanismo de asistencia — no hay QR ni check-in físico), pero el instructor puede marcar no-show después de la clase. **La ventana de promoción cuenta solo `attended = true`.** Un botón y una columna nullable, no un módulo de check-in.
+
+**▲ Reglas de la serie recurrente**, tomadas del comportamiento correcto de v1:
+
+- Editar la serie afecta a las ocurrencias futuras, **nunca a las que ya se marcaron como
+  excepción** (`is_exception`). Alguien que movió la clase del jueves no quiere que la edición de
+  la serie se la pise.
+- Cancelar una ocurrencia **no rompe la serie**: la clase siguiente se genera igual.
+- Eliminar la serie ofrece explicitamente las dos opciones — solo futuras, o todas — y nunca
+  borra ocurrencias pasadas con asistencia registrada.
 
 **Se porta de v1:** validar que la clase no empiece en menos de 30 minutos al reservar, y waitlist automática cuando se llena. Fechas siempre en UTC en la base; Costa Rica es UTC-6 sin DST y el servidor corre en UTC — todo cálculo de calendario usa métodos UTC.
 
@@ -474,6 +568,9 @@ Chequeo de que el schema alcanza para lo pedido (las tablas de la capa vertical 
 | RF-19 | Alta manual — sin tabla, es proceso |
 | HU-32 (ficha del alumno) | `member_profiles` + `dojo_member_details` + última `health_snapshots` |
 | HU-33 (mediciones) | `health_profiles`, `health_snapshots`, activadas por `org_modules` |
+| HU-35 (anuncios del dojo) | `community_posts`, `community_comments`, `community_reactions` |
+| HU-36 (canales de aviso) | `notification_preferences`, `notification_deliveries` |
+| HU-02d (clases recurrentes) | `scheduled_classes.recurrence_*`, `is_exception` |
 
 ## 11. Migraciones — orden de aplicación
 

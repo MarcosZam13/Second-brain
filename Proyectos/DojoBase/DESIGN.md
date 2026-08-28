@@ -3,7 +3,7 @@ proyecto: DojoBase
 tema: DESIGN.md — guía de diseño, sistema de componentes e inventario de pantallas
 fecha: 2026-08-28
 tipo: documentacion
-estado: v1.1 — 41 pantallas mapeadas a HU. v1.1 (2026-08-28) incorpora la revisión de los mockups: progresión por disciplina, ficha del alumno y mediciones opcionales
+estado: v1.2 — 47 pantallas mapeadas a HU. v1.1 incorporó la revisión de los mockups (progresión por disciplina, ficha del alumno, mediciones); v1.2 suma lo del repaso de GymBase v1: sesión de sparring con cronómetro, anuncios, avisos y proyección de torneos
 tags: [dojobase, diseño, ui-ux, design-system, componentes]
 ---
 
@@ -234,7 +234,7 @@ NEGOCIO
 
 ## 4. Inventario de pantallas
 
-41 pantallas. Cada una mapeada a las HU que resuelve.
+47 pantallas. Cada una mapeada a las HU que resuelve. Las `K` son kioscos (pantalla completa, sin navegación) y las `P` son públicas (sin sesión).
 
 ### Acceso (5)
 
@@ -269,6 +269,10 @@ NEGOCIO
 | M17 | Notificaciones | HU-09, HU-20 | Centro de notificaciones |
 | M18 | Ficha del alumno | HU-32, 32b, 32c | Datos personales, emergencia, competencia y récord en una pantalla, con generación de la ficha para torneo y aviso de campos faltantes |
 | M19 | Mis mediciones | HU-33 | **Módulo opcional.** Si el dojo no lo activó, la pantalla no existe ni aparece en la navegación |
+| M20 | Sesión de sparring | HU-07c | **A pantalla completa.** Cronómetro grande, teclado de puntos y fase de descanso. La única pantalla del producto que rompe el marco de navegación |
+| M21 | Anuncios del dojo | HU-35b | Feed de anuncios con portada, fijados arriba, comentarios y reacciones |
+| M22 | Mis avisos | HU-36b | Canales por tipo de evento y activación de push por dispositivo |
+| M23 | Editar perfil | HU-37 | Datos básicos y foto |
 
 ### Admin (13)
 
@@ -298,6 +302,11 @@ NEGOCIO
 | O4 | Configuración del dojo | HU-29, HU-30 | SINPE, plazos, modo de cobro, conexión de pagos |
 | O5 | Grupos familiares | HU-23 | Crear grupos y asignar integrantes |
 | O6 | Módulos del dojo | HU-34 | Activar o desactivar módulos opcionales. Desactivar oculta, no borra |
+| O7 | Página pública del dojo | HU-39 | Editor de historia, instructores, programas, logros y ubicación |
+| D14 | Publicar anuncio | HU-35 | `FormPage`: tiene portada y gating por plan |
+| D15 | Serie de clases | HU-02d | Programar recurrencia y resolver serie contra ocurrencia |
+| K1 | Proyección de torneo | HU-38 | **Kiosco.** Pantalla completa, sin navegación, sin sesión, en tiempo real. Se ve desde el otro lado del gimnasio |
+| P1 | Página pública del dojo | HU-39 | Vista pública, con el tema del dojo |
 
 ---
 
@@ -366,9 +375,13 @@ Se construyen **componiendo primitivas**, nunca con HTML y clases sueltas. `Spar
 | `ThemeEditor` | Editor de tema con vista previa y contraste | HU-21 |
 | `CelebrationOverlay` | El momento de impacto: ascenso, sparring ganado | HU-13, HU-07 |
 
-### 5.3 Las dos pantallas difíciles
+### 5.3 Las pantallas difíciles
 
 **`PromotionScoreGrid` en mobile (D10).** Una matriz de candidatos × criterios no entra en un celular. Solución: en desktop es la grilla completa; **en mobile es un flujo de a un candidato por vez** — su foto y rango arriba, sus criterios como lista vertical de `Stepper`, y navegación anterior/siguiente entre candidatos. Misma data, mismo server action, dos presentaciones. Es el caso donde `DataList` no alcanza y hay que diseñar las dos.
+
+**`SparringSession` (M20).** Es la única pantalla que se usa **durante** una actividad física, no después. Rompe el marco de navegación a propósito: pantalla completa, sin barra, cronómetro en tamaño de display legible a un metro, y el teclado de puntos abajo, en la zona del pulgar. El descanso usa el mismo lienzo con la cuenta regresiva y el resumen del round anterior. Aviso sonoro y vibración — nadie mira la pantalla mientras pelea.
+
+**`TournamentProjection` (K1).** Se ve desde el otro lado del gimnasio, en un televisor, por gente parada. Nada de tipografía de interfaz: tamaños de display, contraste máximo, cero elementos de navegación. Se actualiza en tiempo real — un marcador proyectado con 15 segundos de retraso se nota y desprestigia el torneo.
 
 **`AttendanceRoster` (D6).** Se usa de pie, en el tatami, con una mano. Filas altas, área de toque grande, los tres estados como `SegmentedControl` compacto por fila. Sin scroll horizontal, sin menús anidados.
 
