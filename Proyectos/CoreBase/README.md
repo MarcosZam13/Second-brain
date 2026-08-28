@@ -4,7 +4,7 @@ Ver también: [[Proyectos/README|Proyectos]] · [[Proyectos/DojoBase/README|Dojo
 
 **Repo:** https://github.com/MarcosZam13/CoreBase (privado) · local en `ProyectosPersonales/corebase` — monorepo Turborepo + pnpm.
 **Supabase:** org `CoreBase` · proyecto `pzyvvotltgipehsywqpi` (us-east-2, PG 17.6) — vacío, será la base de DojoBase.
-**Estado:** specs cerrados, `DESIGN.md` listo y scaffolding del monorepo commiteado. Siguiente: migraciones de CoreBase y `apps/dojobase`.
+**Estado (2026-08-28):** **corte vertical funcionando.** Login, tenant por JWT claim, RLS verificado, Realtime probado, y tema por organización servido desde la base. Dos organizaciones sirven dos temas distintos desde el mismo despliegue — el hito de negocio, verificado con prueba automatizada.
 
 ## Qué es
 
@@ -41,13 +41,21 @@ CoreBase es **la plataforma**, no un producto. Es el monorepo y la capa comparti
 
 ## Lo que ya existe en el repo
 
-- `CLAUDE.md` — el contrato de trabajo dentro del repo: las cuatro reglas, la estructura, los patrones obligatorios (JWT, server actions, RLS, fechas).
-- `.claude/agents/` — los cuatro subagentes: `ui-agent`, `qa-agent`, `security-agent`, `docs-agent`.
-- `packages/config` — escala base de tokens y las cuatro reglas de ESLint propias que vuelven ejecutables las convenciones (`no-hardcoded-color`, `no-raw-dimension`, `no-vertical-vocabulary`, `no-cross-app-import`).
-- `packages/core/theming` — contrato de tema, derivación de color de texto por contraste real, tres presets verificados contra WCAG AA, y validación con ajuste sugerido.
-- `packages/ui` — primeras diez primitivas.
+**Base de datos** (7 migraciones aplicadas): identidad (,  con , , ), helpers de JWT en , , RLS de todas las tablas, autorización de canales de Realtime, endurecimiento de la superficie de RPC, y .
 
-Nada está instalado ni compilado todavía: la lógica de contraste sí se verificó ejecutándola contra los valores de referencia de WCAG.
+**App** (, Next.js): login, sin-organización, aceptar invitación, panel, miembros con generación de invitaciones, y editor de tema con vista previa en vivo y validación de contraste.
+
+**Paquetes**:  (tokens + 4 reglas de ESLint propias),  (theming con derivación de contraste, tipos de la base),  (10 primitivas).
+
+**Pruebas que corren de verdad contra Supabase:**
+
+| Prueba | Qué verifica | Estado |
+|---|---|---|
+|  | Entrega en vivo y aislamiento entre organizaciones en los dos sentidos | 227-509 ms · OK |
+|  | Login, claim de tenant, aislamiento de la interfaz, permisos por rol | 9/9 |
+|  | Dos organizaciones, dos temas, el mismo despliegue | 7/7 |
+
+**Subagentes** en : , , , .
 
 ## Contexto técnico de GymBase v1
 
