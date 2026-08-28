@@ -170,6 +170,8 @@ Aplicado ya a [[Proyectos/Tacha/documentacion-v1#6. Modelo de datos (resumen con
 
 ## 8. Diagrama del modelo — DBML para dbdiagram.io
 
+Render del diagrama ya importado (2026-08-27): ![[diagrama-catalogo-scraping.jpeg]]
+
 Pegar directamente en [dbdiagram.io](https://dbdiagram.io) (botón "Import" o reemplazar el contenido del editor). Cubre las tablas de este módulo (catálogo + scraping) más `household_store_preferences` (resolución de 5.3); `categories`, `households` y `stores` aparecen como tablas de referencia mínimas para que las relaciones se vean completas — su definición real vive en otros módulos.
 
 ```dbml
