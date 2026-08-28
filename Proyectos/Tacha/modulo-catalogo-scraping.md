@@ -4,7 +4,7 @@ tema: Módulo de catálogo + web scraping — rediseño (Daniel)
 fecha: 2026-08-27
 tipo: documentacion
 responsable: Daniel
-estado: resuelto — 5.3 (stores) confirmado por el equipo el 2026-08-27, listo para implementar schema.sql
+estado: "DESACTUALIZADO (2026-08-27, avisado por Daniel) — este reporte no es la versión final, Daniel va a mandar una versión final verificada. La resolución de 5.3 (stores fijo + household_store_preferences) se mantiene como decisión del equipo, pero el resto del contenido de esta nota debe reemplazarse cuando llegue esa versión final — no tratar como fuente de verdad hasta entonces"
 fuente: _fuentes/Tacha_reporte-catalogo-scraping_2026-08-27.md
 tags: [documentacion, modelo-datos, scraping, catalogo, supabase, tacha]
 ---
@@ -12,6 +12,8 @@ tags: [documentacion, modelo-datos, scraping, catalogo, supabase, tacha]
 # Módulo de catálogo + web scraping — rediseño (Daniel)
 
 Ver también: [[Proyectos/Tacha/README|README]] · [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] · [[Proyectos/Tacha/historias-usuario|historias-usuario.md]]
+
+> **⚠️ DESACTUALIZADO (2026-08-27):** Daniel avisó que el `.md` que generó este reporte estaba desactualizado y va a mandar una versión final verificada. Cuando llegue, reemplazar el contenido de esta nota (secciones 1-5, 7-8) con la versión final — no usar como referencia de implementación hasta entonces. La **resolución de la sección 6 (stores fijo + `household_store_preferences`)** sí se mantiene como decisión de equipo ya cerrada, independiente de qué tan desactualizado esté el resto del reporte técnico.
 
 Reporte de Daniel (responsable del módulo de web scraping + catálogo, sección 12 de `documentacion-v1.md`), recibido 2026-08-27. Cubre únicamente las tablas y componentes de ese módulo — no toca `households`, `lists`, `list_items`, `recipes`, `meal_plans`, `purchase_sessions` ni autenticación; esas tablas aparecen solo como referencias externas (FKs).
 
