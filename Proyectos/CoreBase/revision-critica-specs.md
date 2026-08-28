@@ -1,19 +1,38 @@
 ---
-proyecto: MemberBase
+proyecto: CoreBase
 tema: revisión crítica del paquete de specs 1-9
 fecha: 2026-08-28
 tipo: analisis
-estado: pendiente de decisiones
-tags: [memberbase, corebase, dojobase, arquitectura, revision]
+estado: revisado — las 7 decisiones se tomaron el 2026-08-28, ver bloque de decisiones al inicio
+tags: [corebase, dojobase, arquitectura, revision]
 ---
 
 # Revisión crítica — specs 1-9 de DojoBase/CoreBase
 
-Ver también: [[Proyectos/MemberBase/README|MemberBase]] · [[Proyectos/DojoBase/README|DojoBase]] · [[Proyectos/GymBase/README|GymBase]]
+Ver también: [[Proyectos/CoreBase/README|CoreBase]] · [[Proyectos/DojoBase/README|DojoBase]] · [[Proyectos/GymBase/README|GymBase]]
 
 Revisión de los 9 documentos de spec (`_fuentes/`) contra el código real de GymBase (`ProyectosPersonales/Gymbase`), su `auditoria-gymbase.md`, `extraccion-tecnica-dojo.md` y `Context/_CONTEXTO-IA.md`.
 
 **Veredicto general:** el paquete de specs es sólido en dirección arquitectónica (separar core de vertical, JWT en vez de header, theming a tabla) y las correcciones de bugs heredados están bien identificadas. Los problemas están en **tres frentes**: (a) SQL que no funciona como está escrito, (b) el schema cubre ~70% de las historias de usuario, y (c) el encuadre del proyecto — el cronograma asume que esto es construcción nueva cuando en realidad es una migración de un cliente en producción.
+
+---
+
+## Decisiones tomadas (2026-08-28)
+
+Las 7 decisiones del resumen final quedaron resueltas. Este documento se conserva como el análisis que las fundamenta; la fuente de verdad de lo decidido es [[Proyectos/CoreBase/arquitectura|arquitectura.md]].
+
+| # | Decisión | Resuelto |
+|---|---|---|
+| 1 | Repo | **Desde cero**, repo nuevo `corebase`. Se descarta evolucionar `Gymbase` — decisión del usuario: proyecto personal, no se pierde nada, y arrancar limpio es lo que garantiza mini-componentes y cero hardcoding desde el día uno. GymBase v1 queda como **fuente de especificación y de lógica de negocio ya validada**, nunca como código a copiar |
+| 2 | Supabase | **Proyecto nuevo** — ya creado: org `CoreBase`, proyecto `CoreBase` (`pzyvvotltgipehsywqpi`, us-east-2, PG 17.6), vacío. Ver nota de nombres en arquitectura.md |
+| 3 | Finanzas (B2) | Se reescribe el requisito: admin sin reportes ni `org_payment_connections`, pero sí ve el monto de la fila que aprueba |
+| 4 | Sparring (D2) | Se agrega confirmación del rival |
+| 5 | Asistencia (D1) | Se agrega no-show marcable por el instructor |
+| 6 | `member_fights` (B6) | Privado por default + `upcoming` siempre visible |
+| 7 | Recorte | Torneos → familias → challenges, en ese orden, si el cronograma se atrasa |
+
+Además el usuario pidió aplicar **cualquier otra corrección que la revisión considere necesaria**, y dejó explícito que las funcionalidades de GymBase que deben sobrevivir (mejoradas) son: historial de peleas profesionales, retos de sparring entre miembros, contenido por carpetas, rutinas, rangos, artes marciales, clases, clases privadas, membresías, torneos y ascensos.
+
 
 Severidad: 🔴 bloqueante (rompe si se implementa tal cual) · 🟠 gap (falta algo que las HU exigen) · 🟡 criterio (decisión a revisar, no está roto)
 
@@ -177,9 +196,11 @@ Spec 5: "si el destinatario no tiene sesión activa (heurística: sin conexión 
 
 Cuatro nombres para tres cosas. Propuesta:
 
-- **MemberBase** = la plataforma / el monorepo / el scope npm `@memberbase/*` (ya es el nombre establecido en el código).
-- **CoreBase** = nombre humano del conjunto `packages/core` + `packages/ui` + `packages/shared-modules`. No es un paquete npm.
+- **CoreBase** = la plataforma, el monorepo (`corebase`), el scope npm `@corebase/*` y la capa compartida. Es también el nombre de la organización y del proyecto de Supabase ya creados.
 - **DojoBase** / **GymBase** = los dos productos vendibles, `apps/dojobase` y `apps/gymbase`.
+- Se descarta **MemberBase** como nombre — era el nombre interno de GymBase v1 y arrastra la confusión que se está resolviendo.
+
+*(Resuelto el 2026-08-28: CoreBase gana como nombre único.)*
 
 ### E3 🟡 `packages/core/{auth,billing,design-tokens}` como 3 paquetes es prematuro
 

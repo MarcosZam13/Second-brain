@@ -1,8 +1,8 @@
 # DojoBase
 
-Ver también: [[Proyectos/README|Proyectos]] · [[Proyectos/MemberBase/README|MemberBase (plataforma)]] · [[Proyectos/MemberBase/revision-critica-specs|Revisión crítica de los specs]] · [[Proyectos/GymBase/README|GymBase]]
+Ver también: [[Proyectos/README|Proyectos]] · [[Proyectos/CoreBase/README|CoreBase (plataforma)]] · [[Proyectos/CoreBase/revision-critica-specs|Revisión crítica de los specs]] · [[Proyectos/GymBase/README|GymBase]]
 
-**App:** `apps/dojobase` dentro del monorepo [[Proyectos/MemberBase/README|MemberBase]].
+**App:** `apps/dojobase` dentro del monorepo [[Proyectos/CoreBase/README|CoreBase]] (`corebase`).
 **Estado:** specs cerrados y revisados (2026-08-28). Pendientes 7 decisiones antes de escribir la primera migración.
 **Primer cliente:** Dojo Shoto — **ya en producción sobre GymBase v1**, con 4 disciplinas (karate, BJJ, MMA, krav magá). Esto hace que DojoBase sea una *migración de un cliente vivo*, no un lanzamiento desde cero (ver A1 de la revisión crítica).
 

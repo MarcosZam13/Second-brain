@@ -12,7 +12,7 @@ Ver también: [[Dashboard]] · [[Sistema/proyecto-segundo-cerebro|Diseño comple
 - `/Cursos/{curso}/examenes/` — material específico de examen
 - `/Cursos/{curso}/entregables/` — tus propios borradores/respuestas de tareas (diario, reportes, proyectos) — separado de `apuntes/`, que es material del profesor, no tuyo
 - `/Cursos/{curso}/repasos/` — notas de repaso para quices/exámenes, sintetizadas por Claude Code a partir de `apuntes/` (no material original del profesor, por eso separado de `apuntes/`) — ver [[Sistema/skills/quiz-repaso/SKILL|quiz-repaso]]
-- `/Proyectos/{MemberBase|DojoBase|GymBase|Tacha|CaneleApp|COMPDES}/` — contexto y documentación de cada proyecto. MemberBase/DojoBase/GymBase son tres notas separadas pero **un solo repo** (el monorepo `memberbase`): MemberBase es la plataforma y CoreBase, los otros dos son las apps que la consumen — ver [[Proyectos/MemberBase/README|MemberBase]] antes de tocar cualquiera de los tres
+- `/Proyectos/{CoreBase|DojoBase|GymBase|Tacha|CaneleApp|COMPDES}/` — contexto y documentación de cada proyecto. CoreBase/DojoBase/GymBase son tres notas separadas pero **un solo repo** (el monorepo `corebase`): CoreBase es la plataforma y la capa compartida, los otros dos son las apps que la consumen — ver [[Proyectos/CoreBase/README|CoreBase]] antes de tocar cualquiera de los tres
 - `/Sistema/skills/` — skills reusables (clean-code-practices, gitflow-scrum, y los que se agreguen)
 - `/Sistema/tickets.md` — registro único de prefijos de ticket por curso/proyecto y último número usado (ver `gitflow-scrum`)
 

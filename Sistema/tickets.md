@@ -21,7 +21,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 | Prefijo | Proyecto | Último usado | Próximo |
 |---|---|---|---|
 | TACHA | Tacha | TACHA-23 | TACHA-24 |
-| MB | MemberBase (plataforma/CoreBase, trabajo transversal del monorepo) | MB-1 | MB-2 |
+| MB | CoreBase (plataforma, trabajo transversal del monorepo) | MB-2 | MB-3 |
 | DOJO | DojoBase | — | DOJO-1 |
 | GYM | GymBase | — | GYM-1 |
 | CANELE | CaneleApp | — | CANELE-1 |
