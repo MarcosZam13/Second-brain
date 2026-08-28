@@ -3,7 +3,7 @@
 Ver también: [[Proyectos/README|Proyectos]] · [[Proyectos/CoreBase/README|CoreBase (plataforma)]] · [[Proyectos/CoreBase/revision-critica-specs|Revisión crítica de los specs]] · [[Proyectos/GymBase/README|GymBase]]
 
 **App:** `apps/dojobase` dentro del monorepo [[Proyectos/CoreBase/README|CoreBase]] (`corebase`).
-**Estado:** specs cerrados y revisados (2026-08-28). Pendientes 7 decisiones antes de escribir la primera migración.
+**Estado:** specs corregidos y cerrados (2026-08-28), con las 7 decisiones aplicadas. Siguiente artefacto: `DESIGN.md`.
 **Primer cliente:** Dojo Shoto — **ya en producción sobre GymBase v1**, con 4 disciplinas (karate, BJJ, MMA, krav magá). Esto hace que DojoBase sea una *migración de un cliente vivo*, no un lanzamiento desde cero (ver A1 de la revisión crítica).
 
 ## Qué es
@@ -26,17 +26,21 @@ Todo lo demás (sparring, promociones, peleas, contenido) ya existe en GymBase y
 
 ## Dónde está cada cosa
 
-- `_fuentes/06-historias-usuario-requerimientos.md` — documento de requerimientos con el formato de Tacha: resumen ejecutivo, alcance, 23 HU, RF/RNF, decisiones técnicas.
-- `_fuentes/07-agentes-cronograma.md` — modelo de 1 orquestador + 4 subagentes (UI, QA, seguridad OWASP, documentación) y cronograma de 8 semanas.
-- `_fuentes/08b-identidad-marca-vs-theming.md` — separación entre la identidad de marca de DojoBase (landing, paleta fija void/crimson/amber/paper, Anton + Space Grotesk) y el theming dinámico por tenant (colores del dojo). Incluye qué cruza de la landing a la app y con qué reglas.
-- `_fuentes/09-prompt-kickoff-semana1-core.md` — prompt de arranque de la semana 1 (subagentes + CoreBase).
+| Documento | Qué contiene |
+|---|---|
+| [[Proyectos/DojoBase/documentacion-v1\|documentacion-v1.md]] | Documento de proyecto: resumen ejecutivo, alcance, actores, RF/RNF, modelo de datos, arquitectura, dirección de diseño, plan de trabajo y decisiones técnicas |
+| [[Proyectos/DojoBase/historias-usuario\|historias-usuario.md]] | 30 HU con criterios de aceptación, agrupadas en épicas por rol, con tabla de trazabilidad HU → RF |
+| [[Proyectos/DojoBase/schema-dojo\|schema-dojo.md]] | Schema de la capa vertical: configuración del dojo, disciplinas, rangos, sparring, promociones, peleas oficiales, torneos. Incluye la resolución de los 11 casos borde de la lógica de promociones de v1 |
+| `_fuentes/` | Specs originales sin editar: 06 (HU/requerimientos), 07 (agentes y cronograma), 08b (identidad de marca vs. theming), 09 (prompt de kickoff) |
+
+La capa compartida (auth, tenant, billing, theming, clases, contenido, notificaciones) vive en [[Proyectos/CoreBase/README|CoreBase]] — [[Proyectos/CoreBase/schema|schema.md]] y [[Proyectos/CoreBase/seguridad-jwt-rls|seguridad-jwt-rls.md]].
 
 ## Pendiente de armar
 
-- **`DESIGN.md`** — el equivalente al de [[Proyectos/Tacha/DESIGN|Tacha]]: personalidad, navegación por rol (miembro / admin / owner), inventario de pantallas mapeado a HU, estados vacíos/carga/error y prompt por pantalla. Es el artefacto que falta para que "mejorar la UI" no termine siendo improvisación pantalla por pantalla (ver F de la revisión crítica).
-- **`documentacion-v1.md` y `historias-usuario.md`** curados — hoy viven mezclados en el spec 06; conviene separarlos como en Tacha (documento de proyecto vs. HU/CA numeradas) una vez cerradas las 7 decisiones, porque varias las cambian.
-- **Cierre de schema contra HU** — el spec 2 cubre ~70% de lo que las HU exigen (ver C de la revisión crítica).
+- **`DESIGN.md`** — el equivalente al de [[Proyectos/Tacha/DESIGN|Tacha]]: personalidad, navegación por rol (miembro / admin / owner), inventario de pantallas mapeado a HU, estados vacíos/carga/error y prompt por pantalla. Es el artefacto que falta para que "mejorar la UI" no sea improvisación pantalla por pantalla, y es lo siguiente en la fila.
+- **Análisis de complejidad y orden de sprints** — estimación por HU y dependencias, como el `analisis-complejidad-viabilidad.md` de Tacha.
 - **Plan de migración de datos de Dojo Shoto** — no existe en ningún spec y es bloqueante del corte.
+- **Verificar que Onvo soporte conexión por comercio** — si exige contrato de agregador, el modelo de billing cambia desde el schema. Media hora de docs, antes de escribir esa migración.
 
 ## Ticket prefix
 
