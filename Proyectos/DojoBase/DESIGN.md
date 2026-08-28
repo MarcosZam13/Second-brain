@@ -350,7 +350,7 @@ Se construyen **componiendo primitivas**, nunca con HTML y clases sueltas. `Spar
 | `ClassCalendarMonth` | Vista mensual del admin, con ocupación | HU-04 |
 | `AttendanceRoster` | Pasar lista con tres estados por alumno | HU-04b |
 | `SparringChallengeCard` | Reto con estado y la acción disponible **según quién mira** | HU-05 a HU-09 |
-| `RoundScoreInput` | Marcador por round, dos `Stepper` enfrentados | HU-07 |
+| `ScorePad` | Marcador por round: botones de valor directo (+1 a +4) por peleador y un deshacer global — ver 5.5 | HU-07 |
 | `HeadToHeadCard` | Marcador acumulado contra un rival | HU-08 |
 | `RankProgressCard` | Rango actual y camino al siguiente, en las tres formas de progresión | HU-14, HU-00b |
 | `MemberFileSheet` | Ficha del alumno con campos faltantes señalados y generación para torneo | HU-32 a HU-32c |
@@ -371,6 +371,20 @@ Se construyen **componiendo primitivas**, nunca con HTML y clases sueltas. `Spar
 **`PromotionScoreGrid` en mobile (D10).** Una matriz de candidatos × criterios no entra en un celular. Solución: en desktop es la grilla completa; **en mobile es un flujo de a un candidato por vez** — su foto y rango arriba, sus criterios como lista vertical de `Stepper`, y navegación anterior/siguiente entre candidatos. Misma data, mismo server action, dos presentaciones. Es el caso donde `DataList` no alcanza y hay que diseñar las dos.
 
 **`AttendanceRoster` (D6).** Se usa de pie, en el tatami, con una mano. Filas altas, área de toque grande, los tres estados como `SegmentedControl` compacto por fila. Sin scroll horizontal, sin menús anidados.
+
+### 5.5 `ScorePad` — anotar como se anota de verdad
+
+Los puntos de un sparring no llegan de a uno: en BJJ una barrida son 2, un pase de guardia 3, una montada 4; en karate un yuko 1, un waza-ari 2, un ippon 3. Un stepper de `+`/`−` obliga a tocar cuatro veces lo que es una sola acción, y con el celular en una mano al lado del tatami eso es lento y se presta a error.
+
+- **Cuatro botones de valor directo por peleador** (+1, +2, +3, +4), en cuadrícula de 2×2 en móvil y en fila de 4 en pantalla ancha. Área de toque de 46 px de alto: se usa de pie.
+- **Un solo deshacer, global**, que revierte la última anotación de cualquiera de los dos — que es como se equivoca alguien anotando en vivo, no "quiero bajarle un punto a este".
+- **El deshacer dice qué va a revertir** antes de tocarlo ("Deshacer +3 de Kevin"). Sin eso, corregir a ciegas genera un segundo error.
+- El puntaje **rebota al sumarse**: confirmación inmediata sin abrir un diálogo. Menos de 200 ms.
+- El historial es del round en curso y vive en el cliente: es una ayuda para anotar, no una bitácora. Lo que se guarda sigue siendo el puntaje final de cada round.
+
+**Los incrementos son configuración de la disciplina** (`disciplines.score_increments`, por defecto `{1,2,3,4}`), no una constante. Un dojo que solo puntúa 2-3-4 en BJJ los ajusta sin tocar código, y la pantalla sigue siendo la misma.
+
+`Stepper` no desaparece: se sigue usando en la grilla de calificación de ascensos, donde los puntajes son arbitrarios dentro de un máximo y no hay valores típicos.
 
 ### 5.4 `RankBadge` — el detalle que define el producto
 

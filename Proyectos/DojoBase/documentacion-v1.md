@@ -95,6 +95,7 @@ Decidido de antemano para no improvisarlo bajo presión: **torneos → grupos fa
 ### Sparring
 - **RF-05** — Todo reto de sparring está asociado a una disciplina específica.
 - **RF-06** — Flujo: creación (challenger) → aceptación o rechazo (rival) → carga de resultados por round (challenger) → cierre con ganador calculado.
+- **RF-06a** ▲ — La carga de puntaje se hace con botones de valor directo por peleador, con deshacer de la última anotación. Los valores disponibles se configuran por disciplina (por defecto 1 a 4).
 - **RF-06b** ▲ — **El rival confirma el resultado cargado.** El historial head-to-head cuenta únicamente enfrentamientos confirmados; los no confirmados se muestran como pendientes en el detalle del reto.
 - **RF-06c** — Cualquiera de los dos participantes puede cancelar un sparring antes de completarse. Un reto `pending` sin respuesta, o `accepted` sin resultado, expira automáticamente tras el plazo configurado (default 14 días).
 - **RF-07** — El sistema expone el historial agregado de enfrentamientos entre cualquier par de miembros con sparrings completados y confirmados.

@@ -70,6 +70,10 @@ disciplines (                                    -- ▲ renombrada desde martial
   -- más importante del modelo, y no estaba en ningún spec.
   progression_style text not null default 'direct'
     check (progression_style in ('direct','stripes','time_based')),
+  -- ▲ Valores con que se anota un sparring. En BJJ una barrida son 2, un pase 3
+  -- y una montada 4; en karate 1, 2 y 3. Cuatro botones de valor directo, no un
+  -- stepper de a uno.
+  score_increments  int[] not null default '{1,2,3,4}',
   rank_display      text not null default 'belt'
     check (rank_display in ('belt','patch','none')),
 

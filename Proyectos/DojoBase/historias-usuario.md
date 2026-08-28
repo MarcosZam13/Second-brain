@@ -180,6 +180,9 @@ Como miembro retado, quiero aceptar o rechazar, para decidir si me enfrento a es
 **HU-07: Cargar el resultado round por round**
 Como retador, quiero cargar los resultados por round del sparring aceptado, para dejar registro del enfrentamiento.
 - CA-01: Puedo agregar rounds con puntaje para ambos y una nota opcional.
+- CA-01b: Anoto con **botones de valor directo** (+1 a +4 por defecto) para cada peleador, no sumando de a uno.
+- CA-01c: Un **deshacer** revierte la última anotación de cualquiera de los dos, e indica cuál va a revertir antes de usarlo.
+- CA-01d: Los valores de los botones se configuran por disciplina; si no se configuran, son 1 a 4.
 - CA-02 **[servidor]**: Solo el retador puede cargar rounds, y solo si el reto está aceptado.
 - CA-03: Al cerrar el reto, el ganador se calcula automáticamente a partir de la suma de los rounds.
 - CA-04 **[servidor]**: El cálculo del ganador usa la misma función que el preview que veo en pantalla — el resultado mostrado y el guardado nunca difieren.

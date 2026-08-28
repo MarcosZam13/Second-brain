@@ -39,6 +39,7 @@ La capa compartida (auth, tenant, billing, theming, clases, contenido, notificac
 
 - **`DESIGN.md`** — el equivalente al de [[Proyectos/Tacha/DESIGN|Tacha]]: personalidad, navegación por rol (miembro / admin / owner), inventario de pantallas mapeado a HU, estados vacíos/carga/error y prompt por pantalla. Es el artefacto que falta para que "mejorar la UI" no sea improvisación pantalla por pantalla, y es lo siguiente en la fila.
 - **Análisis de complejidad y orden de sprints** — estimación por HU y dependencias, como el `analisis-complejidad-viabilidad.md` de Tacha.
+- **Repaso de GymBase v1 buscando huecos** — pasada final por los ~30 módulos de v1 para confirmar que nada útil quedó fuera del alcance de DojoBase. Pendiente acordado el 2026-08-28, después de cerrar el diseño.
 - **Paleta definitiva de Dojo Shoto** — el preset actual (blanco/rojo/azul) es provisional y hay que afinarlo con él. Sigue siendo una fila de `tenant_themes`, no un cambio de código.
 - **Confirmar el sistema de progresión de MMA** — se modeló como `time_based` (tiempo, clases y récord, sin cinturones) a partir de lo que se sabe. Conviene verificarlo con el dojo antes de configurarlo.
 - **Seed de demo de Dojo Shoto** — sus 4 disciplinas, escalas de cinturones, clases y miembros de ejemplo, para que la demo de venta se vea como su dojo y no como datos genéricos.
