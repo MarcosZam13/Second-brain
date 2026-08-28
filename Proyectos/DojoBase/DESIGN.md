@@ -3,7 +3,7 @@ proyecto: DojoBase
 tema: DESIGN.md — guía de diseño, sistema de componentes e inventario de pantallas
 fecha: 2026-08-28
 tipo: documentacion
-estado: v1.0 — completo para arrancar diseño y componentes; 40 pantallas mapeadas a HU
+estado: v1.1 — 41 pantallas mapeadas a HU. v1.1 (2026-08-28) incorpora la revisión de los mockups: progresión por disciplina, ficha del alumno y mediciones opcionales
 tags: [dojobase, diseño, ui-ux, design-system, componentes]
 ---
 
@@ -234,7 +234,7 @@ NEGOCIO
 
 ## 4. Inventario de pantallas
 
-40 pantallas. Cada una mapeada a las HU que resuelve.
+41 pantallas. Cada una mapeada a las HU que resuelve.
 
 ### Acceso (5)
 
@@ -267,6 +267,8 @@ NEGOCIO
 | M15 | Mi membresía | HU-16c, HU-17b | Plan, vencimiento, historial de pagos |
 | M16 | Subir comprobante | HU-17 | Datos SINPE del dojo + adjuntar imagen |
 | M17 | Notificaciones | HU-09, HU-20 | Centro de notificaciones |
+| M18 | Ficha del alumno | HU-32, 32b, 32c | Datos personales, emergencia, competencia y récord en una pantalla, con generación de la ficha para torneo y aviso de campos faltantes |
+| M19 | Mis mediciones | HU-33 | **Módulo opcional.** Si el dojo no lo activó, la pantalla no existe ni aparece en la navegación |
 
 ### Admin (13)
 
@@ -295,6 +297,7 @@ NEGOCIO
 | O3 | Tema del dojo | HU-21 | Editor con vista previa en vivo y **validación de contraste** |
 | O4 | Configuración del dojo | HU-29, HU-30 | SINPE, plazos, modo de cobro, conexión de pagos |
 | O5 | Grupos familiares | HU-23 | Crear grupos y asignar integrantes |
+| O6 | Módulos del dojo | HU-34 | Activar o desactivar módulos opcionales. Desactivar oculta, no borra |
 
 ---
 
@@ -339,7 +342,7 @@ Se construyen **componiendo primitivas**, nunca con HTML y clases sueltas. `Spar
 
 | Componente | Qué resuelve | HU |
 |---|---|---|
-| `RankBadge` | Cinturón con color, color secundario y franjas. **El componente con más peso visual del producto** — ver 5.4 | HU-00, HU-03, HU-14 |
+| `RankBadge` | Insignia de grado, en tres formas según la disciplina — ver 5.4. **El componente con más peso visual del producto** | HU-00, HU-00b, HU-03, HU-14 |
 | `DisciplinePill` | Etiqueta de disciplina con su color | transversal |
 | `MemberIdentity` | Avatar con anillo de rango + nombre + rango en la disciplina del contexto | HU-03, HU-28 |
 | `ClassCard` | Clase con disciplina, hora, instructor, ocupación y estado | HU-01 |
@@ -349,7 +352,9 @@ Se construyen **componiendo primitivas**, nunca con HTML y clases sueltas. `Spar
 | `SparringChallengeCard` | Reto con estado y la acción disponible **según quién mira** | HU-05 a HU-09 |
 | `RoundScoreInput` | Marcador por round, dos `Stepper` enfrentados | HU-07 |
 | `HeadToHeadCard` | Marcador acumulado contra un rival | HU-08 |
-| `RankProgressCard` | Rango actual, franjas y camino al siguiente | HU-14 |
+| `RankProgressCard` | Rango actual y camino al siguiente, en las tres formas de progresión | HU-14, HU-00b |
+| `MemberFileSheet` | Ficha del alumno con campos faltantes señalados y generación para torneo | HU-32 a HU-32c |
+| `MeasurementStrip` | Última medición con su variación | HU-33 |
 | `PromotionScoreGrid` | La grilla de calificación | HU-13 |
 | `CriteriaBreakdown` | Desglose por criterio para el miembro | HU-14 |
 | `FightCard` | Pelea oficial con resultado y método | HU-10 |
@@ -369,12 +374,24 @@ Se construyen **componiendo primitivas**, nunca con HTML y clases sueltas. `Spar
 
 ### 5.4 `RankBadge` — el detalle que define el producto
 
-El cinturón es la identidad visual de un dojo. Este componente tiene que verse bien con **cualquier** color, incluido blanco y negro:
+El cinturón es la identidad visual de un dojo. Este componente tiene que verse bien con **cualquier** color, incluido blanco y negro.
 
-- Barra de color del cinturón, con la punta en el color secundario si el rango lo define (cinturones bicolor).
-- Las franjas se dibujan **proporcionales al tamaño del badge**, y su color se decide por contraste contra el color del cinturón — franjas oscuras sobre cinturón claro, claras sobre oscuro. Es el mismo cálculo de `onColor` de 2.3.
+**Tres formas, según el estilo de progresión de la disciplina (HU-00b):**
+
+| Estilo | Qué dibuja |
+|---|---|
+| `direct` — karate, krav magá | Barra de color **sin punta ni franjas**. El grado se nombra al lado con la etiqueta corta del rango (`3.º kyu`, `1.º dan`) |
+| `stripes` — BJJ | Barra de color con punta oscura y las franjas acumuladas dentro de la punta |
+| `time_based` — MMA | **No dibuja insignia.** El progreso se muestra como tiempo entrenando, clases y récord |
+
+Esto no es cosmética: dibujarle franjas a un cinturón de karate le inventa a la escuela un sistema de grados que no tiene, y un sensei lo nota en la primera pantalla.
+
+**Reglas de dibujo:**
+
+- Las franjas van **proporcionales al tamaño del badge**, y su color se decide por contraste contra el color del cinturón — oscuras sobre cinturón claro, claras sobre oscuro. Es el mismo cálculo de `onColor` de 2.3.
 - Un cinturón blanco necesita borde; uno negro no. Se resuelve con la misma regla de luminancia, no con un caso especial por color.
-- Tamaños: `xs` (dentro de una fila de lista), `sm` (card), `md` (perfil), `lg` (celebración de ascenso).
+- El anillo de rango en un avatar usa el color del cinturón, ajustado si no se distingue del fondo — un cinturón negro sobre un tema oscuro desaparece.
+- Tamaños: `xs` (fila de lista), `sm` (card), `md` (perfil), `lg` (celebración de ascenso).
 
 ---
 

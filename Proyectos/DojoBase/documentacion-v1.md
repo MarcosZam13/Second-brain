@@ -48,6 +48,8 @@ Criterio para priorizar: primero lo que hace el producto **presentable y onboard
 - Challenges de asistencia, rutina y peleas amistosas
 - Billing: planes, suscripción, comprobante SINPE, revisión por admin, dashboard financiero exclusivo del owner, recordatorios de vencimiento
 - Grupos familiares con plan por integrante
+- Ficha completa del alumno con generación de ficha para torneo
+- Mediciones corporales como módulo opcional por dojo
 - Theming dinámico por tenant
 - Notificaciones in-app en tiempo real + push
 - PWA instalable
@@ -78,8 +80,10 @@ Decidido de antemano para no improvisarlo bajo presión: **torneos → grupos fa
 ### Disciplinas y rangos
 - **RF-01** — Múltiples disciplinas por organización, cada una con su sistema de rangos independiente.
 - **RF-02** — Un miembro puede tener rangos distintos y simultáneos en cada disciplina que practique. `member_ranks` es la única fuente de verdad; no existe rango "general" almacenado.
-- **RF-02b** — Cada rango soporta acumulación de franjas antes de ascender; el umbral (`stripes_to_promote`) se define por rango, no es global.
-- **RNF-06 / RF-01b** — Incorporar una disciplina nueva no requiere cambios de schema: es configuración por fila.
+- **RF-02b** ▲ — **Cada disciplina define cómo se progresa en ella**, entre tres estilos: ascenso directo de un rango al siguiente (karate, krav magá), acumulación de franjas dentro del rango (BJJ), o progresión por tiempo y participación sin escalera de rangos (MMA). El sistema no asume franjas para todas.
+- **RF-02c** ▲ — Cada disciplina define también cómo se representa el grado: cinturón, parche o nivel, o ninguna insignia. Es una decisión independiente del estilo de progresión.
+- **RF-02d** ▲ — Un rango puede exigir tiempo mínimo en el rango actual y asistencia mínima acumulada antes de habilitar el ascenso.
+- **RNF-06 / RF-01b** — Incorporar una disciplina nueva no requiere cambios de schema: es configuración por fila, incluido su estilo de progresión.
 
 ### Clases y asistencia
 - **RF-03** — La inscripción a una clase es el mecanismo de asistencia; no existe check-in físico ni QR. Al confirmarse la inscripción, la asistencia se marca como presente.
@@ -108,6 +112,12 @@ Decidido de antemano para no improvisarlo bajo presión: **torneos → grupos fa
 - **RF-11e** — Eliminar un criterio o retirar un candidato solo es posible con el evento en borrador, validado en el servidor.
 - **RF-12** — El miembro consulta su propio historial de promociones, su rango actual por disciplina y el desglose de su calificación por criterio, sin intervención de un admin.
 - **RF-12b** — El ascenso solo modifica el rango de la disciplina evaluada; no altera rangos ni franjas de otras disciplinas del miembro.
+
+### Perfil del alumno y mediciones
+- **RF-12c** ▲ — El sistema mantiene una **ficha completa del alumno** con los datos que exige una inscripción a torneo: identificación, fecha de nacimiento, contacto de emergencia, tipo de sangre, datos del tutor si es menor, federación, seguro deportivo y categoría de peso.
+- **RF-12d** ▲ — El sistema **señala los campos faltantes** de la ficha antes de que hagan falta, y puede **generar la ficha lista para inscripción** combinando datos personales, rango vigente por disciplina, peso más reciente y récord competitivo.
+- **RF-12e** ▲ — El registro de mediciones corporales (peso, estatura, porcentaje de grasa y de masa muscular, más métricas extendidas) es un **módulo opcional que cada organización activa o no**. Cuando está activo, el peso más reciente alimenta la ficha de competencia.
+- **RF-12f** ▲ — La disponibilidad de cada módulo opcional se resuelve por configuración de la organización, sin despliegues ni ramas de código por cliente.
 
 ### Contenido y challenges
 - **RF-13** — Contenido organizado en carpetas anidadas configurables por admin/owner, con visibilidad por plan de membresía.
@@ -194,6 +204,9 @@ Las semanas 3 y 4 del cronograma original (disciplinas/rangos y clases) siguen s
 | Visibilidad de finanzas | Admin con vista agregada, admin ciego a montos, **admin sin reportes** | **Sin reportes** | Ciego a montos no era exigible: el comprobante SINPE muestra el monto en la imagen que el admin debe revisar. Se prefiere un control real y honesto a uno declarativo |
 | Validación de puntaje | Constraint de DB, validación de aplicación | **Aplicación** | Deja abierto el puntaje bonus sin migración |
 | Concepto de instructor | Flag nuevo, tabla propia, admin existente | **Admin existente** | No modela una entidad sin ganar nada |
+| Progresión de rangos | Franjas para todas las disciplinas, **estilo configurable por disciplina** | **Configurable** | Solo BJJ usa franjas; karate asciende directo y MMA no usa cinturones. Asumir un solo modelo le inventa a la escuela un sistema que no tiene |
+| Mediciones corporales | Fuera de alcance (perfil de gimnasio), **módulo opcional** | **Módulo opcional** | Un dojo también las quiere: la categoría de peso para competir depende del peso actual |
+| Feature flags | Config de build por cliente (v1), **filas de módulos por organización** | **Filas por organización** | Los flags de v1 ramificaban lógica de negocio y exigían un despliegue por cliente. Estos solo prenden o apagan un módulo que ya vive aislado |
 | Asistencia | Solo inscripción, inscripción + no-show corregible | **Inscripción + no-show** | La elegibilidad para ascender de cinturón se calcula sobre asistencia; sin corrección, se infla. En un dojo el cinturón es la reputación de la escuela |
 | Resultado de sparring | Auto-reportado por el challenger, **confirmado por el rival** | **Confirmado** | El head-to-head es social; un marcador de una sola parte no sobrevive al primer conflicto |
 | Historial de peleas | Público por default, **privado por default** | **Privado** | El feed social se sostiene con `upcoming` siempre visible; el resultado es del miembro |

@@ -21,14 +21,39 @@ dojo_org_settings (
   org_id                    uuid primary key references organizations on delete cascade,
   sinpe_number              text,
   sinpe_holder_name         text,
+  payment_mode              text not null default 'manual_sinpe'
+                            check (payment_mode in ('manual_sinpe','onvo')),
   class_cancel_minutes      int default 30,     -- antelación mínima para cancelar inscripción
   sparring_expiry_days      int default 14,     -- RF-06b
   default_attendance_window_months int default 3,
   updated_at                timestamptz default now()
 )
+
+-- ▲ NUEVA: datos de competencia del alumno. Lo personal (cédula, nacimiento,
+-- contacto de emergencia) vive en `member_profiles` del core: le sirve a
+-- cualquier producto, no solo a un dojo.
+dojo_member_details (
+  member_id            uuid references profiles on delete cascade,
+  org_id               uuid not null references organizations on delete cascade,
+  federation_id        text,                    -- número de federación o asociación
+  insurance_provider   text,
+  insurance_policy     text,
+  weight_class         text,                    -- categoría habitual, ej. '-77 kg'
+  competes             boolean default false,
+  medical_notes        text,                    -- lesiones y condiciones relevantes
+  updated_at           timestamptz default now(),
+  primary key (member_id, org_id)
+)
 ```
 
 Es la tabla que evita repetir el error de v1, donde `organizations` cargaba `gym_name`, `sinpe_number`, `sinpe_name`, `max_capacity` y `cancel_minutes` — columnas de un vertical dentro del core.
+
+**El problema que resuelve `dojo_member_details`** (planteado por el usuario el 2026-08-28): para
+inscribir a un alumno a un torneo hay que reunir cédula, fecha de nacimiento, peso actual, seguro,
+federación y contacto de emergencia — y hoy eso está disperso o directamente no está. Con esta
+tabla más `member_profiles` (core) y la última medición de peso, la **ficha para torneo** es una
+consulta, no una búsqueda. La app además **marca los campos faltantes antes** de que hagan falta,
+en vez de que aparezcan el día de la inscripción.
 
 ## 2. Disciplinas y rangos
 
@@ -40,6 +65,14 @@ disciplines (                                    -- ▲ renombrada desde martial
   color      text,
   position   int default 0,
   is_active  boolean default true,               -- ▲ desactivar sin borrar el historial
+
+  -- ▲▲ CÓMO PROGRESA ESTA DISCIPLINA. Ver la nota de abajo: es la corrección
+  -- más importante del modelo, y no estaba en ningún spec.
+  progression_style text not null default 'direct'
+    check (progression_style in ('direct','stripes','time_based')),
+  rank_display      text not null default 'belt'
+    check (rank_display in ('belt','patch','none')),
+
   created_at timestamptz default now(),
   unique (org_id, name)
 )
@@ -48,11 +81,14 @@ ranks (
   id                uuid primary key default gen_random_uuid(),
   org_id            uuid not null references organizations on delete cascade,  -- ▲
   discipline_id     uuid not null references disciplines on delete cascade,
-  name              text not null,               -- 'Cinturón blanco', 'Franja azul'
+  name              text not null,               -- 'Cinturón marrón', 'Franja azul'
+  short_label       text,                        -- ▲ '3.º kyu', '1.º dan', 'P2'
   level             int not null,                -- orden de progresión
   color_hex         text,
-  secondary_color_hex text,                      -- ▲ cinturones bicolor, ya existe en v1
-  stripes_to_promote int default 0,              -- 0 = este rango no usa franjas
+  secondary_color_hex text,                      -- cinturones bicolor
+  stripes_to_promote int default 0,              -- ▲ solo aplica si progression_style='stripes'
+  min_months_in_rank int,                        -- ▲ tiempo mínimo antes de poder ascender
+  min_classes_to_promote int,                    -- ▲ asistencia mínima acumulada
   created_at        timestamptz default now(),
   unique (discipline_id, level)                  -- ▲ dos rangos no pueden compartir nivel
 )
@@ -68,6 +104,33 @@ member_ranks (
   primary key (member_id, discipline_id)
 )
 ```
+
+
+### ▲▲ Cada disciplina progresa distinto — corrección del 2026-08-28
+
+Los specs originales asumían que **toda** disciplina acumula franjas dentro del rango, porque el
+modelo se derivó de BJJ. Es falso, y el usuario lo señaló al revisar los mockups:
+
+| Estilo | Quién | Cómo funciona |
+|---|---|---|
+| `direct` | **Karate**, krav magá, taekwondo | Se asciende de un rango al siguiente, por examen. **No hay franjas.** El grado se nombra con `short_label` (`3.º kyu`, `1.º dan`) |
+| `stripes` | **BJJ** — y hasta donde sabemos, es el único | Se acumulan franjas dentro del cinturón hasta llegar al tope, y ahí se asciende de cinturón |
+| `time_based` | **MMA** y disciplinas sin sistema formal de grados | No hay escalera de rangos. El progreso se mide por tiempo entrenando, clases asistidas y récord competitivo. `ranks` puede estar vacía para esta disciplina |
+
+`rank_display` es una decisión aparte de cómo se progresa: `belt` dibuja el cinturón, `patch` un
+parche o nivel (krav magá usa niveles P/G/E, no cinturones), `none` no muestra insignia.
+
+**Por qué importa más de lo que parece.** Dibujarle franjas a un cinturón de karate no es un detalle
+cosmético: es inventarle a la escuela un sistema de grados que no tiene. Un sensei lo nota en la
+primera pantalla, y es exactamente el tipo de error que hace que un producto se vea hecho por
+alguien que no entiende el negocio.
+
+Y respeta RNF-06: si aparece una disciplina con otro sistema, es una fila con otro
+`progression_style`, no un caso especial en el código. Si ninguno de los tres calza, se agrega un
+valor al check — pero primero hay que confirmar con quien la practica, no suponerlo.
+
+**Pendiente de confirmar:** el estilo exacto de MMA. Se modeló como `time_based` porque es lo que
+el usuario describió, pero conviene verificarlo con el dojo antes de configurarlo.
 
 **▲ Corrección de fondo.** Se descarta `org_members.current_rank_id` y `current_rank_stripes` de v1. Coexistían con `org_member_ranks` (el equivalente correcto por disciplina) sin ningún trigger que las mantuviera sincronizadas, y la lógica de resincronización tenía un bug real: al ascender en una disciplina secundaria, reseteaba las franjas del rango "general" — que podía ser el de otra disciplina que ni participó del ascenso (caso borde 7 de `logica-promociones.md`).
 

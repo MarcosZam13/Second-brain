@@ -58,6 +58,30 @@ org_invitations (
 )
 ```
 
+```sql
+-- ▲ NUEVA: datos personales del miembro. Vive en el CORE porque cualquier
+-- producto sobre CoreBase los necesita — una escuela de música también pide
+-- cédula y contacto de emergencia. Lo específico del vertical (federación,
+-- categoría de peso) va en la tabla de extensión de cada app.
+member_profiles (
+  member_id            uuid primary key references profiles on delete cascade,
+  document_type        text check (document_type in ('cedula','dimex','pasaporte')),
+  document_id          text,
+  birth_date           date,
+  phone                text,
+  address              text,
+  blood_type           text,
+  emergency_name       text,
+  emergency_phone      text,
+  emergency_relation   text,
+  -- Para menores de edad: sin esto no se puede inscribir a nada.
+  guardian_name        text,
+  guardian_document    text,
+  guardian_phone       text,
+  updated_at           timestamptz default now()
+)
+```
+
 **▲ `profiles.active_org_id`** cierra el hueco de B4: el hook que arma el JWT necesita saber de qué organización emitir el claim, y el spec nunca dijo dónde vivía ese dato. Cambiar de organización = `UPDATE profiles SET active_org_id` + `refreshSession()`.
 
 **▲ `org_members.status`** permite suspender a un miembro sin borrar su historial (su rango, sus peleas, sus pagos). En v1 la única salida era eliminar la fila.
@@ -158,6 +182,67 @@ membership_reminders_sent (
 **▲ Nota sobre grupos familiares:** el plan se asocia a la suscripción, y la suscripción al grupo. Un grupo puede tener varios miembros con planes distintos (v1 ya lo resolvió así: "plan por integrante dentro de la familia") — el grupo es la unidad de cobro y de descuento, no un plan único forzado.
 
 **▲ ONVO verificado (2026-08-28):** sí soporta conexión por comercio, con un modelo de marketplace tipo Stripe Connect. El diseño era correcto. **El MVP igual cobra por comprobante SINPE manual** — integrar ONVO depende de la inscripción ante Hacienda (trámite, no desarrollo) y conviene que el cobro automático sea opcional por dojo. El modo de cobro es una fila de configuración (`payment_mode`), no una rama de código, y un pago de ONVO se registra igual como `payment_proof` verificado. Detalle completo en [[Proyectos/CoreBase/billing-onvo|billing-onvo.md]].
+
+## 3b. Módulos opcionales por organización — `[core]`
+
+```sql
+-- ▲ NUEVA: qué módulos tiene activos cada organización.
+org_modules (
+  org_id     uuid references organizations on delete cascade,
+  module_key text not null,      -- 'health', 'content', 'challenges', 'routines', ...
+  enabled    boolean not null default true,
+  config     jsonb,              -- ajustes propios del módulo
+  updated_at timestamptz default now(),
+  primary key (org_id, module_key)
+)
+```
+
+**Esta es la versión correcta de los feature flags de GymBase v1.** Allá eran configuración de
+build (`clients/gymbase/<tenant>/theme.config.ts` con 30 flags), lo que significaba un despliegue
+por cliente y código ramificándose por condicionales de vertical — el patrón que generó la deuda.
+
+Acá son **filas por organización**, y solo prenden o apagan un módulo completo que ya vive
+aislado en `packages/modules`. La diferencia está en qué decide el flag: no ramifica lógica de
+negocio, decide si un módulo entero está disponible.
+
+La distinción importa: un dojo puede querer llevar mediciones corporales de sus alumnos y otro no,
+y ninguno de los dos debería ver la UI del otro ni requerir un despliegue distinto.
+
+## 3c. Mediciones corporales — `[module]`, opcional
+
+```sql
+health_profiles (
+  member_id  uuid references profiles on delete cascade,
+  org_id     uuid not null references organizations on delete cascade,
+  height_cm  numeric,
+  notes      text,
+  updated_at timestamptz default now(),
+  primary key (member_id, org_id)
+)
+
+health_snapshots (
+  id             uuid primary key default gen_random_uuid(),
+  org_id         uuid not null references organizations on delete cascade,
+  member_id      uuid not null references profiles on delete cascade,
+  taken_at       date not null default current_date,
+  weight_kg      numeric,
+  body_fat_pct   numeric,
+  muscle_mass_kg numeric,
+  -- Métricas extendidas por clave (InBody y similares), sin una columna por métrica.
+  extended       jsonb,
+  taken_by       uuid references profiles,
+  created_at     timestamptz default now()
+)
+create index on health_snapshots (member_id, taken_at desc);
+```
+
+**Por qué es module y no vertical de gimnasio.** El primer recorte dejó las mediciones fuera, como
+"perfil de gimnasio de fitness". El usuario corrigió el 2026-08-28: un dojo también las quiere,
+sobre todo porque **la categoría de peso para competir depende del peso actual**. Aplicando la
+regla de las 3 capas: si cambio el comportamiento de mediciones en DojoBase, ¿GymBase necesita
+enterarse? No. Es module, activable por `org_modules`.
+
+El peso más reciente alimenta directamente la ficha para torneo del alumno.
 
 ## 4. Notificaciones — `[module]`
 
@@ -387,6 +472,8 @@ Chequeo de que el schema alcanza para lo pedido (las tablas de la capa vertical 
 | HU-23, RF-21 | `family_groups` + `subscriptions.family_group_id` |
 | RF-08 | `notifications`, `push_subscriptions` |
 | RF-19 | Alta manual — sin tabla, es proceso |
+| HU-32 (ficha del alumno) | `member_profiles` + `dojo_member_details` + última `health_snapshots` |
+| HU-33 (mediciones) | `health_profiles`, `health_snapshots`, activadas por `org_modules` |
 
 ## 11. Migraciones — orden de aplicación
 

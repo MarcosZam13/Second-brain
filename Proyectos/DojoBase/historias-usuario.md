@@ -3,11 +3,11 @@ proyecto: DojoBase
 tema: Historias de usuario y criterios de aceptación
 fecha: 2026-08-28
 tipo: documentacion
-estado: v1.0 — 30 HU con CA, agrupadas en épicas por rol. Numeración heredada del spec 06 para no romper trazabilidad; HU-24 en adelante son nuevas
+estado: v1.1 — 37 HU con CA, agrupadas en épicas por rol. Numeración heredada del spec 06; HU-24 en adelante son nuevas. v1.1 (2026-08-28) agrega progresión configurable por disciplina, ficha del alumno y módulos opcionales, salidos de la revisión de los mockups
 tags: [dojobase, historias-usuario, requerimientos]
 ---
 
-# Historias de Usuario — DojoBase (v1.0)
+# Historias de Usuario — DojoBase (v1.1)
 
 Ver también: [[Proyectos/DojoBase/README|README]] · [[Proyectos/DojoBase/documentacion-v1|documentacion-v1.md]] · [[Proyectos/DojoBase/schema-dojo|schema-dojo.md]] · [[Proyectos/CoreBase/schema|CoreBase/schema.md]] · [[Proyectos/CoreBase/seguridad-jwt-rls|seguridad-jwt-rls.md]]
 
@@ -66,16 +66,26 @@ Como owner, quiero que al cambiar el rol de alguien el cambio se aplique cuanto 
 **HU-00: Crear una disciplina y su escala de rangos**
 Como admin, quiero crear una disciplina y definir su escala completa de rangos, para tener con qué poblar clases, sparring y promociones.
 - CA-01: Puedo crear una disciplina con nombre y color; el nombre es único dentro del dojo.
-- CA-02: Puedo definir los rangos de esa disciplina con nombre, nivel de progresión, color (y color secundario para cinturones bicolor) y cantidad de franjas necesarias para ascender.
+- CA-02: Puedo definir los rangos de esa disciplina con nombre, etiqueta corta (`3.º kyu`, `1.º dan`), nivel de progresión y color (más un color secundario para cinturones bicolor). El campo de franjas solo aparece si la disciplina las usa (HU-00b).
 - CA-03: Dos rangos de la misma disciplina no pueden compartir nivel.
 - CA-04: Puedo reordenar los rangos y el orden se refleja en toda la app.
 - CA-05: Puedo desactivar una disciplina sin borrar su historial de rangos, clases ni peleas.
 - CA-06: Agregar una disciplina nueva no requiere ningún cambio de código ni migración.
 
+**HU-00b: Definir cómo se progresa en una disciplina** *(nueva — corrección del 2026-08-28)*
+Como admin, quiero indicar cómo se asciende en cada disciplina, para que la app refleje el sistema real de mi escuela y no uno inventado.
+- CA-01: Al crear una disciplina elijo su estilo de progresión: **ascenso directo**, **franjas** o **por tiempo**.
+- CA-02: Con ascenso directo, la app **no muestra franjas en ninguna parte** — ni en el cinturón, ni en el progreso del alumno, ni en la evaluación de ascensos.
+- CA-03: Con franjas, cada rango define cuántas se necesitan para ascender.
+- CA-04: Por tiempo, la disciplina puede no tener escalera de rangos, y el progreso del alumno se muestra como tiempo entrenando, clases y récord.
+- CA-05: Elijo aparte cómo se representa el grado: cinturón, parche o nivel, o ninguna insignia.
+- CA-06: Puedo exigir tiempo mínimo en el rango y asistencia mínima antes de habilitar un ascenso.
+- CA-07 **[servidor]**: Otorgar una franja en una disciplina de ascenso directo se rechaza.
+
 **HU-27: Asignar el rango de un miembro por disciplina** *(nueva)*
 Como admin, quiero asignar o corregir el rango y las franjas de un miembro en una disciplina, para reflejar su nivel real.
 - CA-01: Puedo asignar un rango por cada disciplina que el miembro practica, de forma independiente.
-- CA-02: Puedo ajustar la cantidad de franjas dentro del rango actual.
+- CA-02: Si la disciplina usa franjas, puedo ajustar cuántas lleva dentro del rango actual. Si no las usa, ese control no existe.
 - CA-03 **[servidor]**: Cambiar el rango en una disciplina no modifica el rango ni las franjas del miembro en ninguna otra disciplina.
 - CA-04: El cambio queda registrado con fecha.
 
@@ -289,6 +299,52 @@ Como miembro, quiero ver mi historial de promociones, mi rango actual por discip
 
 ---
 
+## Rol: Miembro y Admin — ficha del alumno
+
+### Epic: Perfil completo y competencia
+
+**HU-32: Tener toda mi información en un solo lugar** *(nueva — pedido del 2026-08-28)*
+Como alumno, quiero que mis datos completos vivan en mi ficha, para no andar buscando cédula, seguro y contacto de emergencia cada vez que me inscribo a un torneo.
+- CA-01: Mi ficha reúne datos personales (identificación, nacimiento, teléfono, tipo de sangre), contacto de emergencia, y datos de competencia (federación, seguro deportivo, categoría de peso).
+- CA-02: Si soy menor de edad, la ficha incluye los datos del tutor y **la app avisa que sin ellos no puedo inscribirme**.
+- CA-03: Puedo editar mis propios datos; el admin también puede editarlos.
+- CA-04: La ficha muestra mi rango vigente en cada disciplina y mi récord oficial.
+- CA-05 **[servidor]**: Ningún otro miembro puede ver mi ficha.
+
+**HU-32b: Ver qué me falta antes de necesitarlo** *(nueva)*
+Como alumno, quiero que la app me diga qué datos me faltan, para no descubrirlo el día de la inscripción.
+- CA-01: Los campos requeridos para competir que estén vacíos se marcan visiblemente en mi ficha.
+- CA-02: Veo un aviso con el campo puntual que falta y un acceso directo para completarlo.
+- CA-03: El admin ve, en la lista de miembros, quiénes tienen la ficha incompleta.
+
+**HU-32c: Generar la ficha para un torneo** *(nueva)*
+Como admin o alumno, quiero generar la ficha de inscripción ya armada, para no reunir los datos a mano cada vez.
+- CA-01: Un solo control genera un documento con datos personales, rango vigente en la disciplina elegida, peso más reciente y récord.
+- CA-02: Si falta algún dato requerido, la app lo indica **antes** de generar, no después.
+- CA-03: Elijo la disciplina, porque el rango y el récord dependen de ella.
+
+**HU-33: Llevar mis mediciones** *(nueva — módulo opcional)*
+Como alumno de un dojo que activó el módulo, quiero ver mi peso, estatura y composición corporal en el tiempo, para seguir mi progreso físico.
+- CA-01: Veo mi última medición y su variación respecto a la anterior.
+- CA-02: Veo la evolución en el tiempo de cada métrica.
+- CA-03: La app relaciona mi peso actual con mi categoría de peso para competir.
+- CA-04: Si el dojo no activó el módulo, **no existe ninguna señal de la función en la interfaz** — ni menú, ni sección vacía, ni control deshabilitado.
+
+**HU-33b: Registrar una medición** *(nueva — módulo opcional)*
+Como admin, quiero registrar las mediciones de un alumno, para llevar su seguimiento.
+- CA-01: Registro peso, estatura, porcentaje de grasa y de masa muscular con su fecha.
+- CA-02: Puedo agregar métricas adicionales sin que haga falta un cambio de sistema.
+- CA-03: Queda registrado quién tomó la medición y cuándo.
+
+**HU-34: Activar o desactivar módulos del dojo** *(nueva)*
+Como owner, quiero elegir qué módulos opcionales usa mi dojo, para que la app muestre solo lo que me sirve.
+- CA-01: Veo la lista de módulos opcionales con su estado.
+- CA-02: Al desactivar uno, desaparece de la navegación de todos los roles.
+- CA-03 **[servidor]**: Desactivar un módulo **no borra sus datos**; al reactivarlo, el historial sigue ahí.
+- CA-04 **[servidor]**: Con el módulo desactivado, sus operaciones se rechazan aunque se llamen directamente.
+
+---
+
 ## Rol: Miembro — contenido, retos y comunidad
 
 ### Epic: Contenido
@@ -424,7 +480,7 @@ Como sistema, quiero ejecutar un proceso diario que resuelva todo lo que vence p
 | Epic | HU | RF principales |
 |---|---|---|
 | Autenticación y pertenencia | HU-22, 24, 25, 26 | RF-19, RF-20, RNF-02 |
-| Disciplinas y rangos | HU-00, 27 | RF-01, RF-02, RF-02b, RNF-06 |
+| Disciplinas y rangos | HU-00, 00b, 27 | RF-01, RF-02, RF-02b a RF-02d, RNF-06 |
 | Miembros | HU-28 | RF-20 |
 | Calendario y clases | HU-01, 02, 02b, 02c, 03, 04, 04b | RF-03, RF-03b, RF-03c, RF-04, RF-04b |
 | Sparring | HU-05 a HU-09c, 07b | RF-05, RF-06, RF-06b, RF-06c, RF-07, RF-08 |
@@ -434,6 +490,9 @@ Como sistema, quiero ejecutar un proceso diario que resuelva todo lo que vence p
 | Challenges | HU-16 | RF-14 |
 | Membresías y pagos | HU-16b, 16c, 17, 17b, 18, 19, 20, 23 | RF-15, RF-16, RF-17, RF-21, RF-22 |
 | Configuración | HU-21, 29, 30 | RF-18, RF-16 |
+| Ficha del alumno | HU-32, 32b, 32c | RF-12c, RF-12d |
+| Mediciones (opcional) | HU-33, 33b | RF-12e |
+| Módulos opcionales | HU-34 | RF-12f |
 | Procesos automáticos | HU-31 | RF-06c, RF-17 |
 
 ## Pendiente
