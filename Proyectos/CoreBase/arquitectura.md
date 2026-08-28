@@ -151,6 +151,15 @@ El MVP cobra por comprobante SINPE manual. ONVO Pay (marketplace con cuentas con
 
 Tres necesidades vencen por tiempo y ninguna tenía mecanismo asignado: expiración de sparrings sin resolver (RF-06b), recordatorios de pago próximo a vencer (RF-17) y expiración de suscripciones. Se resuelven con **un solo job diario de `pg_cron`** definido como pieza de CoreBase, no con tres mecanismos distintos.
 
+### Tiempo real
+
+En GymBase v1 nunca funcionó, y la causa era estructural: su RLS depende de un header HTTP que el
+middleware de Next.js inyecta, y **una conexión de Realtime no pasa por ese middleware** — así que
+la comprobación interna de Realtime denegaba todo, en silencio. Mover el tenant al claim del JWT
+arregla eso de raíz. El diagnóstico completo, la decisión de usar Broadcast desde la base y el
+**spike que hay que correr antes de construir nada encima** están en
+[[Proyectos/CoreBase/realtime|realtime.md]].
+
 ### Observabilidad
 
 Errores de servidor y de cliente a un solo destino desde el día uno. Sin esto, el primer bug reportado por el sensei se depura a ciegas.

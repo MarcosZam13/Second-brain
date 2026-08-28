@@ -67,10 +67,12 @@ Criterio para priorizar: primero lo que hace el producto **presentable y onboard
 
 ### 2.2b Pendiente legal, no técnico
 
-**La facturación electrónica de Costa Rica queda fuera del MVP, pero hay que decidirla antes del
-primer cobro.** No es una feature opcional: es requisito legal para facturar. Se resuelve por fuera
-con un proveedor de facturación, o se integra después. Va junto con la inscripción ante Hacienda,
-que además es lo que habilita el cobro automático por pasarela.
+**La facturación electrónica de Costa Rica no se hace hasta que esté la inscripción ante Hacienda**
+(decisión del 2026-08-28). Es requisito legal para facturar, no una feature opcional, pero no tiene
+sentido construirla antes del trámite. Va en el mismo paquete que la activación del cobro
+automático por pasarela, que depende de lo mismo.
+
+La política de privacidad y los términos viven en el landing page, no dentro de la app.
 
 ### 2.3 Orden de recorte si el cronograma se atrasa
 
@@ -154,7 +156,7 @@ Decidido de antemano para no improvisarlo bajo presión: **torneos → grupos fa
 - **RF-18b** ▲ — Al crear una disciplina, el sistema ofrece **escalas de rangos precargadas** editables, para no cargar veinte cinturones a mano.
 - **RF-18c** ▲ — El dojo tiene una **página pública editable desde la app** (historia, instructores, programas, logros, ubicación). Editable desde la app, no por código: de lo contrario cada dojo nuevo vuelve a ser un despliegue.
 - **RF-18d** ▲ — Los reportes del owner se exportan en CSV, Excel y PDF.
-- **RF-18e** ▲ — La app incluye política de privacidad y términos de servicio accesibles. Es **bloqueante del primer cobro**, no un detalle.
+- **RF-18e** ▲ — La política de privacidad y los términos de servicio viven en el **landing page** (`apps/marketing`), y la app enlaza a ellos. Siguen siendo bloqueantes del primer cobro.
 - **RF-22** — El flujo de billing completo: definición de planes por admin/owner → elección y suscripción por el miembro → subida de comprobante → revisión por admin, con motivo visible en caso de rechazo.
 - **RF-22b** — El modo de cobro es configuración por organización. El MVP opera en **comprobante SINPE manual**; el cobro automático por pasarela (ONVO, modelo de marketplace) queda modelado y se activa por configuración, sin cambios de código ni de historial. Ver [[Proyectos/CoreBase/billing-onvo|billing-onvo.md]].
 - **RF-21** — Grupos familiares con plan por integrante, cobrados como unidad.
@@ -171,6 +173,7 @@ Decidido de antemano para no improvisarlo bajo presión: **torneos → grupos fa
 - **RNF-04** — Prácticas OWASP 2025 para aplicaciones web multi-tenant con datos sensibles. Toda tabla nueva nace con RLS habilitada y policy de aislamiento por organización.
 - **RNF-05** — PWA instalable, sin dependencia de tienda de aplicaciones para el lanzamiento.
 - **RNF-06** — Incorporar disciplinas nuevas es configuración por fila, no por columna ni por migración.
+- **RNF-07b** ▲ — **Ninguna regla de negocio depende del tiempo real.** Cupos, estados y permisos se validan siempre en el servidor; el vivo es una mejora de percepción. Toda pantalla en vivo tiene que ser correcta sin él, y todo canal reporta su estado de conexión en vez de fallar en silencio — que es exactamente cómo GymBase v1 pasó un año con el tiempo real roto sin un solo error en consola.
 - **RNF-07** ▲ — La app prioriza ligereza sobre impacto visual: sin scroll-jacking, sin parallax de capas, sin animaciones de más de 400 ms en flujos de uso diario. Debe funcionar bien en mobile de gama media con conexión inestable.
 - **RNF-08** ▲ — Un solo patrón por tipo de interacción. Todo formulario es `FormModal`, `FormPage` o `ConfirmDialog`; Sheet/Drawer no existe como categoría. Toda arquitectura de formulario es React Hook Form + Zod.
 

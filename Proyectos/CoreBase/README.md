@@ -34,6 +34,7 @@ CoreBase es **la plataforma**, no un producto. Es el monorepo y la capa comparti
 | [[Proyectos/CoreBase/arquitectura\|arquitectura.md]] | Monorepo, nombres, regla de las 3 capas, stack, multi-tenancy, proyectos de Supabase, y toda la operación que ningún spec cubría (testing, CI, deploy, jobs, observabilidad, seed) |
 | [[Proyectos/CoreBase/schema\|schema.md]] | Schema de la capa core y de los módulos compartidos, corregido y completado contra las historias de usuario |
 | [[Proyectos/CoreBase/seguridad-jwt-rls\|seguridad-jwt-rls.md]] | Tenant vía JWT, helpers, RLS por tabla, matriz de acceso y checklist OWASP por PR. Corrige los 4 bloqueantes de SQL del spec original |
+| [[Proyectos/CoreBase/realtime\|realtime.md]] | Por qué el tiempo real nunca funcionó en GymBase v1, qué lo arregla, y el spike que hay que correr antes de que ninguna funcionalidad dependa de él |
 | [[Proyectos/CoreBase/billing-onvo\|billing-onvo.md]] | Modelo de cobro: el MVP va con comprobante SINPE manual y ONVO Pay (marketplace con cuentas conectadas) queda modelado y listo para activarse por configuración |
 | [[Proyectos/CoreBase/revision-critica-specs\|revision-critica-specs.md]] | El análisis que fundamenta todo lo anterior: qué estaba roto en los specs, qué faltaba, y las 7 decisiones ya tomadas |
 | `_fuentes/` | Los 9 specs originales sin editar, como registro histórico |
