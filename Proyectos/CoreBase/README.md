@@ -2,7 +2,7 @@
 
 Ver también: [[Proyectos/README|Proyectos]] · [[Proyectos/DojoBase/README|DojoBase]] · [[Proyectos/GymBase/README|GymBase v1]]
 
-**Repo:** `ProyectosPersonales/corebase` — creado 2026-08-28, monorepo Turborepo + pnpm. Local, sin remoto todavía.
+**Repo:** https://github.com/MarcosZam13/CoreBase (privado) · local en `ProyectosPersonales/corebase` — monorepo Turborepo + pnpm.
 **Supabase:** org `CoreBase` · proyecto `pzyvvotltgipehsywqpi` (us-east-2, PG 17.6) — vacío, será la base de DojoBase.
 **Estado:** specs cerrados, `DESIGN.md` listo y scaffolding del monorepo commiteado. Siguiente: migraciones de CoreBase y `apps/dojobase`.
 
