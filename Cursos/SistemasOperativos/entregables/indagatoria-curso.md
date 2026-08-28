@@ -10,7 +10,7 @@ tags: [indagatoria, ia, planificacion, scheduling, trabajo-grupal]
 
 # Indagatoria del curso — IA y Gestión de Recursos (Grupo 3 · Tema 10)
 
-Ver también: [[Cursos/SistemasOperativos/apuntes/indagatoria-curso|Tema asignado e instrucciones generales]] · [[Cursos/SistemasOperativos/entregas]]
+Ver también: [[Cursos/SistemasOperativos/apuntes/indagatoria-curso|Tema asignado e instrucciones generales]] · [[Cursos/SistemasOperativos/entregables/indagatoria-curso-plan-equipo|Plan simple para repartir con el equipo]] · [[Cursos/SistemasOperativos/entregas]]
 
 **Peso:** 10% · **Entrega:** documento + exposición **en inglés**, semana 6 (2026-09-10, extensible a semana 7).
 
