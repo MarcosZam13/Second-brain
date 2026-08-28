@@ -41,21 +41,23 @@ CoreBase es **la plataforma**, no un producto. Es el monorepo y la capa comparti
 
 ## Lo que ya existe en el repo
 
-**Base de datos** (7 migraciones aplicadas): identidad (,  con , , ), helpers de JWT en , , RLS de todas las tablas, autorización de canales de Realtime, endurecimiento de la superficie de RPC, y .
+**Base de datos** — 7 migraciones aplicadas: identidad (`organizations`, `profiles` con `active_org_id`, `org_members`, `org_invitations`), helpers de JWT en `public`, `custom_access_token_hook`, RLS de todas las tablas, autorizacion de canales de Realtime, endurecimiento de la superficie de RPC, y `tenant_themes`.
 
-**App** (, Next.js): login, sin-organización, aceptar invitación, panel, miembros con generación de invitaciones, y editor de tema con vista previa en vivo y validación de contraste.
+**App** — `apps/dojobase` (Next.js): login, sin-organizacion, aceptar invitacion, panel, miembros con generacion de invitaciones, y editor de tema con vista previa en vivo y validacion de contraste.
 
-**Paquetes**:  (tokens + 4 reglas de ESLint propias),  (theming con derivación de contraste, tipos de la base),  (10 primitivas).
+**Paquetes** — `@corebase/config` (tokens y las 4 reglas de ESLint propias), `@corebase/core` (theming con derivacion de contraste, tipos de la base), `@corebase/ui` (10 primitivas).
 
 **Pruebas que corren de verdad contra Supabase:**
 
-| Prueba | Qué verifica | Estado |
+| Prueba | Que verifica | Estado |
 |---|---|---|
-|  | Entrega en vivo y aislamiento entre organizaciones en los dos sentidos | 227-509 ms · OK |
-|  | Login, claim de tenant, aislamiento de la interfaz, permisos por rol | 9/9 |
-|  | Dos organizaciones, dos temas, el mismo despliegue | 7/7 |
+| `tests/realtime/spike.mjs` | Entrega en vivo y aislamiento entre organizaciones, en los dos sentidos | 227-509 ms · OK |
+| `tests/e2e/corte-vertical.mjs` | Login, claim de tenant, aislamiento de la interfaz, permisos por rol | 9/9 |
+| `tests/e2e/tema-por-tenant.mjs` | Dos organizaciones, dos temas, el mismo despliegue | 7/7 |
 
-**Subagentes** en : , , , .
+**Subagentes** en `.claude/agents/`: `ui-agent`, `qa-agent`, `security-agent`, `docs-agent`.
+
+**Pendiente de configurar en el panel de Supabase** (ver `supabase/PENDIENTE-CONFIGURAR.md`): proteccion de contrasenas filtradas. El hook del access token y la vida del token de 15 minutos ya quedaron aplicados.
 
 ## Contexto técnico de GymBase v1
 
