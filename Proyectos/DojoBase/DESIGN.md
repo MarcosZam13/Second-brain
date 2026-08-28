@@ -90,7 +90,8 @@ Vienen de `tenant_themes` y se inyectan como CSS vars en el `<html>` **antes del
 | `--color-bg` | Fondo base de la app |
 | `--color-surface` | Cards, paneles, superficies elevadas |
 | `--color-surface-alt` | Filas alternas, encabezados de tabla, estados hover |
-| `--color-border` | Bordes y separadores |
+| `--color-border` | Separadores decorativos. Bajo contraste a proposito |
+| `--color-border-strong` | Contorno de un control interactivo (input, boton secundario). Debe alcanzar 3:1 |
 | `--color-primary` | Acción principal, estado activo, acento de marca del dojo |
 | `--color-on-primary` | **Texto sobre primary — derivado, no configurado** (ver 2.3) |
 | `--color-secondary` | Acento secundario |
@@ -107,16 +108,29 @@ Vienen de `tenant_themes` y se inyectan como CSS vars en el `<html>` **antes del
 
 Si el dojo elige un amarillo como `primary`, el texto blanco encima queda ilegible. Si elige un azul oscuro, el texto negro queda ilegible. **No se puede hardcodear el color del texto sobre `primary`.**
 
-Solución, en `@corebase/core/theming`: al aplicar el tema se calcula la luminancia relativa de cada color de fondo y se deriva su color de texto:
+Solucion, en `@corebase/core/theming`: el color de texto se **deriva** comparando el contraste real contra los dos neutros del sistema, y se devuelve el que gana:
 
 ```ts
 // packages/core/theming/contrast.ts
 export function onColor(background: string): string {
-  return relativeLuminance(background) > 0.45 ? tokens.ink : tokens.paper;
+  return contrastRatio(background, neutral.ink) >= contrastRatio(background, neutral.paper)
+    ? neutral.ink
+    : neutral.paper;
 }
 ```
 
+**Por que no un umbral fijo de luminancia.** Es la solucion obvia (`luminancia > 0.45 ? oscuro : claro`) y esta mal: los colores de luminancia media caen del lado equivocado, y son justo donde un dojo elige su color de marca. Verificado contra la implementacion real:
+
+| Color | Umbral fijo | Contraste real |
+|---|---|---|
+| Ambar `#E8A33D` | texto claro → ratio **2.00** (ilegible) | texto oscuro → ratio **8.80** |
+| Verde oliva `#6B8E23` | texto claro → ratio **3.52** (no llega a AA) | texto oscuro → ratio **4.99** |
+
+Con el umbral, la mitad de las paletas calidas del catalogo quedan ilegibles. Con el contraste real, los ocho colores de prueba — incluidos cinturon blanco y cinturon negro — pasan AA.
+
 Y al guardar el tema, el editor **valida el contraste y avisa** si una combinación no alcanza AA (4.5:1 para texto normal, 3:1 para texto grande y elementos de UI), proponiendo el ajuste más cercano que sí cumple. El dojo puede elegir el color que quiera; lo que no puede es dejar la app ilegible sin enterarse.
+
+**Por que hay dos tokens de borde.** Al correr esa validacion contra los tres presets, los tres fallaban en `border sobre surface` — y estaban bien. WCAG exige 3:1 para elementos de UI que delimitan un control, no para separadores decorativos: un divisor que alcanza 3:1 se ve como una linea gruesa y arruina el diseno. De ahi salio la separacion en `--color-border` (decorativo, no se valida) y `--color-border-strong` (contorno de input o boton secundario, si se valida). Es un hueco del sistema que aparecio por probarlo, no por disenarlo.
 
 Esto es un requisito de accesibilidad **y** de venta: una app que se ve rota con los colores del cliente no se vende.
 
@@ -142,7 +156,8 @@ El tema que ve un dojo recién creado, antes de personalizar. Toma prestado el l
 | `--color-surface` | `#141417` |
 | `--color-surface-alt` | `#1C1C21` |
 | `--color-border` | `#2A2A31` |
-| `--color-primary` | `#C1121F` (carmesí) |
+| `--color-border-strong` | `#666670` |
+| `--color-primary` | `#D91C2B` (carmesí) |
 | `--color-secondary` | `#E8A33D` (ámbar) |
 | `--color-accent` | `#E8A33D` |
 | `--color-text` | `#F2F0EB` (papel) |
@@ -150,6 +165,8 @@ El tema que ve un dojo recién creado, antes de personalizar. Toma prestado el l
 | `--radius-base` | `soft` (8px) |
 
 Presets adicionales que se ofrecen al configurar (HU-21 CA-04): **Papel** (claro, alto contraste, para dojos tradicionales), **Tatami** (verde/beige, cálido), **Combate** (el default oscuro). Dojo Shoto tendrá el suyo propio en blanco/rojo/azul — que es una fila, no un deploy.
+
+Los tres presets estan implementados en `packages/core/src/theming/presets.ts` y **verificados**: los 30 pares de contraste de los tres pasan AA, y el texto derivado sobre cada color de acento tambien. El carmesi paso de `#C1121F` a `#D91C2B` y el gris del preset claro de `#6B7280` a `#5F6672` porque los originales quedaban apenas por debajo del minimo.
 
 ### 2.6 Modo claro y oscuro
 

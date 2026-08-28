@@ -2,9 +2,9 @@
 
 Ver también: [[Proyectos/README|Proyectos]] · [[Proyectos/DojoBase/README|DojoBase]] · [[Proyectos/GymBase/README|GymBase v1]]
 
-**Repo:** `corebase` — monorepo nuevo, a crear en `ProyectosPersonales/`.
+**Repo:** `ProyectosPersonales/corebase` — creado 2026-08-28, monorepo Turborepo + pnpm. Local, sin remoto todavía.
 **Supabase:** org `CoreBase` · proyecto `pzyvvotltgipehsywqpi` (us-east-2, PG 17.6) — vacío, será la base de DojoBase.
-**Estado:** specs corregidos y cerrados (2026-08-28). Siguiente paso: `DESIGN.md` de DojoBase y scaffolding del monorepo.
+**Estado:** specs cerrados, `DESIGN.md` listo y scaffolding del monorepo commiteado. Siguiente: migraciones de CoreBase y `apps/dojobase`.
 
 ## Qué es
 
@@ -37,6 +37,16 @@ CoreBase es **la plataforma**, no un producto. Es el monorepo y la capa comparti
 | [[Proyectos/CoreBase/billing-onvo\|billing-onvo.md]] | Modelo de cobro: el MVP va con comprobante SINPE manual y ONVO Pay (marketplace con cuentas conectadas) queda modelado y listo para activarse por configuración |
 | [[Proyectos/CoreBase/revision-critica-specs\|revision-critica-specs.md]] | El análisis que fundamenta todo lo anterior: qué estaba roto en los specs, qué faltaba, y las 7 decisiones ya tomadas |
 | `_fuentes/` | Los 9 specs originales sin editar, como registro histórico |
+
+## Lo que ya existe en el repo
+
+- `CLAUDE.md` — el contrato de trabajo dentro del repo: las cuatro reglas, la estructura, los patrones obligatorios (JWT, server actions, RLS, fechas).
+- `.claude/agents/` — los cuatro subagentes: `ui-agent`, `qa-agent`, `security-agent`, `docs-agent`.
+- `packages/config` — escala base de tokens y las cuatro reglas de ESLint propias que vuelven ejecutables las convenciones (`no-hardcoded-color`, `no-raw-dimension`, `no-vertical-vocabulary`, `no-cross-app-import`).
+- `packages/core/theming` — contrato de tema, derivación de color de texto por contraste real, tres presets verificados contra WCAG AA, y validación con ajuste sugerido.
+- `packages/ui` — primeras diez primitivas.
+
+Nada está instalado ni compilado todavía: la lógica de contraste sí se verificó ejecutándola contra los valores de referencia de WCAG.
 
 ## Contexto técnico de GymBase v1
 
