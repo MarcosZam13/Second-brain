@@ -22,7 +22,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 |---|---|---|---|
 | TACHA | Tacha | TACHA-23 | TACHA-24 |
 | MB | CoreBase (plataforma, trabajo transversal del monorepo) | MB-4 | MB-5 |
-| DOJO | DojoBase | DOJO-2 | DOJO-3 |
+| DOJO | DojoBase | DOJO-3 | DOJO-4 |
 | GYM | GymBase | — | GYM-1 |
 | CANELE | CaneleApp | — | CANELE-1 |
 | COMPDES | COMPDES 2027 | — | COMPDES-1 |
