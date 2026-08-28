@@ -4,7 +4,7 @@ tema: Diario Reflexivo (bitácora) — Proyecto
 fecha: 2026-08-14
 tipo: entregable
 entregable_de: "[[Cursos/QA/apuntes/proyecto-qa-guia]]"
-estado: entregado
+estado: "Entrada 1 (Semanas 1-2) entregada. Entrada 2 (Semanas 3-4) en borrador (2026-08-27) — falta autocrítica en voz propia, referencias e imágenes reales antes de exportar"
 tags: [diario-reflexivo, bitacora, proyecto, reflexion]
 ---
 
@@ -111,6 +111,44 @@ Para este trabajo simplemente estuve haciendo apuntes de cada clase; para redact
 
 **Link de Drive donde se va subiendo cada diario:** https://drive.google.com/drive/folders/1-35NryXj7H9ANBebpx5K0vSvEruruYE?usp=drive_link
 
+## Entrada 2 — Semanas 3-4
+
+**Borrador (2026-08-27), armado con Claude Code a partir de los apuntes de clase.** Igual que la Entrada 1: el aprendizaje y la autocrítica de cada semana los escribe Marcos — lo que sigue es un primer borrador basado en el contenido real de las diapositivas para no arrancar de cero, pero **la autocrítica de cada apartado hay que revisarla y pasarla a voz propia antes de darla por buena** (la rúbrica pide que sea real, no genérica — ver checklist de la Entrada 1 más arriba, mismo criterio aplica acá).
+
+### 🐜 Ni el pesticida los mata a todos — Semana 3
+
+Esta semana entramos de lleno a Verificación y Validación (V&V): verificar es construir el producto de la manera correcta, validar es construir el producto correcto — dos preguntas que sonaban parecidas antes de esta clase y ahora las tengo bien separadas. Vimos los distintos modelos de ciclo de vida (cascada, V, incremental, prototipos, XP, Scrum) y cómo cada uno mete las pruebas en un momento distinto del proceso, además del proceso de pruebas formal (plan de pruebas → informe de pruebas) y los 7 principios de las pruebas. El que más se me quedó fue la **paradoja del pesticida**: repetir las mismas pruebas una y otra vez las vuelve menos efectivas con el tiempo, igual que un insecticida deja de matar a los bichos que sobrevivieron — hay que variar las técnicas si el objetivo es seguir encontrando defectos nuevos.
+
+**Autocrítica (borrador — falta pasar a voz propia):** *me identifiqué con la paradoja del pesticida porque en mis propios proyectos suelo probar siempre "por donde ya sé que funciona" — le doy click al mismo flujo feliz cada vez en vez de variar el camino, así que probablemente se me estén escapando defectos que una prueba distinta sí encontraría.*
+
+**Referencia (sugerida):** Myers, G. J., Sandler, C., & Badgett, T. (2011). *The Art of Software Testing* (3rd ed.). Wiley.
+
+**Apoyo visual (sugerido):** diagrama del ciclo de vida en V (rama izquierda = especificación, rama derecha = verificación contra esa especificación, punto de encuentro = desarrollo) — es el que mejor resume por qué "verificar" y "validar" son cosas distintas.
+
+### 📦 Caja negra, caja blanca, mismo bicho — Semana 4
+
+Esta semana bajamos un nivel de abstracción: niveles de pruebas (unitarias, integración, sistema, aceptación, mantenimiento) y tipos de pruebas (estáticas vs. dinámicas, caja negra vs. caja blanca, basadas en experiencia). Lo que más me sirvió fue entender que niveles y tipos **no son lo mismo ni están aislados** — un tipo de prueba vive dentro de un nivel específico. También vimos las 4 técnicas de integración (descendente, ascendente, big bang, funcional/transaccional): me quedó clarísimo por qué "big bang" suena rápido pero es la peor opción para encontrar dónde está el defecto real.
+
+**Autocrítica (borrador — falta pasar a voz propia):** *acá me di cuenta de que casi siempre pienso las pruebas en términos de caja negra (¿qué entra, qué debería salir?) y casi nunca en términos de caja blanca (¿qué caminos del código estoy realmente cubriendo?) — probablemente porque caja blanca exige conocer la implementación, y yo vengo más del lado de "usar la app como usuario" que de leer el código de otros antes de probarlo.*
+
+**Referencia (sugerida):** Pressman, R. S., & Maxim, B. R. (2019). *Software Engineering: A Practitioner's Approach* (9th ed.). McGraw-Hill.
+
+**Apoyo visual (sugerido):** la tabla comparativa "Pruebas estáticas vs. Pruebas dinámicas" de la propia diapositiva de clase (ejecución / defectos / ciclo de vida / técnicas) — ver [[Cursos/QA/apuntes/pruebas-software-semana-4#Pruebas estáticas vs. pruebas dinámicas — comparación|la tabla completa en el apunte]].
+
+### 🌳 Del plan borrador al árbol de problemas — Avance del proyecto
+
+En estas dos semanas seguimos avanzando el [[Cursos/QA/entregables/plan-del-proyecto|Plan del proyecto — Fase 1]] sobre Firefly III: ya está redactado el borrador de introducción (qué/por qué/cómo/limitaciones), los 10 requerimientos derivados del mapeo de módulos, y los objetivos general y específicos. Lo que queda pendiente antes de poder entregarlo es construir el árbol de problemas y objetivos, conseguir mínimo 3 fuentes IEEE, y el formato institucional (portada, tabla de contenidos, anexos).
+
+**Autocrítica (borrador — falta pasar a voz propia):** *el contenido de fondo (requerimientos, objetivos) avanzó más rápido que el papeleo de formato — típico de mí, prefiero resolver primero la sustancia y dejo lo administrativo (portada, IEEE, anexos) para el final, cuando en realidad esas fuentes bibliográficas deberían informar el "por qué" del proyecto desde antes, no agregarse después como requisito de forma.*
+
+**Habilidades sociales:** coordiné con el equipo qué falta cerrar del plan antes de repartir el trabajo restante — el objetivo de esta quincena es dejar el plan en un punto donde se pueda dividir entre todos sin que cada quien tenga que releer todo desde cero.
+
+**Apoyo visual (sugerido):** captura de la tabla de requerimientos funcionales/no funcionales de [[Cursos/QA/entregables/plan-del-proyecto|plan-del-proyecto.md]].
+
+### 📝 Bitácora de uso de IA
+
+Igual que en la Entrada 1: le pedí a Claude Code que armara un primer borrador de esta entrada a partir de mis propios apuntes de clase (semana 3 y semana 4) y del estado real del plan del proyecto, con títulos divertidos y referencias sugeridas — falta que yo revise cada autocrítica y la deje en mi propia voz antes de exportar a Drive.
+
 ## Versión anterior de la Entrada 1 (formato de 5 preguntas, archivada 2026-08-18)
 
 > Reemplazada por los 3 apartados de arriba a pedido del profesor (formato más corto). Se conserva por si hace falta consultar el detalle original — no es el formato que se va a entregar.
@@ -156,3 +194,6 @@ Comunicación con el equipo para coordinar la búsqueda y decisión del reposito
 - [ ] Publicar el enlace en TEC-Digital antes de semana 6
 - [ ] Confirmar si la evaluación entre pares del Informe de pruebas también aplica al Diario (la guía no lo aclara — parece que no)
 - [ ] Confirmar con la profesora/TEC-Digital la fecha real de la primera entrada, ya que depende de que arranque el proyecto (ver corrección arriba)
+- [ ] **Entrada 2 (Semanas 3-4), armada 2026-08-27:** revisar y reescribir las 3 autocríticas en voz propia de Marcos (hoy son borrador de Claude Code basado en el contenido de clase, no reflexión personal real todavía)
+- [ ] Entrada 2: agregar imágenes reales (hoy solo hay sugerencias de qué mostrar) y confirmar/cambiar las referencias sugeridas
+- [ ] Entrada 2: exportar a Drive/PDF una vez revisada, igual que se hizo con la Entrada 1
