@@ -20,7 +20,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 
 | Prefijo | Proyecto | Último usado | Próximo |
 |---|---|---|---|
-| TACHA | Tacha | TACHA-21 | TACHA-22 |
+| TACHA | Tacha | TACHA-22 | TACHA-23 |
 | GYM | GymBase | — | GYM-1 |
 | CANELE | CaneleApp | — | CANELE-1 |
 | COMPDES | COMPDES 2027 | — | COMPDES-1 |

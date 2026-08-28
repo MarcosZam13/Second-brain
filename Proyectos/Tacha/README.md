@@ -28,6 +28,7 @@ Ver [[Proyectos/Tacha/documentacion-v1#10. Pendientes de definición|sección 10
 - `Tacha_historias-usuario-v2.2.docx` — versión Word de `historias-usuario.md` sin referencias a otros archivos del vault (sin wikilinks, sin menciones a DESIGN.md/documentacion-v1.md), para pasarle al equipo tal cual.
 - [[Proyectos/Tacha/analisis-complejidad-viabilidad|analisis-complejidad-viabilidad.md]] — complejidad (Fibonacci), importancia y encargado rebalanceado por HU, más plan de 10 sprints de 1 semana respetando dependencias. Versión interactiva (tabla + sprints) publicada como Artifact, compartible con el equipo desde su menú de compartir.
 - [[Proyectos/Tacha/DESIGN|DESIGN.md]] — guía de diseño (personalidad, tokens, navegación, inventario de las 22 pantallas del alcance v1, componentes, estados y un prompt listo por pantalla) para generar interfaz en Stitch AI.
+- [[Proyectos/Tacha/modulo-catalogo-scraping|modulo-catalogo-scraping.md]] — rediseño del schema de catálogo + web scraping (Daniel, 2026-08-27), con la resolución de la ambigüedad de `stores`/`household_store_preferences` y diagrama DBML listo para dbdiagram.io.
 - `mockups/mockup-web-v2.html` — prototipo HTML interactivo (desktop + mobile web, modo claro/oscuro). v2, el propio equipo lo marca como "por mejorar mucho" — se espera que evolucione una vez estén cerrados los requerimientos.
 - `_fuentes/` — el `.docx` original tal como lo entregó el equipo, sin editar.
 
