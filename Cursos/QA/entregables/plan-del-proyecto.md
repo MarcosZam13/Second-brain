@@ -12,100 +12,136 @@ tags: [proyecto, firefly-iii, fase1, plan-del-proyecto]
 
 Ver también: [[Cursos/QA/entregables/mapeo-modulos-firefly-iii|Mapeo de módulos — Firefly III]] · [[Cursos/QA/entregables/seleccion-repositorio-proyecto|Selección de repositorio]] · [[Cursos/QA/apuntes/proyecto-qa-guia|Guía del Proyecto]] · [[Cursos/QA/entregas]]
 
-**Estado:** borrador de contenido (objetivos, requerimientos, problema contextualizado). Entrega oficial: **Semana 6** (ver [[Cursos/QA/apuntes/proyecto-qa-guia]], actualizado 2026-08-29 con el PPT oficial de rúbricas). Faltan, según la estructura oficial de 11 ítems de esa nota: portada, tabla de contenidos, índice de tablas, especificaciones del software (hardware/software, proveedores y versiones), sección de Problema (árbol de problemas), recursos disponibles, cronograma de actividades, y referencias bibliográficas en formato IEEE (mínimo 3 fuentes de bases indexadas del TEC, últimos 5 años).
+**Estado:** contenido completo en borrador, según los 11 ítems de la estructura oficial (ver [[Cursos/QA/apuntes/proyecto-qa-guia]]). Entrega: **Semana 6**, del lunes 7 al domingo 13 de septiembre de 2026 (confirmado por Marcos: la semana 5 arrancó el lunes 31 de agosto). Falta el trabajo de formato: portada, tabla de contenidos e índice de tablas, y que el equipo revise y valide el contenido antes de entregarlo.
 
-**Repositorio elegido:** [firefly-iii/firefly-iii](https://github.com/firefly-iii/firefly-iii) — gestor de finanzas personales self-hosted (Laravel/PHP + Vue). Ver justificación en [[Cursos/QA/entregables/seleccion-repositorio-proyecto]].
+**Repositorio elegido:** [firefly-iii/firefly-iii](https://github.com/firefly-iii/firefly-iii), un gestor de finanzas personales de código abierto y autohospedado, hecho en Laravel/PHP con Vue en el frontend. La justificación completa de por qué se eligió está en [[Cursos/QA/entregables/seleccion-repositorio-proyecto]].
 
 ## Introducción
 
 ### Qué
 
-Este proyecto aplica los procesos de calidad de software (planeación, verificación, validación) vistos en el curso sobre Firefly III, un gestor de finanzas personales de código abierto y autohospedado. En lugar de un proyecto real de empresa (no aplica en esta edición del curso — ver [[Cursos/QA/apuntes/proyecto-qa-guia]]), el equipo eligió este repositorio siguiendo los 9 criterios de [[Cursos/QA/apuntes/criterios-seleccion-repositorio-github]].
+Este proyecto aplica los procesos de calidad de software que se han visto en el curso (planeación, verificación y validación) sobre Firefly III, un gestor de finanzas personales de código abierto y autohospedado. En esta edición del curso el proyecto no se hace sobre una empresa real con contraparte, sino sobre un repositorio de GitHub elegido por el equipo (ver la corrección al respecto en [[Cursos/QA/apuntes/proyecto-qa-guia]]). El equipo escogió Firefly III siguiendo los 9 criterios que pidió la profesora, descritos en [[Cursos/QA/apuntes/criterios-seleccion-repositorio-github]].
 
 ### Por qué
 
-*(Borrador — pendiente pulir con fuentes bibliográficas IEEE)* La gestión financiera personal es un problema con impacto social real: la falta de visibilidad sobre los propios gastos es un factor documentado de sobreendeudamiento, y buena parte de las herramientas populares de finanzas personales dependen de subir datos bancarios sensibles a servidores en la nube de terceros, lo cual genera fricción de privacidad para quien no quiere compartir esa información. Firefly III responde a ese problema siendo completamente autohospedado — los datos financieros del usuario nunca salen de su propio servidor — lo cual lo vuelve un caso de uso legítimo para poblaciones preocupadas por la privacidad de sus datos financieros (a diferencia de apps cloud-first). Validar la calidad de una herramienta así importa porque errores en el cálculo de saldos, presupuestos o transacciones recurrentes tienen consecuencia directa sobre decisiones financieras reales de quien la usa.
+La gestión de las finanzas personales es un problema con impacto social real. No llevar un registro claro de los ingresos y los gastos es uno de los factores que más contribuye al sobreendeudamiento, y buena parte de las aplicaciones de finanzas personales más usadas hoy en día piden conectar las cuentas bancarias a servidores externos para funcionar. Eso genera fricción para las personas que no quieren compartir información tan sensible con un tercero, y las deja sin muchas alternativas si igual quieren llevar el control de su dinero.
+
+Firefly III responde a ese problema porque es completamente autohospedado: los datos financieros nunca salen del servidor del propio usuario. Eso lo convierte en una opción real para quienes les preocupa la privacidad de su información financiera, algo que las aplicaciones que dependen de la nube no ofrecen. Y validar que una herramienta así funcione bien no es un detalle menor, porque un error en el cálculo de saldos, presupuestos o transacciones recurrentes afecta directamente decisiones financieras reales de la persona que la usa.
 
 ### Cómo
 
-Se aplican las 5 fases del curso: identificación/selección de repositorio (esta fase, Semana 6), planeación (plan de pruebas, ≥60 casos, 3 tipos de prueba distintos, Semana 11), diseño/desarrollo/evaluación (proyecto de pruebas automatizado, ≥90% de cobertura automatizada, Semana 15-16), comunicación (presentación en inglés, Semana 16) y reflexión (diario individual, en paralelo, Semana 2 a 16).
+El proyecto sigue las 5 fases del curso. Primero la identificación del problema y la definición de objetivos, que es esta misma fase y se entrega en la semana 6. Luego la planeación, donde se construye el plan de pruebas con al menos 60 casos y 3 tipos de prueba distintos, que se entrega en la semana 11. Después viene el diseño, desarrollo y evaluación, donde se automatiza al menos el 90% de esos casos de prueba y se documentan los defectos encontrados en un informe, entregables que caen entre la semana 15 y la 16. La comunicación de resultados es una presentación en inglés en la semana 16. Y en paralelo a todo esto corre la fase de reflexión, que es el diario individual desde la semana 2 hasta la 16 y se lleva aparte de este documento.
 
 ### Limitaciones
 
-- El equipo prueba sobre el código tal como está en el repositorio público — no hay acceso a datos de usuarios reales de producción, solo datos de prueba generados localmente.
-- El alcance de pruebas se limita a los módulos de alta y media prioridad identificados en [[Cursos/QA/entregables/mapeo-modulos-firefly-iii]] (autenticación, cuentas, transacciones, presupuestos, categorías, facturas, recurrentes, reglas, piggy banks, monedas) — módulos administrativos/de soporte (Admin, Webhooks, Export) quedan fuera salvo que sobre tiempo.
-- No hay contraparte de negocio real que valide requerimientos — los requerimientos se derivan del comportamiento documentado y observado del sistema, no de una entrevista con stakeholders.
+El equipo trabaja sobre el código tal como está publicado en el repositorio. No hay acceso a datos de usuarios reales en producción, solo a datos de prueba generados localmente. El alcance de las pruebas se limita a los módulos de alta y media prioridad que se identificaron en [[Cursos/QA/entregables/mapeo-modulos-firefly-iii]] (autenticación, cuentas, transacciones, presupuestos, categorías, facturas, recurrentes, reglas, piggy banks y monedas); los módulos administrativos o de soporte como Admin, Webhooks o Export quedan fuera del alcance a menos que sobre tiempo para cubrirlos. Tampoco hay una contraparte de negocio que valide los requerimientos: estos se sacaron del comportamiento observado y documentado del sistema, no de una entrevista con alguien del proyecto real.
 
 ## Especificaciones del software
 
-*(Pendiente — listar hardware y software que usa la aplicación, incluyendo proveedores y versiones: stack Laravel/PHP + Vue, versión de PHP/Composer/Node, base de datos, Docker/docker-compose oficial, navegadores soportados, etc. Ítem oficial de la estructura del Plan del proyecto, vale 15 pts en la rúbrica.)*
+Firefly III corre sobre PHP 8.5 o superior, con el framework Laravel en su versión 13. El frontend está en transición entre dos interfaces: la interfaz nueva (v2) usa Vite y Bootstrap 5, mientras que buena parte de las pantallas todavía activas siguen corriendo sobre la interfaz anterior (v1), construida con Vue 2.7 y Bootstrap 3. Esto es relevante para el proyecto porque significa que no toda la aplicación se puede tratar como una sola SPA moderna a la hora de automatizar pruebas de interfaz: hay pantallas servidas por Blade con islas de Vue 2 y pantallas más nuevas hechas con Vite.
+
+Como base de datos, la configuración oficial de Docker usa MySQL (variable `DB_CONNECTION=mysql` en el `.env` de ejemplo del repo). El despliegue se hace con el `docker-compose` oficial del proyecto, que el equipo ya probó y confirmó que funciona: los contenedores levantan sin problema y se puede iniciar sesión en `http://localhost/login` (verificado el 17 de agosto). No se encontró en el repositorio una lista oficial de navegadores soportados, así que eso queda pendiente de definir con criterio propio del equipo (los navegadores modernos más comunes: Chrome, Firefox y Edge en sus versiones actuales).
 
 ## Requerimientos del sistema
 
-Derivados del mapeo de módulos ([[Cursos/QA/entregables/mapeo-modulos-firefly-iii]]) y verificados contra el código fuente del repo:
+Estos requerimientos salen del mapeo de módulos ([[Cursos/QA/entregables/mapeo-modulos-firefly-iii]]) y se verificaron contra el código fuente del repositorio, no solo contra la documentación.
 
-**Funcionales (por módulo, alta/media prioridad):**
-1. El sistema debe permitir registro e inicio de sesión de usuarios, incluyendo autenticación de dos factores (2FA).
+**Funcionales**, por módulo de alta y media prioridad:
+1. El sistema debe permitir registrar e iniciar sesión, incluyendo autenticación de dos factores (2FA).
 2. El sistema debe permitir crear, editar y eliminar cuentas financieras de distintos tipos (activo, pasivo, gasto, ingreso).
-3. El sistema debe permitir registrar transacciones de tipo gasto, ingreso y transferencia entre cuentas propias, manteniendo la consistencia contable de doble entrada.
-4. El sistema debe permitir definir presupuestos por categoría y período, y calcular correctamente el gasto disponible restante.
-5. El sistema debe permitir clasificar transacciones por categoría y por etiqueta.
-6. El sistema debe permitir definir facturas/gastos recurrentes esperados y hacer coincidencia automática (matching) contra transacciones reales.
+3. El sistema debe permitir registrar transacciones de gasto, ingreso y transferencia entre cuentas propias, manteniendo la consistencia contable de doble entrada.
+4. El sistema debe permitir definir presupuestos por categoría y período, calculando correctamente el monto disponible restante.
+5. El sistema debe permitir clasificar las transacciones por categoría y por etiqueta.
+6. El sistema debe permitir definir facturas o gastos recurrentes esperados y hacer coincidencia automática contra las transacciones reales que se van registrando.
 7. El sistema debe permitir automatizar la creación de transacciones recurrentes según una programación temporal definida por el usuario.
-8. El sistema debe permitir definir reglas condicionales que clasifiquen transacciones automáticamente según criterios definidos por el usuario.
-9. El sistema debe permitir crear metas de ahorro (piggy banks) con seguimiento de progreso.
-10. El sistema debe soportar múltiples monedas con conversión correcta según tasas de cambio.
+8. El sistema debe permitir definir reglas condicionales que clasifiquen transacciones automáticamente según criterios que el usuario configure.
+9. El sistema debe permitir crear metas de ahorro (piggy banks) con seguimiento del progreso.
+10. El sistema debe soportar múltiples monedas, con conversión correcta según las tasas de cambio.
 
 **No funcionales:**
-- El sistema debe poder desplegarse localmente vía Docker (`docker-compose` oficial) sin dependencias externas no documentadas.
-- El sistema debe exponer una API REST documentada (OpenAPI/Swagger) que cubra las operaciones principales, para permitir pruebas automatizadas más allá de la interfaz web.
-- El sistema debe aislar correctamente los datos financieros entre distintos usuarios/grupos (UserGroup).
+- El sistema debe poder desplegarse localmente con Docker, usando el `docker-compose` oficial, sin depender de servicios externos que no estén documentados.
+- El sistema debe exponer una API REST que cubra las operaciones principales, para poder automatizar pruebas más allá de la interfaz web.
+- El sistema debe aislar correctamente los datos financieros entre distintos usuarios o grupos de usuarios (UserGroup).
 
 ## Problema
 
-*(Pendiente — construir árbol de problemas y árbol de objetivos siguiendo [[Cursos/QA/apuntes/taller-arbol-problemas-objetivos]]: causas y efectos del problema, contextualizado desde una perspectiva social/educativa/política/económica. Ítem oficial de la estructura, vale 25 pts combinados en la rúbrica — 10 por contextualizar el problema social real, 15 por determinar sus partes/características/factores.)*
+El problema central que motiva este proyecto es que muchas personas no tienen forma de llevar un control ordenado de sus finanzas personales sin exponer su información bancaria a servidores de terceros.
+
+**Causas**, de la más general a la más puntual:
+- Las personas no tienen el hábito de registrar sus ingresos y gastos de forma consistente.
+- Las aplicaciones de finanzas personales más populares están construidas sobre un modelo cloud first, donde hay que conectar las cuentas bancarias directamente a los servidores de la empresa que ofrece el servicio.
+- Muchos usuarios evitan usar esas aplicaciones porque no confían en compartir sus credenciales bancarias con un tercero, o porque el servicio simplemente no está disponible o tiene costo en su país.
+
+**Efectos**, partiendo del problema hacia lo más general:
+- Quien no lleva un control de sus finanzas tiende a tomar decisiones financieras mal informadas, lo que contribuye al sobreendeudamiento.
+- Esto se traduce en más estrés financiero y menos capacidad real de ahorro.
+- Como alternativa, muchas personas terminan usando hojas de cálculo manuales, que son más propensas a errores humanos que una herramienta pensada para eso.
+
+Este árbol de problemas se construyó siguiendo la metodología del taller de la profesora (ver [[Cursos/QA/apuntes/taller-arbol-problemas-objetivos]]). Falta pasarlo a diagrama visual para el documento final, pero el contenido y el orden de causas y efectos ya está definido.
 
 ## Objetivos
 
 ### Objetivo general
 
-Evaluar la calidad del software de Firefly III mediante la aplicación de un proceso de pruebas de software (planeación, diseño, ejecución y análisis de resultados) sobre sus módulos financieros críticos, con el fin de determinar el grado de cumplimiento de sus requerimientos funcionales y detectar posibles defectos.
+Evaluar la calidad del software de Firefly III aplicando un proceso de pruebas (planeación, diseño, ejecución y análisis de resultados) sobre sus módulos financieros críticos, con el fin de determinar qué tanto cumple sus requerimientos funcionales y detectar los defectos que pueda tener.
 
-### Objetivos específicos
+### Objetivos específicos, metas e indicadores
 
-1. Analizar los requerimientos funcionales de los módulos de alta y media prioridad de Firefly III (autenticación, cuentas, transacciones, presupuestos, categorías, facturas, recurrentes, reglas, piggy banks, monedas) para delimitar el alcance de pruebas.
-2. Diseñar un plan de pruebas con al menos 60 casos de prueba, cubriendo 3 tipos de prueba distintos, con un máximo del 10% de casos manuales.
-3. Automatizar al menos el 90% de los casos de prueba diseñados, utilizando un framework adecuado al stack del repositorio (Laravel/PHP + Vue) o pruebas contra la API REST documentada.
-4. Ejecutar el plan de pruebas y documentar los defectos encontrados en un informe de pruebas con análisis de resultados.
-5. Comunicar los resultados del proyecto en una presentación en inglés ante la profesora y el docente de inglés.
+| Objetivo específico | Metas | Indicadores |
+|---|---|---|
+| Analizar los requerimientos funcionales de los módulos de alta y media prioridad de Firefly III para delimitar el alcance de las pruebas | Revisar el código fuente de cada módulo (no solo la documentación); consultar con el equipo cuáles módulos quedan dentro y cuáles fuera del alcance | Documento de requerimientos completo antes de la semana 6; al menos 10 módulos cubiertos entre alta y media prioridad |
+| Diseñar un plan de pruebas con al menos 60 casos, cubriendo 3 tipos de prueba distintos, con un máximo de 10% de casos manuales | Definir las técnicas de prueba a usar; escribir cada caso con el formato que dio la profesora | 60 o más casos de prueba definidos antes de la semana 11; 3 tipos de prueba distintos aplicados; 90% o más de los casos marcados como automatizables |
+| Automatizar al menos el 90% de los casos de prueba diseñados | Elegir el framework de pruebas adecuado al stack (PHP/Laravel) o trabajar directo contra la API REST; escribir y correr las pruebas automatizadas | 90% o más de los 60+ casos ejecutándose de forma automática antes de la semana 15 |
+| Ejecutar el plan de pruebas y documentar los defectos encontrados en un informe de pruebas | Correr todas las pruebas automatizadas; registrar cada defecto en el formato de fichas dado por la profesora | Informe de pruebas entregado en la semana 16, con todos los defectos encontrados descritos y con evidencia |
+| Comunicar los resultados del proyecto en una presentación en inglés | Preparar la presentación y ensayarla como equipo antes de la fecha | Presentación de 20 minutos más 10 de preguntas, dentro del tiempo pactado, en la semana 16 |
 
 ## Recursos disponibles
 
-*(Pendiente — ítem oficial de la estructura, vale 10 pts en la rúbrica: recursos humanos del equipo, herramientas de testing a usar, infraestructura para correr Firefly III localmente, tiempo disponible.)*
+El equipo cuenta con los siguientes recursos para llevar a cabo el proyecto:
+
+- **Humanos:** los integrantes del equipo (3 a 4 personas según lo que pide el curso), cada uno con acceso a su propio entorno de desarrollo.
+- **Infraestructura:** cada integrante puede levantar Firefly III localmente con Docker, usando el `docker-compose` oficial del proyecto, ya probado y funcionando desde el 17 de agosto.
+- **Herramientas:** GitHub para el control de versiones y coordinación del equipo, y el framework de pruebas que se termine de elegir en la Fase 2 según el stack del repositorio (Laravel/PHP) o pruebas directas contra la API REST.
+- **Tiempo:** desde ahora (semana 5) hasta la semana 16, repartido entre las cinco fases del curso.
+- **Acceso a la información:** el código fuente completo del repositorio está disponible públicamente en GitHub, junto con sus issues, historial de commits y documentación.
 
 ## Cronograma de actividades
 
-*(Pendiente — ítem oficial de la estructura, vale 10 pts en la rúbrica: cronograma de trabajo del equipo hasta la Semana 6, coordinado con las fechas de entrega de las siguientes fases — Semana 11 Plan de pruebas, Semana 15 Proyecto de pruebas, Semana 16 Informe de pruebas y Presentación.)*
+| Semana | Actividad |
+|---|---|
+| 5 (31 de agosto al 6 de septiembre) | Terminar de revisar y validar este Plan del proyecto en equipo, completar formato (portada, tabla de contenidos, índice de tablas) |
+| 6 (7 al 13 de septiembre) | Entrega del Plan del proyecto |
+| 7 a 10 | Definir técnicas de prueba, escribir los casos de prueba y avanzar el Plan de pruebas |
+| 11 (12 al 18 de octubre) | Entrega del Plan de pruebas |
+| 12 a 14 | Automatizar los casos de prueba definidos |
+| 15 (9 al 15 de noviembre) | Entrega del Proyecto de pruebas |
+| 16 (16 al 22 de noviembre) | Entrega del Informe de pruebas y de la Presentación |
 
 ## Conclusiones y recomendaciones
 
-*(Pendiente — se completa una vez el equipo revise y valide este borrador)*
+Firefly III es un proyecto adecuado para aplicar los procesos de calidad de software del curso porque combina un problema social real (privacidad y control de las finanzas personales) con un sistema técnicamente lo bastante complejo como para dar suficientes casos de prueba: cálculos financieros, autenticación con 2FA, reglas condicionales y soporte multi moneda, entre otros. El principal riesgo que el equipo identifica hasta ahora es que el mantenimiento del repositorio está bastante concentrado en un solo desarrollador, lo que podría dificultar reportar o dar seguimiento a algún hallazgo si hiciera falta, aunque para el propósito del curso (aplicar QA sobre el código ya existente) esto no debería ser un problema real.
 
 ## Referencias bibliográficas (IEEE)
 
-*(Pendiente — mínimo 3 fuentes de bases indexadas del TEC (Scopus, ISI Web of Science, IEEE Xplore, Engineering Village), publicadas en los últimos 5 años, sobre gestión financiera personal / privacidad de datos financieros / calidad de software en aplicaciones financieras)*
+[1] T. Stefanov, M. Stefanova, S. Varbanova, and S. Temelkov, "Personal Finance Management Application," *TEM Journal*, vol. 13, no. 3, pp. 2066-2075, Aug. 2024.
+
+[2] M. Salahat, R. A. Said, K. Hamid, U. Haseeb, E. Abdel Maguid Abdel Ghani, A. Abualkishik, M. W. Iqbal, and M. Inairat, "Software Testing Issues Improvement in Quality Assurance," in *2023 2nd International Conference on Business Analytics for Technology and Security (ICBATS)*, 2023, doi: 10.1109/ICBATS57792.2023.10111145.
+
+[3] *(Pendiente: falta una tercera fuente, idealmente sobre privacidad de datos financieros o adopción de software autohospedado. Se buscaron candidatos pero no se pudo confirmar con suficiente certeza la autoría exacta como para citarlos sin revisar el artículo original. Buscar directo en las bases del TEC: Scopus, IEEE Xplore, ISI Web of Science o Engineering Village.)*
 
 ## Anexos
 
-*(Pendiente)*
+*(No es un ítem que puntúe en la rúbrica oficial de este entregable, pero se deja la sección por si el equipo quiere agregar algo, como capturas de la app corriendo localmente.)*
 
 ## Pendiente
 
-- [ ] Llenar Especificaciones del software (hardware/software, proveedores, versiones — 15 pts)
-- [ ] Construir árbol de problemas y árbol de objetivos (medios/fines) siguiendo [[Cursos/QA/apuntes/taller-arbol-problemas-objetivos]] para la sección Problema (25 pts); formalizar los objetivos específicos con tabla de metas e indicadores
-- [ ] Llenar Recursos disponibles (10 pts) y Cronograma de actividades (10 pts)
-- [ ] Revisión y validación del equipo de QA sobre requerimientos y objetivos
-- [ ] Buscar y citar mínimo 3 fuentes IEEE para contextualizar el problema social
-- [x] Formato bibliográfico confirmado: IEEE para este entregable (resuelto — ver [[Cursos/QA/apuntes/proyecto-qa-guia]], rúbricas oficiales del PPT 2026-08-29)
-- [ ] Agregar portada, tabla de contenidos e índice de tablas antes de entregar (siguen el orden oficial de 11 ítems — ver [[Cursos/QA/apuntes/proyecto-qa-guia]]; conclusiones/anexos no puntúan en la rúbrica oficial pero no está de más dejarlos)
-- [ ] Confirmar fecha de calendario real para la Semana 6 (TEC-Digital) y sincronizar a Todoist/Calendar
+- [x] Especificaciones del software
+- [x] Problema (árbol de problemas en texto, falta pasarlo a diagrama visual)
+- [x] Objetivos específicos con tabla de metas e indicadores
+- [x] Recursos disponibles
+- [x] Cronograma de actividades
+- [ ] Revisión y validación del equipo sobre todo el contenido
+- [ ] Confirmar la tercera fuente bibliográfica (ver nota en Referencias)
+- [ ] Agregar portada, tabla de contenidos e índice de tablas antes de entregar
+- [ ] Pasar el árbol de problemas a un diagrama visual real
+- [ ] Sincronizar la fecha de entrega (semana del 7 al 13 de septiembre) a Todoist y Calendar

@@ -24,18 +24,20 @@ Experimentar los procesos de calidad del software (planeación, validación, ver
 
 ## Las 5 fases (semanas de entrega confirmadas por el PPT oficial)
 
-| Fase | Entregable(s) | Modalidad | Semana de entrega (oficial) |
-|---|---|---|---|
-| 1. Identificación del problema y definición de objetivos | Plan del proyecto | Equipo (3-4 personas) | **Semana 6** |
-| 2. Planeación | Plan de pruebas (≥60 casos de prueba, **3 tipos de prueba distintos** — ver corrección abajo) | Equipo | **Semana 11**. Máximo 10% de las pruebas pueden ser manuales |
-| 3. Diseño, Desarrollo y Evaluación | Proyecto de pruebas (código, ≥90% automatizado) | Equipo | **Semana 15** (tabla de evaluación) — el diagrama de fases del mismo PPT dice "Semana 16 y Semana 17" para proyecto de pruebas + informe combinados; no se pudo reconciliar la diferencia de 1-2 semanas entre ambas fuentes del mismo PPT, confirmar con la profesora/TEC-Digital |
-| 3. (cont.) | Informe de pruebas | Equipo (sumativa) + evaluación entre pares (otro equipo evalúa el informe) | **Semana 16** (tabla de evaluación) |
-| 4. Comunicación | Presentación de resultados | Equipo | **Semana 16** (tabla de evaluación) / Semana 17 (diagrama de fases) — mismo desfase que la fila anterior. Exposición **en inglés** ante profesora + docente de inglés (estrategia FUI — Fomento del Uso del Inglés) |
-| 5. Reflexión | Diario reflexivo | **Individual**, en paralelo | Semana 2 a Semana 16, entradas cada 2 semanas como mínimo — ver [[Cursos/QA/entregables/diario-reflexivo|nota aparte]], no se profundiza acá |
+Marcos confirmó el 2026-08-29 que la semana 5 del curso arrancó el lunes 31 de agosto de 2026. Con ese ancla, las semanas de entrega ya tienen fecha de calendario real:
+
+| Fase | Entregable(s) | Modalidad | Semana de entrega (oficial) | Fecha de calendario |
+|---|---|---|---|---|
+| 1. Identificación del problema y definición de objetivos | Plan del proyecto | Equipo (3-4 personas) | **Semana 6** | 7 al 13 de septiembre de 2026 |
+| 2. Planeación | Plan de pruebas (≥60 casos de prueba, **3 tipos de prueba distintos**, ver corrección abajo) | Equipo | **Semana 11**. Máximo 10% de las pruebas pueden ser manuales | 12 al 18 de octubre de 2026 |
+| 3. Diseño, Desarrollo y Evaluación | Proyecto de pruebas (código, ≥90% automatizado) | Equipo | **Semana 15** según la tabla de evaluación (el diagrama de fases del mismo PPT dice "Semana 16 y 17" para proyecto de pruebas e informe combinados, no se pudo reconciliar esa diferencia entre ambas fuentes del mismo PPT, confirmar con la profesora si hace falta precisión) | 9 al 15 de noviembre de 2026 |
+| 3. (cont.) | Informe de pruebas | Equipo (sumativa) + evaluación entre pares (otro equipo evalúa el informe) | **Semana 16** según la tabla de evaluación | 16 al 22 de noviembre de 2026 |
+| 4. Comunicación | Presentación de resultados | Equipo | **Semana 16** según la tabla de evaluación (17 según el diagrama de fases, mismo desfase que la fila anterior). Exposición **en inglés** ante profesora y docente de inglés, parte de la estrategia FUI (Fomento del Uso del Inglés) | 16 al 22 de noviembre de 2026 |
+| 5. Reflexión | Diario reflexivo | **Individual**, en paralelo | Semana 2 a Semana 16, entradas cada 2 semanas como mínimo, ver [[Cursos/QA/entregables/diario-reflexivo|nota aparte]], no se profundiza acá | 10 de agosto al 22 de noviembre de 2026 |
 
 **Corrección importante (2026-08-29):** la rúbrica oficial de Plan de pruebas puntúa explícitamente "utilizando 3 tipos diferentes de pruebas" (10 pts) — la guía genérica anterior y el borrador de [[Cursos/QA/entregables/plan-del-proyecto|plan-del-proyecto.md]] decían "≥2 tipos", que ya quedaba corregido a "3" en el resumen de rúbricas más abajo pero no se había propagado a la tabla de fases ni al entregable. Corregido en ambos lugares.
 
-**Pendiente de confirmar:** no hay forma de derivar la fecha de calendario exacta de "Semana N" sin saber el lunes de inicio del semestre (TEC-Digital). Evidencia indirecta en el vault (quiz de Semana 1 el 2026-08-12, miércoles) sugiere que la Semana 1 arrancó ~2026-08-10, pero no es suficientemente sólida para calcular Semana 6/11/15/16 con confianza — confirmar con TEC-Digital o la profesora antes de comprometerse a una fecha de calendario.
+Con la semana 5 confirmada como ancla, la semana 1 del curso habría arrancado el lunes 3 de agosto de 2026, lo cual calza con la evidencia que ya había en el vault (el quiz de la semana 1 se aplicó el 2026-08-12, un miércoles, dentro de la semana 2, revisando contenido de la semana anterior).
 
 ## Estructura de documentos exigida — Plan del proyecto (oficial, confirmada por el PPT)
 
