@@ -8,7 +8,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 
 | Prefijo | Curso | Último usado | Próximo |
 |---|---|---|---|
-| SEM | Seminario de Estudios Costarricenses | SEM-14 | SEM-15 |
+| SEM | Seminario de Estudios Costarricenses | SEM-15 | SEM-16 |
 | QA | Aseguramiento de la Calidad del Software | QA-35 | QA-36 |
 | SEG | Seguridad | SEG-21 | SEG-22 |
 | WEB | Desarrollo Web | WEB-5 | WEB-6 |
