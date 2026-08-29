@@ -14,7 +14,13 @@ tags: [proyecto, plan-de-pruebas, diario-reflexivo, rubrica, aprendizaje-basado-
 
 Ver también: [[Cursos/QA/apuntes/calidad-semana-1|Calidad — Semana 1]] · [[Cursos/QA/entregables/plan-del-proyecto|Plan del proyecto]] · [[Cursos/QA/entregables/diario-reflexivo|Diario Reflexivo]] · [[Cursos/QA/entregas]]
 
-> **Actualizado 2026-08-29** con el PPT oficial de esta edición del curso (`QA_proyecto-fases-y-rubricas-oficiales_2026-08-29.pptx`), que trae las rúbricas completas con puntaje por ítem y las semanas de entrega reales — a diferencia del PDF/diapositivas de 2026-08-14, que era la guía institucional genérica de estrategia didáctica (con fechas de calendario de una edición anterior que no aplican acá). Donde el PPT oficial contradice al PDF genérico, **manda el PPT oficial** — se deja indicado en cada sección. El diario reflexivo se excluye de esta nota a propósito: se gestiona aparte en [[Cursos/QA/entregables/diario-reflexivo]] con su propio ritmo quincenal.
+> **Actualizado 2026-08-29** con el PPT oficial de esta edición del curso (`QA_proyecto-fases-y-rubricas-oficiales_2026-08-29.pptx`, guardado en `Cursos/QA/_fuentes/`), que trae las rúbricas completas con puntaje por ítem y las semanas de entrega reales — a diferencia del PDF/diapositivas de 2026-08-14, que era la guía institucional genérica de estrategia didáctica (con fechas de calendario de una edición anterior que no aplican acá). Donde el PPT oficial contradice al PDF genérico, **manda el PPT oficial** — se deja indicado en cada sección. El diario reflexivo se excluye de esta nota a propósito: se gestiona aparte en [[Cursos/QA/entregables/diario-reflexivo]] con su propio ritmo quincenal.
+
+**Nota sobre las dos fuentes de semanas dentro del mismo PPT** (para que quede claro a qué se refiere esta nota cuando dice "la tabla de evaluación" o "el diagrama de fases"): ese PowerPoint trae dos diapositivas distintas con información de semanas, y no coinciden entre sí en dos de los cinco entregables.
+- **Diapositiva "Evaluación"** (número 6): una tabla con el peso porcentual de cada rubro del curso (tareas, laboratorios, proyecto, examen) y, entre paréntesis, la semana de cada entregable del proyecto. Es la fuente que se usa como principal en esta nota porque es la misma que ya estaba confirmada en [[Cursos/QA/apuntes/calidad-semana-1]].
+- **Diapositiva "Fases"** (número 4): un diagrama de flujo (tipo organigrama) que muestra las 5 fases del proyecto una tras otra, con su entregable y su semana de entrega debajo de cada una. Para Proyecto de pruebas + Informe de pruebas y para la Presentación, este diagrama marca una semana más tarde que la tabla de Evaluación.
+
+Si hace falta ver el PPT directamente para entender esta diferencia, está en `Cursos/QA/_fuentes/QA_proyecto-fases-y-rubricas-oficiales_2026-08-29.pptx`.
 
 ## Objetivo del proyecto
 

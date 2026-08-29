@@ -24,9 +24,9 @@ Este proyecto aplica los procesos de calidad de software que se han visto en el 
 
 ### Por qué
 
-La gestión de las finanzas personales es un problema con impacto social real. No llevar un registro claro de los ingresos y los gastos es uno de los factores que más contribuye al sobreendeudamiento, y buena parte de las aplicaciones de finanzas personales más usadas hoy en día piden conectar las cuentas bancarias a servidores externos para funcionar. Eso genera fricción para las personas que no quieren compartir información tan sensible con un tercero, y las deja sin muchas alternativas si igual quieren llevar el control de su dinero.
+La gestión de las finanzas personales es un problema con impacto social real. No llevar un registro claro de los ingresos y los gastos es uno de los factores que más contribuye al sobreendeudamiento, y aplicaciones como la estudiada en [1] muestran que todavía hay una necesidad activa de herramientas que ayuden a las personas a organizar su presupuesto y entender su situación financiera. Buena parte de las aplicaciones de finanzas personales más usadas hoy en día piden conectar las cuentas bancarias a servidores externos para funcionar, lo que genera fricción para quien no quiere compartir información tan sensible con un tercero y lo deja sin muchas alternativas si igual quiere llevar el control de su dinero.
 
-Firefly III responde a ese problema porque es completamente autohospedado: los datos financieros nunca salen del servidor del propio usuario. Eso lo convierte en una opción real para quienes les preocupa la privacidad de su información financiera, algo que las aplicaciones que dependen de la nube no ofrecen. Y validar que una herramienta así funcione bien no es un detalle menor, porque un error en el cálculo de saldos, presupuestos o transacciones recurrentes afecta directamente decisiones financieras reales de la persona que la usa.
+Firefly III responde a ese problema porque es completamente autohospedado: los datos financieros nunca salen del servidor del propio usuario. Eso lo convierte en una opción real para quienes les preocupa la privacidad de su información financiera, algo que las aplicaciones que dependen de la nube no ofrecen. Y validar que una herramienta así funcione bien no es un detalle menor: como señalan [2] al hablar de los problemas más comunes en aseguramiento de la calidad, una prueba mal planificada o incompleta deja pasar defectos que después tienen consecuencias reales, y en este caso esas consecuencias caen directo sobre las decisiones financieras de la persona que usa la herramienta (un error en el cálculo de saldos, presupuestos o transacciones recurrentes).
 
 ### Cómo
 
@@ -41,6 +41,8 @@ El equipo trabaja sobre el código tal como está publicado en el repositorio. N
 Firefly III corre sobre PHP 8.5 o superior, con el framework Laravel en su versión 13. El frontend está en transición entre dos interfaces: la interfaz nueva (v2) usa Vite y Bootstrap 5, mientras que buena parte de las pantallas todavía activas siguen corriendo sobre la interfaz anterior (v1), construida con Vue 2.7 y Bootstrap 3. Esto es relevante para el proyecto porque significa que no toda la aplicación se puede tratar como una sola SPA moderna a la hora de automatizar pruebas de interfaz: hay pantallas servidas por Blade con islas de Vue 2 y pantallas más nuevas hechas con Vite.
 
 Como base de datos, la configuración oficial de Docker usa MySQL (variable `DB_CONNECTION=mysql` en el `.env` de ejemplo del repo). El despliegue se hace con el `docker-compose` oficial del proyecto, que el equipo ya probó y confirmó que funciona: los contenedores levantan sin problema y se puede iniciar sesión en `http://localhost/login` (verificado el 17 de agosto). No se encontró en el repositorio una lista oficial de navegadores soportados, así que eso queda pendiente de definir con criterio propio del equipo (los navegadores modernos más comunes: Chrome, Firefox y Edge en sus versiones actuales).
+
+En cuanto a hardware, el repositorio no publica un requisito mínimo oficial. Por experiencia propia levantando el stack completo (contenedores de la aplicación, base de datos MySQL y caché) en la máquina de un integrante del equipo, alcanza con un equipo con al menos 4 GB de RAM libres para Docker y unos 2 GB de espacio en disco para las imágenes y los volúmenes. No hace falta hardware especial, cualquier laptop de desarrollo estándar del equipo es suficiente.
 
 ## Requerimientos del sistema
 
@@ -65,7 +67,7 @@ Estos requerimientos salen del mapeo de módulos ([[Cursos/QA/entregables/mapeo-
 
 ## Problema
 
-El problema central que motiva este proyecto es que muchas personas no tienen forma de llevar un control ordenado de sus finanzas personales sin exponer su información bancaria a servidores de terceros.
+El problema central que motiva este proyecto es que muchas personas no tienen forma de llevar un control ordenado de sus finanzas personales sin exponer su información bancaria a servidores de terceros. Esto no es solo un problema técnico: tiene un lado educativo, porque buena parte de la población nunca recibió formación formal en manejo de presupuesto personal, y un lado económico, porque las decisiones financieras mal informadas afectan directamente la capacidad de ahorro y la salud financiera de los hogares.
 
 **Causas**, de la más general a la más puntual:
 - Las personas no tienen el hábito de registrar sus ingresos y gastos de forma consistente.
@@ -107,15 +109,20 @@ El equipo cuenta con los siguientes recursos para llevar a cabo el proyecto:
 
 ## Cronograma de actividades
 
-| Semana                              | Actividad                                                                                                                          |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| 5 (31 de agosto al 6 de septiembre) | Terminar de revisar y validar este Plan del proyecto en equipo, completar formato (portada, tabla de contenidos, índice de tablas) |
-| 6 (7 al 13 de septiembre)           | Entrega del Plan del proyecto                                                                                                      |
-| 7 a 10                              | Definir técnicas de prueba, escribir los casos de prueba y avanzar el Plan de pruebas                                              |
-| 11 (12 al 18 de octubre)            | Entrega del Plan de pruebas                                                                                                        |
-| 12 a 14                             | Automatizar los casos de prueba definidos                                                                                          |
-| 15 (9 al 15 de noviembre)           | Entrega del Proyecto de pruebas                                                                                                    |
-| 16 (16 al 22 de noviembre)          | Entrega del Informe de pruebas y de la Presentación                                                                                |
+| Semana | Fechas (2026) | Actividad |
+|---|---|---|
+| 5 | 31 de agosto al 6 de septiembre | Terminar de revisar y validar este Plan del proyecto en equipo; completar el formato (portada, tabla de contenidos, índice de tablas) |
+| 6 | 7 al 13 de septiembre | **Entrega del Plan del proyecto** (miércoles 9 de septiembre) |
+| 7 | 14 al 20 de septiembre | Elegir las técnicas de prueba a usar y empezar a escribir los primeros casos de prueba |
+| 8 | 21 al 27 de septiembre | Seguir escribiendo casos de prueba, meta de tener al menos la mitad de los 60 definidos |
+| 9 | 28 de septiembre al 4 de octubre | Terminar de escribir los 60 o más casos de prueba, cubriendo los 3 tipos de prueba distintos |
+| 10 | 5 al 11 de octubre | Revisar y validar el Plan de pruebas en equipo antes de entregarlo |
+| 11 | 12 al 18 de octubre | **Entrega del Plan de pruebas** (miércoles 14 de octubre) |
+| 12 | 19 al 25 de octubre | Elegir el framework de automatización y dejar el entorno de pruebas configurado |
+| 13 | 26 de octubre al 1 de noviembre | Automatizar el primer bloque de casos de prueba |
+| 14 | 2 al 8 de noviembre | Terminar de automatizar la suite completa (meta: 90% o más de los casos) y empezar a documentar los defectos encontrados |
+| 15 | 9 al 15 de noviembre | **Entrega del Proyecto de pruebas** (miércoles 11 de noviembre) |
+| 16 | 16 al 22 de noviembre | Terminar el Informe de pruebas, preparar y ensayar la presentación en inglés. **Entrega del Informe de pruebas y de la Presentación** (miércoles 18 de noviembre) |
 
 ## Conclusiones y recomendaciones
 
@@ -135,13 +142,14 @@ Firefly III es un proyecto adecuado para aplicar los procesos de calidad de soft
 
 ## Pendiente
 
-- [x] Especificaciones del software
+- [x] Especificaciones del software (hardware y software)
 - [x] Problema (árbol de problemas en texto, falta pasarlo a diagrama visual)
 - [x] Objetivos específicos con tabla de metas e indicadores
 - [x] Recursos disponibles
-- [x] Cronograma de actividades
+- [x] Cronograma de actividades, semana por semana con fechas
+- [x] Citas en el texto ([1] y [2] ya aparecen citadas en la Introducción, no solo listadas en Referencias)
+- [x] Sincronizar la fecha de entrega a Todoist y Calendar (hecho 2026-08-29)
 - [ ] Revisión y validación del equipo sobre todo el contenido
 - [ ] Confirmar la tercera fuente bibliográfica (ver nota en Referencias)
 - [ ] Agregar portada, tabla de contenidos e índice de tablas antes de entregar
 - [ ] Pasar el árbol de problemas a un diagrama visual real
-- [ ] Sincronizar la fecha de entrega (semana del 7 al 13 de septiembre) a Todoist y Calendar
