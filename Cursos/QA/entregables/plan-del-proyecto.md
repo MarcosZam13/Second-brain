@@ -12,7 +12,7 @@ tags: [proyecto, firefly-iii, fase1, plan-del-proyecto]
 
 Ver también: [[Cursos/QA/entregables/mapeo-modulos-firefly-iii|Mapeo de módulos — Firefly III]] · [[Cursos/QA/entregables/seleccion-repositorio-proyecto|Selección de repositorio]] · [[Cursos/QA/apuntes/proyecto-qa-guia|Guía del Proyecto]] · [[Cursos/QA/entregas]]
 
-**Estado:** contenido completo en borrador, según los 11 ítems de la estructura oficial (ver [[Cursos/QA/apuntes/proyecto-qa-guia]]). Entrega: **Semana 6**, del lunes 7 al domingo 13 de septiembre de 2026 (confirmado por Marcos: la semana 5 arrancó el lunes 31 de agosto). Falta el trabajo de formato: portada, tabla de contenidos e índice de tablas, y que el equipo revise y valide el contenido antes de entregarlo.
+**Estado:** contenido completo en borrador, según los 11 ítems de la estructura oficial (ver [[Cursos/QA/apuntes/proyecto-qa-guia]]). Entrega: **miércoles 9 de septiembre de 2026** (semana 6, día de clase de QA según Marcos; la semana 5 arrancó el lunes 31 de agosto). Falta el trabajo de formato: portada, tabla de contenidos e índice de tablas, y que el equipo revise y valide el contenido antes de entregarlo.
 
 **Repositorio elegido:** [firefly-iii/firefly-iii](https://github.com/firefly-iii/firefly-iii), un gestor de finanzas personales de código abierto y autohospedado, hecho en Laravel/PHP con Vue en el frontend. La justificación completa de por qué se eligió está en [[Cursos/QA/entregables/seleccion-repositorio-proyecto]].
 
@@ -107,15 +107,15 @@ El equipo cuenta con los siguientes recursos para llevar a cabo el proyecto:
 
 ## Cronograma de actividades
 
-| Semana | Actividad |
-|---|---|
+| Semana                              | Actividad                                                                                                                          |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | 5 (31 de agosto al 6 de septiembre) | Terminar de revisar y validar este Plan del proyecto en equipo, completar formato (portada, tabla de contenidos, índice de tablas) |
-| 6 (7 al 13 de septiembre) | Entrega del Plan del proyecto |
-| 7 a 10 | Definir técnicas de prueba, escribir los casos de prueba y avanzar el Plan de pruebas |
-| 11 (12 al 18 de octubre) | Entrega del Plan de pruebas |
-| 12 a 14 | Automatizar los casos de prueba definidos |
-| 15 (9 al 15 de noviembre) | Entrega del Proyecto de pruebas |
-| 16 (16 al 22 de noviembre) | Entrega del Informe de pruebas y de la Presentación |
+| 6 (7 al 13 de septiembre)           | Entrega del Plan del proyecto                                                                                                      |
+| 7 a 10                              | Definir técnicas de prueba, escribir los casos de prueba y avanzar el Plan de pruebas                                              |
+| 11 (12 al 18 de octubre)            | Entrega del Plan de pruebas                                                                                                        |
+| 12 a 14                             | Automatizar los casos de prueba definidos                                                                                          |
+| 15 (9 al 15 de noviembre)           | Entrega del Proyecto de pruebas                                                                                                    |
+| 16 (16 al 22 de noviembre)          | Entrega del Informe de pruebas y de la Presentación                                                                                |
 
 ## Conclusiones y recomendaciones
 
