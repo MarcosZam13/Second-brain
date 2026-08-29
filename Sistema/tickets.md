@@ -8,7 +8,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 
 | Prefijo | Curso | Último usado | Próximo |
 |---|---|---|---|
-| SEM | Seminario de Estudios Costarricenses | SEM-18 | SEM-19 |
+| SEM | Seminario de Estudios Costarricenses | SEM-19 | SEM-20 |
 | QA | Aseguramiento de la Calidad del Software | QA-35 | QA-36 |
 | SEG | Seguridad | SEG-21 | SEG-22 |
 | WEB | Desarrollo Web | WEB-5 | WEB-6 |
@@ -21,7 +21,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 | Prefijo | Proyecto | Último usado | Próximo |
 |---|---|---|---|
 | TACHA | Tacha | TACHA-23 | TACHA-24 |
-| MB | CoreBase (plataforma, trabajo transversal del monorepo) | MB-8 | MB-9 |
+| MB | CoreBase (plataforma, trabajo transversal del monorepo) | MB-17 | MB-18 |
 | DOJO | DojoBase | DOJO-6 | DOJO-7 |
 | GYM | GymBase | — | GYM-1 |
 | CANELE | CaneleApp | — | CANELE-1 |
