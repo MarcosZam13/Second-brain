@@ -8,25 +8,25 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 
 | Prefijo | Curso | Último usado | Próximo |
 |---|---|---|---|
-| SEM | Seminario de Estudios Costarricenses | SEM-19 | SEM-20 |
-| QA | Aseguramiento de la Calidad del Software | QA-36 | QA-37 |
+| SEM | Seminario de Estudios Costarricenses | SEM-20 | SEM-21 |
+| QA | Aseguramiento de la Calidad del Software | QA-37 | QA-38 |
 | SEG | Seguridad | SEG-21 | SEG-22 |
 | WEB | Desarrollo Web | WEB-5 | WEB-6 |
 | CYS | Computación y Sociedad | CYS-4 | CYS-5 |
 | EST | Estadística | EST-8 | EST-9 |
-| SO | Sistemas Operativos | SO-23 | SO-24 |
+| SO | Sistemas Operativos | SO-24 | SO-25 |
 
 ## Proyectos personales
 
 | Prefijo | Proyecto | Último usado | Próximo |
 |---|---|---|---|
 | TACHA | Tacha | TACHA-23 | TACHA-24 |
-| MB | CoreBase (plataforma, trabajo transversal del monorepo) | MB-19 | MB-20 |
-| DOJO | DojoBase | DOJO-9 | DOJO-10 |
+| MB | CoreBase (plataforma, trabajo transversal del monorepo) | MB-20 | MB-21 |
+| DOJO | DojoBase | DOJO-10 | DOJO-11 |
 | GYM | GymBase | — | GYM-1 |
 | CANELE | CaneleApp | — | CANELE-1 |
 | COMPDES | COMPDES 2027 | — | COMPDES-1 |
-| LAND | DojoBase Landing | LAND-1 | LAND-2 |
+| LAND | DojoBase Landing | LAND-2 | LAND-3 |
 
 ## Sistema (el vault mismo)
 

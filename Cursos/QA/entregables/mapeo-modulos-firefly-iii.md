@@ -10,7 +10,7 @@ tags: [proyecto, firefly-iii, mapeo-modulos, fase2, plan-de-pruebas]
 
 # Mapeo de módulos — Firefly III
 
-Ver también: [[Cursos/QA/entregables/seleccion-repositorio-proyecto|Selección de repositorio]] · [[Cursos/QA/apuntes/proyecto-qa-guia|Guía del Proyecto]] · [[Cursos/QA/entregas]]
+Ver también: [[Cursos/QA/entregables/seleccion-repositorio-proyecto|Selección de repositorio]] · [[Cursos/QA/entregables/reparto-equipo-fase1-fase2|Reparto de trabajo — Fase 1 y 2]] · [[Cursos/QA/apuntes/proyecto-qa-guia|Guía del Proyecto]] · [[Cursos/QA/entregas]]
 
 **Objetivo de esta nota:** listar los módulos reales de Firefly III (verificados contra el código fuente del repo, no solo la descripción de marketing) como insumo directo para el Plan del proyecto (Fase 1) y, más adelante, para diseñar los ≥60 casos de prueba de la Fase 2.
 

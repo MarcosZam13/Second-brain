@@ -10,7 +10,7 @@ tags: [proyecto, firefly-iii, fase1, plan-del-proyecto]
 
 # Plan del proyecto — Fase 1
 
-Ver también: [[Cursos/QA/entregables/mapeo-modulos-firefly-iii|Mapeo de módulos — Firefly III]] · [[Cursos/QA/entregables/seleccion-repositorio-proyecto|Selección de repositorio]] · [[Cursos/QA/apuntes/proyecto-qa-guia|Guía del Proyecto]] · [[Cursos/QA/entregas]]
+Ver también: [[Cursos/QA/entregables/mapeo-modulos-firefly-iii|Mapeo de módulos — Firefly III]] · [[Cursos/QA/entregables/seleccion-repositorio-proyecto|Selección de repositorio]] · [[Cursos/QA/entregables/reparto-equipo-fase1-fase2|Reparto de trabajo — Fase 1 y 2]] · [[Cursos/QA/apuntes/proyecto-qa-guia|Guía del Proyecto]] · [[Cursos/QA/entregas]]
 
 **Estado:** contenido completo en borrador, según los 11 ítems de la estructura oficial (ver [[Cursos/QA/apuntes/proyecto-qa-guia]]). Entrega: **miércoles 9 de septiembre de 2026** (semana 6, día de clase de QA según Marcos; la semana 5 arrancó el lunes 31 de agosto). Falta el trabajo de formato: portada, tabla de contenidos e índice de tablas, y que el equipo revise y valide el contenido antes de entregarlo.
 
@@ -109,20 +109,20 @@ El equipo cuenta con los siguientes recursos para llevar a cabo el proyecto:
 
 ## Cronograma de actividades
 
-| Semana | Fechas (2026) | Actividad |
-|---|---|---|
-| 5 | 31 de agosto al 6 de septiembre | Terminar de revisar y validar este Plan del proyecto en equipo; completar el formato (portada, tabla de contenidos, índice de tablas) |
-| 6 | 7 al 13 de septiembre | **Entrega del Plan del proyecto** (miércoles 9 de septiembre) |
-| 7 | 14 al 20 de septiembre | Elegir las técnicas de prueba a usar y empezar a escribir los primeros casos de prueba |
-| 8 | 21 al 27 de septiembre | Seguir escribiendo casos de prueba, meta de tener al menos la mitad de los 60 definidos |
-| 9 | 28 de septiembre al 4 de octubre | Terminar de escribir los 60 o más casos de prueba, cubriendo los 3 tipos de prueba distintos |
-| 10 | 5 al 11 de octubre | Revisar y validar el Plan de pruebas en equipo antes de entregarlo |
-| 11 | 12 al 18 de octubre | **Entrega del Plan de pruebas** (miércoles 14 de octubre) |
-| 12 | 19 al 25 de octubre | Elegir el framework de automatización y dejar el entorno de pruebas configurado |
-| 13 | 26 de octubre al 1 de noviembre | Automatizar el primer bloque de casos de prueba |
-| 14 | 2 al 8 de noviembre | Terminar de automatizar la suite completa (meta: 90% o más de los casos) y empezar a documentar los defectos encontrados |
-| 15 | 9 al 15 de noviembre | **Entrega del Proyecto de pruebas** (miércoles 11 de noviembre) |
-| 16 | 16 al 22 de noviembre | Terminar el Informe de pruebas, preparar y ensayar la presentación en inglés. **Entrega del Informe de pruebas y de la Presentación** (miércoles 18 de noviembre) |
+| Semana | Fechas (2026)                    | Actividad                                                                                                                                                         |
+| ------ | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 5      | 31 de agosto al 6 de septiembre  | Terminar de revisar y validar este Plan del proyecto en equipo; completar el formato (portada, tabla de contenidos, índice de tablas)                             |
+| 6      | 7 al 13 de septiembre            | **Entrega del Plan del proyecto** (miércoles 9 de septiembre)                                                                                                     |
+| 7      | 14 al 20 de septiembre           | Elegir las técnicas de prueba a usar y empezar a escribir los primeros casos de prueba                                                                            |
+| 8      | 21 al 27 de septiembre           | Seguir escribiendo casos de prueba, meta de tener al menos la mitad de los 60 definidos                                                                           |
+| 9      | 28 de septiembre al 4 de octubre | Terminar de escribir los 60 o más casos de prueba, cubriendo los 3 tipos de prueba distintos                                                                      |
+| 10     | 5 al 11 de octubre               | Revisar y validar el Plan de pruebas en equipo antes de entregarlo                                                                                                |
+| 11     | 12 al 18 de octubre              | **Entrega del Plan de pruebas** (miércoles 14 de octubre)                                                                                                         |
+| 12     | 19 al 25 de octubre              | Elegir el framework de automatización y dejar el entorno de pruebas configurado                                                                                   |
+| 13     | 26 de octubre al 1 de noviembre  | Automatizar el primer bloque de casos de prueba                                                                                                                   |
+| 14     | 2 al 8 de noviembre              | Terminar de automatizar la suite completa (meta: 90% o más de los casos) y empezar a documentar los defectos encontrados                                          |
+| 15     | 9 al 15 de noviembre             | **Entrega del Proyecto de pruebas** (miércoles 11 de noviembre)                                                                                                   |
+| 16     | 16 al 22 de noviembre            | Terminar el Informe de pruebas, preparar y ensayar la presentación en inglés. **Entrega del Informe de pruebas y de la Presentación** (miércoles 18 de noviembre) |
 
 ## Conclusiones y recomendaciones
 
