@@ -133,8 +133,14 @@ Y respeta RNF-06: si aparece una disciplina con otro sistema, es una fila con ot
 `progression_style`, no un caso especial en el código. Si ninguno de los tres calza, se agrega un
 valor al check — pero primero hay que confirmar con quien la practica, no suponerlo.
 
-**Pendiente de confirmar:** el estilo exacto de MMA. Se modeló como `time_based` porque es lo que
-el usuario describió, pero conviene verificarlo con el dojo antes de configurarlo.
+**No es un bloqueante confirmar el estilo exacto de MMA.** `progression_style` se elige por
+disciplina al crearla (HU-00b CA-01) — no es una decisión que tome el sistema por adelantado.
+`time_based` es el preset sugerido para MMA porque es lo que describió el usuario, pero si un dojo
+real la practica distinto, se cambia esa fila sin tocar código ni schema. Lo mismo vale para
+cualquier disciplina que no calce en ninguno de los tres estilos con cinturón/franjas/parche: con
+`rank_display = 'none'`, un `progression_style = 'direct'` ya funciona como una escalera de rangos
+totalmente libre — nombre, `short_label` y color por rango, sin insignia dibujada — que es la forma
+más simple de decir "rangos personalizados" sin agregar un cuarto valor al check.
 
 **▲ Corrección de fondo.** Se descarta `org_members.current_rank_id` y `current_rank_stripes` de v1. Coexistían con `org_member_ranks` (el equivalente correcto por disciplina) sin ningún trigger que las mantuviera sincronizadas, y la lógica de resincronización tenía un bug real: al ascender en una disciplina secundaria, reseteaba las franjas del rango "general" — que podía ser el de otra disciplina que ni participó del ascenso (caso borde 7 de `logica-promociones.md`).
 
