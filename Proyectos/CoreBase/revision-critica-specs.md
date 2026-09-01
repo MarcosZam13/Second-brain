@@ -213,7 +213,7 @@ El spec 2 lo justifica por "continuidad con hooks ya extraídos" — pero esos h
 
 ### E5 🟠 Falta todo lo de operación, no solo de features
 
-Ningún spec menciona: estrategia de testing (GymBase ya tiene Vitest + Playwright configurados), CI, cuántos proyectos de Vercel, variables de entorno por app, seed de datos demo, monitoreo de errores, ni la app de marketing (`apps/marketing`, mencionada de pasada en 8b). Son las cosas que aparecen en la semana 6 y descarrilan el cronograma.
+Ningún spec menciona: estrategia de testing (GymBase ya tiene Vitest + Playwright configurados), CI, cuántos proyectos de Vercel, variables de entorno por app, seed de datos demo, monitoreo de errores, ni la landing de marketing (mencionada de pasada en 8b — resuelto 2026-08-31 como repo propio, `dojobase-landing`, no como app dentro de este monorepo). Son las cosas que aparecen en la semana 6 y descarrilan el cronograma.
 
 ### E6 ⚪ Resuelto — ONVO sí soporta conexión por comercio
 

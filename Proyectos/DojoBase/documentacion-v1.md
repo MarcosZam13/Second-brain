@@ -158,7 +158,7 @@ Decidido de antemano para no improvisarlo bajo presión: **torneos → grupos fa
 - **RF-18b** ▲ — Al crear una disciplina, el sistema ofrece **escalas de rangos precargadas** editables, para no cargar veinte cinturones a mano.
 - **RF-18c** ▲ — El dojo tiene una **página pública editable desde la app** (historia, instructores, programas, logros, ubicación). Editable desde la app, no por código: de lo contrario cada dojo nuevo vuelve a ser un despliegue.
 - **RF-18d** ▲ — Los reportes del owner se exportan en CSV, Excel y PDF.
-- **RF-18e** ▲ — La política de privacidad y los términos de servicio viven en el **landing page** (`apps/marketing`), y la app enlaza a ellos. Siguen siendo bloqueantes del primer cobro.
+- **RF-18e** ▲ — La política de privacidad y los términos de servicio viven en la **landing page** (repo propio `dojobase-landing`, ver [[Proyectos/DojoBase-Landing/README|DojoBase Landing]]), y la app enlaza a ellos. Siguen siendo bloqueantes del primer cobro.
 - **RF-22** — El flujo de billing completo: definición de planes por admin/owner → elección y suscripción por el miembro → subida de comprobante → revisión por admin, con motivo visible en caso de rechazo.
 - **RF-22b** — El modo de cobro es configuración por organización. El MVP opera en **comprobante SINPE manual**; el cobro automático por pasarela (ONVO, modelo de marketplace) queda modelado y se activa por configuración, sin cambios de código ni de historial. Ver [[Proyectos/CoreBase/billing-onvo|billing-onvo.md]].
 - **RF-21** — Grupos familiares con plan por integrante, cobrados como unidad.
@@ -202,7 +202,7 @@ Las dos reglas que sostienen la separación y se verifican en CI: `packages/core
 
 Dos capas que no se mezclan (ver `_fuentes/08b-identidad-marca-vs-theming.md`):
 
-- **Identidad de DojoBase** — la marca del producto: landing de venta, paleta fija de alto contraste, tipografía de display, animación libre. Vive en `apps/marketing` y **no se importa desde la app**.
+- **Identidad de DojoBase** — la marca del producto: landing de venta, paleta fija de alto contraste, tipografía de display, animación libre. Vive en el repo `dojobase-landing` (ver [[Proyectos/DojoBase-Landing/README|DojoBase Landing]]) y **no se importa desde la app**.
 - **Theming del tenant** — los colores del dojo, en `tenant_themes`. Todo color de la app resuelve contra `var(--color-*)`, nunca contra la paleta de la marca.
 
 Lo que sí cruza de la marca a la app, con reglas: la tipografía de display en **máximo 3 o 4 momentos de alto impacto** (modal de "¡Promovido!", resultado de sparring ganado, título del feed de próximas peleas) y nunca en formularios ni tablas; micro-animaciones de confirmación de logro, cortas y nativas; y la paleta oscura como **preset opcional** de `tenant_themes`, no como default.

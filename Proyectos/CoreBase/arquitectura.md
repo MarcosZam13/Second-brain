@@ -141,7 +141,7 @@ GitHub Actions con: typecheck, lint (incluye las reglas anti-hex y anti-vertical
 
 ### Entornos y deploy
 
-Un proyecto de Vercel por app. `apps/dojobase` con dominio propio; `apps/marketing` separado. Variables de entorno por app, nunca compartidas entre productos.
+Un proyecto de Vercel por app. `apps/dojobase` con dominio propio. Variables de entorno por app, nunca compartidas entre productos. La landing de venta (`dojobase-landing`) es un repo aparte con su propio proyecto de Vercel — ver [[Proyectos/DojoBase-Landing/README|DojoBase Landing]].
 
 ### Cobro
 

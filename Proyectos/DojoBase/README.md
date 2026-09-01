@@ -1,6 +1,6 @@
 # DojoBase
 
-Ver también: [[Proyectos/README|Proyectos]] · [[Proyectos/CoreBase/README|CoreBase (plataforma)]] · [[Proyectos/CoreBase/revision-critica-specs|Revisión crítica de los specs]] · [[Proyectos/GymBase/README|GymBase]]
+Ver también: [[Proyectos/README|Proyectos]] · [[Proyectos/CoreBase/README|CoreBase (plataforma)]] · [[Proyectos/CoreBase/revision-critica-specs|Revisión crítica de los specs]] · [[Proyectos/GymBase/README|GymBase]] · [[Proyectos/DojoBase-Landing/README|DojoBase Landing (proyecto separado)]]
 
 **App:** `apps/dojobase` dentro del monorepo [[Proyectos/CoreBase/README|CoreBase]] (`corebase`).
 **Estado:** specs corregidos y cerrados (2026-08-28), con las 7 decisiones aplicadas, y `DESIGN.md` v1.3 listo. En código: **DOJO-7 (disciplinas y rangos)** y **DOJO-8 (clases y asistencia)**, ambos mergeados a `main` — [PR #1](https://github.com/MarcosZam13/CoreBase/pull/1) y [PR #5](https://github.com/MarcosZam13/CoreBase/pull/5). Qué se desvió del plan: [[Proyectos/DojoBase/cierre-dojo-7|cierre-dojo-7.md]] y [[Proyectos/DojoBase/cierre-dojo-8|cierre-dojo-8.md]]. Detalle paso a paso en `corebase/ESTADO.md`. Siguiente módulo: sparring.

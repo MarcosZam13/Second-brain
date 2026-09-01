@@ -95,7 +95,7 @@ Tres pantallas públicas nuevas, todas con la marca del dojo:
 | Crear cuenta desde invitación | Muestra a qué dojo entra y con qué rol antes de pedir datos |
 | Recuperar contraseña | Dos pasos, con la marca del dojo |
 
-El `DESIGN.md` las agrega al inventario. La landing de venta de DojoBase (`apps/marketing`) es otra cosa y no se mezcla: esa lleva la marca de **DojoBase**, no la del dojo.
+El `DESIGN.md` las agrega al inventario. La landing de venta de DojoBase (repo propio `dojobase-landing`, ver [[Proyectos/DojoBase-Landing/README|DojoBase Landing]]) es otra cosa y no se mezcla: esa lleva la marca de **DojoBase**, no la del dojo.
 
 ## El costo, dicho de frente
 
