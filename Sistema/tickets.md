@@ -9,11 +9,11 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 | Prefijo | Curso | Último usado | Próximo |
 |---|---|---|---|
 | SEM | Seminario de Estudios Costarricenses | SEM-19 | SEM-20 |
-| QA | Aseguramiento de la Calidad del Software | QA-35 | QA-36 |
+| QA | Aseguramiento de la Calidad del Software | QA-36 | QA-37 |
 | SEG | Seguridad | SEG-21 | SEG-22 |
 | WEB | Desarrollo Web | WEB-5 | WEB-6 |
 | CYS | Computación y Sociedad | CYS-4 | CYS-5 |
-| EST | Estadística | EST-7 | EST-8 |
+| EST | Estadística | EST-8 | EST-9 |
 | SO | Sistemas Operativos | SO-23 | SO-24 |
 
 ## Proyectos personales
@@ -26,6 +26,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 | GYM | GymBase | — | GYM-1 |
 | CANELE | CaneleApp | — | CANELE-1 |
 | COMPDES | COMPDES 2027 | — | COMPDES-1 |
+| LAND | DojoBase Landing | LAND-1 | LAND-2 |
 
 ## Sistema (el vault mismo)
 
