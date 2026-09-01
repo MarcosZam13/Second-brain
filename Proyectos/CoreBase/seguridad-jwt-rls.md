@@ -96,10 +96,32 @@ alter table <tabla> enable row level security;
 create policy "org_scoped_select" on <tabla>
   for select using (org_id = public.org_id());
 
-create policy "org_scoped_staff_write" on <tabla>
-  for all using (org_id = public.org_id() and public.is_admin_or_owner())
+-- Tres policies, no una `for all`: `for all` incluye SELECT, así que
+-- cualquier lectura evalúa esta política Y `org_scoped_select` (ambas
+-- permisivas, se OR-ean) — trabajo doble en cada SELECT cuando la de
+-- lectura ya cubre a todo el mundo en el dojo, staff incluido.
+create policy "org_scoped_staff_insert" on <tabla>
+  for insert with check (org_id = public.org_id() and public.is_admin_or_owner());
+
+create policy "org_scoped_staff_update" on <tabla>
+  for update using (org_id = public.org_id() and public.is_admin_or_owner())
   with check (org_id = public.org_id() and public.is_admin_or_owner());
+
+create policy "org_scoped_staff_delete" on <tabla>
+  for delete using (org_id = public.org_id() and public.is_admin_or_owner());
 ```
+
+**▲ Corregido tras DOJO-7:** la primera versión de esta sección tenía
+`org_scoped_staff_write` como una sola policy `for all`, que es exactamente
+el anti-patrón de arriba. `disciplines`/`ranks`/`member_ranks` la copiaron
+tal cual y el advisor de performance de Supabase lo marcó
+(`multiple_permissive_policies`) recién al cerrar el módulo — migración
+`dojo_optimizacion` (017) la separó en insert/update/delete. Nada de esto
+afecta a quién se le permite qué, solo cuántas veces Postgres evalúa cada
+política. (`public.org_id()`/`public.is_admin_or_owner()` son funciones
+`stable` y no necesitan el envoltorio `(select ...)` — eso es solo para una
+llamada cruda a `auth.uid()`/`auth.jwt()` en el cuerpo de una policy, ver
+`dojo_member_ranks_rls_initplan`, migración 015.)
 
 Cubre directo: `organizations` (lectura de la propia), `membership_plans`, `class_types`, `scheduled_classes`, `content_categories`, `content`, `challenges`, y del lado vertical `disciplines`, `ranks`, `promotion_events`, `promotion_criteria`, `tournaments`, `tournament_divisions`.
 
