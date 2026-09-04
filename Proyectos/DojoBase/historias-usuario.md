@@ -1,9 +1,9 @@
 ---
 proyecto: DojoBase
 tema: Historias de usuario y criterios de aceptación
-fecha: 2026-08-28
+fecha: 2026-09-03
 tipo: documentacion
-estado: v1.3 — 64 historias con criterios de aceptación, agrupadas en épicas por rol. Numeración heredada del spec 06; HU-24 en adelante son nuevas. v1.1 agrega progresión por disciplina, ficha del alumno y módulos opcionales (revisión de mockups); v1.2 agrega lo que salió del repaso de GymBase v1: sesión de sparring con cronómetro, clases recurrentes, anuncios, notificaciones por correo y proyección de torneos
+estado: v1.4 — 64 historias con criterios de aceptación, agrupadas en épicas por rol. Numeración heredada del spec 06; HU-24 en adelante son nuevas. v1.1 agrega progresión por disciplina, ficha del alumno y módulos opcionales (revisión de mockups); v1.2 agrega lo que salió del repaso de GymBase v1: sesión de sparring con cronómetro, clases recurrentes, anuncios, notificaciones por correo y proyección de torneos. v1.4 (2026-09-03) corrige HU-05/06/07/07c/08/09 contra lo que DOJO-9 terminó construyendo: sin fecha propuesta, el reto se decide por rounds ganados (no suma de puntos) con KO/sumisión/decisión por round, HU-07b (confirmación del rival) removida, preparación de 10s antes de cada round
 tags: [dojobase, historias-usuario, requerimientos]
 ---
 
@@ -173,7 +173,7 @@ Como instructor, quiero marcar quién realmente no llegó, para que la asistenci
 
 **HU-05: Retar a un compañero**
 Como miembro, quiero retar a otro miembro a un sparring en una disciplina específica, para competir de forma informal dentro del dojo.
-- CA-01: Elijo rival y disciplina, y opcionalmente propongo fecha.
+- CA-01: Elijo rival, disciplina, cantidad de rounds y duración de cada round y del descanso. *(2026-09-03: sin fecha propuesta — sacada a pedido explícito, ver HU-07c CA-01 donde vivía la config de rounds/duración por default; ahora se elige siempre al retar.)*
 - CA-02 **[servidor]**: No puedo retarme a mí mismo.
 - CA-03 **[servidor]**: No puedo retar a alguien de otra organización.
 - CA-04: El reto queda pendiente y aparece en mi lista de retos.
@@ -181,7 +181,7 @@ Como miembro, quiero retar a otro miembro a un sparring en una disciplina espec�
 
 **HU-06: Aceptar o rechazar un reto**
 Como miembro retado, quiero aceptar o rechazar, para decidir si me enfrento a esa persona.
-- CA-01: Veo el reto con quién me reta, en qué disciplina, su rango en esa disciplina, y la fecha propuesta.
+- CA-01: Veo el reto con quién me reta, en qué disciplina, y su rango en esa disciplina. *(2026-09-03: ya no muestra fecha propuesta — el campo se sacó del alta, ver HU-05 CA-01.)*
 - CA-02: Puedo aceptar o rechazar, y el retador recibe notificación de mi respuesta.
 - CA-03 **[servidor]**: Solo el rival puede responder, y solo mientras el reto esté pendiente.
 - CA-04: Un reto rechazado queda en el historial como rechazado; no desaparece sin dejar rastro.
@@ -193,45 +193,43 @@ Como retador, quiero cargar los resultados por round del sparring aceptado, para
 - CA-01c: Un **deshacer** revierte la última anotación de cualquiera de los dos, e indica cuál va a revertir antes de usarlo.
 - CA-01d: Los valores de los botones se configuran por disciplina; si no se configuran, son 1 a 4.
 - CA-02 **[servidor]**: Solo el retador puede cargar rounds, y solo si el reto está aceptado.
-- CA-03: Al cerrar el reto, el ganador se calcula automáticamente a partir de la suma de los rounds.
+- CA-03 *(rediseñada 2026-09-03)*: Al cerrar el reto, el ganador se calcula a partir de **cuántos rounds ganó cada uno** — no de la suma de puntos. Cada round se lo lleva quien anotó más en ESE round; un round empatado en puntos no cuenta para ninguno de los dos.
 - CA-04 **[servidor]**: El cálculo del ganador usa la misma función que el preview que veo en pantalla — el resultado mostrado y el guardado nunca difieren.
-- CA-05: Un empate en la suma de rounds es un resultado válido y se guarda como tal.
+- CA-05 *(rediseñada 2026-09-03)*: Un empate en la cantidad de rounds ganados por cada uno es un resultado válido y se guarda como tal.
+- CA-06 *(nueva — 2026-09-03)*: Puedo corregir un round ya cargado sin tener que deshacer los rounds posteriores.
+- CA-07 *(nueva — 2026-09-03)*: Un round puede decidirse por **KO, sumisión o decisión** en vez de por puntos — declaro quién ganó ese round y queda fijo, sin importar el marcador que hubiera hasta ahí. No cierra el reto: el reto sigue jugándose los rounds que falten, y se sigue decidiendo por CA-03.
 
 **HU-07c: Correr la sesión de sparring con cronómetro** *(nueva — hallazgo del repaso de v1)*
 Como challenger, quiero que la app me lleve el tiempo de cada round y del descanso, para poder concentrarme en el sparring en vez de en el reloj.
 - CA-01: Al crear el reto defino cantidad de rounds, duración de cada uno y del descanso; si no los defino, son 3 rounds de 3 minutos con 1 de descanso.
-- CA-02: La sesión recorre las fases: cronómetro del round → cargar el resultado → descanso → round siguiente, y termina en un resumen.
+- CA-02: La sesión recorre las fases: **preparación → cronómetro del round → cargar el resultado → descanso → round siguiente**, y termina en un resumen. *(2026-09-03: se agregó la fase de preparación, ver CA-08.)*
 - CA-03: Puedo anotar puntos **mientras el round corre**, sin pausar nada.
 - CA-04 **[servidor / cliente]**: El tiempo se calcula contra el instante de inicio, no descontando un contador. **Con la pantalla apagada o la app en segundo plano, al volver el cronómetro muestra el tiempo correcto.**
 - CA-05: Suena un aviso y vibra al faltar 10 segundos y al terminar el round — nadie mira la pantalla mientras pelea.
 - CA-06: El paso a descanso es automático; el paso al round siguiente lo confirmo yo, porque el descanso real nunca dura lo configurado.
 - CA-07: Puedo pausar y retomar, y puedo terminar el reto antes de completar todos los rounds.
+- CA-08 *(nueva — 2026-09-03)*: Antes de CADA round (incluido el primero) hay una preparación de 10 segundos con cuenta regresiva, con un aviso sonoro distinto al de "quedan 10s"/"terminó el round" — para notar la diferencia entre "falta poco" y "arrancó de verdad" sin mirar la pantalla. También puedo declarar un round por KO/sumisión/decisión desde acá mismo (HU-07 CA-07), sin volver al detalle primero.
 
-**HU-07b: Confirmar el resultado** *(nueva — decisión 4)*
-Como miembro retado, quiero confirmar o disputar el resultado que cargó mi rival, para que el historial refleje lo que realmente pasó.
-- CA-01: Cuando el retador cierra el reto, recibo una notificación para confirmar el resultado.
-- CA-02: Puedo confirmarlo, y el enfrentamiento pasa a contar en el historial cruzado.
-- CA-03: Mientras no lo confirme, el reto se muestra como "pendiente de confirmación" y **no cuenta** en el historial cruzado.
-- CA-04 **[servidor]**: Solo el rival puede confirmar, y solo sobre un reto completado.
-- CA-05: Puedo dejar una nota si no estoy de acuerdo, visible para ambos y para el staff.
+~~**HU-07b: Confirmar el resultado**~~ *(removida — 2026-09-03, a pedido explícito)*
+Existía como "el rival confirma o disputa el resultado antes de que cuente en el historial". Se sacó por completo: en un sparring amistoso entre compañeros que ya lo vieron, pedir un click de "confirmar" además del cierre era fricción sin ninguna decisión real detrás. `cerrar_reto()` cierra en firme, sin paso aparte — el mecanismo de dejar una nota (`sparring_notes`) sigue existiendo en la base, pero sin superficie en la UI.
 
 **HU-08: Ver mi historial contra un compañero**
 Como miembro, quiero ver mi historial de enfrentamientos contra un compañero, para llevar cuenta de la rivalidad.
-- CA-01: Veo el marcador acumulado por disciplina contra cada rival con el que tuve sparrings.
-- CA-02: Solo se cuentan enfrentamientos completados **y confirmados**.
+- CA-01: Veo el marcador acumulado de retos por disciplina contra cada rival con el que tuve sparrings, **y el total de rounds ganados/perdidos** sumando todos esos retos. *(2026-09-03: se agregó el detalle de rounds, no solo retos.)*
+- CA-02 *(2026-09-03: ya no depende de confirmación, ver HU-07b)*: Solo se cuentan enfrentamientos completados.
 - CA-03: Puedo abrir el detalle de cada enfrentamiento y ver los rounds.
 - CA-04 **[servidor]**: No puedo ver el historial cruzado de dos miembros en el que no participo.
 
 **HU-09: Recibir el reto al momento**
 Como miembro, quiero enterarme inmediatamente cuando me retan, para responder a tiempo.
-- CA-01: Si estoy usando la app, el reto aparece como aviso inmediato sin recargar.
-- CA-02: Si no estoy, recibo una notificación push.
+- CA-01 *(ampliada 2026-09-03)*: Si estoy usando la app, el reto aparece como aviso inmediato sin recargar — **sin importar en qué pantalla esté**, no solo en la lista de retos. El aviso muestra rival, disciplina y la configuración de rounds, y lleva al detalle si lo toco.
+- CA-02: Si no estoy, recibo una notificación push. *(Todavía sin construir — no existe tabla de notificaciones/suscripciones push; queda como ticket aparte, no parte de esta tanda.)*
 - CA-03: El reto persiste en mi lista de retos pendientes — no desaparece por haberse mostrado una vez.
 - CA-04: Si recibí el aviso in-app, la notificación push no vuelve a llamar la atención sobre lo mismo una vez que la marqué leída.
 
 **HU-09b: Cancelar un sparring propio**
 Como miembro, quiero cancelar un sparring en el que participo antes de que se complete, para salir de un reto que ya no quiero sostener.
-- CA-01: Cualquiera de los dos participantes puede cancelar mientras el reto esté pendiente o aceptado.
+- CA-01: Puedo cancelar mientras el reto esté aceptado. Si todavía está pendiente, **solo el retador puede cancelar** — el rival responde con Aceptar/Rechazar, no cancela. *(2026-09-04: precisado tras encontrar la asimetría real en `cancelar_reto()`, migración `20260830020000_dojo_sparring_hallazgos_code_review.sql` — el hallazgo original decía "cualquiera de los dos" sin distinguir el estado pendiente.)*
 - CA-02: El otro participante recibe notificación.
 - CA-03 **[servidor]**: Un reto completado no se puede cancelar.
 

@@ -67,6 +67,18 @@ Tres razones:
 
 `postgres_changes` queda para lo simple y poco sensible, si hace falta.
 
+**El cliente tiene que abrir el canal con `{ config: { private: true } }`.**
+Sin esa opción el canal es un broadcast abierto: no pasa por el RLS de
+`realtime.messages`, así que ni la autorización se cumple (cualquiera se
+suscribe al canal ajeno) ni `realtime.broadcast_changes()` entrega nada — el
+mecanismo completo de "Broadcast desde la base" da por sentado un canal
+privado. El spike original ya lo hacía bien; en DojoBase (canal `user:<uuid>`
+de sparring, DOJO-9 paso 11) se copió el patrón del canal pero no esa
+opción, y lo encontró un test antes de tocar el navegador — ver
+`modulos/sparring/decisiones.md` del repo. Vale la pena que sea lo primero
+que se revisa cuando un canal nuevo "no llega nada" con la policy bien
+escrita.
+
 ### Nunca más un canal mudo
 
 Regla de código, no de buena voluntad:
