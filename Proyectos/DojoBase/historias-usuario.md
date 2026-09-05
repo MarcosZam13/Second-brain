@@ -3,7 +3,7 @@ proyecto: DojoBase
 tema: Historias de usuario y criterios de aceptación
 fecha: 2026-09-03
 tipo: documentacion
-estado: v1.4 — 64 historias con criterios de aceptación, agrupadas en épicas por rol. Numeración heredada del spec 06; HU-24 en adelante son nuevas. v1.1 agrega progresión por disciplina, ficha del alumno y módulos opcionales (revisión de mockups); v1.2 agrega lo que salió del repaso de GymBase v1: sesión de sparring con cronómetro, clases recurrentes, anuncios, notificaciones por correo y proyección de torneos. v1.4 (2026-09-03) corrige HU-05/06/07/07c/08/09 contra lo que DOJO-9 terminó construyendo: sin fecha propuesta, el reto se decide por rounds ganados (no suma de puntos) con KO/sumisión/decisión por round, HU-07b (confirmación del rival) removida, preparación de 10s antes de cada round
+estado: v1.5 — 66 historias con criterios de aceptación, agrupadas en épicas por rol. Numeración heredada del spec 06; HU-24 en adelante son nuevas. v1.1 agrega progresión por disciplina, ficha del alumno y módulos opcionales (revisión de mockups); v1.2 agrega lo que salió del repaso de GymBase v1: sesión de sparring con cronómetro, clases recurrentes, anuncios, notificaciones por correo y proyección de torneos. v1.4 (2026-09-03) corrige HU-05/06/07/07c/08/09 contra lo que DOJO-9 terminó construyendo: sin fecha propuesta, el reto se decide por rounds ganados (no suma de puntos) con KO/sumisión/decisión por round, HU-07b (confirmación del rival) removida, preparación de 10s antes de cada round. v1.5 (2026-09-06) agrega la épica "Torneos" (HU-42 a HU-44, bocetada y sin priorizar) tras aclarar con Marcos que Torneos y Peleas oficiales (HU-10/11/11b) son features distintas — HU-38 (proyección) se reubicó ahí, vivía suelta bajo Configuración sin ninguna otra HU de torneos escrita todavía.
 tags: [dojobase, historias-usuario, requerimientos]
 ---
 
@@ -269,6 +269,41 @@ Como miembro, quiero decidir si el resultado de mi pelea se ve en el feed del do
 
 ---
 
+## Rol: Admin y Miembro — torneos
+
+> **Distinto de "Peleas oficiales" (HU-10/11/11b) — aclarado por Marcos el 2026-09-05.** Una pelea oficial es competencia profesional del miembro fuera del dojo; un torneo es un evento que el propio dojo organiza (interno o abierto a externos) para que varios miembros participen y se foguen entre ellos. Un torneo no genera peleas oficiales por sí solo — ver la nota abierta en HU-45 CA-03. Épica nueva, todavía sin construir; **bocetada, no priorizada** — falta pasarla por el mismo desglose crítico que recibieron las demás antes de tener un ticket.
+
+### Epic: Torneos internos y externos
+
+**HU-42: Crear un torneo** *(nueva — bocetada 2026-09-06)*
+Como admin, quiero crear un torneo interno o externo indicando disciplina y fecha, para organizar un evento donde varios miembros se midan y se foguen.
+- CA-01: Puedo crear un torneo indicando nombre, disciplina, si es interno (solo miembros del dojo) o abierto a externos, y fecha.
+- CA-02: El torneo tiene un estado (borrador, en curso, cerrado) — mismo ciclo de vida que un evento de promoción (HU-12/13b).
+- CA-03 **[servidor]**: Solo admin y owner pueden crear, editar o cancelar un torneo.
+
+**HU-43: Armar el cuadro de participantes** *(nueva — bocetada 2026-09-06)*
+Como admin, quiero agregar participantes al torneo viendo la información de cada uno, para armar los cruces con criterio en vez de al azar.
+- CA-01: Puedo agregar miembros del dojo como participantes; en un torneo abierto a externos también puedo agregar un participante libre por nombre, igual que el rival de una pelea oficial (HU-10 CA-01).
+- CA-02: Al decidir un cruce veo la ficha de cada candidato a participante — rango, disciplina y, si es miembro del dojo, su historial de peleas — para emparejar peleadores de nivel parecido.
+- CA-03: Armo los cruces a mano, un participante contra otro — no es un bracket generado automáticamente ni una eliminatoria con avance automático.
+- CA-04 **[servidor]**: Un participante no puede quedar cruzado contra sí mismo, ni en dos cruces sin resolver del mismo torneo a la vez.
+
+**HU-44: Ver la card de cada cruce y registrar su resultado** *(nueva — bocetada 2026-09-06)*
+Como admin, quiero ver una card por cada cruce con la información de la pelea y registrar su resultado, para llevar el orden del torneo mientras avanza.
+- CA-01: Cada cruce se ve como una card con los dos participantes, la disciplina y su estado (pendiente, jugado).
+- CA-02: Puedo registrar resultado y método del cruce (mismo vocabulario que una pelea oficial, HU-10), quedando reflejado en la card.
+- CA-03: **Abierto, sin decidir todavía:** si un participante es miembro del dojo, ¿el resultado del cruce entra a su historial de peleas oficiales (HU-10/HU-11) o queda solo dentro del torneo? Un torneo interno de fogueo probablemente no debería mezclarse con el historial competitivo "afuera del dojo" que HU-10/11 describen — a decidir antes de construir esta HU.
+- CA-04: Miembros y staff pueden ver el estado de todos los cruces del torneo, jugados y pendientes, sin necesidad de ser admin.
+
+**HU-38: Proyectar el torneo en una pantalla** *(nueva — confirmada en el repaso; reubicada acá el 2026-09-06, vivía suelta bajo "Owner — configuración" sin ninguna otra HU de torneos todavía escrita)*
+Como admin, quiero proyectar el cuadro de cruces en un televisor durante el torneo, para que los presentes sigan las peleas.
+- CA-01: Abro una vista a pantalla completa, de solo lectura, con control de zoom.
+- CA-02: El marcador se actualiza **en tiempo real** al registrarse un resultado (HU-44 CA-02), sin recargar ni esperar.
+- CA-03: La pantalla se abre con un enlace propio, **sin necesidad de iniciar sesión** en la tableta o laptop del proyector.
+- CA-04 **[servidor]**: Ese enlace da acceso únicamente a la vista de lectura de ese torneo, a nada más.
+
+---
+
 ## Rol: Admin y Miembro — promociones
 
 ### Epic: Eventos de ascenso
@@ -516,13 +551,6 @@ Como miembro, quiero editar mi nombre, teléfono y foto de perfil, para que mi f
 - CA-02: La foto se ve en el avatar de toda la app, con el anillo de mi rango.
 - CA-03: Si no tengo foto, se muestran mis iniciales — nunca un espacio en blanco.
 
-**HU-38: Proyectar el torneo en una pantalla** *(nueva — confirmada en el repaso)*
-Como admin, quiero proyectar el bracket en un televisor durante el torneo, para que los presentes sigan las peleas.
-- CA-01: Abro una vista a pantalla completa, de solo lectura, con control de zoom.
-- CA-02: El marcador se actualiza **en tiempo real** al registrarse un resultado, sin recargar ni esperar.
-- CA-03: La pantalla se abre con un enlace propio, **sin necesidad de iniciar sesión** en la tableta o laptop del proyector.
-- CA-04 **[servidor]**: Ese enlace da acceso únicamente a la vista de lectura de ese torneo, a nada más.
-
 **HU-39: Ver la página pública del dojo** *(nueva — confirmada en el repaso)*
 Como owner, quiero una página pública del dojo editable desde la app, para poder compartirla con interesados.
 - CA-01: Edito historia, instructores, programas, logros y ubicación **desde la app**, sin tocar código.
@@ -575,6 +603,7 @@ Como sistema, quiero avisar a los inscritos antes de su clase, para bajar las au
 | Calendario y clases | HU-01, 02, 02b, 02c, 02d, 03, 04, 04b | RF-03 a RF-04c |
 | Sparring | HU-05 a HU-09c, 07b, 07c | RF-05 a RF-08 |
 | Peleas oficiales | HU-10, 11, 11b | RF-09, RF-10 |
+| Torneos *(bocetada, sin priorizar)* | HU-42, 43, 44, 38 | — |
 | Promociones | HU-12, 12b, 13, 13b, 14 | RF-11 a RF-12b |
 | Contenido | HU-15, 15b | RF-13, RF-13b |
 | Challenges | HU-16 | RF-14 |
@@ -584,7 +613,6 @@ Como sistema, quiero avisar a los inscritos antes de su clase, para bajar las au
 | Notificaciones por canal | HU-36, 36b | RF-17, RF-17b |
 | Perfil y página del dojo | HU-37, 39 | RF-18c |
 | Inicio del staff y ver como alumno | HU-40, 41 | RF-23 |
-| Proyección de torneo | HU-38 | — |
 | Ficha del alumno | HU-32, 32b, 32c | RF-12c, RF-12d |
 | Mediciones (opcional) | HU-33, 33b | RF-12e |
 | Módulos opcionales | HU-34 | RF-12f |
