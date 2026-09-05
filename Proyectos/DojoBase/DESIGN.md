@@ -3,7 +3,7 @@ proyecto: DojoBase
 tema: DESIGN.md — guía de diseño, sistema de componentes e inventario de pantallas
 fecha: 2026-08-28
 tipo: documentacion
-estado: v1.3 — 48 pantallas mapeadas a HU. v1.1 incorporó la revisión de los mockups (progresión por disciplina, ficha del alumno, mediciones); v1.2 suma lo del repaso de GymBase v1: sesión de sparring con cronómetro, anuncios, avisos y proyección de torneos
+estado: v1.4 — 48 pantallas mapeadas a HU. v1.1 incorporó la revisión de los mockups (progresión por disciplina, ficha del alumno, mediciones); v1.2 suma lo del repaso de GymBase v1: sesión de sparring con cronómetro, anuncios, avisos y proyección de torneos; v1.4 (2026-09-05) corrige D9/D10/M10 contra lo que DOJO-11 terminó construyendo — ver 7.9 y 5.3 para el porqué
 tags: [dojobase, diseño, ui-ux, design-system, componentes]
 ---
 
@@ -289,7 +289,7 @@ La autorización no tiene nada que ver con la navegación. Que una sección est�
 | M7 | Cargar resultado | HU-07 | Marcador por rounds, pensado para usarse al lado del tatami |
 | M8 | Rivalidades | HU-08 | Head-to-head por rival y disciplina |
 | M9 | Mi progreso | HU-14 | **Pantalla estrella.** Rango por disciplina, camino al siguiente, historial de promociones |
-| M10 | Detalle de evaluación | HU-14 | Desglose por criterio con puntaje y máximo |
+| M10 | Detalle de evaluación | HU-14 | *(2026-09-05: construida como acordeón inline dentro de M9, no como ruta aparte — mismo dato, sin navegación extra; ver 7.7)* Desglose por criterio con puntaje y máximo |
 | M11 | Mis peleas | HU-10, HU-11b | Historial + toggle de publicación por pelea |
 | M12 | Contenido | HU-15 | Explorador de carpetas |
 | M13 | Detalle de contenido | HU-15, HU-15b | Lectura + favorito |
@@ -317,8 +317,8 @@ La autorización no tiene nada que ver con la navegación. Que una sección est�
 | D6 | Pasar lista | HU-04b | Lista de inscritos con tres estados. **Diseñada para el celular** |
 | D7 | Disciplinas y rangos | HU-00 | Editor de la escala de cinturones, con vista previa |
 | D8 | Promociones | HU-12 | Lista de eventos por estado |
-| D9 | Evento — candidatos | HU-12b | Postular, ver asistencia en la ventana |
-| D10 | Evento — calificación | HU-13 | La grilla. Ver 5.3 para su versión mobile |
+| D9 | Evento — candidatos | HU-12b | *(2026-09-05: construida junto con D10 en una sola ruta — el detalle del evento, con secciones de criterios/candidatos/calificación; ver 7.9)* Postular. **Sin la asistencia en la ventana todavía** — pendiente, ver historias-usuario.md |
+| D10 | Evento — calificación | HU-13 | La grilla, simplificada a un panel por candidato — ver 5.3 |
 | D11 | Peleas | HU-10 | Registro y edición del historial oficial |
 | D12 | Contenido — gestión | HU-15 | Carpetas y publicación |
 | D13 | Pagos | HU-18 | Bandeja de comprobantes con la imagen al lado de la decisión |
@@ -395,8 +395,8 @@ Se construyen **componiendo primitivas**, nunca con HTML y clases sueltas. `Spar
 | `RankProgressCard` | Rango actual y camino al siguiente, en las tres formas de progresión | HU-14, HU-00b |
 | `MemberFileSheet` | Ficha del alumno con campos faltantes señalados y generación para torneo | HU-32 a HU-32c |
 | `MeasurementStrip` | Última medición con su variación | HU-33 |
-| `PromotionScoreGrid` | La grilla de calificación | HU-13 |
-| `CriteriaBreakdown` | Desglose por criterio para el miembro | HU-14 |
+| `CandidatoCalificacion` | Panel de calificación de un candidato: un `Stepper` por criterio, puntaje final en vivo, promover/no promover — ver 5.3 (reemplaza a `PromotionScoreGrid` de v1.3, que era una grilla con dos presentaciones) | HU-13 |
+| `PantallaMiProgreso` (desglose inline) | Reemplaza a `CriteriaBreakdown` como pantalla aparte: acordeón dentro de M9, mismo dato | HU-14 |
 | `FightCard` | Pelea oficial con resultado y método | HU-10 |
 | `UpcomingFightsFeed` | Feed de próximas peleas del dojo | HU-11 |
 | `PaymentProofUploader` | Datos SINPE + adjuntar comprobante | HU-17 |
@@ -408,7 +408,7 @@ Se construyen **componiendo primitivas**, nunca con HTML y clases sueltas. `Spar
 
 ### 5.3 Las pantallas difíciles
 
-**`PromotionScoreGrid` en mobile (D10).** Una matriz de candidatos × criterios no entra en un celular. Solución: en desktop es la grilla completa; **en mobile es un flujo de a un candidato por vez** — su foto y rango arriba, sus criterios como lista vertical de `Stepper`, y navegación anterior/siguiente entre candidatos. Misma data, mismo server action, dos presentaciones. Es el caso donde `DataList` no alcanza y hay que diseñar las dos.
+**`PromotionScoreGrid` en mobile (D10) — corregido 2026-09-05.** El plan original era una matriz de candidatos × criterios en desktop y un flujo de a un candidato por vez en mobile, dos presentaciones sobre la misma data. DOJO-11 lo construyó como **una sola presentación para las dos superficies**: `CandidatoCalificacion`, un panel por candidato con un `Stepper` por criterio, dentro de la lista de candidatos de D9/D10 (que además se unificaron en una sola ruta). Con 1-2 candidatos por evento — lo normal en un dojo chico — la tabla completa no aporta nada sobre el panel, y evita mantener dos layouts para el mismo dato. La versión con las dos presentaciones queda documentada acá como la solución de fondo si algún dojo real llega a calificar muchos candidatos a la vez (del orden de 8-10 en pantalla) y el acordeón se vuelve incómodo de recorrer — no se descartó por error, se descartó por costo sin beneficio actual.
 
 **`SparringSession` (M20).** Es la única pantalla que se usa **durante** una actividad física, no después. Rompe el marco de navegación a propósito: pantalla completa, sin barra, cronómetro en tamaño de display legible a un metro, y el teclado de puntos abajo, en la zona del pulgar. El descanso usa el mismo lienzo con la cuenta regresiva y el resumen del round anterior. Aviso sonoro y vibración — nadie mira la pantalla mientras pelea.
 
@@ -494,13 +494,13 @@ Encabezado enfrentando a los dos peleadores: avatar grande, nombre y cinturón a
 Pantalla estrella del miembro. Arriba, una tarjeta por disciplina: nombre de la disciplina, cinturón actual grande con sus franjas, y una barra de progreso al siguiente rango con el texto de qué falta ("2 franjas más" o "12 clases más"). Debajo, línea de tiempo de eventos de promoción en los que participé, cada uno con fecha, nombre del evento, resultado como badge y puntaje final. Tocar uno abre el desglose por criterio.
 
 ### 7.7 M10 — Desglose de evaluación
-Encabezado con el evento, la fecha y el resultado. Lista de criterios: nombre, puntaje obtenido sobre el máximo, barra de progreso y el peso del criterio. Al final, el puntaje total y la nota mínima si el evento la tenía, comparados visualmente. Tono informativo, no de reprobación.
+*(2026-09-05: construida como acordeón dentro de la tarjeta del evento en M9, no como pantalla aparte — se toca la tarjeta y se expande ahí mismo, sin navegar.)* Encabezado con el evento, la fecha y el resultado — ya visibles en la tarjeta cerrada. Al expandir: lista de criterios con nombre, puntaje obtenido sobre el máximo y barra de progreso. Al final, la nota mínima del evento si la tenía. Tono informativo, no de reprobación. El peso del criterio (planeado en v1.3) no se muestra — el puntaje ya normalizado es lo que le importa al miembro, no cómo se ponderó.
 
 ### 7.8 D6 — Pasar lista
 Diseñada para usarse de pie con una mano. Encabezado con la clase, hora y contador "18 de 20 presentes". Filas altas: avatar, nombre, cinturón, y a la derecha un control segmentado compacto de tres opciones — presente, ausente, sin marcar. Sin scroll horizontal. Botón de guardar fijo abajo.
 
-### 7.9 D10 — Grilla de calificación
-Desktop: tabla con candidatos en filas y criterios en columnas, celdas editables con guardado automático, columna final con el puntaje calculado y botones de decisión. Fila marcada visualmente si la evaluación está incompleta. Mobile: un candidato por pantalla — su foto, nombre y cinturón arriba, sus criterios como lista vertical de steppers con el máximo visible, puntaje final grande abajo, y flechas de anterior/siguiente candidato.
+### 7.9 D9/D10 — Detalle del evento: criterios, candidatos y calificación
+*(2026-09-05: D9 y D10 se construyeron como una sola pantalla — el detalle del evento — en vez de dos rutas separadas; ver 5.3 para por qué la grilla se simplificó a un panel por candidato.)* Encabezado con el nombre del evento, la disciplina, el estado (borrador/activo/completado) y qué otorga (rango fijo, rango dinámico al siguiente de la escala, o franja), más los botones de la etapa actual (activar, cerrar, reabrir, resolver por nota mínima). Debajo, la lista de criterios (nombre, máximo, peso) con agregar/editar/eliminar — editar y eliminar solo mientras el evento está en borrador. Debajo, la lista de candidatos postulados: nombre, rango con el que se presentó, estado. Cada candidato pendiente expande ahí mismo su panel de calificación — un `Stepper` por criterio con guardado automático, puntaje final recalculado en vivo, aviso de evaluación incompleta, y los botones promover/no promover. Un candidato ya resuelto muestra su puntaje final y el botón de revertir la decisión.
 
 ### 7.10 D13 — Revisar comprobantes
 Lista de comprobantes pendientes. Al abrir uno: la imagen del comprobante ocupando la mitad de la pantalla (ampliable), y al lado el miembro, el plan, el monto y hasta cuándo se le extiende la membresía si se aprueba. Dos botones claros: aprobar y rechazar. Rechazar abre un campo obligatorio de motivo.
