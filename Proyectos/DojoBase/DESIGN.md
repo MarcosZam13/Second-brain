@@ -478,6 +478,8 @@ Base común, a anteponer a todos:
 ### 7.1 M1 — Inicio del miembro
 Dashboard de un alumno. Arriba, card de la próxima clase con disciplina, hora, instructor y botón de inscribirse. Debajo, sección "Te retaron" con tarjetas de retos de sparring pendientes de responder (avatar del retador, su cinturón, disciplina, botones aceptar/rechazar). Después, feed horizontal "Próximas peleas" con tarjetas de compañeros que compiten pronto. Si la membresía vence en menos de 7 días, una franja de aviso arriba de todo. Estado vacío por sección, nunca espacio en blanco.
 
+*(2026-09-06/07, DOJO-14): solo el feed "Próximas peleas" está construido de verdad, agregado de forma aditiva sobre el scaffold que ya existía en `/panel` — próxima clase, retos pendientes y aviso de membresía siguen sin construirse, esta pantalla no está completa todavía. El feed es horizontal con scroll, tarjetas de `w-72` con el nombre del miembro y el rival apilados en líneas separadas (no en una sola fila): un primer intento con ambos nombres en una fila truncaba nombres completos a la mitad en una tarjeta angosta — corregido antes de cerrar el módulo.*
+
 ### 7.2 M2 — Calendario semanal
 Vista de semana con los 7 días como columnas en desktop y como carrusel de días en mobile. Cada clase es una tarjeta compacta: nombre, disciplina con su color, hora, instructor, y ocupación tipo "8/12". Estado visual distinto para inscrito, con cupo, lleno y cancelada. Navegación de semana anterior/siguiente arriba. Toque en la tarjeta abre el detalle.
 
@@ -533,6 +535,12 @@ Tarjetas, una por grupo: nombre con un badge de estado agregado ("Al día" si to
 ### 7.18 CelebrationOverlay
 Superposición a pantalla completa, breve. Fondo oscurecido, el cinturón nuevo grande al centro con una animación corta de entrada (menos de 400ms), la palabra "¡PROMOVIDO!" en Anton, y el nombre del rango. Un botón de continuar. Sin confeti genérico ni animación larga: impacto por contraste y tipografía, no por movimiento.
 
+### 7.19 D11 — Peleas *(construida en DOJO-14, sin prompt previo)*
+Lista simple (no tabla), una `Card` por pelea: nombre del miembro y del rival con un badge de resultado (Ganó/Perdió/Empate/Próxima), y una segunda línea con disciplina, fecha y método si lo hay. Cada fila tiene "Editar" y "Eliminar" (con `ConfirmDialog`). Botón "Nueva pelea" abre un `FormModal` con: miembro (select, solo en alta — al editar se muestra como texto, no es editable), disciplina, fecha, resultado, y un `SegmentedControl` "Del dojo"/"Externo" que decide si el campo de rival es un select de miembros o un texto libre. Completar una pelea "próxima" con su resultado es la misma acción de editar, no un flujo aparte.
+
+### 7.20 M11 — Mis peleas *(construida en DOJO-14, sin prompt previo)*
+Lista del propio historial, misma `Card` por fila que D11 pero sin acciones de edición/borrado. Sobre una pelea ya jugada (no "próxima"), un badge Público/Privado y un botón que alterna la publicación — no aparece sobre una pelea "próxima" porque todavía no hay ningún resultado que publicar.
+
 ---
 
 ## 8. Cómo usar este documento
@@ -545,6 +553,6 @@ Superposición a pantalla completa, breve. Fondo oscurecido, el cinturón nuevo 
 
 ## Pendiente
 
-- **Prompts de las pantallas restantes** — están las 18 que definen el lenguaje visual (agregadas O2/M15/M16/O5 en DOJO-13); el resto se derivan de estas y de los componentes ya definidos.
+- **Prompts de las pantallas restantes** — están las 20 que definen el lenguaje visual (agregadas O2/M15/M16/O5 en DOJO-13, D11/M11 en DOJO-14); el resto se derivan de estas y de los componentes ya definidos.
 - **Mockup navegable** — un HTML de las 4 o 5 pantallas clave, como el `mockup-web-v2.html` de Tacha, para validar el lenguaje visual antes de escribir componentes.
 - **Iconografía** — definir el set (probablemente Lucide) y las reglas de tamaño y grosor.
