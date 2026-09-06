@@ -503,7 +503,9 @@ Diseñada para usarse de pie con una mano. Encabezado con la clase, hora y conta
 *(2026-09-05: D9 y D10 se construyeron como una sola pantalla — el detalle del evento — en vez de dos rutas separadas; ver 5.3 para por qué la grilla se simplificó a un panel por candidato.)* Encabezado con el nombre del evento, la disciplina, el estado (borrador/activo/completado) y qué otorga (rango fijo, rango dinámico al siguiente de la escala, o franja), más los botones de la etapa actual (activar, cerrar, reabrir, resolver por nota mínima). Debajo, la lista de criterios (nombre, máximo, peso) con agregar/editar/eliminar — editar y eliminar solo mientras el evento está en borrador. Debajo, la lista de candidatos postulados: nombre, rango con el que se presentó, estado. Cada candidato pendiente expande ahí mismo su panel de calificación — un `Stepper` por criterio con guardado automático, puntaje final recalculado en vivo, aviso de evaluación incompleta, y los botones promover/no promover. Un candidato ya resuelto muestra su puntaje final y el botón de revertir la decisión.
 
 ### 7.10 D13 — Revisar comprobantes
-Lista de comprobantes pendientes. Al abrir uno: la imagen del comprobante ocupando la mitad de la pantalla (ampliable), y al lado el miembro, el plan, el monto y hasta cuándo se le extiende la membresía si se aprueba. Dos botones claros: aprobar y rechazar. Rechazar abre un campo obligatorio de motivo.
+Lista de comprobantes pendientes. Al abrir uno: la imagen del comprobante ocupando la mitad de la pantalla, y al lado el miembro, el plan, el monto y hasta cuándo se le extiende la membresía si se aprueba. Dos botones claros: aprobar y rechazar. Rechazar abre un campo obligatorio de motivo.
+
+*(2026-09-06, corregido contra un hallazgo de seguridad de DOJO-13: el monto no es solo informativo — es un campo editable, precargado con lo que subió el miembro, con la advertencia de verificarlo contra la imagen antes de aprobar. El monto que se guarda al aprobar es el que quede en ese campo, no el original — así el admin puede corregir un valor equivocado o malicioso antes de que quede fijo como ingreso. Si el dojo cobra recargo por mora y el período tiene uno aplicado, se muestra una línea aparte con el monto del recargo. La imagen todavía NO es ampliable — quedó pendiente, no se construyó en esta tanda.)*
 
 ### 7.11 O1 — Finanzas
 Fila de KPIs arriba: ingresos del mes, suscripciones activas, pagos pendientes, morosos. Debajo, gráfica de ingresos por mes. Al lado, distribución por plan. Abajo, tabla de últimos pagos. Números tabulares en todo. Sobrio y legible, no un dashboard sobrecargado.
@@ -517,7 +519,18 @@ Lista de disciplinas a la izquierda; al elegir una, su escala de rangos a la der
 ### 7.14 A2 — Aceptar invitación
 Pantalla centrada, sobria. Logo del dojo, "Te invitaron a unirte a [Dojo]", el rol con el que entrás, y quién te invitó. Un solo botón principal. Debajo, alternativa de iniciar sesión si ya tenés cuenta. Si la invitación venció, mensaje claro con qué hacer.
 
-### 7.15 CelebrationOverlay
+### 7.15 O2 — Planes *(construida en DOJO-13, sin prompt previo)*
+Grilla de tarjetas, una por plan: nombre, badge "Recomendado" (acento) o "Inactivo" (neutral) si aplica, precio grande con el período al lado ("/ mes" o "/ año"), y tres acciones por tarjeta (editar, marcar/quitar recomendado, desactivar/reactivar). Botón "+ Nuevo plan" al final de la grilla. Sin tabla ni lista — son pocos planes por dojo, la grilla de tarjetas alcanza y se lee mejor en mobile que una tabla.
+
+### 7.16 M15/M16 — Mi membresía / Subir comprobante *(construidas en DOJO-13, sin prompt previo)*
+**M15:** si no hay plan elegido, grilla de tarjetas de planes activos (mismo estilo que O2, con el recomendado destacado por un borde de acento) con botón "Suscribirme" por tarjeta. Si ya hay un plan, una tarjeta con el nombre, precio, badge de estado (Esperando pago / Al día / Vencida), fecha de vencimiento, aviso de recargo por mora si el período tiene uno aplicado, y botón "Subir comprobante" cuando el estado lo permite. Debajo, "Historial de pagos": lista simple de comprobantes con monto, fecha y badge de estado; si fue rechazado, el motivo en rojo debajo del monto.
+
+**M16 (modal sobre M15):** título con los datos SINPE del dojo en la descripción ("Transferí a X (titular)"). Un campo de monto opcional con la aclaración de que si se deja vacío se toma el del plan, y el input de archivo de imagen — armado a mano, no con `FormField` (esa primitiva todavía no tiene `type="file"`, ver § 5.1). Botón "Subir".
+
+### 7.17 O5 — Grupos familiares *(construida en DOJO-13, sin prompt previo)*
+Tarjetas, una por grupo: nombre con un badge de estado agregado ("Al día" si todos los integrantes están activos, "Con atraso" si alguno está vencido, "Con pagos pendientes" en los demás casos, "Sin integrantes" si está vacío). Debajo, la lista de integrantes con su nombre y plan, cada uno con un botón "Quitar" (desvincula del grupo sin tocar su suscripción ni su historial). Acciones de la tarjeta: agregar integrante (modal con selector de miembro + selector de plan — le crea la suscripción si no tenía), renombrar, eliminar el grupo. Botón "+ Nuevo grupo" al final.
+
+### 7.18 CelebrationOverlay
 Superposición a pantalla completa, breve. Fondo oscurecido, el cinturón nuevo grande al centro con una animación corta de entrada (menos de 400ms), la palabra "¡PROMOVIDO!" en Anton, y el nombre del rango. Un botón de continuar. Sin confeti genérico ni animación larga: impacto por contraste y tipografía, no por movimiento.
 
 ---
@@ -532,6 +545,6 @@ Superposición a pantalla completa, breve. Fondo oscurecido, el cinturón nuevo 
 
 ## Pendiente
 
-- **Prompts de las pantallas restantes** — están las 15 que definen el lenguaje visual; el resto se derivan de estas y de los componentes ya definidos.
+- **Prompts de las pantallas restantes** — están las 18 que definen el lenguaje visual (agregadas O2/M15/M16/O5 en DOJO-13); el resto se derivan de estas y de los componentes ya definidos.
 - **Mockup navegable** — un HTML de las 4 o 5 pantallas clave, como el `mockup-web-v2.html` de Tacha, para validar el lenguaje visual antes de escribir componentes.
 - **Iconografía** — definir el set (probablemente Lucide) y las reglas de tamaño y grosor.
