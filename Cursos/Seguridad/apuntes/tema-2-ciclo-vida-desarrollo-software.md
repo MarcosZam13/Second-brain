@@ -5,7 +5,9 @@ fecha: 2026-08-24
 tipo: apunte
 fuente:
   - _fuentes/Seguridad_tema2-ciclo-vida-desarrollo-software_2026-08-24.pdf
-tags: [tema2, sdlc, threat-modeling, owasp, nist, iso27034, cadena-suministro, casos-abuso, dread]
+  - _fuentes/Seguridad_nist-csf-2.0-oficial_2026-09-07.pdf
+  - _fuentes/Seguridad_nice-framework-fuerza-laboral_2026-09-07.pdf
+tags: [tema2, sdlc, threat-modeling, owasp, nist, csf, nice, iso27034, cadena-suministro, casos-abuso, dread]
 ---
 
 # Tema 2 — Ciclo de Vida de Desarrollo de Software (buenas prácticas de seguridad)
@@ -85,7 +87,24 @@ Agencia federal de EE.UU. (Departamento de Comercio, fundada en 1901), **no regu
 | Enfoque | Operativo/técnico | Estratégico/riesgo de negocio |
 | Recursos | Guías estáticas | Herramientas de referencia online |
 
-Publicaciones especiales (serie 800) relevantes: **SP 800-53** (controles de seguridad y privacidad para sistemas de información), **SP 800-171** (protección de info sensible no clasificada en contratistas), **SP 800-30** (guía para evaluaciones de riesgo — ver sección de ARA más abajo), **NICE Framework** (roles y competencias de la fuerza laboral de ciberseguridad). También existe **NIST C-SCRM** (Cybersecurity Supply Chain Risk Management, SP 1305) específico para riesgo de cadena de suministro.
+**Las 6 funciones en detalle (documento oficial NIST CSWP 29, fuente añadida 2026-09-07)** — se ejecutan de forma concurrente, no secuencial: GOVERN/IDENTIFY/PROTECT/DETECT operan de forma continua, mientras RESPOND/RECOVER están listas para activarse cuando ocurre un incidente.
+
+| Función | Categorías (subdivisiones) | Qué responde |
+|---|---|---|
+| **GOVERN (GV)** | Contexto organizacional, Estrategia de gestión de riesgo, Roles/responsabilidades, Política, Supervisión, Riesgo de cadena de suministro | ¿Cuál es la estrategia y quién es responsable de qué? |
+| **IDENTIFY (ID)** | Gestión de activos, Evaluación de riesgos, Mejora | ¿Qué tenemos y qué riesgos corre? |
+| **PROTECT (PR)** | Gestión de identidad/autenticación/control de acceso, Concientización y capacitación, Seguridad de datos, Seguridad de plataforma, Resiliencia de infraestructura | ¿Cómo evitamos que pase? |
+| **DETECT (DE)** | Monitoreo continuo, Análisis de eventos adversos | ¿Cómo nos damos cuenta de que está pasando? |
+| **RESPOND (RS)** | Gestión de incidentes, Análisis, Comunicación/reporte, Mitigación | ¿Qué hacemos mientras pasa? |
+| **RECOVER (RC)** | Ejecución del plan de recuperación, Comunicación de recuperación | ¿Cómo volvemos a la normalidad? |
+
+Cada Función se divide en Categorías y estas en Subcategorías (outcomes técnicos/de gestión específicos) — no es una checklist de pasos a seguir en orden, sino un lenguaje común para organizar qué se está gestionando.
+
+Publicaciones especiales (serie 800) relevantes: **SP 800-53** (controles de seguridad y privacidad para sistemas de información), **SP 800-171** (protección de info sensible no clasificada en contratistas), **SP 800-30** (guía para evaluaciones de riesgo — ver sección de ARA más abajo), **SP 800-181r1 / NICE Framework** (roles y competencias de la fuerza laboral de ciberseguridad — ver debajo). También existe **NIST C-SCRM** (Cybersecurity Supply Chain Risk Management, SP 1305) específico para riesgo de cadena de suministro.
+
+#### NICE Framework (SP 800-181 Rev. 1) — marco de fuerza laboral
+
+Mientras el CSF organiza *qué outcomes de seguridad* debe lograr una organización, el **NICE Framework** ("Marco de la Iniciativa Nacional para la Educación en Ciberseguridad") organiza *quién hace el trabajo*: define un lenguaje común de **roles de trabajo (Work Roles)**, tareas, conocimientos y habilidades (KSA — Knowledge, Skills, Abilities) para la fuerza laboral de ciberseguridad. Se usa para describir puestos, diseñar programas educativos/de capacitación, y planificar la fuerza laboral de una organización — es el complemento de "personas" al marco técnico/de riesgo del CSF.
 
 ### ISO/IEC
 
