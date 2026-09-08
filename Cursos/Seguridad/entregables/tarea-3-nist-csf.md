@@ -12,9 +12,11 @@ tags: [tarea3, nist-csf, voteonline, grupo11]
 
 Ver también: [[Cursos/Seguridad/apuntes/tema-2-ciclo-vida-desarrollo-software|Tema 2 — las 6 funciones del NIST CSF]] · [[Cursos/Seguridad/entregables/tarea-2-threat-modeling|Tarea 2 — Threat Modeling de VoteOnline]] · [[Cursos/Seguridad/apuntes/stride-metodologia-amenazas|STRIDE]]
 
-**Valor: 5%** · Trabajo en clase, 30 min + exposición de 5 min. **Misma empresa que Tarea 2: VoteOnline** (sistema de votación remota para colegios profesionales).
+**Valor: 5%** · Trabajo en clase, 30 min + exposición de 5 min. **Empresa: VoteOnline** (sistema de votación remota para colegios profesionales).
 
-**La idea no es llenar espacios de memoria — es tomar lo que ya identificamos en el Threat Modeling (Tarea 2) y organizarlo bajo las 5 funciones del NIST CSF.** Cada respuesta de acá abajo trae su "por qué" para poder explicarlo en la exposición sin leer textual.
+**Grupo 11:** Rachel Monterrey Quesada · Wesley Esquivel Mena · Marcos Zamora Sánchez · Dereck Yariel Cuadra González
+
+**Estado final — entregado como Word el 2026-09-07.** Versión Word final: `entregables/Tarea3_NIST_CSF_Grupo11.docx`. Rúbrica real de la profesora (`_fuentes/Seguridad_rubrica-evaluacion-tarea3_2026-09-07.xlsx`): solo califica **1.1 (15 pts), 1.2 (15 pts), 1.3 (35 pts) y 2.1 (35 pts)** — 2.2 en adelante no tiene puntaje asignado, es para la exposición.
 
 ## 1. IDENTIFY — Identificación de activos y riesgos
 
@@ -25,18 +27,18 @@ Ver también: [[Cursos/Seguridad/apuntes/tema-2-ciclo-vida-desarrollo-software|T
 3. **Base de datos electoral** — contiene el resultado completo de la elección.
 4. **Panel de administración / cookie de sesión** — es la puerta de acceso con más privilegio a todo lo anterior.
 
-**1.2 Datos de clientes (colegiados) que deben protegerse:**
+**1.2 Datos de clientes que deben protegerse:**
 
-- Número de cédula (semilla del token).
-- Correo electrónico (canal de entrega del token).
-- El voto emitido y su vínculo con el votante (dato más sensible del sistema: revela cómo votó una persona específica).
+El voto de los colegiados y sus datos personales (cédula y correo electrónico), ya que permiten identificar a la persona y vincularla con su elección.
 
 **1.3 Cuatro riesgos de seguridad y por qué lo son:**
 
-1. **Predicción de tokens** (SHA-1 sin sal sobre la cédula) — es riesgo porque la cédula es semi-pública en Costa Rica; un atacante externo puede calcular el token de otro colegiado sin necesitar acceso privilegiado ni interceptar nada.
-2. **Cookie de sesión del panel sin `HttpOnly`** — es riesgo porque es robable vía XSS, y esa sola cookie da acceso de auditoría a toda la base de datos electoral.
-3. **Un administrador legítimo puede ver qué votó una persona específica** (voto e ID en la misma tabla) — es riesgo aunque no haya "atacante": rompe el secreto del voto desde adentro, con acceso completamente autorizado.
-4. **El canal de correo (proveedor externo)** puede ser interceptado — es riesgo porque el token viaja sin garantía de confidencialidad hacia un tercero fuera del control del colegio.
+1. **El acceso al panel de administración solo está protegido por una cookie de sesión** — es riesgo porque, si esa cookie se roba, cualquier persona puede entrar al sistema como administrador y auditar toda la base de datos electoral.
+2. **Que se pierda el secreto del voto** (ID del colegiado y voto en la misma tabla) — es riesgo porque cualquier persona con acceso al sistema podría ver por quién votó cada colegiado.
+3. **Que el token se prediga o se filtre y se use para votar suplantando la identidad de otro colegiado** — es riesgo porque permite que alguien emita un voto en nombre de otra persona sin su consentimiento, afectando la autenticidad y la integridad del proceso electoral.
+4. **Que un administrador con acceso legítimo al panel modifique o elimine votos directamente en la base de datos antes del cierre** — es riesgo porque no hace falta robar nada: el mismo acceso autorizado que sirve para auditar la elección también permite alterar el resultado, lo que puede convertir la votación en un proceso fraudulento.
+
+*(Nota: los riesgos 3 y 4 se separaron a propósito — antes se traslapaban al mezclar "suplantación por token robado" con "alguien cambia los votos", que son dos mecanismos distintos y la rúbrica de esta sección pesa 35 pts, la más alta del documento.)*
 
 ## 2. PROTECT — Controles de protección
 
@@ -51,7 +53,7 @@ Ver también: [[Cursos/Seguridad/apuntes/tema-2-ciclo-vida-desarrollo-software|T
 
 - Cifrado en tránsito (TLS) en todo el tráfico votante↔servidor↔correo, para que interceptar el canal no alcance para leer el token.
 - Cifrado en reposo de la tabla electoral.
-- Rediseño ya identificado en Tarea 2: separar "ID de quién votó" de "qué opción se eligió" en dos tablas, unidas solo por un token efímero que se destruye al cerrar la elección.
+- Separar "ID de quién votó" de "qué opción se eligió" en dos tablas, unidas solo por un token efímero que se destruye al cerrar la elección.
 - Reemplazar SHA-1 sin sal por HMAC-SHA256 con clave secreta del servidor + salt único por token.
 
 **2.3 Cuatro medidas de capacitación para empleados:**
@@ -107,13 +109,13 @@ Ver también: [[Cursos/Seguridad/apuntes/tema-2-ciclo-vida-desarrollo-software|T
 **5.2 Cuatro mejoras de proceso después del incidente y por qué:**
 
 1. **MFA obligatorio en todas las cuentas del panel** (no solo tras el incidente) — cierra permanentemente la puerta que se usó esta vez.
-2. **Adoptar el rediseño de tokens (HMAC + salt) y la separación de tablas** ya identificado en el Threat Modeling de Tarea 2 — convierte una lección aprendida en un cambio de diseño real, no solo un parche puntual.
+2. **Adoptar el rediseño de tokens (HMAC + salt) y la separación de tablas** ya planteados — convierte una lección aprendida en un cambio de diseño real, no solo un parche puntual.
 3. **Revisiones periódicas de logs de auditoría**, no solo reactivas ante incidentes — pasa de "nos dimos cuenta de casualidad" a "lo detectamos por proceso".
 4. **Post-mortem sin culpa (blameless)** que actualice el plan de respuesta con lo aprendido — mejora continua real del proceso, no solo cerrar el caso puntual.
 
-## Cómo se conecta con lo que ya vimos
+## Nota interna (no va en el documento a entregar)
 
-Esto no es un ejercicio aislado: es el mismo caso VoteOnline de Tarea 2, reorganizado bajo las 5 funciones del NIST CSF (Identify/Protect/Detect/Respond/Recover — ver [[Cursos/Seguridad/apuntes/tema-2-ciclo-vida-desarrollo-software|Tema 2]] para las 6, incluyendo Govern). El Threat Modeling identificó **qué** podía salir mal y cómo mitigarlo desde el diseño; el NIST CSF organiza esas mismas ideas en un ciclo continuo — de hecho, casi todas las mitigaciones de diseño de Tarea 2 (separar tablas, MFA, tokens HMAC+salt, cookies seguras) reaparecen acá bajo PROTECT, porque son la misma solución vista desde dos frameworks distintos.
+El caso VoteOnline ya se había analizado antes con Threat Modeling/STRIDE — ver [[Cursos/Seguridad/entregables/tarea-2-threat-modeling]]. Acá se reorganizó esa misma comprensión del sistema bajo las 5 funciones del NIST CSF. El documento final para entregar/exponer (`Tarea3_NIST_CSF_Grupo11.docx`) no menciona esa tarea anterior explícitamente, para que se entienda como un análisis autocontenido.
 
 ## Checklist contra la rúbrica
 
