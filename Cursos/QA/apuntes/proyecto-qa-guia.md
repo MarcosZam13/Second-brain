@@ -12,7 +12,7 @@ tags: [proyecto, plan-de-pruebas, diario-reflexivo, rubrica, aprendizaje-basado-
 
 # Guía del Proyecto — Aprendizaje Basado en Proyectos
 
-Ver también: [[Cursos/QA/apuntes/calidad-semana-1|Calidad — Semana 1]] · [[Cursos/QA/entregables/plan-del-proyecto|Plan del proyecto]] · [[Cursos/QA/entregables/diario-reflexivo|Diario Reflexivo]] · [[Cursos/QA/entregas]]
+Ver también: [[Cursos/QA/apuntes/calidad-semana-1|Calidad — Semana 1]] · [[Cursos/QA/entregables/plan-del-proyecto|Plan del proyecto]] · [[Cursos/QA/entregables/diario-reflexivo|Diario Reflexivo]] · [[Cursos/QA/apuntes/ejemplo-plan-e-informe-pruebas-companeros|Ejemplo real de Fase 2/3 de compañeros]] · [[Cursos/QA/entregas]]
 
 > **Actualizado 2026-08-29** con el PPT oficial de esta edición del curso (`QA_proyecto-fases-y-rubricas-oficiales_2026-08-29.pptx`, guardado en `Cursos/QA/_fuentes/`), que trae las rúbricas completas con puntaje por ítem y las semanas de entrega reales — a diferencia del PDF/diapositivas de 2026-08-14, que era la guía institucional genérica de estrategia didáctica (con fechas de calendario de una edición anterior que no aplican acá). Donde el PPT oficial contradice al PDF genérico, **manda el PPT oficial** — se deja indicado en cada sección. El diario reflexivo se excluye de esta nota a propósito: se gestiona aparte en [[Cursos/QA/entregables/diario-reflexivo]] con su propio ritmo quincenal.
 
