@@ -3,6 +3,7 @@ curso: CompuYSociedad
 tema: "Tarea Corta — Comparación de Códigos de Ética (ACM vs. CPIC)"
 fecha: 2026-09-06
 tipo: entregable
+estado: "entregado (confirmado por el usuario 2026-09-09)"
 fuente: investigación web (acm.org, artículos sobre el Código de Ética CPIC 2013) — sin PDF oficial completo del CPIC disponible en línea de acceso libre
 tags: [etica-profesional, acm, cpic, colegio-informatica-cr, video-grupal]
 ---
@@ -11,7 +12,7 @@ tags: [etica-profesional, acm, cpic, colegio-informatica-cr, video-grupal]
 
 Ver también: [[Cursos/CompuYSociedad/entregas]]
 
-**Entrega:** video grupal, 5–8 minutos, todos los integrantes participan · **Fecha límite: 2026-09-08, 8:00 a.m.** · Valor: 15 puntos, con rúbrica.
+**Entrega:** video grupal, 5–8 minutos, todos los integrantes participan · **Fecha límite: 2026-09-08, 8:00 a.m.** · Valor: 15 puntos, con rúbrica. **Entregado (confirmado 2026-09-09).**
 
 Archivo entregable generado: `GuiaPreparacion_ComparacionCodigosEtica.docx` — guía de contenido y estructura para grabar el video. **No es un guion para leer**; la rúbrica penaliza explícitamente "lectura de guion" y premia la discusión grupal genuina.
 
@@ -29,6 +30,4 @@ El texto completo y oficial del Código de Ética del CPIC (2013) no está dispo
 
 ## Pendiente antes de entregar
 
-- Confirmar el texto oficial del CPIC si el profesor lo exige literal.
-- Definir quién cubre cada bloque del video según el tamaño real del equipo.
-- Grabar y editar el video (5–8 minutos).
+- [x] Grabar y editar el video (5–8 minutos) — entregado 2026-09-09.

@@ -4,7 +4,7 @@ tema: Reporte audiovisual #2 — Refugiados nicaragüenses
 fecha: 2026-08-12
 tipo: entregable
 entregable_de: "[[Cursos/Seminario/apuntes/reportes-audiovisuales]]"
-estado: "borrador completo — falta revisar redacción final y formato antes de entregar"
+estado: "entregado (confirmado por el usuario 2026-09-09)"
 tags: [reporte-audiovisual, entregable, refugiados-nicaraguenses]
 ---
 
@@ -29,8 +29,8 @@ Ver también: [[Cursos/Seminario/apuntes/reportes-audiovisuales]] · [[Cursos/Se
 - [x] Leer (o repasar) Sandoval García (2002) — necesario para la pregunta 2 y 3, que piden integrar el imaginario colectivo costarricense sobre migración nicaragüense
 - [x] Comprensión y análisis del documental (4 pts) — cada respuesta ya integra un dato o testimonio puntual del video
 - [x] Integración de contenidos del curso (3 pts) — Sandoval García (2002) y Jiménez Matarrita (2005)
-- [ ] Argumentación, claridad y presentación (3 pts) — revisar si la profesora pide formato APA 7, y leer todo en voz alta antes de entregar
-- [ ] Exportar/entregar en el formato que pida la profesora
+- [x] Argumentación, claridad y presentación (3 pts)
+- [x] Exportar/entregar en el formato que pida la profesora — entregado 2026-09-09
 
 ## Preguntas
 

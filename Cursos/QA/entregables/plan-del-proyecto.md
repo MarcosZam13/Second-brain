@@ -4,7 +4,7 @@ tema: Plan del proyecto — Fase 1
 fecha: 2026-08-17
 tipo: entregable
 entregable_de: "[[Cursos/QA/apuntes/proyecto-qa-guia]]"
-estado: borrador
+estado: "entregado (confirmado por el usuario 2026-09-09)"
 tags: [proyecto, firefly-iii, fase1, plan-del-proyecto]
 ---
 
@@ -12,7 +12,7 @@ tags: [proyecto, firefly-iii, fase1, plan-del-proyecto]
 
 Ver también: [[Cursos/QA/entregables/mapeo-modulos-firefly-iii|Mapeo de módulos — Firefly III]] · [[Cursos/QA/entregables/seleccion-repositorio-proyecto|Selección de repositorio]] · [[Cursos/QA/entregables/reparto-equipo-fase1-fase2|Reparto de trabajo — Fase 1 y 2]] · [[Cursos/QA/apuntes/proyecto-qa-guia|Guía del Proyecto]] · [[Cursos/QA/entregas]]
 
-**Estado:** contenido completo, según los 11 ítems de la estructura oficial (ver [[Cursos/QA/apuntes/proyecto-qa-guia]]), incluyendo requerimientos + HU con CA, diagrama del árbol de problemas y las 3 fuentes bibliográficas. Entrega: **miércoles 9 de septiembre de 2026** (semana 6, día de clase de QA según Marcos; la semana 5 arrancó el lunes 31 de agosto). Falta: (1) llenar los datos reales de portada — nombres del equipo, profesora, grupo — marcados como `[COMPLETAR]`; (2) que el equipo revise y dé el visto bueno antes de entregar; (3) al exportar a Word, generar la tabla de contenidos real y paginar el índice de tablas.
+**Estado: entregado (2026-09-09)**, según los 11 ítems de la estructura oficial (ver [[Cursos/QA/apuntes/proyecto-qa-guia]]), incluyendo requerimientos + HU con CA, diagrama del árbol de problemas y las 3 fuentes bibliográficas.
 
 **Repositorio elegido:** [firefly-iii/firefly-iii](https://github.com/firefly-iii/firefly-iii), un gestor de finanzas personales de código abierto y autohospedado, hecho en Laravel/PHP con Vue en el frontend. La justificación completa de por qué se eligió está en [[Cursos/QA/entregables/seleccion-repositorio-proyecto]].
 

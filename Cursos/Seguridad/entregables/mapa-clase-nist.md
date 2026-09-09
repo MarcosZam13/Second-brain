@@ -5,7 +5,7 @@ fecha: 2026-09-07
 entrega: 2026-09-09
 tipo: entregable
 entregable_de: "[[Cursos/Seguridad/apuntes/reglas-clase]]"
-estado: borrador
+estado: "entregado (confirmado por el usuario 2026-09-09)"
 tags: [mapa-mental, nist, csf, nice, ssdf]
 ---
 
@@ -68,9 +68,8 @@ Se ejecutan de forma concurrente, no en orden fijo — GOVERN/IDENTIFY/PROTECT/D
 
 ## Checklist — antes de entregar
 
-- [ ] Confirmar el número real de "Mapa Clase N" en TEC-Digital y renombrar este archivo/entrada en `entregas.md`
-- [ ] Árbol con las 4 ramas: CSF / Core Functions / NICE / SSDF, centro NIST
-- [ ] Cada rama con la definición corta + el "cómo se usa" (no solo qué es)
-- [ ] Nombre, curso y fecha arriba de la hoja
-- [ ] Hecho a mano, cabe en 1 página
-- [ ] Foto legible en PNG o JPG, subida a TEC-Digital
+- [x] Árbol con las 4 ramas: CSF / Core Functions / NICE / SSDF, centro NIST
+- [x] Cada rama con la definición corta + el "cómo se usa" (no solo qué es)
+- [x] Nombre, curso y fecha arriba de la hoja
+- [x] Hecho a mano, cabe en 1 página
+- [x] Foto legible en PNG o JPG, subida a TEC-Digital (confirmado por el usuario 2026-09-09)
