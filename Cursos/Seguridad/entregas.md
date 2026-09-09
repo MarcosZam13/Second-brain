@@ -26,7 +26,7 @@ entregas_pendientes:
 
 # Entregas y fechas
 
-Ver también: [[Cursos/Seguridad/temario]] · [[Cursos/Seguridad/apuntes/reglas-clase|Reglas de clase]]
+Ver también: [[Cursos/Seguridad/temario]] · [[Cursos/Seguridad/apuntes/reglas-clase|Reglas de clase]] · [[Cursos/Seguridad/examenes/parcial-1-temas|Parcial 1 — temas oficiales]]
 
 > Cargado a partir de una captura de la plataforma de tareas (TEC-Digital) + reglas de clase del profesor. La categoría "Tareas" de la plataforma suma `– / 40` puntos; confirmado con el usuario 2026-08-18 que la captura no estaba cortada, solo hay estas 2 asignaciones cargadas por ahora.
 >
