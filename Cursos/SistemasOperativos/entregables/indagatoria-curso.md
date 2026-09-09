@@ -10,9 +10,11 @@ tags: [indagatoria, ia, planificacion, scheduling, trabajo-grupal]
 
 # Indagatoria del curso — IA y Gestión de Recursos (Grupo 3 · Tema 10)
 
-Ver también: [[Cursos/SistemasOperativos/apuntes/indagatoria-curso|Tema asignado e instrucciones generales]] · [[Cursos/SistemasOperativos/entregables/indagatoria-curso-plan-equipo|Plan simple para repartir con el equipo]] · [[Cursos/SistemasOperativos/entregas]]
+Ver también: [[Cursos/SistemasOperativos/apuntes/indagatoria-curso|Tema asignado e instrucciones generales]] · [[Cursos/SistemasOperativos/entregables/indagatoria-curso-plan-equipo|Plan simple para repartir con el equipo]] · [[Cursos/SistemasOperativos/entregables/indagatoria-curso-documento-en|Documento final en inglés (borrador activo)]] · [[Cursos/SistemasOperativos/entregas]]
 
-**Peso:** 10% · **Entrega:** documento + exposición **en inglés**, semana 6 (2026-09-10, extensible a semana 7).
+> Esta nota es el esquema en español; el trabajo real de redacción pasó a [[Cursos/SistemasOperativos/entregables/indagatoria-curso-documento-en|indagatoria-curso-documento-en.md]] (Bloque A listo, B y C pendientes).
+
+**Peso:** 10% · **Entrega:** documento + exposición **en inglés**, movida a semana 7 (jueves 2026-09-17) para no encimarse con la Indagatoria Corta de Arch Linux (semana 6, 2026-09-10).
 
 > Espacio para ir avanzando semana a semana, según pide el TO-DO del curso. Ir marcando qué está cubierto y qué falta a medida que se avanza, no dejarlo para el final.
 

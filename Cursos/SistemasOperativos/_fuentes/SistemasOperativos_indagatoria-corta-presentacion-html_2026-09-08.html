@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arch Linux — Torre de control de procesos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root{
+  --bg:#14181F;
+  --surface:#1B212B;
+  --surface2:#20273240;
+  --text:#ECEEF2;
+  --muted:#9AA4B2;
+  --amber:#E8A33D;
+  --cyan:#4FB9C4;
+  --red:#D6674F;
+  --line:#2C3542;
+}
+
+*{box-sizing:border-box;}
+html,body{
+  margin:0; padding:0; height:100%;
+  background:var(--bg); color:var(--text);
+  font-family:'Space Grotesk', sans-serif;
+  overflow:hidden;
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+}
+
+.deck{position:relative; width:100vw; height:100vh;}
+
+.slide{
+  position:absolute; inset:0;
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  padding:6vh 8vw;
+  opacity:0;
+}
+.slide.active{
+  display:flex;
+  animation:rise 0.55s ease forwards;
+}
+@keyframes rise{
+  from{opacity:0; transform:translateY(18px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+.eyebrow{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.78rem;
+  color:var(--amber);
+  letter-spacing:0.02em;
+  margin-bottom:0.8rem;
+}
+.eyebrow.cyan{color:var(--cyan);}
+
+h1{
+  font-size:clamp(2rem, 5vw, 3.6rem);
+  line-height:1.08;
+  margin:0 0 0.6rem 0;
+  font-weight:700;
+  max-width:18ch;
+}
+h2{
+  font-size:clamp(1.6rem, 3.4vw, 2.4rem);
+  line-height:1.15;
+  margin:0 0 1.4rem 0;
+  font-weight:600;
+  max-width:22ch;
+}
+p.lead{
+  font-size:clamp(1rem, 1.6vw, 1.3rem);
+  color:var(--muted);
+  max-width:60ch;
+  line-height:1.55;
+}
+.mono{font-family:'JetBrains Mono', monospace;}
+
+/* ---- Title slide ---- */
+#s0{justify-content:center; align-items:flex-start;}
+.kernel-mark{
+  width:64px; height:64px;
+  border:2px solid var(--amber);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:2rem;
+  position:relative;
+}
+.kernel-mark::before{
+  content:'';
+  width:10px; height:10px;
+  background:var(--amber);
+  border-radius:50%;
+  animation:orbit 3s linear infinite;
+}
+@keyframes orbit{
+  from{transform:rotate(0deg) translateX(22px) rotate(0deg);}
+  to{transform:rotate(360deg) translateX(22px) rotate(-360deg);}
+}
+.team{
+  margin-top:2.2rem;
+  display:flex; gap:2.4rem;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.9rem;
+  color:var(--muted);
+}
+.team span{color:var(--text);}
+
+/* ---- Two-column comparison ---- */
+.split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  width:100%;
+  border:1px solid var(--line);
+}
+.col{
+  padding:2.2rem 2rem;
+  border-right:1px solid var(--line);
+}
+.col:last-child{border-right:none;}
+.col.amber{border-top:3px solid var(--amber);}
+.col.cyan{border-top:3px solid var(--cyan);}
+.col h3{
+  font-size:1.4rem; margin:0 0 0.4rem 0;
+}
+.col .tag{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.75rem;
+  color:var(--muted);
+  margin-bottom:1rem;
+  display:block;
+}
+.col ul{margin:0; padding-left:1.1rem; color:var(--muted); font-size:0.98rem; line-height:1.6;}
+.col ul li::marker{color:inherit;}
+.col.amber ul li::marker{color:var(--amber);}
+.col.cyan ul li::marker{color:var(--cyan);}
+
+/* ---- Analogy panel ---- */
+.panel{
+  border:1px solid var(--line);
+  background:var(--surface);
+  padding:1.6rem 1.8rem;
+  max-width:56ch;
+  margin-top:1.6rem;
+}
+.panel .k{color:var(--amber); font-family:'JetBrains Mono', monospace; font-size:0.8rem; display:block; margin-bottom:0.5rem;}
+
+/* ---- Grid of facts ---- */
+.factgrid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  margin-top:1.6rem;
+  max-width:900px;
+}
+.fact{background:var(--bg); padding:1.4rem 1.3rem;}
+.fact .big{font-family:'JetBrains Mono', monospace; color:var(--amber); font-size:1.05rem; display:block; margin-bottom:0.4rem;}
+.fact p{color:var(--muted); font-size:0.92rem; margin:0; line-height:1.5;}
+
+/* ---- Terminal block ---- */
+.term{
+  background:#0F1319;
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:1.1rem 1.3rem;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.85rem;
+  color:#B8E6BE;
+  max-width:640px;
+  margin-top:1.4rem;
+  line-height:1.7;
+}
+.term .cmt{color:var(--muted);}
+.term .prompt{color:var(--amber);}
+
+/* ---- Race/queue visual (scheduler) ---- */
+.track{
+  margin-top:2rem;
+  max-width:680px;
+}
+.lane{
+  display:flex; align-items:center; gap:1rem;
+  margin-bottom:1.1rem;
+}
+.lane .label{
+  width:110px; font-family:'JetBrains Mono', monospace; font-size:0.78rem; color:var(--muted); flex-shrink:0;
+}
+.lane .bar-bg{
+  flex:1; height:14px; background:var(--surface); border:1px solid var(--line); border-radius:8px; overflow:hidden;
+}
+.lane .bar{
+  height:100%; border-radius:8px;
+  animation:fill 1.4s ease forwards;
+  width:0%;
+}
+@keyframes fill{ to{ width:var(--w); } }
+.lane.eevdf .bar{background:var(--muted); --w:55%;}
+.lane.bore .bar{background:var(--amber); --w:88%;}
+.lane.win .bar{background:var(--cyan); --w:65%;}
+
+/* ---- Advantage / disadvantage list ---- */
+.prosandcons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2.4rem;
+  margin-top:1.6rem;
+  max-width:900px;
+}
+.prosandcons h4{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.8rem;
+  margin:0 0 0.7rem 0;
+  text-transform:none;
+}
+.prosandcons .pros h4{color:var(--amber);}
+.prosandcons .cons h4{color:var(--red);}
+.prosandcons ul{margin:0; padding-left:1.1rem; color:var(--muted); font-size:0.92rem; line-height:1.65;}
+
+/* ---- Closing ---- */
+#last h1{max-width:none;}
+
+/* ---- Nav ---- */
+.nav{
+  position:fixed; bottom:26px; left:0; right:0;
+  display:flex; justify-content:center; gap:8px;
+  z-index:10;
+}
+.dot{
+  width:8px; height:8px; border-radius:50%;
+  background:var(--line);
+  cursor:pointer;
+  transition:background 0.2s, transform 0.2s;
+  border:none;
+}
+.dot.active{background:var(--amber); transform:scale(1.3);}
+.dot:focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+
+.arrow{
+  position:fixed; top:50%; transform:translateY(-50%);
+  width:44px; height:44px;
+  border:1px solid var(--line);
+  background:var(--surface);
+  color:var(--text);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; font-size:1.1rem;
+  z-index:10;
+  opacity:0.75;
+  transition:opacity 0.2s, border-color 0.2s;
+}
+.arrow:hover{opacity:1; border-color:var(--amber);}
+.arrow:focus-visible{outline:2px solid var(--amber);}
+.arrow.left{left:22px;}
+.arrow.right{right:22px;}
+
+.counter{
+  position:fixed; top:26px; right:32px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.78rem;
+  color:var(--muted);
+  z-index:10;
+}
+
+@media (max-width:760px){
+  .split, .factgrid, .prosandcons{grid-template-columns:1fr;}
+  .col, .fact{border-right:none; border-bottom:1px solid var(--line);}
+  .arrow{width:36px; height:36px; font-size:0.95rem;}
+  .slide{padding:8vh 6vw;}
+}
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- 0: TITULO -->
+  <section class="slide active" id="s0">
+    <div class="eyebrow">IC-XXXX · Sistemas Operativos · Indagatoria corta</div>
+    <div class="kernel-mark"></div>
+    <h1>¿Quién manda de verdad dentro de un Linux?</h1>
+    <p class="lead">Instalamos dos variantes de Arch Linux — CachyOS y Omarchy — para comparar cómo cada una gestiona los procesos del sistema.</p>
+    <div class="team">
+      <div>Equipo <span>Marcos Zamora · Mario Rojas · Joseph Fonseca</span></div>
+    </div>
+  </section>
+
+  <!-- 1: QUE ES ARCH -->
+  <section class="slide" id="s1">
+    <div class="eyebrow">01 — El sistema base</div>
+    <h2>Arch Linux no viene armado. Tú lo armas.</h2>
+    <p class="lead">La mayoría de sistemas operativos llegan como un mueble ya ensamblado: abres la caja y ya está la sala completa. Arch llega como la bolsa de piezas y el instructivo. Nada corre por defecto — cada pieza la agrega quien instala.</p>
+    <div class="panel">
+      <span class="k">FILOSOFÍA KISS</span>
+      "Keep it simple, stupid": menos capas escondidas, más control real sobre lo que corre en la máquina.
+    </div>
+  </section>
+
+  <!-- 2: LAS DOS VARIANTES -->
+  <section class="slide" id="s2">
+    <div class="eyebrow">02 — Nuestro experimento</div>
+    <h2>Mismo Arch, dos formas de armarlo</h2>
+    <div class="split">
+      <div class="col amber">
+        <span class="tag">MARCOS</span>
+        <h3>CachyOS</h3>
+        <ul>
+          <li>Arch pensado para exprimir el hardware</li>
+          <li>Kernel propio, ya modificado</li>
+          <li>Deja elegir cómo reparte el CPU su tiempo</li>
+        </ul>
+      </div>
+      <div class="col cyan">
+        <span class="tag">JOSEPH</span>
+        <h3>Omarchy</h3>
+        <ul>
+          <li>Arch con instalador guiado y escritorio ya listo</li>
+          <li>Creado por David Heinemeier Hansson (Rails)</li>
+          <li>No toca el motor, cuida la experiencia de llegar</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3: KERNEL COMO TORRE DE CONTROL -->
+  <section class="slide" id="s3">
+    <div class="eyebrow">03 — La gestión de procesos</div>
+    <h2>El kernel funciona como la torre de control de un aeropuerto</h2>
+    <p class="lead">Cada programa en ejecución equivale a una aeronave que solicita una pista. El kernel determina el orden de despegue, gestiona la espera en fila y puede interrumpir el vuelo de un proceso cuando es necesario, sin que el usuario intervenga directamente.</p>
+    <div class="factgrid">
+      <div class="fact"><span class="big">task_struct</span><p>El registro de cada proceso: su identidad, el CPU que ha solicitado y su posición en la fila.</p></div>
+      <div class="fact"><span class="big">/proc/[pid]</span><p>Donde el kernel expone esos registros, disponibles para su consulta directa.</p></div>
+      <div class="fact"><span class="big">run queue</span><p>La fila de despegue: un carril de espera por cada núcleo del procesador.</p></div>
+    </div>
+  </section>
+
+  <!-- 4: CREACION Y FINALIZACION -->
+  <section class="slide" id="s4">
+    <div class="eyebrow">04 — Nacer y morir (como proceso)</div>
+    <h2>Todo proceso empieza con fork() y puede terminar con una señal</h2>
+    <p class="lead">Cuando abrís una terminal y escribís un comando, el sistema clona el proceso actual (<span class="mono">fork</span>) y lo reemplaza por el programa nuevo (<span class="mono">exec</span>). Para cerrarlo, se le envía una señal.</p>
+    <div class="term">
+<span class="cmt"># pedirle amablemente que cierre</span><br>
+<span class="prompt">$</span> kill -SIGTERM 4821<br><br>
+<span class="cmt"># obligarlo a cerrar, ya sin preguntar</span><br>
+<span class="prompt">$</span> kill -9 4821
+    </div>
+  </section>
+
+  <!-- 5: EL PLANIFICADOR -->
+  <section class="slide" id="s5">
+    <div class="eyebrow">05 — El corazón del experimento</div>
+    <h2>El planificador decide quién pasa primero</h2>
+    <p class="lead">Linux moderno ya no usa CFS — desde 2023 corre <span class="mono">EEVDF</span>. CachyOS le suma un parche, <span class="mono">BORE</span>, que le da prioridad a lo que sentís en el momento (mover el mouse, escribir) sobre lo que corre callado en el fondo.</p>
+    <div class="track">
+      <div class="lane eevdf"><div class="label">Arch / Omarchy</div><div class="bar-bg"><div class="bar"></div></div></div>
+      <div class="lane bore"><div class="label">CachyOS (BORE)</div><div class="bar-bg"><div class="bar"></div></div></div>
+      <div class="lane win"><div class="label">Windows</div><div class="bar-bg"><div class="bar"></div></div></div>
+    </div>
+    <p class="lead" style="font-size:0.85rem; margin-top:1rem;">Fluidez percibida por el equipo al usar el sistema en el día a día — impresión de uso, no una medición de laboratorio.</p>
+  </section>
+
+  <!-- 6: COMPARACION CON WINDOWS -->
+  <section class="slide" id="s7">
+    <div class="eyebrow">06 — Contra otro sistema</div>
+    <h2>Windows reparte turnos fijos. Linux calcula turnos al vuelo</h2>
+    <p class="lead">Windows asigna prioridades fijas y le da un empujón extra a la ventana activa. EEVDF y BORE, en cambio, recalculan constantemente un "tiempo virtual" por proceso — más flexible, menos predecible.</p>
+  </section>
+
+  <!-- 7: EXPERIENCIA DE USUARIO -->
+  <section class="slide" id="s8">
+    <div class="eyebrow">07 — Lo que se siente al usarlo</div>
+    <h2>Ganás rendimiento o ganás comodidad — rara vez ambas</h2>
+    <div class="prosandcons">
+      <div class="pros">
+        <h4>A FAVOR</h4>
+        <ul>
+          <li>CachyOS se siente rápido desde el primer día</li>
+          <li>Omarchy instala solo, sin tocar la terminal</li>
+          <li>Ambos traen sus herramientas ya resueltas</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h4>EN CONTRA</h4>
+        <ul>
+          <li>CachyOS exigió pelear con drivers y dual boot</li>
+          <li>Omarchy obliga a aceptar las decisiones de su autor</li>
+          <li>Comunidad más pequeña que Ubuntu si algo falla</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8: TRANSICION A LA DEMO EN VIVO -->
+  <section class="slide" id="s6">
+    <div class="eyebrow">08 — Ahora, en vivo</div>
+    <h2>Lo mostramos funcionando en la máquina real</h2>
+    <p class="lead">A continuación vemos en vivo el kernel, el planificador y las herramientas de monitoreo corriendo sobre las instalaciones reales de CachyOS y Omarchy.</p>
+  </section>
+
+  <!-- 9: CONCLUSION CLAVE -->
+  <section class="slide" id="s9">
+    <div class="eyebrow">09 — El hallazgo real</div>
+    <h2>Gestionar procesos es trabajo del kernel, no de la distribución</h2>
+    <p class="lead">fork(), /proc, systemd, futex, D-Bus — todo eso fue idéntico en ambos sistemas. Lo único que una distribución puede cambiar de verdad es <em>qué planificador corre</em> y <em>qué tan fácil es llegar a usarlo</em>. Eso fue justo lo que comparamos.</p>
+  </section>
+
+  <!-- 10: CIERRE -->
+  <section class="slide" id="last">
+    <div class="eyebrow">Gracias</div>
+    <h1>¿Preguntas?</h1>
+    <p class="lead">Marcos Zamora · Mario Rojas · Joseph Fonseca</p>
+  </section>
+
+</div>
+
+<button class="arrow left" id="prevBtn" aria-label="Diapositiva anterior">‹</button>
+<button class="arrow right" id="nextBtn" aria-label="Siguiente diapositiva">›</button>
+<div class="nav" id="navDots"></div>
+<div class="counter" id="counter">01 / 11</div>
+
+<script>
+const slides = Array.from(document.querySelectorAll('.slide'));
+let idx = 0;
+
+const navDots = document.getElementById('navDots');
+slides.forEach((_, i) => {
+  const d = document.createElement('button');
+  d.className = 'dot' + (i===0 ? ' active' : '');
+  d.setAttribute('aria-label', 'Ir a diapositiva ' + (i+1));
+  d.addEventListener('click', () => go(i));
+  navDots.appendChild(d);
+});
+const dots = Array.from(navDots.children);
+const counter = document.getElementById('counter');
+
+function pad(n){ return n < 10 ? '0'+n : ''+n; }
+
+function go(i){
+  if(i < 0 || i >= slides.length) return;
+  slides[idx].classList.remove('active');
+  idx = i;
+  slides[idx].classList.add('active');
+  dots.forEach((d, di) => d.classList.toggle('active', di === idx));
+  counter.textContent = pad(idx+1) + ' / ' + pad(slides.length);
+}
+
+document.getElementById('prevBtn').addEventListener('click', () => go(idx-1));
+document.getElementById('nextBtn').addEventListener('click', () => go(idx+1));
+
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'ArrowRight' || e.key === ' ') go(idx+1);
+  if(e.key === 'ArrowLeft') go(idx-1);
+});
+
+let touchStartX = null;
+document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+document.addEventListener('touchend', (e) => {
+  if(touchStartX === null) return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if(dx > 50) go(idx-1);
+  if(dx < -50) go(idx+1);
+  touchStartX = null;
+});
+
+counter.textContent = '01 / ' + pad(slides.length);
+</script>
+
+</body>
+</html>

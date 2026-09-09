@@ -26,7 +26,7 @@ Nos tocó investigar cómo se usa **inteligencia artificial / machine learning p
 
 - **Peso:** 10% de la nota final.
 - **Formato:** documento escrito + exposición **en inglés**.
-- **Fecha:** semana 6 (jueves 2026-09-10), con posible extensión a semana 7 (2026-09-17).
+- **Fecha:** movida a semana 7 (jueves 2026-09-17) — semana 6 (2026-09-10) la ocupa la Indagatoria Corta de Arch Linux.
 - El profesor pide avanzar **semana a semana** desde ya (vamos en semana 4) y coordinar con él los puntos antes de profundizar, para tener retroalimentación a tiempo.
 
 ## Estructura del documento (8 piezas)
