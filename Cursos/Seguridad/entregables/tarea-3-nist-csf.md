@@ -4,7 +4,7 @@ tema: "Tarea 3 — NIST CSF aplicado a VoteOnline (Grupo 11)"
 fecha: 2026-09-07
 tipo: entregable
 entregable_de: "[[Cursos/Seguridad/apuntes/tarea-3-nist-csf-instrucciones]]"
-estado: borrador
+estado: entregado
 tags: [tarea3, nist-csf, voteonline, grupo11]
 ---
 
