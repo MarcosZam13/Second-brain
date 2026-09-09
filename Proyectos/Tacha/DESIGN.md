@@ -9,7 +9,7 @@ tags: [diseño, ui-ux, stitch, tacha]
 
 # DESIGN.md — Tacha
 
-Ver también: [[Proyectos/Tacha/README|README]] · [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] (v2.1, secciones 3, 4, 6 y 9) · [[Proyectos/Tacha/historias-usuario|historias-usuario.md]] (v2.0) · [[Proyectos/Tacha/mockups/mockup-web-v2.html|mockups/mockup-web-v2.html]] · `Tacha_documentacion-v2.1.docx` (versión Word)
+Ver también: [[Proyectos/Tacha/README|README]] · [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] (v2.1, secciones 3, 4, 6 y 9) · [[Proyectos/Tacha/historias-usuario|historias-usuario.md]] (v2.0) · `mockups/mockup-web-v3.html` (mockup guía actual, 9 pantallas Alta — ver nota en sección 8) · `Tacha_documentacion-v2.1.docx` (versión Word)
 
 **Propósito de este documento:** dar a quien genere pantallas en Stitch AI (hoy: principalmente Melany — diseño UI, y Marcos — listas/PWA) el contexto completo — personalidad, tokens, navegación, inventario de pantallas, componentes y un prompt listo por pantalla — para que nada quede a medio definir. Cubre las 22 pantallas del alcance v1 completo de [[Proyectos/Tacha/documentacion-v1|documentacion-v1.md]] (sección 3), incluidas [[Proyectos/Tacha/documentacion-v1#4.11 Grupos de productos (aceptado 2026-08-18, confirmado por el equipo 2026-08-19)|grupos de productos]], [[Proyectos/Tacha/documentacion-v1#4.5.1 Mis productos personalizados (aceptado 2026-08-18, confirmado por el equipo 2026-08-19)|mis productos personalizados]], la [[Proyectos/Tacha/documentacion-v1#4.12 Acceso público y autenticación extendida (landing, about, auth)|landing pública y autenticación extendida]] que pidió el profesor, y Mi inventario/Configuración/Perfil agregadas el 2026-08-19, ya todas parte del alcance de trabajo. Es más fácil quitar o ajustar algo de acá después que generarlo desde cero a mitad de la sesión de Stitch.
 
@@ -281,6 +281,10 @@ Cada prompt asume que Stitch ya tiene cargada la personalidad (sección 1), los 
 ### 7.21 Perfil de usuario (nueva 2026-08-19)
 
 > Pantalla accesible desde el sidebar (desktop) o "Más → Perfil" (mobile), ver [[Proyectos/Tacha/documentacion-v1#4.1 Gestión de usuarios, familias y perfiles|4.1]]. Cabecera con foto de perfil (o iniciales si no hay foto) y nombre, con opción de editar ambos. Debajo, accesos a "Cambiar contraseña" y a "Configuración" (7.20). Si el usuario pertenece a un household, una tarjeta "Mi household" con el nombre del household y acceso directo a gestionarlo (invitar, ver familiares, salir); si no pertenece a ninguno, un CTA discreto para crear o unirse a uno. Al final, "Cerrar sesión" como acción secundaria, siempre visible.
+
+## 7.22 Mockup guía v3 (2026-09-06)
+
+`mockups/mockup-web-v3.html` construye las 9 pantallas de prioridad Alta de la sección 4 (más el detalle de producto 7.1b) como HTML estático navegable, usando los tokens de la sección 2 y los componentes de la sección 5 ya nombrados en el markup (clases `catalog-card`, `group-card`, `suggestion-chip`, etc.). No reemplaza los prompts de Stitch — es la referencia visual para que el equipo vea la identidad de marca aplicada de punta a punta antes de generar, con toggle de modo claro/oscuro y un índice de anclas al inicio del archivo para saltar entre pantallas. `mockup-web-v2.html` queda obsoleto como referencia de navegación (predata la decisión del sidebar de 6 ítems y los sub-tabs de Catálogo) — solo sus tokens de color siguen vigentes, ya heredados en v3.
 
 ## 8. Cómo usar este documento con Stitch AI
 
