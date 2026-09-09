@@ -3,7 +3,7 @@ curso: Seguridad
 tema: Tarea 1 — Legislación (El Contrato Roto), rol Devs
 fecha: 2026-08-18
 entregable_de: "[[Cursos/Seguridad/apuntes/tarea-1-legislacion-costarricense]]"
-estado: borrador
+estado: "entregado (confirmado por el usuario 2026-09-04)"
 tags: [tarea1, devs, ley8968, ley7975, ley6683]
 ---
 
@@ -91,5 +91,5 @@ MediSync CR cumple el nivel Alto del Reglamento a la Ley 8968 mediante cifrado, 
 - [x] Anexo de prompts de IA — incluido en el Word (fuera de las 5 páginas)
 - [x] Pasar a Word y verificar máx. 5 páginas + portada — el documento final es `Tarea1SeguridadMarcosZamora.docx` (hecho por el estudiante, revisado y corregido 2026-08-26). Confirmado con Word: portada + cuerpo = **5 páginas exactas (en el límite, sin margen)**, Anexo de IA en página 6 aparte con salto de página explícito, sin contar contra el límite.
 - [x] Corregido 2026-08-26: la cita "Art. 24 de la Ley 8968" para medidas de seguridad era incorrecta (Art. 24 de la Ley es "Denuncia" ante PRODHAB, verificado contra el texto oficial); el artículo correcto es el **Art. 10 ("Seguridad de los datos")**. Se reforzó además la Sección II citando el **Art. 24 de la Constitución Política** (el que realmente pide la guía de la profesora como "arma secreta") con las resoluciones de Sala IV N.° 5802-1999 y N.° 4847-1999.
-- [ ] Confirmar si se entrega en pareja (ambos deben subir el documento o no se evalúa)
+- [x] Entregada (confirmado por el usuario 2026-09-04) — logística de pareja resuelta al momento de subirla
 - [x] Nombre del estudiante ya está en la portada del Word final (Marcos Zamora Sánchez); `[Nombre del estudiante]` solo queda como placeholder en mi copia auxiliar `Seguridad_tarea-1-legislacion-devs.docx`, que ya es redundante.

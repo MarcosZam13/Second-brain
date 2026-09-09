@@ -5,7 +5,7 @@ fecha: 2026-08-24
 entrega: 2026-08-26
 tipo: entregable
 entregable_de: "[[Cursos/Seguridad/apuntes/reglas-clase]]"
-estado: borrador
+estado: "entregado (confirmado por el usuario 2026-09-04)"
 tags: [mapa-mental, pruebas-seguridad, owasp, estandares, cadena-suministro]
 ---
 
@@ -67,8 +67,8 @@ Existen para que las empresas no tengan que inventar desde cero cómo proteger s
 
 ## Checklist — antes de entregar
 
-- [ ] Árbol con las 4 ramas: Tipos de Pruebas / Frameworks / OWASP / Cadena de Suministro
-- [ ] Cada rama con solo los conceptos clave (sin ejemplos, como pidió la profesora)
-- [ ] Nombre, curso y fecha arriba de la hoja
-- [ ] Hecho a mano, cabe en 1 página
-- [ ] Foto legible en PNG o JPG, subida a TEC-Digital
+- [x] Árbol con las 4 ramas: Tipos de Pruebas / Frameworks / OWASP / Cadena de Suministro
+- [x] Cada rama con solo los conceptos clave (sin ejemplos, como pidió la profesora)
+- [x] Nombre, curso y fecha arriba de la hoja
+- [x] Hecho a mano, cabe en 1 página
+- [x] Foto legible en PNG o JPG, subida a TEC-Digital
