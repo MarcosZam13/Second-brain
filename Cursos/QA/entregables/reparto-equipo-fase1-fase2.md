@@ -10,7 +10,7 @@ tags: [proyecto, firefly-iii, fase1, fase2, reparto, equipo]
 
 # Reparto de trabajo — Fase 1 (cierre) y Fase 2 (Plan de pruebas)
 
-Ver también: [[Cursos/QA/entregables/plan-del-proyecto|Plan del proyecto]] · [[Cursos/QA/entregables/mapeo-modulos-firefly-iii|Mapeo de módulos — Firefly III]] · [[Cursos/QA/apuntes/proyecto-qa-guia|Guía del Proyecto]] · [[Cursos/QA/entregas]]
+Ver también: [[Cursos/QA/entregables/plan-del-proyecto|Plan del proyecto]] · [[Cursos/QA/entregables/mapeo-modulos-firefly-iii|Mapeo de módulos — Firefly III]] · [[Cursos/QA/entregables/plan-de-pruebas|Plan de pruebas — Fase 2 (borrador)]] · [[Cursos/QA/apuntes/proyecto-qa-guia|Guía del Proyecto]] · [[Cursos/QA/entregas]]
 
 Equipo de 3 personas. Nota para compartir tal cual con el equipo — quién hace qué, en qué orden.
 
@@ -45,8 +45,11 @@ Las 3 técnicas sugeridas (una por persona) ya cubren el requisito de "3 tipos d
 
 ## Pendiente
 
-- [ ] Persona 1: tercera fuente bibliográfica
-- [ ] Persona 2: portada + TOC + índice de tablas
-- [ ] Persona 3: diagrama del árbol de problemas
-- [ ] Los 3: revisión final del Plan del proyecto antes del 2026-09-09
-- [ ] Confirmar entre el equipo si esta división de módulos para Fase 2 queda así o se ajusta
+- [x] Persona 1: tercera fuente bibliográfica
+- [x] Persona 2: portada + TOC + índice de tablas
+- [x] Persona 3: diagrama del árbol de problemas
+- [x] Los 3: revisión final del Plan del proyecto — entregado 2026-09-09
+- [x] Confirmar entre el equipo si esta división de módulos para Fase 2 queda así o se ajusta — se mantuvo tal cual al redactar [[Cursos/QA/entregables/plan-de-pruebas|el borrador del Plan de pruebas]]
+- [ ] Confirmar con el profesor cómo funciona la aplicación propia que mencionó para digitalizar los casos de prueba (no es Jira+TCMS de la semana 3) y trasladar los 74 casos ya redactados en cuanto se sepa el formato
+- [ ] Revisión y visto bueno del equipo sobre el Plan de pruebas antes del 2026-10-14
+- [ ] Llenar los `[COMPLETAR]` de la portada del Plan de pruebas con los datos reales del equipo
