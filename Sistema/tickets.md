@@ -22,11 +22,12 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 |---|---|---|---|
 | TACHA | Tacha | TACHA-24 | TACHA-25 |
 | MB | CoreBase (plataforma, trabajo transversal del monorepo) | MB-23 | MB-24 |
-| DOJO | DojoBase | DOJO-20 | DOJO-21 |
+| DOJO | DojoBase | DOJO-21 | DOJO-22 |
 | GYM | GymBase | — | GYM-1 |
 | CANELE | CaneleApp | — | CANELE-1 |
 | COMPDES | COMPDES 2027 | — | COMPDES-1 |
 | LAND | DojoBase Landing | LAND-2 | LAND-3 |
+| AS | Asistencias TEC | — | AS-32 (los items AS-01 a AS-31 ya vienen numerados del backlog del profesor, ver [[Proyectos/AsistenciasTEC/backlog\|backlog.md]]) |
 
 ## Sistema (el vault mismo)
 
