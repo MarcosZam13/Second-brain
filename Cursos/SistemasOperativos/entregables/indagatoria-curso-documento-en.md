@@ -21,6 +21,8 @@ Ver también: [[Cursos/SistemasOperativos/entregables/indagatoria-curso-plan-equ
 
 ## Block A — Fundamentals *(pieces 1–2 · owner: Marcos · done)*
 
+**Guión de presentación (hablado, en inglés) ya listo:** [[Cursos/SistemasOperativos/entregables/guion-indagatoria-curso-bloque-a|guion-indagatoria-curso-bloque-a.md]] — incluye el gancho de apertura, notas de pronunciación y vocabulario clave.
+
 ### 1. Introduction
 
 CPU scheduling is the part of the operating system that decides, every time a processor core becomes free, which of the ready processes or threads gets to run next. A core goes idle constantly and for many different reasons — a running process blocks on I/O, a timer interrupt ends its quantum, a higher-priority task wakes up — and on a modern multi-core system with dozens or hundreds of runnable threads competing for a handful of cores, this decision happens thousands of times per second. The scheduler is therefore one of the few OS components whose logic runs on the critical path of essentially everything the system does: it has direct influence over throughput (how much useful work gets done per unit of time), latency (how quickly an individual task gets a response), and fairness (whether every task gets a reasonable share of the CPU, not just the loudest ones).

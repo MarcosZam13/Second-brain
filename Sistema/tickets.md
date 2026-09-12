@@ -14,7 +14,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 | WEB | Desarrollo Web | WEB-5 | WEB-6 |
 | CYS | Computación y Sociedad | CYS-5 | CYS-6 |
 | EST | Estadística | EST-8 | EST-9 |
-| SO | Sistemas Operativos | SO-27 | SO-28 |
+| SO | Sistemas Operativos | SO-28 | SO-29 |
 
 ## Proyectos personales
 
@@ -22,7 +22,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 |---|---|---|---|
 | TACHA | Tacha | TACHA-24 | TACHA-25 |
 | MB | CoreBase (plataforma, trabajo transversal del monorepo) | MB-23 | MB-24 |
-| DOJO | DojoBase | DOJO-27 | DOJO-28 |
+| DOJO | DojoBase | DOJO-28 | DOJO-29 |
 | GYM | GymBase | — | GYM-1 |
 | CANELE | CaneleApp | — | CANELE-1 |
 | COMPDES | COMPDES 2027 | — | COMPDES-1 |
