@@ -4,7 +4,7 @@ tema: Diario Reflexivo (bitácora) — Proyecto
 fecha: 2026-08-14
 tipo: entregable
 entregable_de: "[[Cursos/QA/apuntes/proyecto-qa-guia]]"
-estado: "Entrada 1 (Semanas 1-2) entregada. Entrada 2 (Semanas 3-4) en borrador (2026-08-27) — falta autocrítica en voz propia, referencias e imágenes reales antes de exportar"
+estado: "Entrada 1 (Semanas 1-2) entregada. Entrada 2 (Semanas 3-4) en borrador (2026-08-27). Entrada 3 (Semanas 5-6) en borrador (2026-09-12) — falta autocrítica en voz propia, referencias e imágenes reales antes de exportar"
 tags: [diario-reflexivo, bitacora, proyecto, reflexion]
 ---
 
@@ -149,6 +149,44 @@ En estas dos semanas seguimos avanzando el [[Cursos/QA/entregables/plan-del-proy
 
 Igual que en la Entrada 1: le pedí a Claude Code que armara un primer borrador de esta entrada a partir de mis propios apuntes de clase (semana 3 y semana 4) y del estado real del plan del proyecto, con títulos divertidos y referencias sugeridas — falta que yo revise cada autocrítica y la deje en mi propia voz antes de exportar a Drive.
 
+## Entrada 3 — Semanas 5-6
+
+**Borrador (2026-09-12), armado con Claude Code a partir de [[Cursos/QA/apuntes/taller-pruebas-semana-5|Taller de Pruebas — SauceDemo (Semana 5)]] y [[Cursos/QA/apuntes/caja-negra-semana-6|Técnicas de diseño — Pruebas de Caja Negra (Semana 6)]], más el estado real del Plan de pruebas.** Igual que las entradas anteriores: la reflexión y la autocrítica de cada apartado las tiene que revisar y pasar a su propia voz Marcos antes de darla por buena.
+
+### 🛒 De diseñador a tester en SauceDemo — Semana 5
+
+Esta semana fue más que todo una actividad práctica: hicimos un taller de pruebas donde nos tocó agarrar unos requerimientos de una tienda en línea (SauceDemo) y a partir de eso diseñar casos de prueba completos, primero identificando las condiciones de cada requerimiento, después escribiendo los pasos y el resultado esperado antes de ejecutar nada, y solo hasta el final sí probar la aplicación de verdad. Los casos los metimos dentro de una aplicación que hizo el propio profesor (QAtlas) para reportar todo: casos, ejecución, defectos y trazabilidad contra el requerimiento original. Estuvo bastante interesante la verdad, fue la primera vez que se sintió como estar haciendo QA de verdad y no solo viendo teoría.
+
+**Autocrítica (borrador, falta pasar a voz propia):** *me di cuenta que normalmente hago justo lo contrario de la "regla de oro" que vimos en el taller (el resultado esperado se define antes de ejecutar la prueba): yo primero corro la aplicación, veo qué pasa, y ahí decido si eso "estaba bien". Es más cómodo pero termina acomodando el resultado esperado a lo que ya vi, en vez de exigirle a la aplicación que cumpla algo que yo definí antes.*
+
+**Referencia (sugerida):** Kaner, C., Falk, J., & Nguyen, H. Q. (1999). *Testing Computer Software* (2nd ed.). Wiley.
+
+**Apoyo visual (sugerido):** el diagrama del taller que resume el ciclo completo de diseño de casos de prueba: Requerimiento → Análisis → Condiciones de prueba → Casos de prueba → Datos de prueba → Ejecución → Evidencia → Pass/Fail/Blocked → Reporte de defecto.
+
+### 📦 Todo cabe en una caja (negra) — Semana 6
+
+Esta semana vimos materia que fue básicamente caja negra: clases de equivalencia, valores límite, combinación por pares, tablas de decisión y diagramas de estado. Lo que más se me quedó fue que caja negra no es "probarle a la aplicación cualquier cosa que se me ocurra", sino dividir las entradas posibles en grupos (clases) que se comportan igual entre sí, y después enfocarse sobre todo en los bordes de esos grupos, porque ahí es donde más se esconden los defectos. También vimos que cuando hay muchas variables no tiene sentido combinarlas todas contra todas porque crecen exponencial (el ejemplo de 10 variables con 10 valores daba 10 mil millones de casos), así que ahí es donde entra la combinación por pares para cubrir lo importante sin volverse loco.
+
+**Autocrítica (borrador, falta pasar a voz propia):** *normalmente cuando pruebo algo se me ocurren valores medio al azar, un caso "que sí funcione" y uno "que no", nada más, nunca había pensado en formalizarlo con el mínimo, el mínimo-1, el mínimo+1 y así. Viendo el ejemplo del cajero automático y el de la fecha (día/mes/año) me di cuenta que esos casos "raros" justo en el borde son los que en mis propios proyectos se me han escapado antes.*
+
+**Referencia (sugerida):** Copeland, L. (2004). *A Practitioner's Guide to Software Test Design*. Artech House.
+
+**Apoyo visual (sugerido):** el diagrama de flujo de las 5 técnicas de caja negra visto en clase: Clases equivalentes → Valores límite → Combinación por pares → Tablas de decisión → Diagrama de estados.
+
+### 📋 74 casos y contando — Avance del proyecto
+
+En estas dos semanas avanzamos bastante el [[Cursos/QA/entregables/plan-de-pruebas|Plan de pruebas — Fase 2]] del proyecto: ya dejamos un borrador completo con 74 casos de prueba repartidos en 3 tipos distintos (funcionales, unitarias y de rendimiento), cada uno justificado y usando varias de las técnicas que vimos en clase esta misma semana, sobre todo clases de equivalencia y valores límite. El equipo ya tiene claro qué módulos le tocan a cada quien (Auth + Profile, Transaction + Category, Account + Budget) desde el reparto que habíamos hecho antes, así que escribir los casos fue más rápido de lo esperado.
+
+**Autocrítica (borrador, falta pasar a voz propia):** *fue una casualidad útil que la materia de caja negra cayera justo cuando estábamos escribiendo los casos de prueba del proyecto, porque me obligó a justificar por qué elegía cada valor en vez de solo poner "un caso válido y uno inválido" como hacía antes de esta semana. Si la materia hubiera venido después de entregar el plan, seguramente esa parte hubiera quedado más floja.*
+
+**Habilidades sociales:** coordiné con el equipo para dividir la redacción de los 74 casos según el reparto de módulos que ya teníamos, y quedamos en revisarlo todos juntos antes de completar la portada y mandarlo.
+
+**Apoyo visual (sugerido):** captura de la tabla de técnicas de diseño de casos de prueba del Plan de pruebas, con la justificación de cuál técnica se usó en cada módulo.
+
+### 📝 Bitácora de uso de IA
+
+Igual que en las entradas anteriores: le pasé a Claude Code el PowerPoint del taller de SauceDemo (semana 5) y los apuntes de la clase de caja negra (semana 6), más el estado real del Plan de pruebas, para que armara un primer borrador de esta entrada con títulos divertidos y referencias sugeridas. Le pedí además que revisara las dos entradas anteriores ya exportadas en PDF para que la redacción y el tono de esta salieran parecidos a como yo las dejé, porque las veces anteriores tuve que cambiarlas bastante antes de subirlas.
+
 ## Versión anterior de la Entrada 1 (formato de 5 preguntas, archivada 2026-08-18)
 
 > Reemplazada por los 3 apartados de arriba a pedido del profesor (formato más corto). Se conserva por si hace falta consultar el detalle original — no es el formato que se va a entregar.
@@ -197,3 +235,6 @@ Comunicación con el equipo para coordinar la búsqueda y decisión del reposito
 - [ ] **Entrada 2 (Semanas 3-4), armada 2026-08-27:** revisar y reescribir las 3 autocríticas en voz propia de Marcos (hoy son borrador de Claude Code basado en el contenido de clase, no reflexión personal real todavía)
 - [ ] Entrada 2: agregar imágenes reales (hoy solo hay sugerencias de qué mostrar) y confirmar/cambiar las referencias sugeridas
 - [ ] Entrada 2: exportar a Drive/PDF una vez revisada, igual que se hizo con la Entrada 1
+- [ ] **Entrada 3 (Semanas 5-6), armada 2026-09-12:** revisar y reescribir las 3 autocríticas en voz propia de Marcos (hoy son borrador de Claude Code basado en el PPT del taller de Semana 5 y los apuntes de caja negra de Semana 6)
+- [ ] Entrada 3: agregar imágenes reales (hoy solo hay sugerencias de qué mostrar) y confirmar/cambiar las referencias sugeridas
+- [ ] Entrada 3: exportar a Drive/PDF una vez revisada, igual que se hizo con las entradas anteriores
