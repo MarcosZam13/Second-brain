@@ -3,7 +3,7 @@ proyecto: DojoBase
 tema: DESIGN.md — guía de diseño, sistema de componentes e inventario de pantallas
 fecha: 2026-08-28
 tipo: documentacion
-estado: v1.4 — 48 pantallas mapeadas a HU. v1.1 incorporó la revisión de los mockups (progresión por disciplina, ficha del alumno, mediciones); v1.2 suma lo del repaso de GymBase v1: sesión de sparring con cronómetro, anuncios, avisos y proyección de torneos; v1.4 (2026-09-05) corrige D9/D10/M10 contra lo que DOJO-11 terminó construyendo — ver 7.9 y 5.3 para el porqué
+estado: v1.5 — 50 pantallas mapeadas a HU. v1.1 incorporó la revisión de los mockups (progresión por disciplina, ficha del alumno, mediciones); v1.2 suma lo del repaso de GymBase v1: sesión de sparring con cronómetro, anuncios, avisos y proyección de torneos; v1.4 (2026-09-05) corrige D9/D10/M10 contra lo que DOJO-11 terminó construyendo — ver 7.9 y 5.3 para el porqué; v1.5 (2026-09-12) agrega M25/M26 (Torneos, DOJO-30) al desglosar HU-42/43/44 para ticket -- sin divisiones ni bracket automático, ver decisiones.md
 tags: [dojobase, diseño, ui-ux, design-system, componentes]
 ---
 
@@ -304,6 +304,8 @@ La autorización no tiene nada que ver con la navegación. Que una sección est�
 | M22 | Mis avisos | HU-36b | Canales por tipo de evento y activación de push por dispositivo |
 | M23 | Editar perfil | HU-37 | Datos básicos y foto |
 | M24 | Ver como alumno | HU-41 | No es una pantalla: es un modo. El staff mira la app tal como la ve un alumno, para dar soporte sin adivinar |
+| M25 | Torneos | HU-42 | Lista de torneos del dojo (nombre, disciplina, estado, fecha). Staff ve "+ Nuevo torneo"; visible a cualquier rol, como Anuncios |
+| M26 | Torneo — detalle | HU-43, HU-44 | Cuadro de participantes + grilla de cards de cruces con su estado y resultado. Staff ve además agregar participante, crear cruce y registrar resultado inline — misma card para todos los roles, sin ruta de gestión aparte |
 
 ### Admin (14)
 
@@ -406,6 +408,7 @@ Se construyen **componiendo primitivas**, nunca con HTML y clases sueltas. `Spar
 | `ChallengeCard` | Desafío con barra de progreso hacia la meta | HU-16 |
 | `ThemeEditor` | Editor de tema con vista previa y contraste | HU-21 |
 | `CelebrationOverlay` | El momento de impacto: ascenso, sparring ganado | HU-13, HU-07 |
+| `TournamentMatchCard` | Cruce de torneo con los dos participantes, estado (pendiente/jugado) y resultado — mismo criterio visual que `FightCard`/`SparringChallengeCard` | HU-44 |
 
 ### 5.3 Las pantallas difíciles
 
@@ -413,7 +416,9 @@ Se construyen **componiendo primitivas**, nunca con HTML y clases sueltas. `Spar
 
 **`SparringSession` (M20).** Es la única pantalla que se usa **durante** una actividad física, no después. Rompe el marco de navegación a propósito: pantalla completa, sin barra, cronómetro en tamaño de display legible a un metro, y el teclado de puntos abajo, en la zona del pulgar. El descanso usa el mismo lienzo con la cuenta regresiva y el resumen del round anterior. Aviso sonoro y vibración — nadie mira la pantalla mientras pelea.
 
-**`TournamentProjection` (K1).** Se ve desde el otro lado del gimnasio, en un televisor, por gente parada. Nada de tipografía de interfaz: tamaños de display, contraste máximo, cero elementos de navegación. Se actualiza en tiempo real — un marcador proyectado con 15 segundos de retraso se nota y desprestigia el torneo.
+**`TournamentProjection` (K1).** Se ve desde el otro lado del gimnasio, en un televisor, por gente parada. Nada de tipografía de interfaz: tamaños de display, contraste máximo, cero elementos de navegación. Se actualiza en tiempo real — un marcador proyectado con 15 segundos de retraso se nota y desprestigia el torneo. **Fuera de DOJO-30** (ver decisiones.md): necesita acceso anónimo sin sesión, un patrón nuevo en este repo — se construye en un ticket aparte.
+
+**M25/M26 (Torneos, DOJO-30) — sin divisiones ni bracket automático, a propósito.** `schema-dojo.md` § 6 describía `tournament_divisions` (por peso/rango) y `tournament_matches` con `round`/`match_number`/`is_third_place` — un bracket de eliminatoria con avance automático. Eso es el diseño ANTERIOR a HU-42/43/44 (bocetadas 2026-09-06 sobre ese mismo spec), que las simplifica a propósito: "armo los cruces a mano... no es un bracket generado automáticamente" (HU-43 CA-03) y ninguna división. `documentacion-v1.md` ya lo anticipaba ("el modelo de datos entra, la UI de armado de brackets no, es lo primero que se cae si falta tiempo") — HU-42/43/44 son ese recorte ya aplicado. `schema-dojo.md` queda como referencia de la versión completa si algún dojo real pide divisiones/bracket automático después, no como lo que se construye ahora.
 
 **`AttendanceRoster` (D6).** Se usa de pie, en el tatami, con una mano. Filas altas, área de toque grande, los tres estados como `SegmentedControl` compacto por fila. Sin scroll horizontal, sin menús anidados.
 

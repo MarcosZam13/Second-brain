@@ -271,7 +271,7 @@ Como miembro, quiero decidir si el resultado de mi pelea se ve en el feed del do
 
 ## Rol: Admin y Miembro — torneos
 
-> **Distinto de "Peleas oficiales" (HU-10/11/11b) — aclarado por Marcos el 2026-09-05.** Una pelea oficial es competencia profesional del miembro fuera del dojo; un torneo es un evento que el propio dojo organiza (interno o abierto a externos) para que varios miembros participen y se foguen entre ellos. Un torneo no genera peleas oficiales por sí solo — ver la nota abierta en HU-45 CA-03. Épica nueva, todavía sin construir; **bocetada, no priorizada** — falta pasarla por el mismo desglose crítico que recibieron las demás antes de tener un ticket.
+> **Distinto de "Peleas oficiales" (HU-10/11/11b) — aclarado por Marcos el 2026-09-05.** Una pelea oficial es competencia profesional del miembro fuera del dojo; un torneo es un evento que el propio dojo organiza (interno o abierto a externos) para que varios miembros participen y se foguen entre ellos. Un torneo no genera peleas oficiales por sí solo — ver HU-44 CA-03, resuelto. **Ticket asignado: DOJO-30** (2026-09-12) — pasó el desglose crítico, sin divisiones ni bracket automático (ver `DESIGN.md` § 5.3 y `modulos/torneos/plan.md` en el repo). HU-38 (proyección en pantalla) queda para un ticket aparte: necesita acceso anónimo sin sesión, un patrón nuevo en este repo.
 
 ### Epic: Torneos internos y externos
 
@@ -292,7 +292,7 @@ Como admin, quiero agregar participantes al torneo viendo la información de cad
 Como admin, quiero ver una card por cada cruce con la información de la pelea y registrar su resultado, para llevar el orden del torneo mientras avanza.
 - CA-01: Cada cruce se ve como una card con los dos participantes, la disciplina y su estado (pendiente, jugado).
 - CA-02: Puedo registrar resultado y método del cruce (mismo vocabulario que una pelea oficial, HU-10), quedando reflejado en la card.
-- CA-03: **Abierto, sin decidir todavía:** si un participante es miembro del dojo, ¿el resultado del cruce entra a su historial de peleas oficiales (HU-10/HU-11) o queda solo dentro del torneo? Un torneo interno de fogueo probablemente no debería mezclarse con el historial competitivo "afuera del dojo" que HU-10/11 describen — a decidir antes de construir esta HU.
+- CA-03: **Resuelto (2026-09-12):** el resultado del cruce queda solo dentro del torneo — nunca escribe en el historial de peleas oficiales (HU-10/HU-11), ni siquiera si el participante es miembro del dojo. Si un cruce puntual amerita quedar en ese historial competitivo, el admin lo carga aparte con el formulario de Peleas oficiales que ya existe (HU-10) — sin acoplar las dos tablas ni construir un puente automático.
 - CA-04: Miembros y staff pueden ver el estado de todos los cruces del torneo, jugados y pendientes, sin necesidad de ser admin.
 
 **HU-38: Proyectar el torneo en una pantalla** *(nueva — confirmada en el repaso; reubicada acá el 2026-09-06, vivía suelta bajo "Owner — configuración" sin ninguna otra HU de torneos todavía escrita)*
@@ -605,7 +605,7 @@ Como sistema, quiero avisar a los inscritos antes de su clase, para bajar las au
 | Calendario y clases | HU-01, 02, 02b, 02c, 02d, 03, 04, 04b | RF-03 a RF-04c |
 | Sparring | HU-05 a HU-09c, 07b, 07c | RF-05 a RF-08 |
 | Peleas oficiales | HU-10, 11, 11b | RF-09, RF-10 |
-| Torneos *(bocetada, sin priorizar)* | HU-42, 43, 44, 38 | — |
+| Torneos *(DOJO-30: HU-42/43/44; HU-38 en ticket aparte)* | HU-42, 43, 44, 38 | — |
 | Promociones | HU-12, 12b, 13, 13b, 14 | RF-11 a RF-12b |
 | Contenido | HU-15, 15b | RF-13, RF-13b |
 | Challenges | HU-16 | RF-14 |
