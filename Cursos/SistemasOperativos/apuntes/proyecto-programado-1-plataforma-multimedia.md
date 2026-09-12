@@ -4,7 +4,7 @@ tema: "I Proyecto Programado — Plataforma Distribuida de Procesamiento Multime
 fecha: 2026-09-11
 tipo: apunte
 fuente: _fuentes/ProyectoProgramadoI_PlataformaMultimediaCasos_v2.pdf
-tags: [proyecto-programado, sistemas-distribuidos, concurrencia, semana-9]
+tags: [proyecto-programado, sistemas-distribuidos, concurrencia, semana-9, celery, redis]
 ---
 
 # I Proyecto Programado — Plataforma Distribuida de Procesamiento Multimedia por Casos (v2.0)
@@ -109,3 +109,14 @@ Libertad de stack, siempre que se justifique y garantice arquitectura distribuid
 ## Perspectiva desde los temas del curso
 
 Administración de procesos · estados y control de trabajos (sub-tarea y caso) · planificación/asignación (routing) · colas · concurrencia y asincronía · sincronización (barrier/join) · comunicación entre procesos · administración de recursos y heterogeneidad de cómputo (Unidad 1) · monitoreo y balanceo de carga · sistemas distribuidos · administración de información y archivos.
+
+## Decisiones de arquitectura recomendadas (análisis propio, no parte de la consigna)
+
+Ver desarrollo completo y reparto de trabajo en [[Cursos/SistemasOperativos/entregables/propuesta-desarrollo-equipo|propuesta de desarrollo para el equipo]]. El profesor confirmó que permite usar librerías (busca "sencillo pero funcional", no reimplementar todo desde cero), así que la recomendación es:
+
+- **Stack: Python + Celery + Redis como broker.** Celery da colas con *task routing* nativo (mapea directo a workers especializados por tipo: colas `worker-video`, `worker-audio`, `worker-metadata`) y el primitivo `chord` (N tareas + callback cuando todas terminan, con conteo atómico en Redis) resuelve el barrier/join de cierre de caso sin tener que escribir un contador/lock a mano — que es el punto con más riesgo de race condition de todo el proyecto.
+- **Ojo con la rúbrica igual:** aunque Celery resuelva el chord por debajo, el documento de arquitectura debe explicar qué es ese barrier/join y cómo Celery lo implementa (contador en Redis), no solo invocar `chord()` sin explicación — el rubro de 20% evalúa comprensión del principio, no que lo hayan reescrito desde cero.
+- **Red entre las 3 máquinas: Tailscale o ZeroTier.** Resuelve NAT/firewalls de redes distintas en minutos y da IPs estables entre las laptops del equipo — el riesgo logístico más alto del proyecto no es el código, es que las 3 máquinas físicas se puedan hablar de forma confiable.
+- **No sobre-invertir en el dashboard.** Pesa 5% de la rúbrica; una tabla de estado por caso/sub-tarea (Flask/FastAPI simple o incluso Streamlit) alcanza. El esfuerzo va a arquitectura + implementación distribuida + concurrencia, que juntos son 55%.
+- **Dataset por script, no a mano.** Generarlo (duplicar/transformar un set más chico real, o descargar uno CC de audio/video) en vez de gastar tiempo humano curando 400-600 archivos uno por uno.
+- **Workers especializados, no genéricos.** Da una justificación real y citable (conexión con Unidad 1, heterogeneidad de cómputo) para el rubro de Arquitectura, y con Celery el *task routing* lo hace casi gratis.

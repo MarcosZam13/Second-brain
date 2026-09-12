@@ -14,7 +14,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 | WEB | Desarrollo Web | WEB-5 | WEB-6 |
 | CYS | Computación y Sociedad | CYS-5 | CYS-6 |
 | EST | Estadística | EST-8 | EST-9 |
-| SO | Sistemas Operativos | SO-26 | SO-27 |
+| SO | Sistemas Operativos | SO-27 | SO-28 |
 
 ## Proyectos personales
 
