@@ -19,6 +19,9 @@ entregas_pendientes:
   - fecha: "2026-09-09"
     entregable: "Mapa Clase (semana NIST) — mapa mental a mano"
     estado: entregado
+  - fecha: "2026-09-14"
+    entregable: "Parcial 1 — teórico/práctico, con apuntes permitidos"
+    estado: pendiente
   - fecha: "2026-11-09"
     entregable: "Proyecto Final — evaluación/explotación/remediación OWASP + NIST CSF 2.0 (grupal, 20%)"
     estado: pendiente
@@ -44,6 +47,7 @@ Ver también: [[Cursos/Seguridad/temario]] · [[Cursos/Seguridad/apuntes/reglas-
 | 2026-08-24 (lunes) | Quiz 1 — formato Kahoot (10 preguntas) sobre el informe *Estado de la Ciberseguridad en Costa Rica 2025* (UNA/LabCIBE, 166 páginas). Ver [[Cursos/Seguridad/apuntes/quiz1-estado-ciberseguridad-cr-2025\|índice/resumen de estudio]] — el PDF completo también está archivado para búsquedas puntuales | no especificado | **entregado (2026-08-24)** |
 | 2026-09-07 (domingo), trabajo en clase | Tarea 3 — NIST CSF aplicado a VoteOnline, Grupo 11 (Rachel, Wesley, Marcos, Dereck), 30 min + exposición de 5 min. Ver [[Cursos/Seguridad/entregables/tarea-3-nist-csf\|documento final]] | 5% | **entregado (2026-09-07)** |
 | 2026-09-09 (miércoles), 23:45 | Mapa Clase (semana NIST) — mapa mental a mano de NIST/CSF/Core Functions/NICE/SSDF. Ver [[Cursos/Seguridad/entregables/mapa-clase-nist\|entregables/mapa-clase-nist]] | 0.50 pts (de 40 en categoría Tareas) | **entregado (confirmado 2026-09-09)** |
+| 2026-09-14 (lunes), hora sin confirmar | **Parcial 1** — teórico/práctico, con apuntes permitidos. Temas: importancia de la seguridad del software (+ legislación CR), ciclo de vida (SDLC), tríada CIA, threat modeling (STRIDE/DREAD), OWASP Top 10, cadena de suministro, NIST CSF 2.0, NICE. Ver [[Cursos/Seguridad/examenes/parcial-1-temas\|temas oficiales]] y [[Cursos/Seguridad/examenes/resumen-parcial-1\|resumen/chuleta de estudio]] | 15% | pendiente |
 | 2026-11-09 (lunes), 8:00pm | Proyecto Final IC-8071 — evaluar, explotar y remediar vulnerabilidades (OWASP Top 10 + NIST CSF 2.0) en una app cliente-servidor vulnerable, 1 módulo por integrante (Autenticación/Gestión de Usuarios/Operaciones/Logs), entrega única con Matriz de Gobernanza + Documento de PoCs + Matriz de Riesgo Residual + Reporte Técnico de Parches + video individual de máx. 5 min por integrante. Grupal, máx. 4 personas. Ver [[Cursos/Seguridad/entregables/proyecto-final-organizacion\|organización de módulos vigente]] · [[Cursos/Seguridad/apuntes/proyecto-final-instrucciones\|instrucciones completas + rúbrica]] | 20% (nota final) | pendiente — módulo Logs/Auditoría no existe en el repo, hay que construirlo |
 
 <!--

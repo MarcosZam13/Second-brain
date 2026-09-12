@@ -11,7 +11,9 @@ tags: [parcial-1, examen, cia, threat-modeling, owasp, nist-csf, nice, cadena-su
 
 Ver también: [[Cursos/Seguridad/temario]] · [[Cursos/Seguridad/entregas]] · [[Cursos/Seguridad/apuntes/tema-1-importancia-seguridad-software|Tema 1]] · [[Cursos/Seguridad/apuntes/tema-2-ciclo-vida-desarrollo-software|Tema 2]] · [[Cursos/Seguridad/apuntes/stride-metodologia-amenazas|STRIDE / Threat Modeling]] · [[Cursos/Seguridad/apuntes/repaso-clases-3-4|Repaso Clases 3-4]] · [[Cursos/Seguridad/entregables/mapa-clase-nist|Mapa Clase NIST]]
 
-Lista oficial de temas que entran en el Parcial 1, según diapositiva de la profesora. Fecha del examen sin confirmar todavía — no está en [[Cursos/Seguridad/entregas]] hasta que se sepa.
+Lista oficial de temas que entran en el Parcial 1, según diapositiva de la profesora. **Fecha: lunes 2026-09-14** (indicada por Marcos, hora exacta pendiente de confirmar en TEC-Digital) — ya agregada a [[Cursos/Seguridad/entregas]].
+
+**Resumen de estudio para el examen (chuleta compartible, con apuntes permitidos):** [[Cursos/Seguridad/examenes/resumen-parcial-1|resumen-parcial-1.md]].
 
 ## Temas (según la diapositiva)
 
