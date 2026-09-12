@@ -327,7 +327,7 @@ La autorización no tiene nada que ver con la navegación. Que una sección est�
 
 | # | Pantalla | HU | Notas |
 |---|---|---|---|
-| O1 | Finanzas | HU-19 | Ingresos por período, suscripciones activas, distribución por plan |
+| O1 | Finanzas | HU-19 | Ingresos por período, suscripciones activas, distribución por plan, **gastos con recurrencia automática (DOJO-25)**, miembros con más asistencia, disciplina más asistida, cantidad de miembros |
 | O2 | Planes | HU-16b | CRUD de planes, marcar recomendado |
 | O3 | Tema del dojo | HU-21 | Editor con vista previa en vivo y **validación de contraste** |
 | O4 | Configuración del dojo | HU-29, HU-30 | SINPE, plazos, modo de cobro, conexión de pagos |
@@ -514,6 +514,8 @@ Lista de comprobantes pendientes. Al abrir uno: la imagen del comprobante ocupan
 ### 7.11 O1 — Finanzas
 Fila de KPIs arriba: ingresos del mes, suscripciones activas, pagos pendientes, morosos. Debajo, gráfica de ingresos por mes. Al lado, distribución por plan. Abajo, tabla de últimos pagos. Números tabulares en todo. Sobrio y legible, no un dashboard sobrecargado.
 
+**Ampliado en DOJO-25** (pedido de Marcos, "que se vea de verdad valor para el dueño"): la fila de KPIs suma **gastos del período**, **balance** (ingresos − gastos) y **cantidad de miembros**. Una segunda fila de gráficas: **gastos por mes** (misma barra que ingresos, mismo eje temporal) y **gastos por categoría** (mismo estilo de barra horizontal que distribución por plan). Una tabla de **últimos gastos**, con badge "Recurrente" en los que vienen de una plantilla. Dos tarjetas chicas al final: **miembros con más asistencia** (top 5, nombre + cantidad de clases) y **disciplina más asistida** (barra horizontal, mismo estilo que distribución por plan). Botón "+ Nuevo gasto" sobre la tabla de gastos, abre un `FormModal` con concepto, categoría (select: alquiler/servicios/salarios/equipo/marketing/otro), monto y un `FormField type="select"` de recurrencia (Ninguna/Mensual/Anual) — si no es "Ninguna", agrega fecha de inicio y crea una plantilla recurrente en vez de un gasto suelto. Cada fila de gasto tiene "Eliminar" (`ConfirmDialog`); las plantillas recurrentes se gestionan desde una lista aparte debajo de la tabla, con "Pausar/Reanudar" y "Eliminar" por fila (eliminar la plantilla no borra los gastos ya generados).
+
 ### 7.12 O3 — Tema del dojo
 Dos columnas: a la izquierda los controles — selectores de color por token, selector de tipografías, radio de bordes, subida de logo, y una fila de presets. A la derecha, vista previa en vivo de una pantalla real de la app (un calendario con tarjetas de clase). Si una combinación no alcanza el contraste mínimo, aviso inline con el ajuste sugerido. Botón de guardar fijo.
 
@@ -529,7 +531,7 @@ Grilla de tarjetas, una por plan: nombre, badge "Recomendado" (acento) o "Inacti
 ### 7.16 M15/M16 — Mi membresía / Subir comprobante *(construidas en DOJO-13, sin prompt previo)*
 **M15:** si no hay plan elegido, grilla de tarjetas de planes activos (mismo estilo que O2, con el recomendado destacado por un borde de acento) con botón "Suscribirme" por tarjeta. Si ya hay un plan, una tarjeta con el nombre, precio, badge de estado (Esperando pago / Al día / Vencida), fecha de vencimiento, aviso de recargo por mora si el período tiene uno aplicado, y botón "Subir comprobante" cuando el estado lo permite. Debajo, "Historial de pagos": lista simple de comprobantes con monto, fecha y badge de estado; si fue rechazado, el motivo en rojo debajo del monto.
 
-**M16 (modal sobre M15):** título con los datos SINPE del dojo en la descripción ("Transferí a X (titular)"). Un campo de monto opcional con la aclaración de que si se deja vacío se toma el del plan, y el input de archivo de imagen — armado a mano, no con `FormField` (esa primitiva todavía no tiene `type="file"`, ver § 5.1). Botón "Subir".
+**M16 (modal sobre M15):** título con los datos SINPE del dojo en la descripción ("Transferí a X (titular)"). Un campo de monto opcional con la aclaración de que si se deja vacío se toma el del plan, y el input de archivo de imagen — armado a mano, no con `FormField` (construida antes de que la primitiva tuviera `type="file"`; agregado en DOJO-27 § 7.22, sin retrofitear M16/D12, que ya funcionan). Botón "Subir".
 
 ### 7.17 O5 — Grupos familiares *(construida en DOJO-13, sin prompt previo)*
 Tarjetas, una por grupo: nombre con un badge de estado agregado ("Al día" si todos los integrantes están activos, "Con atraso" si alguno está vencido, "Con pagos pendientes" en los demás casos, "Sin integrantes" si está vacío). Debajo, la lista de integrantes con su nombre y plan, cada uno con un botón "Quitar" (desvincula del grupo sin tocar su suscripción ni su historial). Acciones de la tarjeta: agregar integrante (modal con selector de miembro + selector de plan — le crea la suscripción si no tenía), renombrar, eliminar el grupo. Botón "+ Nuevo grupo" al final.
@@ -542,6 +544,18 @@ Lista simple (no tabla), una `Card` por pelea: nombre del miembro y del rival co
 
 ### 7.20 M11 — Mis peleas *(construida en DOJO-14, sin prompt previo)*
 Lista del propio historial, misma `Card` por fila que D11 pero sin acciones de edición/borrado. Sobre una pelea ya jugada (no "próxima"), un badge Público/Privado y un botón que alterna la publicación — no aparece sobre una pelea "próxima" porque todavía no hay ningún resultado que publicar.
+
+### 7.21 M21 — Anuncios del dojo *(DOJO-27)*
+Feed de una sola columna, una `Card` por anuncio. Los fijados (`is_pinned`) van primero, con un `Badge` "Fijado" antes del título — sin sección separada, el orden ya lo dice. Portada (si tiene) como imagen de ancho completo arriba de la tarjeta, `aspect-ratio` 16:9, `object-cover`; sin portada, la tarjeta arranca directo en el título. Debajo del título, una línea con categoría (texto simple, sin `Badge` — no es un estado, es una etiqueta libre) y fecha relativa. Cuerpo del anuncio truncado a unas líneas con "Ver más" si es largo — no hace falta un patrón nuevo, un `<p className="line-clamp-4">` con el toggle alcanza.
+
+Reacciones y comentarios comparten el pie de la tarjeta: un botón de reacción (ícono + contador, se resalta si el usuario ya reaccionó) y un contador de comentarios que expande la sección de comentarios debajo (no una pantalla aparte). Cada comentario es una fila chica: `Avatar` (xs) + nombre + `RankBadge` (su rango más alto entre disciplinas, mismo criterio que `rangoMasAltoDeMiembro()` de DOJO-23 — ambigüedad ya resuelta ahí, se reusa, no se inventa un criterio nuevo) + cuerpo + fecha relativa. Un textarea chico + botón "Comentar" al final de la lista. Sin editar/borrar el propio comentario (HU-35b no lo pide) — solo staff, por fila, un botón ghost "Ocultar"/"Mostrar" (`ConfirmDialog` no hace falta, es reversible).
+
+Staff ve, además, sobre cada tarjeta: "Editar" (va a D14 en modo edición) y "Eliminar" (`ConfirmDialog`, destructivo). Botón "+ Nuevo anuncio" fijo arriba del feed, va a D14. Restricción por plan: un `Badge` chico "Restringido" en la tarjeta, visible solo para staff (para que sepan cuáles son privados sin tener que abrir cada uno) — un miembro sin acceso ni siquiera recibe la fila (RLS ya la esconde), así que no hace falta ninguna marca para ellos.
+
+Estado vacío: `EmptyState` ("Todavía no hay anuncios" / staff ve el botón de crear, miembro no). Sin el módulo activo, la pantalla ni aparece en la navegación (HU-35b CA-04) — no hace falta un estado "módulo desactivado" acá, a diferencia de Mediciones que si lo tenía cuando el corte era distinto.
+
+### 7.22 D14 — Publicar anuncio *(DOJO-27)*
+`FormPage` (multi-sección, como ya fijaba el catálogo): sección "Anuncio" (título, categoría como texto libre, cuerpo en textarea) + sección "Portada" (`FormField type="file"`, opcional, con vista previa de imagen debajo si se eligió una — mismo patrón de preview que ya usa D12/Contenido, ahora sobre la primitiva en vez de a mano) + sección "Visibilidad" (el mismo bloque de "restringir a planes" con checkboxes que ya usa D12). "Fijar arriba del resto" NO es un campo de este formulario -- es una acción de la tarjeta en M21 (mismo criterio que "Marcar recomendado" en Planes), porque es un estado que cambia después de publicar, no una decisión de la publicación misma. Un solo botón "Publicar" (alta) o "Guardar" (edición) en el footer fijo del `FormPage`. Sin borrador -- publicar es inmediato, no hay estado intermedio.
 
 ---
 
