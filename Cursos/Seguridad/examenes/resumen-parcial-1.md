@@ -10,17 +10,18 @@ tags: [parcial-1, examen, resumen, cia, stride, dread, owasp, nist-csf, nice, le
 
 Ver también: [[Cursos/Seguridad/examenes/parcial-1-temas|Parcial 1 — temas oficiales]] · [[Cursos/Seguridad/entregas]] · [[Cursos/Seguridad/apuntes/tema-1-importancia-seguridad-software|Tema 1]] · [[Cursos/Seguridad/apuntes/tema-2-ciclo-vida-desarrollo-software|Tema 2]] · [[Cursos/Seguridad/apuntes/stride-metodologia-amenazas|STRIDE]] · [[Cursos/Seguridad/apuntes/repaso-clases-3-4|Repaso Clases 3-4]] · [[Cursos/Seguridad/apuntes/tarea-1-legislacion-costarricense|Legislación]] · [[Cursos/Seguridad/apuntes/marco-legal-digital-ciberseguridad-cr|Marco legal ampliado]]
 
-**Examen:** lunes 2026-09-14 (según lo indicado por Marcos — falta confirmar hora exacta en TEC-Digital). Teórico/práctico, 15% de la nota, con apuntes permitidos.
+**Examen:** lunes 2026-09-14, 4:00pm. Teórico/práctico, 15% de la nota, con apuntes permitidos.
 
 **Resumen publicado como página web, pensado para consultarse rápido durante el examen y para compartir con el equipo:**
 
 👉 **https://claude.ai/code/artifact/c4e16ac1-0caa-45b7-85bf-9d8d761bced5**
 
-Cubre los 8 temas oficiales de [[Cursos/Seguridad/examenes/parcial-1-temas|parcial-1-temas.md]]: glosario de siglas, importancia de la seguridad del software (historia + CIA + ética), legislación costarricense (leyes, artículos, plazos ARCO, sanciones PRODHAB), ciclo de vida de desarrollo (SDLC, ARA, casos de abuso), tríada CIA, threat modeling (STRIDE/DREAD), OWASP Top 10, cadena de suministro, NIST CSF 2.0 y NICE. Incluye un banco de 20 preguntas de autoevaluación al final.
+Cubre los 8 temas oficiales de [[Cursos/Seguridad/examenes/parcial-1-temas|parcial-1-temas.md]] (verificado uno por uno, ninguno queda afuera): glosario de siglas, importancia de la seguridad del software (historia + CIA + ética + definición formal), legislación costarricense (leyes, artículos, base constitucional, plazos ARCO, sanciones PRODHAB, casuística real), ciclo de vida de desarrollo (SDLC, ARA, casos de abuso, ISO 27001/27034, SANS), tríada CIA, threat modeling (STRIDE con su origen histórico + DREAD), **OWASP Top 10:2025** (lista oficial completa, con equivalencia contra la numeración 2021), cadena de suministro, NIST CSF 2.0 (incluye extra de Tiers/Profiles) y NICE. Cierra con un banco de 25 preguntas de autoevaluación.
 
-Contenido armado a partir de todos los apuntes ya existentes del curso (no agrega materia nueva) — si algo del contenido del resumen no coincide con lo dado en clase, prevalece el apunte fuente correspondiente, no la chuleta.
+**2026-09-12 — actualizado a pedido de Marcos:** se cambió la sección OWASP a la lista oficial **2025** (verificada contra owasp.org/Top10/2025 y fuentes secundarias — antes tenía la 2021 con una nota aparte sobre la versión 2025), se confirmó la hora del examen (4:00pm) y se agregó contenido de refuerzo en varias secciones (base constitucional de la legislación CR, ISO 27001/27034, SANS, origen de STRIDE, Tiers/Profiles de NIST CSF) por si el examen pregunta más allá de lo mínimo de cada tema.
+
+Contenido armado a partir de todos los apuntes ya existentes del curso, más verificación externa puntual para la lista OWASP 2025 y los datos de refuerzo — si algo del resumen no coincide con lo dado en clase, prevalece siempre el apunte fuente correspondiente o lo que diga la profesora, no la chuleta.
 
 ## Pendiente
 
-- Confirmar hora exacta del examen en TEC-Digital y sincronizarla a Calendar/Todoist.
 - Si la profesora confirma formato de examen (opción múltiple, desarrollo, caso práctico, etc.), actualizar esta nota y el artifact para orientar el repaso a ese formato específico.
