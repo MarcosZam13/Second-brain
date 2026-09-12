@@ -4,7 +4,7 @@ tema: "Guión de presentación — Indagatoria del curso, Block A (Fundamentals)
 fecha: 2026-09-12
 tipo: entregable
 entregable_de: "[[Cursos/SistemasOperativos/entregables/indagatoria-curso-documento-en]]"
-estado: borrador — listo para ensayar, falta timing real y nombre de quien presenta Block B
+estado: "borrador v2 (2026-09-12) — simplificado a pedido de Marcos, más coloquial. Listo para ensayar, falta nombre de quien presenta Block B"
 tags: [indagatoria, ia, planificacion, scheduling, trabajo-grupal, ingles, guion, presentacion]
 ---
 
@@ -12,43 +12,43 @@ tags: [indagatoria, ia, planificacion, scheduling, trabajo-grupal, ingles, guion
 
 Ver también: [[Cursos/SistemasOperativos/entregables/indagatoria-curso-documento-en|Documento completo (inglés)]] · [[Cursos/SistemasOperativos/entregables/indagatoria-curso-plan-equipo|Plan de reparto]] · [[Cursos/SistemasOperativos/entregas]]
 
-**Exposición:** jueves 2026-09-17 (semana 7) · presentación **en inglés** · Marcos presenta Block A completo (piezas 1-2: Introduction + Classical heuristics) y le cede la palabra a quien presente Block B.
+**Exposición:** jueves 2026-09-17 (semana 7) · presentación **en inglés** · Marcos presenta **todo el Bloque A seguido** (puntos 1 al 4, sin que nadie más hable en el medio) y recién en el punto 5 le cede la palabra a quien presente Block B.
 
-**Tono:** hablado, no leído — igual que en el guión de la Indagatoria Corta de Arch Linux. Explicar la idea con tus propias palabras al ensayar; lo que importa es que suene natural en inglés, no memorizar la frase exacta. Los tiempos entre paréntesis son un estimado para armar el ritmo, no una regla — ajustalos al ensayar en voz alta.
+> **v2 (2026-09-12):** versión simplificada — la primera quedó demasiado densa, con oraciones largas metiendo dos o tres ideas técnicas juntas. Se acortaron las frases, se sacó el dato de EEVDF del gancho de apertura (quedaba forzado ahí, ahora aparece una sola vez, en su lugar natural dentro de la sección de CFS/EEVDF), y se bajó el vocabulario "de paper" a algo que suene a como se explicaría en una conversación real.
 
-**Gancho pedido por el profesor:** arranca con una pregunta retórica + un dato real (el cambio de scheduler de Linux en 2023) en vez de empezar directo con la definición — es la parte que engancha antes de meterse en lo técnico.
+**Tono:** hablado, coloquial — como si le explicaras esto a un compañero de otra carrera que no sabe nada de sistemas operativos, no como si leyeras un párrafo del documento. Los tiempos entre paréntesis son un estimado, no una regla.
 
 ---
 
-## 1. Hook + team intro (~0:25)
+## 1. Hook + team intro (~0:20)
 
-> "Quick question before we start: how many times per second do you think the CPU in front of you decides which process runs next? Not tens. Not hundreds. On a modern multi-core system, it's thousands of times every second. And here's the part that surprised us: the exact rule the Linux kernel uses to make that decision changed in 2023 — after almost two decades. Something this fundamental is still evolving, and that's exactly why our group picked this topic. We're Group 3, Topic 10: AI and Resource Management in Operating Systems. I'm Marcos, and I'll cover the fundamentals — what scheduling is, and how it's done today — before handing off to [teammate] for the machine learning side."
+> "Quick question. How many times per second do you think your computer decides which program gets to run next? Go ahead, take a guess. ...It's not ten. It's not a hundred. It's thousands — every single second. That's how often your CPU has to pick a winner. So today, we're looking at how it makes that choice. We're Group 3, Topic 10: AI and Resource Management in Operating Systems. I'm Marcos — I'll cover the basics, what scheduling is and the classic ways to do it. Then [teammate] takes over with the AI side."
 
-## 2. What scheduling is, and why it matters (~0:40)
+## 2. What scheduling actually is (~0:35)
 
-> "So, what is CPU scheduling? Every time a core goes idle — a process blocks on I/O, its time slice runs out, something higher-priority wakes up — the operating system has to decide who runs next. On a machine with dozens of runnable threads and only a handful of cores, that happens constantly, and it directly shapes three things: throughput, how much work gets done; latency, how fast you get a response; and fairness, whether every process gets a real turn."
+> "So, what does 'scheduling' mean? Picture this: your CPU has a few cores, but way more programs want to run than it has room for. Every time a core frees up — something finishes, gets stuck waiting, or its turn just ends — the operating system has to pick who goes next. And that one decision affects three things: how much work gets done overall, how fast you get a response, and whether everyone actually gets a fair turn."
 
-## 3. Why this is a natural fit for AI — bridge to Block B (~0:35)
+## 3. Why this is a good problem for AI — bridge to Block B (~0:30)
 
-> "Classical schedulers make that decision with fixed, hand-designed rules — a time quantum, a priority level. The problem is they're reactive: they only know what a process already did, never what it's about to do next. But scheduling has three things going for it if you want to apply machine learning: it repeats at very high frequency, so there's a ton of data to learn from; the goal is measurable — throughput, latency, fairness; and the environment is genuinely uncertain, so predicting what a process will do is actually useful. That's the gap [teammate]'s part of the talk picks up. But first, let's look at how it's done today — the baseline we're comparing against."
+> "Now, the classic way to make that decision uses fixed rules someone wrote by hand — a timer, a priority number. The problem is, those rules only look at what already happened, never what's coming. And that's exactly why this is a great problem for AI: it happens constantly, so there's tons of data; there's a clear goal, like speed or fairness; and the future really is uncertain, so being able to predict it is actually useful. That's where [teammate] comes in. But first — let's see how it's done today, without any AI."
 
-## 4. Classical heuristics (~2:15 total)
+## 4. The classic ways to do it (~2:00 total)
 
 ### 4a. Round Robin (~0:30)
 
-> "The simplest one is Round Robin. Every process sits in a circular queue and gets a fixed time slice before going to the back of the line. It's fair — everyone eventually gets a turn — and it's cheap to implement. But it treats every process the same: one that only needs two milliseconds still waits behind long ones, which hurts anything interactive. And picking the time slice itself is a trade-off — too short, and the system wastes time switching between processes; too long, and it starts behaving like plain first-come-first-served."
+> "First one: Round Robin. Simple idea — everyone stands in a circle, gets the same amount of time, then goes to the back of the line. It's fair, and it's cheap to build. But it's not smart: a tiny task still has to wait behind a huge one. And picking how long each turn should last is tricky — too short, and you waste time just switching between people; too long, and it stops feeling fair at all."
 
 ### 4b. Multi-Level Feedback Queue (~0:35)
 
-> "Multi-Level Feedback Queue improves on that with several queues at different priority levels. Use your whole time slice without blocking, and you drop a level; block early for I/O, and you stay high priority. So short, interactive processes naturally float to the top — without the scheduler ever knowing in advance how long a process needs. To stop long processes from starving at the bottom forever, MLFQ periodically boosts everyone back up — that's called aging. The catch: it depends on a handful of hand-tuned numbers, and a setup that works for one workload can fall apart for another."
+> "Next one: Multi-Level Feedback Queue, or MLFQ. Instead of one line, you get several, each with a different priority. Use your whole turn? You drop a level. Finish early because you were waiting on something? You stay near the top. So quick tasks naturally rise up, and long ones sink down. To stop anyone from getting stuck at the bottom forever, everyone gets bumped back up once in a while — that's called aging. The downside: it only works well if you tune a bunch of numbers just right for your specific case."
 
-### 4c. CFS and EEVDF (~0:50)
+### 4c. CFS and the 2023 surprise (~0:45)
 
-> "Which brings us back to that fact from the beginning. For almost two decades, Linux used CFS — the Completely Fair Scheduler — which tracks a 'virtual runtime' for every task and always picks whoever has received the least CPU time so far, scaled by priority. Since 2023, Linux runs EEVDF instead — spelled out, E-E-V-D-F — which gives each task a virtual deadline and picks whoever's deadline is closest. That's a more principled way to guarantee latency-sensitive tasks don't starve, which was CFS's known weak spot. But here's the thing: even EEVDF only looks backward, at time already spent. None of these three heuristics predicts what a process is about to do next — and closing exactly that gap is what [teammate] is about to show you."
+> "And then there's Linux. For almost twenty years, Linux used something called CFS. Simple idea: it tracks how much CPU time each task has already gotten, and always gives the next turn to whoever has the least. It worked well enough to last two decades. But — fun fact — in 2023, Linux actually replaced it with a new one, called EEVDF. Instead of just tracking time spent, it gives every task a deadline, and picks whoever's deadline is closest. It's better at making sure nobody gets left behind. But here's the thing — even this brand-new one only looks at the past. It still can't predict what a process is about to do. And that's exactly the door [teammate] is about to open."
 
 ## 5. Handoff to Block B (~0:15)
 
-> "So that's our baseline: three heuristics, all reactive, all tuned by hand. Now [teammate] is going to show you what happens when a model learns the pattern instead of someone hard-coding it."
+> "So — three ways to do this, each smarter than the last, but all of them reactive. None of them can see the future. Let's see what happens when we let a model try."
 
 ---
 
@@ -56,26 +56,16 @@ Ver también: [[Cursos/SistemasOperativos/entregables/indagatoria-curso-document
 
 | Término | Cómo suena |
 |---|---|
-| Heuristic(s) | hyoo-RIS-tik(s) |
-| Quantum | KWAN-tuhm |
-| Round Robin | ronda normal, sin acento raro — "raund ROB-in" |
+| Heuristic(s) — *ya no aparece en esta v2, se sacó la palabra del guión* | — |
+| Quantum / time slice | se cambió por "turn" y "time" en el guión — más fácil de decir que "quantum" |
+| Round Robin | "raund ROB-in" |
 | Queue | "kyoo" (como "cue") |
-| EEVDF | deletrealo letra por letra: "E, E, V, D, F" — nadie lo pronuncia como palabra |
-| vruntime / virtual runtime | mejor decir "virtual runtime" completo en vez de la abreviatura, se entiende más claro hablado |
-| Starve / starving | starv / STAR-ving (que un proceso "starves" = se queda sin CPU nunca) |
+| EEVDF | deletrealo: "E, E, V, D, F" — nadie lo pronuncia como palabra |
+| Starve / starving | STARV / STAR-ving |
 | Throughput | THROO-put |
-| Latency | LAY-tuhn-see |
-
-## Vocabulario clave para tener fresco (por si preguntan)
-
-- **Scheduler** = planificador · **Ready queue** = cola de procesos listos · **Time slice / quantum** = cuanto de tiempo
-- **Reactive** (decide con el pasado) vs. **predictive** (anticipa el futuro) — es el contraste central entre Block A y Block B
-- **Starvation** = un proceso nunca recibe CPU · **Aging** = mecanismo para evitarlo, subiendo prioridad con el tiempo
-- **Fairness** = que nadie acapare el CPU injustamente
 
 ## Próximos pasos
 
 - [ ] Confirmar quién presenta Block B para reemplazar los `[teammate]` del guión por el nombre real.
-- [ ] Ensayar en voz alta contra el tiempo real — este guión da ~4 minutos para Block A solo; sumarle Block B y Block C para saber el total.
-- [ ] Practicar la pronunciación de EEVDF, heuristics y quantum unas cuantas veces sueltas antes de meterlas en el guión completo.
-- [ ] Una vez Block B y C estén escritos, acordar transiciones cortas entre bloques (ver la sección 5 de arriba como ejemplo) y hacer un ensayo grupal completo.
+- [ ] Practicar esta versión en voz alta un par de veces — al ser más coloquial, va a sonar más natural con menos ensayo que la v1.
+- [ ] Una vez Block B y C estén escritos, acordar transiciones cortas entre bloques y hacer un ensayo grupal completo.
