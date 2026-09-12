@@ -293,7 +293,7 @@ La autorización no tiene nada que ver con la navegación. Que una sección est�
 | M11 | Mis peleas | HU-10, HU-11b | Historial + toggle de publicación por pelea |
 | M12 | Contenido | HU-15 | Explorador de carpetas |
 | M13 | Detalle de contenido | HU-15, HU-15b | Lectura + favorito |
-| M14 | Retos | HU-16 | Challenges activos con progreso |
+| M14 | Desafíos | HU-16 | Desafíos activos con mi progreso hacia la meta *(renombrada de "Retos" el 2026-09-12 — esa palabra queda para Sparring)* |
 | M15 | Mi membresía | HU-16c, HU-17b | Plan, vencimiento, historial de pagos |
 | M16 | Subir comprobante | HU-17 | Datos SINPE del dojo + adjuntar imagen |
 | M17 | Notificaciones | HU-09, HU-20 | Centro de notificaciones |
@@ -305,7 +305,7 @@ La autorización no tiene nada que ver con la navegación. Que una sección est�
 | M23 | Editar perfil | HU-37 | Datos básicos y foto |
 | M24 | Ver como alumno | HU-41 | No es una pantalla: es un modo. El staff mira la app tal como la ve un alumno, para dar soporte sin adivinar |
 
-### Admin (13)
+### Admin (14)
 
 | # | Pantalla | HU | Notas |
 |---|---|---|---|
@@ -335,6 +335,7 @@ La autorización no tiene nada que ver con la navegación. Que una sección est�
 | O6 | Módulos del dojo | HU-34 | Activar o desactivar módulos opcionales. Desactivar oculta, no borra |
 | O7 | Página pública del dojo | HU-39 | Editor de historia, instructores, programas, logros y ubicación |
 | D14 | Publicar anuncio | HU-35 | `FormPage`: tiene portada y gating por plan |
+| D15 | Desafíos — gestión | HU-16 | Lista de desafíos con crear/cerrar y quiénes lo completaron |
 | D15 | Serie de clases | HU-02d | Programar recurrencia y resolver serie contra ocurrencia |
 | K1 | Proyección de torneo | HU-38 | **Kiosco.** Pantalla completa, sin navegación, sin sesión, en tiempo real. Se ve desde el otro lado del gimnasio |
 | P1 | Página pública del dojo | HU-39 | Vista pública, con el tema del dojo |
@@ -402,7 +403,7 @@ Se construyen **componiendo primitivas**, nunca con HTML y clases sueltas. `Spar
 | `PaymentProofUploader` | Datos SINPE + adjuntar comprobante | HU-17 |
 | `PaymentProofReview` | Imagen al lado de aprobar/rechazar con motivo | HU-18 |
 | `ContentFolderTree` | Navegación por carpetas anidadas | HU-15 |
-| `ChallengeCard` | Reto con progreso | HU-16 |
+| `ChallengeCard` | Desafío con barra de progreso hacia la meta | HU-16 |
 | `ThemeEditor` | Editor de tema con vista previa y contraste | HU-21 |
 | `CelebrationOverlay` | El momento de impacto: ascenso, sparring ganado | HU-13, HU-07 |
 
@@ -556,6 +557,12 @@ Estado vacío: `EmptyState` ("Todavía no hay anuncios" / staff ve el botón de 
 
 ### 7.22 D14 — Publicar anuncio *(DOJO-27)*
 `FormPage` (multi-sección, como ya fijaba el catálogo): sección "Anuncio" (título, categoría como texto libre, cuerpo en textarea) + sección "Portada" (`FormField type="file"`, opcional, con vista previa de imagen debajo si se eligió una — mismo patrón de preview que ya usa D12/Contenido, ahora sobre la primitiva en vez de a mano) + sección "Visibilidad" (el mismo bloque de "restringir a planes" con checkboxes que ya usa D12). "Fijar arriba del resto" NO es un campo de este formulario -- es una acción de la tarjeta en M21 (mismo criterio que "Marcar recomendado" en Planes), porque es un estado que cambia después de publicar, no una decisión de la publicación misma. Un solo botón "Publicar" (alta) o "Guardar" (edición) en el footer fijo del `FormPage`. Sin borrador -- publicar es inmediato, no hay estado intermedio.
+
+### 7.23 M14 — Desafíos *(DOJO-28, acotada 2026-09-12)*
+Grilla de `ChallengeCard`, una por desafío **activo o recién cerrado** (no un historial completo — a los ya cerrados hace tiempo no vale la pena volver). Cada tarjeta: nombre, descripción, un `Badge` con el tipo (Asistencia / Peleas amistosas), fecha límite ("Vence en 5 días" / "Cerrado"), y una barra de progreso propia hacia la meta (ej. "7 de 10 clases") con el mismo estilo de barra que ya usa `FichaElegibilidad` (DOJO-11) para la ventana de asistencia — no se inventa un widget nuevo. Si ya cumplió la meta, la barra se llena del todo y un `Badge tone="success"` "¡Completado!" reemplaza la fecha límite. Sin acciones -- es de solo lectura, el progreso lo calcula el servidor. Estado vacío: `EmptyState` ("Todavía no hay desafíos activos"). Sin el módulo activo, la pantalla ni aparece en la navegación (mismo corte que Contenido/Anuncios).
+
+### 7.24 D15 — Desafíos, gestión *(DOJO-28)*
+Lista simple (no tabla, mismo criterio que D11/Peleas): una `Card` por desafío con nombre, tipo, rango de fechas, y una barra de progreso **agregada** (cuántos miembros de los que tienen membresía activa ya completaron la meta, ej. "6 de 23 completaron"). Click en la tarjeta expande -- no navega a otra ruta, mismo patrón que los comentarios de M21 -- una lista de miembros con su progreso individual, ordenada de mayor a menor. Dos acciones por tarjeta: "Cerrar ahora" (`ConfirmDialog`, solo si todavía no llegó a su fecha de fin -- si ya llegó, el cron la cierra sola y la acción no aparece) y "Eliminar" (`ConfirmDialog`, destructivo, solo si nunca se cerró -- un desafío ya cerrado es historial, no se borra). Botón "+ Nuevo desafío" fijo arriba, abre un `FormModal` (no `FormPage` -- son 5 campos simples, no amerita una ruta aparte: mismo criterio que M5/Nuevo reto de Sparring) con nombre, descripción, tipo (select: Asistencia / Peleas amistosas), meta (numérico) y fechas de inicio/fin. Estado vacío: `EmptyState` con el botón de crear.
 
 ---
 

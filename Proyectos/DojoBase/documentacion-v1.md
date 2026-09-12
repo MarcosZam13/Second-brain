@@ -45,7 +45,7 @@ Criterio para priorizar: primero lo que hace el producto **presentable y onboard
 - Promociones: eventos, criterios ponderados, calificación, resolución, reapertura, y **portal del miembro** con desglose por criterio
 - Historial de peleas oficiales + feed de próximas peleas
 - Contenido en carpetas anidadas, con gating por plan y favoritos
-- Challenges de asistencia, rutina y peleas amistosas
+- Desafíos de asistencia y peleas amistosas (challenges gamificados, distintos de los retos de Sparring)
 - Billing: planes, suscripción, comprobante SINPE, revisión por admin, dashboard financiero exclusivo del owner, recordatorios de vencimiento
 - Grupos familiares con plan por integrante
 - Ficha completa del alumno con generación de ficha para torneo
@@ -146,7 +146,7 @@ Decidido de antemano para no improvisarlo bajo presión: **torneos → grupos fa
 ### Contenido y challenges
 - **RF-13** — Contenido organizado en carpetas anidadas configurables por admin/owner, con visibilidad por plan de membresía.
 - **RF-13b** — El miembro puede marcar contenido como favorito.
-- **RF-14** — Challenges de al menos tres tipos: asistencia, cumplimiento de rutina y participación en peleas amistosas.
+- **RF-14** — Challenges ("Desafíos" en la UI, para no chocar con "reto" de Sparring) de dos tipos: asistencia y participación en peleas amistosas. **El tipo "cumplimiento de rutina" se sacó de alcance el 2026-09-12** — no existe ninguna feature de rutinas en el producto, sin fuente de datos para medir cumplimiento; se retoma si esa feature llega a construirse.
 
 ### Billing
 - **RF-15** ▲ — **El admin puede aprobar o rechazar comprobantes de pago y ve el monto de la fila que revisa** (el comprobante SINPE lo muestra en la imagen), **pero no accede a reportes ni dashboards de ingresos agregados**.

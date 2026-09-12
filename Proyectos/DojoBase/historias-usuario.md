@@ -3,7 +3,7 @@ proyecto: DojoBase
 tema: Historias de usuario y criterios de aceptación
 fecha: 2026-09-03
 tipo: documentacion
-estado: v1.5 — 66 historias con criterios de aceptación, agrupadas en épicas por rol. Numeración heredada del spec 06; HU-24 en adelante son nuevas. v1.1 agrega progresión por disciplina, ficha del alumno y módulos opcionales (revisión de mockups); v1.2 agrega lo que salió del repaso de GymBase v1: sesión de sparring con cronómetro, clases recurrentes, anuncios, notificaciones por correo y proyección de torneos. v1.4 (2026-09-03) corrige HU-05/06/07/07c/08/09 contra lo que DOJO-9 terminó construyendo: sin fecha propuesta, el reto se decide por rounds ganados (no suma de puntos) con KO/sumisión/decisión por round, HU-07b (confirmación del rival) removida, preparación de 10s antes de cada round. v1.5 (2026-09-06) agrega la épica "Torneos" (HU-42 a HU-44, bocetada y sin priorizar) tras aclarar con Marcos que Torneos y Peleas oficiales (HU-10/11/11b) son features distintas — HU-38 (proyección) se reubicó ahí, vivía suelta bajo Configuración sin ninguna otra HU de torneos escrita todavía.
+estado: v1.6 — 66 historias con criterios de aceptación, agrupadas en épicas por rol. Numeración heredada del spec 06; HU-24 en adelante son nuevas. v1.1 agrega progresión por disciplina, ficha del alumno y módulos opcionales (revisión de mockups); v1.2 agrega lo que salió del repaso de GymBase v1: sesión de sparring con cronómetro, clases recurrentes, anuncios, notificaciones por correo y proyección de torneos. v1.4 (2026-09-03) corrige HU-05/06/07/07c/08/09 contra lo que DOJO-9 terminó construyendo: sin fecha propuesta, el reto se decide por rounds ganados (no suma de puntos) con KO/sumisión/decisión por round, HU-07b (confirmación del rival) removida, preparación de 10s antes de cada round. v1.5 (2026-09-06) agrega la épica "Torneos" (HU-42 a HU-44, bocetada y sin priorizar) tras aclarar con Marcos que Torneos y Peleas oficiales (HU-10/11/11b) son features distintas — HU-38 (proyección) se reubicó ahí, vivía suelta bajo Configuración sin ninguna otra HU de torneos escrita todavía. v1.6 (2026-09-12) acota HU-16 (Challenges) antes de arrancar DOJO-28: el tipo "rutina" se sacó de alcance (no existe ninguna feature de rutinas en el producto, sin fuente de datos para medir cumplimiento) y la UI se renombra a "Desafíos" para no chocar con "reto" de Sparring.
 tags: [dojobase, historias-usuario, requerimientos]
 ---
 
@@ -434,14 +434,16 @@ Como miembro, quiero comentar y reaccionar a los anuncios, para participar de la
 - CA-03: El admin puede **ocultar** un comentario sin borrarlo.
 - CA-04: Si el dojo no activó el módulo, la sección no existe en la navegación.
 
-### Epic: Challenges
+### Epic: Challenges (Desafíos)
 
-**HU-16: Crear challenges**
-Como admin, quiero crear retos de asistencia, rutina o peleas amistosas, para incentivar la participación de los miembros.
-- CA-01: Puedo crear un reto con nombre, descripción, tipo, meta, y fechas de inicio y fin.
-- CA-02: Los miembros ven los retos activos y su progreso.
-- CA-03: El progreso de un reto de asistencia cuenta solo la asistencia **presente**.
-- CA-04: Puedo cerrar un reto y ver quiénes lo completaron.
+**HU-16: Crear challenges** *(acotada 2026-09-12, ver nota de versión)*
+Como admin, quiero crear desafíos de asistencia o peleas amistosas, para incentivar la participación de los miembros.
+- CA-01: Puedo crear un desafío con nombre, descripción, tipo (asistencia o peleas amistosas), meta numérica, y fechas de inicio y fin.
+- CA-02: Los miembros ven los desafíos activos y su progreso individual hacia la meta.
+- CA-03 **[servidor]**: El progreso de un desafío de asistencia cuenta solo la asistencia **presente** (mismo criterio que HU-13b CA-03 para promociones) dentro del rango de fechas del desafío.
+- CA-04 **[servidor]**: El progreso de un desafío de peleas amistosas cuenta las peleas de Sparring **cerradas** (HU-07/07c) del miembro dentro del rango de fechas — no las pendientes ni las rechazadas.
+- CA-05: Puedo cerrar un desafío antes de su fecha de fin y ver quiénes lo completaron.
+- CA-06: En la UI se llama "Desafíos", nunca "retos" — esa palabra queda reservada para Sparring (HU-05 a HU-09c), que ya la usa en toda su interfaz y en `sparring_challenges`.
 
 ---
 
