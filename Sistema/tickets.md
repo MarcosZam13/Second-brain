@@ -22,7 +22,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 |---|---|---|---|
 | TACHA | Tacha | TACHA-24 | TACHA-25 |
 | MB | CoreBase (plataforma, trabajo transversal del monorepo) | MB-23 | MB-24 |
-| DOJO | DojoBase | DOJO-35 | DOJO-36 (DOJO-31, reservado desde DOJO-30, ahora en uso para HU-38/proyección K1 — ver `modulos/torneos-proyeccion/decisiones.md`) |
+| DOJO | DojoBase | DOJO-36 | DOJO-37 |
 | GYM | GymBase | — | GYM-1 |
 | CANELE | CaneleApp | — | CANELE-1 |
 | COMPDES | COMPDES 2027 | — | COMPDES-1 |
