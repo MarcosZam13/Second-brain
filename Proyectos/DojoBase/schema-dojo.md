@@ -333,6 +333,16 @@ create index on member_fights (org_id, result, fight_date);
 
 ## 6. Torneos
 
+**Actualización (2026-09-13, DOJO-32):** este diseño con divisiones/bracket
+automático se simplificó para DOJO-30 (HU-42/43/44, modo manual, sin
+`tournament_divisions`) y luego se reinstaló parcialmente en DOJO-32
+(HU-43b) como un segundo modo (`format = 'bracket'`) — cuadro automático,
+byes, siembra y avance de rondas, pero todavía **sin** `tournament_divisions`
+ni partido por el tercer puesto ni proyección K1 (HU-38 sigue en DOJO-31).
+El schema real de DOJO-32 vive en `modulos/torneos-bracket/` del repo
+corebase, no acá — esta sección queda como el diseño completo original,
+para si algún dojo real pide categorías por peso/rango más adelante.
+
 ```sql
 tournaments (
   id                        uuid primary key default gen_random_uuid(),
