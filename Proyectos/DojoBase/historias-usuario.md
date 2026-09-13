@@ -271,7 +271,7 @@ Como miembro, quiero decidir si el resultado de mi pelea se ve en el feed del do
 
 ## Rol: Admin y Miembro — torneos
 
-> **Distinto de "Peleas oficiales" (HU-10/11/11b) — aclarado por Marcos el 2026-09-05.** Una pelea oficial es competencia profesional del miembro fuera del dojo; un torneo es un evento que el propio dojo organiza (interno o abierto a externos) para que varios miembros participen y se foguen entre ellos. Un torneo no genera peleas oficiales por sí solo — ver HU-44 CA-03, resuelto. **Ticket asignado: DOJO-30** (2026-09-12) — pasó el desglose crítico, sin divisiones ni bracket automático (ver `DESIGN.md` § 5.3 y `modulos/torneos/plan.md` en el repo). HU-38 (proyección en pantalla) queda para un ticket aparte: necesita acceso anónimo sin sesión, un patrón nuevo en este repo.
+> **Distinto de "Peleas oficiales" (HU-10/11/11b) — aclarado por Marcos el 2026-09-05.** Una pelea oficial es competencia profesional del miembro fuera del dojo; un torneo es un evento que el propio dojo organiza (interno o abierto a externos) para que varios miembros participen y se foguen entre ellos. Un torneo no genera peleas oficiales por sí solo — ver HU-44 CA-03, resuelto. **Ticket asignado: DOJO-30** (2026-09-12) — pasó el desglose crítico, sin divisiones ni bracket automático (ver `DESIGN.md` § 5.3 y `modulos/torneos/plan.md` en el repo). HU-38 (proyección en pantalla) — **DOJO-31** (2026-09-13, en curso): acceso anónimo sin sesión, primer patrón del repo. Código y migración escritos ([PR #31](https://github.com/MarcosZam13/CoreBase/pull/31), draft); falta aplicar la migración contra el proyecto real antes de cerrar — ver `modulos/torneos-proyeccion/README.md` en el repo.
 
 ### Epic: Torneos internos y externos
 
