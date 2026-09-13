@@ -567,7 +567,7 @@ Como owner, quiero conectar la cuenta de pagos del dojo, para procesar cobros.
 - CA-02: Veo el estado de la conexión.
 - CA-03 **[servidor]**: Un admin no puede ver ni modificar esta configuración por ninguna vía.
 
-**HU-37: Editar mi perfil y mi foto** *(nueva — quedó pendiente en v1; acotada 2026-09-13, DOJO-36)*
+**HU-37: Editar mi perfil y mi foto** *(nueva — quedó pendiente en v1; acotada 2026-09-13, DOJO-36 en curso — código y migración escritos, [PR #32](https://github.com/MarcosZam13/CoreBase/pull/32) en draft, falta aplicar la migración — ver `modulos/perfil/README.md` en el repo)*
 Como miembro, quiero editar mi nombre y mi foto de perfil, para que se vea bien en toda la app.
 - CA-01: **Acotado (2026-09-13):** puedo editar mi nombre y subir una foto. El teléfono **no** vive acá -- ya se edita en Mi ficha (`member_files.phone`, HU-32 CA-03), que es un dato de la ficha del alumno (vertical, por dojo), distinto de este perfil (core, la identidad de la cuenta). Un segundo lugar editando el mismo campo hubiera sido dos fuentes de verdad para un solo dato.
 - CA-02: La foto se ve en el avatar de toda la app, con el anillo de mi rango.
