@@ -4,7 +4,7 @@ tema: "Evaluación Integradora: Privacidad, seguridad y responsabilidad digital 
 fecha: 2026-09-08
 tipo: entregable
 entregable_de: "[[Cursos/CompuYSociedad/apuntes/evaluacion-integradora-privacidad-datos-leyes-8968-9048]]"
-estado: borrador
+estado: "entregado (confirmado por el usuario 2026-09-13, antes de la fecha límite del 2026-09-16)"
 tags: [ley-8968, ley-9048, proteccion-datos, delitos-informaticos, trabajo-grupal, voluntico]
 ---
 
@@ -12,7 +12,7 @@ tags: [ley-8968, ley-9048, proteccion-datos, delitos-informaticos, trabajo-grupa
 
 Ver también: [[Cursos/CompuYSociedad/apuntes/evaluacion-integradora-privacidad-datos-leyes-8968-9048|Instrucciones completas + rúbrica de coevaluación]] · [[Cursos/CompuYSociedad/entregables/mi-empresa-voluntico|Mi Empresa — VolunTico]] · [[Cursos/CompuYSociedad/entregas]]
 
-**Modalidad:** equipo · **Entregables:** documento (4–6 páginas) + video (4–6 min) · **Valor:** 15 puntos en el curso (la rúbrica de coevaluación puntúa internamente sobre 100 y se traduce a esos 15) · **Fecha límite: 2026-09-16, 8:00 a.m., entrega en el foro del curso.**
+**Modalidad:** equipo · **Entregables:** documento (4–6 páginas) + video (4–6 min) · **Valor:** 15 puntos en el curso (la rúbrica de coevaluación puntúa internamente sobre 100 y se traduce a esos 15) · **Fecha límite: 2026-09-16, 8:00 a.m., entrega en el foro del curso. Entregado (confirmado 2026-09-13).**
 
 **Coevaluación entre equipos:** el profesor asigna, después de que todos entreguen, qué equipo evalúa a cuál usando la misma rúbrica de 6 criterios (ver [[Cursos/CompuYSociedad/apuntes/evaluacion-integradora-privacidad-datos-leyes-8968-9048|apuntes]]). No hay que hacer nada adicional para esto — solo entregar documento y video con enlace/permisos habilitados para que el otro equipo pueda verlos.
 
@@ -114,12 +114,10 @@ VolunTico es una plataforma web (y, a futuro, app móvil) que conecta a personas
 - [x] Aplicación de la Ley N.° 9048 (20%) — sección 3 completa
 - [x] Perspectiva como empresarios (15%) y como colaboradores (15%) — tabla de la sección 4
 - [x] Riesgos y medidas de prevención (15%) — matriz de la sección 5, con un riesgo de datos personales y dos de acceso/engaño/sabotaje
-- [ ] Análisis crítico y aprendizajes del video (15%) — depende de la grabación real, no se puede marcar desde el borrador escrito
+- [x] Análisis crítico y aprendizajes del video (15%) — grabado con guion propio del equipo (guion por orador: Rachel, Angie, Laura, Melany, Kendall, Marcos) y presentación de apoyo
 
-### Pendiente antes de entregar
+### Entrega
 
-1. **Revisar los tres riesgos de la sección 5 con el equipo** — se escribieron como propuesta razonable a partir del modelo de negocio de VolunTico, pero conviene que el equipo los valide o cambie por otros que conozcan mejor.
-2. **Grabar el video** siguiendo la guía de bloques, con participación de todos los integrantes.
-3. **Completar nombres reales de los integrantes** en la portada del documento (mismo pendiente que quedó abierto en `mi-empresa-voluntico.md`).
-4. Exportar/confirmar el documento final como PDF o DOCX identificado con el nombre de la empresa y las personas integrantes.
-5. Entregar en el foro del curso antes del 2026-09-16, 8:00 a.m., con el video como enlace con permisos de visualización habilitados (no requiere edición profesional).
+Entregado en el foro del curso el 2026-09-13, antes de la fecha límite (2026-09-16, 8:00 a.m.). El equipo grabó el video siguiendo su propio guion (`Guion_EvaluacionIntegradora_VolunTico.docx`), con una presentación de fondo hecha a la medida de ese guion (misma paleta de la presentación del profesor: navy, cian, teal y naranja).
+
+Queda pendiente solo la coevaluación entre equipos, que el profesor asigna después de que todos entreguen (ver [[Cursos/CompuYSociedad/apuntes/evaluacion-integradora-privacidad-datos-leyes-8968-9048|apuntes]]) — no requiere ninguna acción de este equipo por ahora.

@@ -12,7 +12,7 @@ Fuente de verdad única para los prefijos de ticket usados en branches/commits/P
 | QA | Aseguramiento de la Calidad del Software | QA-42 | QA-43 |
 | SEG | Seguridad | SEG-31 | SEG-32 |
 | WEB | Desarrollo Web | WEB-5 | WEB-6 |
-| CYS | Computación y Sociedad | CYS-6 | CYS-7 |
+| CYS | Computación y Sociedad | CYS-7 | CYS-8 |
 | EST | Estadística | EST-8 | EST-9 |
 | SO | Sistemas Operativos | SO-29 | SO-30 |
 
