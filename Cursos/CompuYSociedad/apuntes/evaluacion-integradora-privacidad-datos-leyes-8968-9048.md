@@ -14,7 +14,7 @@ tags: [ley-8968, ley-9048, proteccion-datos, delitos-informaticos, trabajo-grupa
 
 Ver también: [[Cursos/CompuYSociedad/entregas]] · [[Cursos/CompuYSociedad/entregables/mi-empresa-voluntico|Mi Empresa — VolunTico]] · [[Cursos/CompuYSociedad/entregables/evaluacion-integradora-privacidad-datos-voluntico|Borrador aplicado a VolunTico]]
 
-**Modalidad:** trabajo por equipo · **Entregables:** documento + video · **Valor:** 100 puntos · **Fecha límite:** ⟨no está en el material recibido — confirmar con el profesor/aula virtual⟩.
+**Modalidad:** trabajo por equipo · **Entregables:** documento + video · **Valor:** 15 puntos en el curso (la guía y la presentación dicen "100 puntos", pero el anuncio del foro con la fecha confirmada indica 15.00 como valor de la asignación en el LMS — la rúbrica de coevaluación sigue puntuando internamente sobre 100 y se traduce a esos 15) · **Fecha límite: 2026-09-16, 8:00 a.m. — entrega en el foro del curso** (confirmado por anuncio del profesor, 2026-09-13).
 
 ## Propósito y pregunta guía
 

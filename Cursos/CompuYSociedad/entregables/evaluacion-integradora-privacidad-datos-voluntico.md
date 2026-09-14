@@ -12,7 +12,9 @@ tags: [ley-8968, ley-9048, proteccion-datos, delitos-informaticos, trabajo-grupa
 
 Ver también: [[Cursos/CompuYSociedad/apuntes/evaluacion-integradora-privacidad-datos-leyes-8968-9048|Instrucciones completas + rúbrica de coevaluación]] · [[Cursos/CompuYSociedad/entregables/mi-empresa-voluntico|Mi Empresa — VolunTico]] · [[Cursos/CompuYSociedad/entregas]]
 
-**Modalidad:** equipo · **Entregables:** documento (4–6 páginas) + video (4–6 min) · **Valor:** 100 puntos · **Fecha límite:** ⟨pendiente confirmar⟩.
+**Modalidad:** equipo · **Entregables:** documento (4–6 páginas) + video (4–6 min) · **Valor:** 15 puntos en el curso (la rúbrica de coevaluación puntúa internamente sobre 100 y se traduce a esos 15) · **Fecha límite: 2026-09-16, 8:00 a.m., entrega en el foro del curso.**
+
+**Coevaluación entre equipos:** el profesor asigna, después de que todos entreguen, qué equipo evalúa a cuál usando la misma rúbrica de 6 criterios (ver [[Cursos/CompuYSociedad/apuntes/evaluacion-integradora-privacidad-datos-leyes-8968-9048|apuntes]]). No hay que hacer nada adicional para esto — solo entregar documento y video con enlace/permisos habilitados para que el otro equipo pueda verlos.
 
 Archivo entregable generado: `EvaluacionIntegradora_VolunTico.docx`.
 
@@ -116,8 +118,8 @@ VolunTico es una plataforma web (y, a futuro, app móvil) que conecta a personas
 
 ### Pendiente antes de entregar
 
-1. **Confirmar la fecha límite real** — no viene especificada en la guía ni en la presentación del curso; revisar aula virtual o preguntar al profesor.
-2. **Revisar los tres riesgos de la sección 5 con el equipo** — se escribieron como propuesta razonable a partir del modelo de negocio de VolunTico, pero conviene que el equipo los valide o cambie por otros que conozcan mejor.
-3. **Grabar el video** siguiendo la guía de bloques, con participación de todos los integrantes.
-4. **Completar nombres reales de los integrantes** en la portada del documento (mismo pendiente que quedó abierto en `mi-empresa-voluntico.md`).
-5. Exportar/confirmar el documento final como PDF o DOCX identificado con el nombre de la empresa y las personas integrantes.
+1. **Revisar los tres riesgos de la sección 5 con el equipo** — se escribieron como propuesta razonable a partir del modelo de negocio de VolunTico, pero conviene que el equipo los valide o cambie por otros que conozcan mejor.
+2. **Grabar el video** siguiendo la guía de bloques, con participación de todos los integrantes.
+3. **Completar nombres reales de los integrantes** en la portada del documento (mismo pendiente que quedó abierto en `mi-empresa-voluntico.md`).
+4. Exportar/confirmar el documento final como PDF o DOCX identificado con el nombre de la empresa y las personas integrantes.
+5. Entregar en el foro del curso antes del 2026-09-16, 8:00 a.m., con el video como enlace con permisos de visualización habilitados (no requiere edición profesional).
