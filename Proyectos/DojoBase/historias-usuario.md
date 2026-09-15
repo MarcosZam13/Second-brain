@@ -353,7 +353,7 @@ Como admin, quiero reabrir un evento cerrado que dejó candidatos sin resolver, 
 - CA-03: Cerrar un evento sin nota mínima definida es válido y no requiere confirmación especial.
 - CA-04: La reapertura queda registrada con quién y cuándo.
 
-**HU-45: Registrar el cruce de un criterio de combate, aparte de su nota** *(nueva — pedido de Marcos el 2026-09-13, tras ver la card de cruce manual de la proyección de Torneos, DOJO-31)*
+**HU-45: Registrar el cruce de un criterio de combate, aparte de su nota** *(nueva — pedido de Marcos el 2026-09-13, tras ver la card de cruce manual de la proyección de Torneos, DOJO-31 — construida 2026-09-15, DOJO-46, PR abierto contra `main`; falta aplicar la migración contra la base real, correr `tests/rls/promociones-cruce-combate.mjs` y una pasada de navegador antes de cerrar del todo — ver `modulos/promociones/decisiones.md` en el repo)*
 Como admin, quiero armar el cruce de combate de un candidato (rival, marcador en vivo, resultado y método) para un criterio de evaluación de tipo Combate, para dejar constancia de la pelea real con la misma facilidad que un torneo — la nota de ese criterio la sigo cargando yo aparte, como cualquier otro.
 
 - CA-01: Al definir los criterios de un evento (HU-12 CA-02), puedo marcar uno como tipo **Combate** en vez del tipo numérico por defecto (stepper + puntaje máximo).
@@ -637,7 +637,7 @@ Como sistema, quiero avisar a los inscritos antes de su clase, para bajar las au
 | Sparring | HU-05 a HU-09c, 07b, 07c | RF-05 a RF-08 |
 | Peleas oficiales | HU-10, 11, 11b | RF-09, RF-10 |
 | Torneos *(DOJO-30: HU-42/43/44 modo manual; DOJO-32: HU-43b modo bracket; DOJO-31: HU-38 proyección pública)* | HU-42, 43, 43b, 44, 38 | — |
-| Promociones *(HU-45 bocetada y lista para ticket — ver nota v1.8 en `estado`)* | HU-12, 12b, 13, 13b, 14, 45 | RF-11 a RF-12b |
+| Promociones *(HU-45 construida 2026-09-15, DOJO-46 — falta aplicar migración + QA)* | HU-12, 12b, 13, 13b, 14, 45 | RF-11 a RF-12b |
 | Contenido | HU-15, 15b | RF-13, RF-13b |
 | Challenges | HU-16 | RF-14 |
 | Membresías y pagos | HU-16b, 16c, 17, 17b, 18, 19, 20, 23 | RF-15, RF-16, RF-17, RF-21, RF-22 |
