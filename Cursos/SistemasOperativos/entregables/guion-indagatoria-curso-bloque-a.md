@@ -4,7 +4,7 @@ tema: "Guión de presentación — Indagatoria del curso, Block A (Fundamentals)
 fecha: 2026-09-12
 tipo: entregable
 entregable_de: "[[Cursos/SistemasOperativos/entregables/indagatoria-curso-documento-en]]"
-estado: "borrador v2 (2026-09-12) — simplificado a pedido de Marcos, más coloquial. Listo para ensayar, falta nombre de quien presenta Block B"
+estado: "borrador v2 (2026-09-14) — simplificado a pedido de Marcos, más coloquial. Joseph confirmado como presentador de Block B, listo para ensayar"
 tags: [indagatoria, ia, planificacion, scheduling, trabajo-grupal, ingles, guion, presentacion]
 ---
 
@@ -22,7 +22,7 @@ Ver también: [[Cursos/SistemasOperativos/entregables/indagatoria-curso-document
 
 ## 1. Hook + team intro (~0:20)
 
-> "Quick question. How many times per second do you think your computer decides which program gets to run next? Go ahead, take a guess. ...It's not ten. It's not a hundred. It's thousands — every single second. That's how often your CPU has to pick a winner. So today, we're looking at how it makes that choice. We're Group 3, Topic 10: AI and Resource Management in Operating Systems. I'm Marcos — I'll cover the basics, what scheduling is and the classic ways to do it. Then [teammate] takes over with the AI side."
+> "Quick question. How many times per second do you think your computer decides which program gets to run next? Go ahead, take a guess. ...It's not ten. It's not a hundred. It's thousands — every single second. That's how often your CPU has to pick a winner. So today, we're looking at how it makes that choice. We're Group 3, Topic 10: AI and Resource Management in Operating Systems. I'm Marcos — I'll cover the basics, what scheduling is and the classic ways to do it. Then Joseph takes over with the AI side."
 
 ## 2. What scheduling actually is (~0:35)
 
@@ -30,7 +30,7 @@ Ver también: [[Cursos/SistemasOperativos/entregables/indagatoria-curso-document
 
 ## 3. Why this is a good problem for AI — bridge to Block B (~0:30)
 
-> "Now, the classic way to make that decision uses fixed rules someone wrote by hand — a timer, a priority number. The problem is, those rules only look at what already happened, never what's coming. And that's exactly why this is a great problem for AI: it happens constantly, so there's tons of data; there's a clear goal, like speed or fairness; and the future really is uncertain, so being able to predict it is actually useful. That's where [teammate] comes in. But first — let's see how it's done today, without any AI."
+> "Now, the classic way to make that decision uses fixed rules someone wrote by hand — a timer, a priority number. The problem is, those rules only look at what already happened, never what's coming. And that's exactly why this is a great problem for AI: it happens constantly, so there's tons of data; there's a clear goal, like speed or fairness; and the future really is uncertain, so being able to predict it is actually useful. That's where Joseph comes in. But first — let's see how it's done today, without any AI."
 
 ## 4. The classic ways to do it (~2:00 total)
 
@@ -40,11 +40,11 @@ Ver también: [[Cursos/SistemasOperativos/entregables/indagatoria-curso-document
 
 ### 4b. Multi-Level Feedback Queue (~0:35)
 
-> "Next one: Multi-Level Feedback Queue, or MLFQ. Instead of one line, you get several, each with a different priority. Use your whole turn? You drop a level. Finish early because you were waiting on something? You stay near the top. So quick tasks naturally rise up, and long ones sink down. To stop anyone from getting stuck at the bottom forever, everyone gets bumped back up once in a while — that's called aging. The downside: it only works well if you tune a bunch of numbers just right for your specific case."
+> "Next one: Multi-Level Feedback Queue, or MLFQ. The idea is simple. You don't have one line, you have several lines, and each one has its own priority. A task that uses its whole turn moves down to a lower line. A task that finishes early because it was waiting on something stays near the top. That way, short tasks stay near the top, and long tasks move down over time. The problem is, a task at the bottom could get stuck there forever. So every task gets moved back to the top once in a while. That's called aging. The downside is you have to tune a bunch of numbers to make it work well, and the right numbers depend on the situation."
 
 ### 4c. CFS and the 2023 surprise (~0:45)
 
-> "And then there's Linux. For almost twenty years, Linux used something called CFS. Simple idea: it tracks how much CPU time each task has already gotten, and always gives the next turn to whoever has the least. It worked well enough to last two decades. But — fun fact — in 2023, Linux actually replaced it with a new one, called EEVDF. Instead of just tracking time spent, it gives every task a deadline, and picks whoever's deadline is closest. It's better at making sure nobody gets left behind. But here's the thing — even this brand-new one only looks at the past. It still can't predict what a process is about to do. And that's exactly the door [teammate] is about to open."
+> "And then there's Linux. For almost twenty years, Linux used something called CFS. Simple idea: it tracks how much CPU time each task has already gotten, and always gives the next turn to whoever has the least. It worked well enough to last two decades. But — fun fact — in 2023, Linux actually replaced it with a new one, called EEVDF. Instead of just tracking time spent, it gives every task a deadline, and picks whoever's deadline is closest. It's better at making sure nobody gets left behind. But here's the thing — even this brand-new one only looks at the past. It still can't predict what a process is about to do. And that's exactly the door Joseph is about to open."
 
 ## 5. Handoff to Block B (~0:15)
 
@@ -66,6 +66,7 @@ Ver también: [[Cursos/SistemasOperativos/entregables/indagatoria-curso-document
 
 ## Próximos pasos
 
-- [ ] Confirmar quién presenta Block B para reemplazar los `[teammate]` del guión por el nombre real.
+- [x] Confirmar quién presenta Block B — Joseph, ya reemplazado en el guión.
 - [ ] Practicar esta versión en voz alta un par de veces — al ser más coloquial, va a sonar más natural con menos ensayo que la v1.
-- [ ] Una vez Block B y C estén escritos, acordar transiciones cortas entre bloques y hacer un ensayo grupal completo.
+- [ ] Joseph necesita su propio guión hablado para Block B (secciones 3–6) — el documento escrito ya está, pero un guión de exposición es un texto aparte, más corto y coloquial, igual que este.
+- [ ] Una vez Block B tenga guión y Block C esté escrito, acordar transiciones cortas entre bloques y hacer un ensayo grupal completo.
