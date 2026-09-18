@@ -27,9 +27,9 @@ Ver también: [[Cursos/QA/entregables/plan-del-proyecto|Plan del proyecto — Fa
 - **Grupo:** [COMPLETAR: número de grupo]
 - **Proyecto:** Plan de pruebas — Fase 2, aplicado a Firefly III
 - **Integrantes del equipo:**
-  - [COMPLETAR: nombre completo — carné] (Persona 1 — Auth + Profile)
-  - [COMPLETAR: nombre completo — carné] (Persona 2 — Transaction + Category)
-  - [COMPLETAR: nombre completo — carné] (Persona 3 — Account + Budget)
+  - Marcos Eduardo Zamora Sánchez (Persona 1 — Auth + Profile)
+  - Kevin Said Reyes Quesada (Persona 2 — Transaction + Category)
+  - Diana Carolina Camacho Jiménez (Persona 3 — Account + Budget)
 - **Fecha de entrega:** 14 de octubre de 2026
 
 ## Tabla de contenidos
@@ -257,7 +257,8 @@ Este plan de pruebas cubre los 6 módulos de alta prioridad de Firefly III con 7
 - [x] Criterios de evaluación numéricos por tipo de prueba, incluyendo el umbral de rendimiento que RNF-06 dejaba abierto
 - [x] 74 casos de prueba en el formato oficial de ficha, ≥60 exigidos, con entradas válidas e inválidas
 - [x] 3 fuentes bibliográficas IEEE verificadas vía Crossref (Salahat 2023, Ganesh 2023, Anantha Padmanabha & Acharya 2023) — la tercera reemplaza a Tsai 2021 (quedaba al borde del quinquenio); la nueva es del mismo tema (fuzzing de REST API) y 2023
-- [ ] **Llenar los `[COMPLETAR]` de la Portada** con los datos reales del equipo (nombres + carné) y el número de grupo — el profesor y la institución ya están confirmados
+- [x] Nombres del equipo (sin carné, confirmado 2026-09-18): Marcos Eduardo Zamora Sánchez, Kevin Said Reyes Quesada, Diana Carolina Camacho Jiménez
+- [ ] **Llenar los `[COMPLETAR]` restantes de la Portada** — institución/sede, escuela/carrera, código del curso y número de grupo
 - [ ] Confirmar con el equipo la herramienta de digitalización que mencionó el profesor y trasladar estas 74 fichas ahí en cuanto se conozca el formato que exige
 - [ ] Revisión y validación del equipo sobre todo el contenido antes de entregar el 2026-10-14
 - [ ] Al exportar a Word: generar la tabla de contenidos real y paginar el índice de tablas
