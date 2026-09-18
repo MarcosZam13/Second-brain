@@ -1,0 +1,32 @@
+# Integration prompt — paste into Claude Code inside the target repo
+
+Usage: copy this package's contents (`ARCHITECTURE.md`, `SCRUM.md`, `USER_STORIES.md`, `GITFLOW.md`, `.github/`, `.claude/`, `.agents/`) to the root of the real project repo, open Claude Code there, and paste the prompt below as-is (fill in the `{}` placeholders first).
+
+---
+
+I just copied a dev-process/best-practices package into the root of this repo: `ARCHITECTURE.md`, `SCRUM.md`, `USER_STORIES.md`, `GITFLOW.md`, `.github/PULL_REQUEST_TEMPLATE.md`, `.claude/agents/{security-reviewer,code-reviewer,qa-checker}.md`, and `.agents/skills/{security-practices,clean-code-practices,qa-testing-practices,scrum-architecture-docs}/SKILL.md`. This repo is for **{project name}** ({one-sentence description of what the project is}). If this repo already has its own agent contract file (`AGENTS.md`, `CLAUDE.md`, or similar) with a skill catalog, I need you to integrate the new material into it without duplicating what's already there, and get the process docs ready to fill in with real project context.
+
+Do this in order, without committing or pushing anything yet — I want to review the diff first:
+
+1. **Read first.** Read the repo's existing agent contract file (`AGENTS.md`/`CLAUDE.md`, whichever it uses) and every `.agents/skills/*/SKILL.md` that already existed before I copied anything, so you know what's already covered.
+
+2. **Deduplicate.** The skills I just copied (`clean-code-practices`, `qa-testing-practices`) are generic versions from another source — the repo may already cover most of that ground with more specific skills (naming/component conventions, constants, state management, unit-testing standards, end-to-end testing). Decide what to do in each case: if a copied skill is purely redundant, delete it and update `.claude/agents/code-reviewer.md`/`qa-checker.md` to reference the repo's real skills instead of the generic one. If it adds something the repo doesn't have (e.g. bug-report or test-plan templates), keep only that part, not the whole file. `security-practices` and `scrum-architecture-docs` should be genuinely new — if either has an equivalent already, flag it before touching it.
+
+3. **Register in the contract file.** Add a row for every skill that survives step 2 to the skill catalog in the repo's agent contract file — if it's not registered there, agents won't load it automatically.
+
+4. **Update the "project snapshot"/project description** in the contract file with the real details I confirm below. **Don't invent** product name, stack, or roles I haven't given you explicitly — ask if something's unclear instead of assuming.
+
+5. **Don't fill `ARCHITECTURE.md`/`SCRUM.md`/`USER_STORIES.md` with invented content.** They ship with structure/placeholders only, on purpose. Ask me for the real details (roles, confirmed stack, epics, sprints, user stories) and build the content with me, section by section — don't generate a fictional backlog just to "complete" the document.
+
+6. **Confirm `.github/PULL_REQUEST_TEMPLATE.md` is in the right place** for GitHub to pre-fill it automatically on a new PR, and that the three subagents in `.claude/agents/` have valid frontmatter (`name`/`description`/`tools`).
+
+7. When done, summarize: what got registered in the contract file, what got deleted/merged as redundant, and what questions are still open to finish filling in `ARCHITECTURE.md`/`SCRUM.md`/`USER_STORIES.md`.
+
+General rules: don't delete anything in the repo that didn't come from this package without asking me first, don't touch `.agents/skills/` that already existed except to remove exact duplicates, and follow whatever pattern the repo's own contract file already defines (it's the source of truth; IDE-specific bridge files just point to it).
+
+**Project context to fill in before pasting:**
+- Project name:
+- One-sentence description:
+- Confirmed stack (if different from what the repo already has):
+- Roles in the system:
+- Ticket tracker in use (Jira, Linear, GitHub Issues, etc.) and ticket prefix:

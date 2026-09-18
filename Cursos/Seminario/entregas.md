@@ -18,7 +18,7 @@ Ver también: [[Cursos/Seminario/temario]]
 |---|---|---|---|
 | 2026-08-18 | [[Cursos/Seminario/entregables/reporte-audiovisual-1-yolanda-oreamuno\|Reporte audiovisual #1]] (Yolanda Oreamuno) | 10% | entregado |
 | 2026-09-08 | [[Cursos/Seminario/entregables/reporte-audiovisual-2-refugiados-nicaraguenses\|Reporte audiovisual #2]] (refugiados nicaragüenses) | 10% | **entregado (confirmado 2026-09-09)** |
-| 2026-09-22 | [[Cursos/Seminario/entregables/diario-1\|Diario de realidad nacional #1]] (3 entradas) | 15% | borrador |
+| 2026-09-22 | [[Cursos/Seminario/entregables/diario-1\|Diario de realidad nacional #1]] (3 entradas) | 15% | borrador — documento Word listo (`entregables/Diario_Realidad_Nacional_1_MarcosZamora.docx`, generado 2026-09-17), faltan las 3 reflexiones personales (Marcos las escribe directo en el Word) |
 | 2026-09-29 | [[Cursos/Seminario/entregables/proyecto-investigacion-avance\|Proyecto de investigación]] — avance (racismo, Limón) | 5% | borrador |
 | 2026-11-03 | [[Cursos/Seminario/apuntes/reportes-audiovisuales\|Reporte audiovisual #3]] (agua y comunidades) | 10% | pendiente |
 | 2026-11-03 | [[Cursos/Seminario/apuntes/diario-realidad-nacional\|Diario de realidad nacional #2]] (3 entradas) | 15% | pendiente |

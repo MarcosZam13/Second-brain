@@ -29,7 +29,7 @@ Fuente completa: [[Cursos/QA/entregables/plan-del-proyecto|plan-del-proyecto.md]
 
 ## Fase 2 — Plan de pruebas (entrega miércoles 2026-10-14, semana 11)
 
-Requisitos de la rúbrica oficial: **≥60 casos de prueba**, **3 tipos de prueba distintos**, máx. 10% manuales, formato de ficha dado por la profesora. Según el cronograma del Plan del proyecto, arranca en semana 7 (14 de septiembre).
+Requisitos de la rúbrica oficial: **≥60 casos de prueba**, **3 tipos de prueba distintos**, máx. 10% manuales, formato de ficha dado por el profesor. Según el cronograma del Plan del proyecto, arranca en semana 7 (14 de septiembre).
 
 División por los 6 módulos de alta prioridad ([[Cursos/QA/entregables/mapeo-modulos-firefly-iii|mapeo de módulos]]), 2 por persona:
 

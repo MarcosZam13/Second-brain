@@ -18,14 +18,14 @@ Ver también: [[Cursos/QA/entregables/mapeo-modulos-firefly-iii|Mapeo de módulo
 
 ---
 
-*A partir de aquí, el contenido sigue el orden exacto de los 11 ítems oficiales (ver [[Cursos/QA/apuntes/proyecto-qa-guia]]). Los tres primeros ítems (Portada, Tabla de contenidos, Índice de tablas) llevan campos marcados como `[COMPLETAR: ...]` porque necesitan datos que no están en este vault (nombre completo de cada integrante, grupo, nombre de la profesora) — el resto del documento ya está redactado.*
+*A partir de aquí, el contenido sigue el orden exacto de los 11 ítems oficiales (ver [[Cursos/QA/apuntes/proyecto-qa-guia]]). Los tres primeros ítems (Portada, Tabla de contenidos, Índice de tablas) llevan campos marcados como `[COMPLETAR: ...]` porque necesitan datos que no están en este vault (nombre completo de cada integrante, grupo, nombre del profesor) — el resto del documento ya está redactado.*
 
 ## Portada
 
 - **Institución:** [COMPLETAR: nombre completo del TEC / sede]
 - **Escuela / Carrera:** [COMPLETAR]
 - **Curso:** Calidad de Software (QA) — [COMPLETAR: código del curso]
-- **Profesora:** [COMPLETAR: nombre completo]
+- **Profesor:** Marcos Rodríguez Ovares
 - **Grupo:** [COMPLETAR: número de grupo]
 - **Proyecto:** Plan del proyecto — Fase 1, aplicado a Firefly III
 - **Integrantes del equipo:**
@@ -72,7 +72,7 @@ Ver también: [[Cursos/QA/entregables/mapeo-modulos-firefly-iii|Mapeo de módulo
 
 ### Qué
 
-Este proyecto aplica los procesos de calidad de software que se han visto en el curso (planeación, verificación y validación) sobre Firefly III, un gestor de finanzas personales de código abierto y autohospedado. En esta edición del curso el proyecto no se hace sobre una empresa real con contraparte, sino sobre un repositorio de GitHub elegido por el equipo (ver la corrección al respecto en [[Cursos/QA/apuntes/proyecto-qa-guia]]). El equipo escogió Firefly III siguiendo los 9 criterios que pidió la profesora, descritos en [[Cursos/QA/apuntes/criterios-seleccion-repositorio-github]].
+Este proyecto aplica los procesos de calidad de software que se han visto en el curso (planeación, verificación y validación) sobre Firefly III, un gestor de finanzas personales de código abierto y autohospedado. En esta edición del curso el proyecto no se hace sobre una empresa real con contraparte, sino sobre un repositorio de GitHub elegido por el equipo (ver la corrección al respecto en [[Cursos/QA/apuntes/proyecto-qa-guia]]). El equipo escogió Firefly III siguiendo los 9 criterios que pidió el profesor, descritos en [[Cursos/QA/apuntes/criterios-seleccion-repositorio-github]].
 
 ### Por qué
 
@@ -290,7 +290,7 @@ El problema central que motiva este proyecto es que muchas personas no tienen fo
 - Esto se traduce en más estrés financiero y menos capacidad real de ahorro.
 - Como alternativa, muchas personas terminan usando hojas de cálculo manuales, que son más propensas a errores humanos que una herramienta pensada para eso.
 
-Este árbol de problemas se construyó siguiendo la metodología del taller de la profesora (ver [[Cursos/QA/apuntes/taller-arbol-problemas-objetivos]]). El diagrama visual:
+Este árbol de problemas se construyó siguiendo la metodología del taller del profesor (ver [[Cursos/QA/apuntes/taller-arbol-problemas-objetivos]]). El diagrama visual:
 
 ```mermaid
 flowchart TD
@@ -327,9 +327,9 @@ Evaluar la calidad del software de Firefly III aplicando un proceso de pruebas (
 | Objetivo específico | Metas | Indicadores |
 |---|---|---|
 | Analizar los requerimientos funcionales de los módulos de alta prioridad de Firefly III para delimitar el alcance de las pruebas | Revisar el código fuente de cada módulo (no solo la documentación); consultar con el equipo cuáles módulos de media prioridad quedan como respaldo | Documento de requerimientos completo antes de la semana 6, con 20 RF/HU sobre los 6 módulos de alta prioridad |
-| Diseñar un plan de pruebas con al menos 60 casos, cubriendo 3 tipos de prueba distintos, con un máximo de 10% de casos manuales | Definir las técnicas de prueba a usar; escribir cada caso con el formato que dio la profesora | 60 o más casos de prueba definidos antes de la semana 11; 3 tipos de prueba distintos aplicados; 90% o más de los casos marcados como automatizables |
+| Diseñar un plan de pruebas con al menos 60 casos, cubriendo 3 tipos de prueba distintos, con un máximo de 10% de casos manuales | Definir las técnicas de prueba a usar; escribir cada caso con el formato que dio el profesor | 60 o más casos de prueba definidos antes de la semana 11; 3 tipos de prueba distintos aplicados; 90% o más de los casos marcados como automatizables |
 | Automatizar al menos el 90% de los casos de prueba diseñados | Elegir el framework de pruebas adecuado al stack (PHP/Laravel) o trabajar directo contra la API REST; escribir y correr las pruebas automatizadas | 90% o más de los 60+ casos ejecutándose de forma automática antes de la semana 15 |
-| Ejecutar el plan de pruebas y documentar los defectos encontrados en un informe de pruebas | Correr todas las pruebas automatizadas; registrar cada defecto en el formato de fichas dado por la profesora | Informe de pruebas entregado en la semana 16, con todos los defectos encontrados descritos y con evidencia |
+| Ejecutar el plan de pruebas y documentar los defectos encontrados en un informe de pruebas | Correr todas las pruebas automatizadas; registrar cada defecto en el formato de fichas dado por el profesor | Informe de pruebas entregado en la semana 16, con todos los defectos encontrados descritos y con evidencia |
 | Comunicar los resultados del proyecto en una presentación en inglés | Preparar la presentación y ensayarla como equipo antes de la fecha | Presentación de 20 minutos más 10 de preguntas, dentro del tiempo pactado, en la semana 16 |
 
 ## Recursos disponibles
@@ -388,8 +388,8 @@ Firefly III es un proyecto adecuado para aplicar los procesos de calidad de soft
 - [x] Sincronizar la fecha de entrega a Todoist y Calendar (hecho 2026-08-29)
 - [x] Expandir "Requerimientos del sistema" a 20 requerimientos funcionales (RF) + 6 no funcionales (RNF) + 20 historias de usuario con criterios de aceptación, trazables 1 a 1 (RF-0N → HU-0N), sobre los 6 módulos de alta prioridad (2026-09-08, a partir de la observación del equipo de que faltaban requerimientos para este ítem, que vale 25/100 en la rúbrica)
 - [x] Confirmar la tercera fuente bibliográfica: "Money Map: The Personal Finance Tracker" (ICKECS 2025, IEEE, DOI 10.1109/ICKECS65700.2025.11035699) — verificada vía Crossref y Semantic Scholar, no solo por el título (2026-09-08)
-- [x] Agregar Portada, Tabla de contenidos e Índice de tablas como secciones propias del documento (2026-09-08) — la Portada queda con campos `[COMPLETAR]` porque necesita nombres reales del equipo, la profesora y el grupo, que no están en este vault
+- [x] Agregar Portada, Tabla de contenidos e Índice de tablas como secciones propias del documento (2026-09-08) — la Portada queda con campos `[COMPLETAR]` porque necesita nombres reales del equipo, el profesor y el grupo, que no están en este vault
 - [x] Pasar el árbol de problemas a un diagrama visual real (Mermaid, con nota de cómo exportarlo a imagen para Word)
-- [ ] **Llenar los `[COMPLETAR]` de la Portada** con los datos reales del equipo (nombres completos + carné de cada integrante), la profesora y el grupo — esto es lo único que de verdad falta y solo Marcos/el equipo lo tiene
+- [ ] **Llenar los `[COMPLETAR]` de la Portada** con los datos reales del equipo (nombres completos + carné de cada integrante), el profesor y el grupo — esto es lo único que de verdad falta y solo Marcos/el equipo lo tiene
 - [ ] Revisión y validación del equipo sobre todo el contenido — visto bueno final antes de entregar el 2026-09-09
 - [ ] Al exportar a Word: generar la tabla de contenidos real con la función automática de Word (estilos de título) y paginar el índice de tablas; exportar el diagrama Mermaid como imagen (Obsidian o mermaid.live)

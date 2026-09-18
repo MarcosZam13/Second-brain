@@ -24,4 +24,4 @@ Cuando aparezca una pregunta de arquitectura nueva (patrones de diseño, testing
 - Patrones de diseño más allá de SOLID (Factory, Repository, Observer, etc.) aplicados a TypeScript/React.
 - Testing con Playwright — primera vez que se usa en el vault, comparar con el patrón POM ya documentado en [[Sistema/skills/qa-testing-practices/SKILL|qa-testing-practices]].
 - El skill de Stitch que va a compartir el profesor, en cuanto llegue.
-- El flujo de git real que use la empresa del profesor, en cuanto se documente (ver [[Proyectos/AsistenciasTEC/README#Cómo se va a trabajar (distinto al resto de proyectos del vault)|README de Asistencias TEC]]).
+- ~~El flujo de git real que use la empresa del profesor~~ — confirmado 2026-09-16, ver Modelo 3 en [[Sistema/aprendizaje/git-workflow-diagrama|git-workflow-diagrama.md]].

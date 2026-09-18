@@ -12,7 +12,7 @@ tags: [proyecto, firefly-iii, fase2, plan-de-pruebas]
 
 Ver también: [[Cursos/QA/entregables/plan-del-proyecto|Plan del proyecto — Fase 1]] · [[Cursos/QA/entregables/mapeo-modulos-firefly-iii|Mapeo de módulos]] · [[Cursos/QA/entregables/reparto-equipo-fase1-fase2|Reparto de trabajo]] · [[Cursos/QA/apuntes/plantillas-fichas-caso-prueba-defectos|Plantilla oficial de ficha]] · [[Cursos/QA/apuntes/ejemplo-plan-e-informe-pruebas-companeros|Ejemplo de compañeros (100)]] · [[Cursos/QA/apuntes/proyecto-qa-guia|Guía del Proyecto]] · [[Cursos/QA/entregas]]
 
-**Estado: borrador completo (74 casos de prueba, 3 tipos de prueba, técnicas justificadas).** Entrega real: miércoles 14 de octubre de 2026 (semana 11). Falta: (1) datos reales de portada (nombres, carné, profesora, grupo); (2) confirmar con el equipo si esta versión se digitaliza tal cual en la aplicación del profesor o si hay que adaptar el formato de la ficha a lo que esa herramienta pida (el profesor todavía no compartió el detalle de la herramienta); (3) revisión y visto bueno del equipo.
+**Estado: borrador completo (74 casos de prueba, 3 tipos de prueba, técnicas justificadas).** Entrega real: miércoles 14 de octubre de 2026 (semana 11). Falta: (1) nombres/carné del equipo, institución/escuela y número de grupo en la portada (el profesor ya está confirmado: Marcos Rodríguez Ovares); (2) confirmar con el equipo si esta versión se digitaliza tal cual en la aplicación del profesor o si hay que adaptar el formato de la ficha a lo que esa herramienta pida (el profesor todavía no compartió el detalle de la herramienta); (3) revisión y visto bueno del equipo.
 
 **Sobre la herramienta de digitalización:** el profesor tiene una aplicación propia para cargar los casos de prueba, distinta de Jira+TCMS que se mencionó en la semana 3 del curso. Marcos confirmó que todavía no sabe cómo se usa ni qué campos exige. Este documento se redactó con la ficha oficial de [[Cursos/QA/apuntes/plantillas-fichas-caso-prueba-defectos|plantillas-fichas-caso-prueba-defectos.md]] (la que sí está confirmada) para que sea trasladable a cualquier sistema de captura: todo caso queda numerado, con sus 3 precondiciones, sus 6 pasos y su criterio de éxito/fracaso explícito, así que copiarlo campo por campo a la herramienta del profesor en cuanto se conozca es un trabajo mecánico, no de redacción.
 
@@ -23,7 +23,7 @@ Ver también: [[Cursos/QA/entregables/plan-del-proyecto|Plan del proyecto — Fa
 - **Institución:** [COMPLETAR: nombre completo del TEC / sede]
 - **Escuela / Carrera:** [COMPLETAR]
 - **Curso:** Calidad de Software (QA) — [COMPLETAR: código del curso]
-- **Profesora:** [COMPLETAR: nombre completo]
+- **Profesor:** Marcos Rodríguez Ovares
 - **Grupo:** [COMPLETAR: número de grupo]
 - **Proyecto:** Plan de pruebas — Fase 2, aplicado a Firefly III
 - **Integrantes del equipo:**
@@ -247,7 +247,7 @@ Este plan de pruebas cubre los 6 módulos de alta prioridad de Firefly III con 7
 
 [2] M. Ganesh, A. D. Durai C, V. R. Kanakala, I. T. J. Swamidason, and R. Nambiar, "An Extensive Review of Spring Boot Testing Based on Business Requirements of the Software," in *2023 4th International Conference on Smart Electronics and Communication (ICOSEC)*, Trichy, India, 2023, pp. 1-6, doi: 10.1109/ICOSEC58147.2023.10276283.
 
-[3] C.-H. Tsai, S.-C. Tsai, and S.-K. Huang, "REST API Fuzzing by Coverage Level Guided Blackbox Testing," in *2021 IEEE 21st International Conference on Software Quality, Reliability and Security (QRS)*, Hainan, China, 2021, pp. 291-300, doi: 10.1109/QRS54544.2021.00040.
+[3] S. M. Anantha Padmanabha and V. Acharya, "Minimizing Test Cases in REST API Fuzzing," in *2023 Second International Conference on Smart Technologies for Smart Nation (SmartTechCon)*, Singapore, 2023, pp. 1359-1364, doi: 10.1109/SmartTechCon57526.2023.10391726.
 
 ## Pendiente
 
@@ -256,8 +256,8 @@ Este plan de pruebas cubre los 6 módulos de alta prioridad de Firefly III con 7
 - [x] Herramientas elegidas y justificadas contra el stack real (PHPUnit + JMeter, evitando el problema de la interfaz dividida)
 - [x] Criterios de evaluación numéricos por tipo de prueba, incluyendo el umbral de rendimiento que RNF-06 dejaba abierto
 - [x] 74 casos de prueba en el formato oficial de ficha, ≥60 exigidos, con entradas válidas e inválidas
-- [x] 3 fuentes bibliográficas IEEE verificadas (Salahat 2023, Ganesh 2023, Tsai 2021 vía Crossref) — **ojo:** Tsai 2021 queda justo en el borde del quinquenio contado desde 2026; si la profesora es estricta con eso, buscar un reemplazo 2022+ sobre pruebas de caja negra/REST antes de entregar
-- [ ] **Llenar los `[COMPLETAR]` de la Portada** con los datos reales del equipo, la profesora y el grupo
+- [x] 3 fuentes bibliográficas IEEE verificadas vía Crossref (Salahat 2023, Ganesh 2023, Anantha Padmanabha & Acharya 2023) — la tercera reemplaza a Tsai 2021 (quedaba al borde del quinquenio); la nueva es del mismo tema (fuzzing de REST API) y 2023
+- [ ] **Llenar los `[COMPLETAR]` de la Portada** con los datos reales del equipo (nombres + carné) y el número de grupo — el profesor y la institución ya están confirmados
 - [ ] Confirmar con el equipo la herramienta de digitalización que mencionó el profesor y trasladar estas 74 fichas ahí en cuanto se conozca el formato que exige
 - [ ] Revisión y validación del equipo sobre todo el contenido antes de entregar el 2026-10-14
 - [ ] Al exportar a Word: generar la tabla de contenidos real y paginar el índice de tablas

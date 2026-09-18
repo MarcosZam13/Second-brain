@@ -71,6 +71,50 @@ gitGraph
 
 **Por qué domina en equipos ágiles chicos y proyectos nuevos:** menos ramas que sincronizar mentalmente, conflictos de merge más chicos (porque las ramas viven poco), y encaja natural con CI/CD (cada merge a `main` puede deployar solo si pasa el pipeline). El precio: exige tests y CI en los que de verdad se confía — sin eso, `main` se rompe seguido y el modelo colapsa.
 
+## Modelo 3 — Entregables con QA Fix (confirmado por el profesor para Asistencias TEC, 2026-09-16 — mismo patrón que Tacha)
+
+El profesor compartió el diagrama real: no es Gitflow clásico ni trunk-based puro, es un modelo propio con una rama de integración por hito de entrega.
+
+```mermaid
+gitGraph
+    commit id: "init"
+    branch develop
+    checkout develop
+    commit id: "setup"
+    branch ticket/AS-07-ver-asistencias
+    checkout ticket/AS-07-ver-asistencias
+    commit id: "feat: listar asistencias"
+    checkout develop
+    merge ticket/AS-07-ver-asistencias
+    branch entregable-1
+    checkout entregable-1
+    branch qa-fix/AS-07-bug-filtro
+    checkout qa-fix/AS-07-bug-filtro
+    commit id: "fix: bug encontrado en QA"
+    checkout entregable-1
+    merge qa-fix/AS-07-bug-filtro
+    checkout main
+    merge entregable-1 tag: "entrega 1"
+    branch hotfix/AS-09-critico
+    checkout hotfix/AS-09-critico
+    commit id: "fix: crítico en producción"
+    checkout main
+    merge hotfix/AS-09-critico
+```
+
+**Ramas y su propósito:**
+
+| Rama | Sale de | Vuelve a | Propósito |
+|---|---|---|---|
+| `ticket/{AS-n}-...` | `develop` | `develop` | Una HU/tarea del backlog |
+| `develop` | — | `entregable-{N}` | Integración continua de tickets terminados |
+| `entregable-{N}` | `develop` | `main` | Congela el alcance de una entrega/hito, pasa por QA antes de llegar a `main` |
+| `qa-fix/{AS-n}-...` | `entregable-{N}` | `entregable-{N}` | Arregla bugs encontrados al validar esa entrega específica |
+| `main` | — | — | Lo ya entregado/aceptado |
+| `hotfix/{AS-n}-...` | `main` | `main` | Arreglo urgente sobre algo ya entregado, sin pasar por `develop`/`entregable` |
+
+Documentado también como variante reusable en [[Sistema/skills/gitflow-scrum/SKILL#1b. Variante: modelo de Entregables (cuando el curso/empresa entrega por hitos)|gitflow-scrum §1b]], junto con el formato de PR específico (Qué hace / Cómo se testea / Ticket de Jira / Screenshots UI / Screenshots Playwright) en §4b — ese es el que se usa para Asistencias TEC, no el genérico de §4.
+
 ## Cómo elegir (y qué preguntarle al profesor)
 
 No es una decisión puramente técnica — depende de:
@@ -79,7 +123,7 @@ No es una decisión puramente técnica — depende de:
 2. **¿Hay CI/CD real y un equipo que confía en sus tests?** → Trunk-based/GitHub Flow.
 3. **¿Qué exige el profesor para calificar el proceso?** Si pide Gitflow completo, se sigue tal cual para la evaluación — documentar además el argumento de por qué en producción real (sin releases versionados) se preferiría trunk-based es contenido válido para la parte de "cómo lo mejorarían".
 
-Para Asistencias TEC el flujo real todavía no está definido — el profesor usa "toda la base que usa en la empresa", así que puede no ser ninguno de los dos modelos de libro tal cual, sino una variante propia (como pasa en Tacha, que usa `main`/`develop`/`ticket`/`entregable`/`qa-fix`/`hotfix` por exigencia del profesor de otra materia). Documentar el flujo real en `Proyectos/AsistenciasTEC/README.md` en cuanto se defina, no asumir ninguno de los dos de acá.
+Para Asistencias TEC el flujo real ya se confirmó (2026-09-16, diagrama compartido por el profesor): es el Modelo 3 de arriba, el mismo patrón `main`/`develop`/`ticket`/`entregable`/`qa-fix`/`hotfix` que usa Tacha por exigencia del profesor de otra materia — no era una coincidencia, es la base real de su empresa. Ver [[Proyectos/AsistenciasTEC/README|README de Asistencias TEC]] para el estado actualizado.
 
 ## Piezas que aplican sin importar el modelo elegido
 

@@ -10,7 +10,7 @@ tags: [parcial-1, examen, resumen, cia, stride, dread, owasp, nist-csf, nice, le
 
 Ver también: [[Cursos/Seguridad/examenes/parcial-1-temas|Parcial 1 — temas oficiales]] · [[Cursos/Seguridad/entregas]] · [[Cursos/Seguridad/apuntes/tema-1-importancia-seguridad-software|Tema 1]] · [[Cursos/Seguridad/apuntes/tema-2-ciclo-vida-desarrollo-software|Tema 2]] · [[Cursos/Seguridad/apuntes/stride-metodologia-amenazas|STRIDE]] · [[Cursos/Seguridad/apuntes/repaso-clases-3-4|Repaso Clases 3-4]] · [[Cursos/Seguridad/apuntes/tarea-1-legislacion-costarricense|Legislación]] · [[Cursos/Seguridad/apuntes/marco-legal-digital-ciberseguridad-cr|Marco legal ampliado]]
 
-**Examen:** lunes 2026-09-14, 4:00pm. Teórico/práctico, 15% de la nota, con apuntes permitidos.
+**Examen:** lunes 2026-09-14, 4:00pm. **20% de la nota** (corregido 2026-09-14, no 15%). Formato confirmado por la profesora: **selección única, con tiempo por pregunta**, simulando un examen de certificación. Material complementario permitido, pero el tiempo por pregunta no da margen para buscar todo — hay que saberlo, no solo tenerlo a mano.
 
 **Resumen publicado como página web, pensado para consultarse rápido durante el examen y para compartir con el equipo:**
 
@@ -22,6 +22,12 @@ Cubre los 8 temas oficiales de [[Cursos/Seguridad/examenes/parcial-1-temas|parci
 
 Contenido armado a partir de todos los apuntes ya existentes del curso, más verificación externa puntual para la lista OWASP 2025 y los datos de refuerzo — si algo del resumen no coincide con lo dado en clase, prevalece siempre el apunte fuente correspondiente o lo que diga la profesora, no la chuleta.
 
+**Simulacro de práctica (selección única, cronometrado por pregunta, con caso NIST CSF aplicado a una empresa nueva):**
+
+👉 https://claude.ai/artifact/P1iYhrVkPfJcoxFJPV6mDb
+
+25 preguntas de selección única, una a la vez, cronometradas (elegís el tiempo por pregunta: 30/45/60/90s ya que no se sabe el valor exacto que usa la profesora). Cubre los 8 temas + 7 preguntas de un caso nuevo aplicado a NIST CSF (empresa ficticia "SaludConecta", distinta de VoteOnline) al estilo de la Tarea 3. Al terminar muestra desglose de aciertos por tema y repaso de lo fallado.
+
 ## Pendiente
 
-- Si la profesora confirma formato de examen (opción múltiple, desarrollo, caso práctico, etc.), actualizar esta nota y el artifact para orientar el repaso a ese formato específico.
+- (Resuelto 2026-09-14) Formato de examen confirmado: selección única con tiempo por pregunta, estilo certificación.

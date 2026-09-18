@@ -94,7 +94,7 @@ Los tres deben poder explicar el sistema completo en la exposición, no solo su 
 | Semana | Fecha | Foco | Nota |
 |---|---|---|---|
 | Ahora | 11–14 sep | Alinear stack y roles con el equipo, crear repo, cada quien monta el entorno (Python, Redis, Celery) en su máquina, probar Tailscale entre las 3 | Resolver la conectividad entre máquinas de una vez, es lo más impredecible |
-| Semana 7 | 15–21 sep | Coordinador + modelo de datos + un worker end-to-end en una sola máquina (caso homogéneo simple) | Choca con la Indagatoria (entrega 17 sep) — repartir bien el tiempo |
+| Semana 7 | 15–21 sep | Coordinador + modelo de datos + un worker end-to-end en una sola máquina (caso homogéneo simple) | **Rol A hecho 2026-09-17** (probado con caso heterogéneo exitoso y caso con falla parcial, no solo el homogéneo mínimo) — repo local en `C:\Users\luisy\Documents\Uni\SO\plataforma-multimedia`, sin remoto todavía. Choca con la Indagatoria (entrega 17 sep) — repartir bien el tiempo con Rol B/C |
 | Semana 8 | 22–28 sep | Distribuir en las 3 máquinas reales, task routing a los 3 tipos de worker, `chord` para casos heterogéneos, dashboard básico, script de dataset | Choca con la I Prueba de Curso (24 sep) |
 | Semana 9 | 29 sep–1 oct | Integración, informe de pruebas con carga real, documentación técnica y manual, ensayo de la exposición | Entrega 01 oct (jueves) — dejar 1-2 días de colchón para bugs de última hora |
 

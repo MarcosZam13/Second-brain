@@ -2,6 +2,7 @@
 curso: Estadistica
 entregas_pendientes:
   - {fecha: "2026-09-03", entregable: "Quiz 2", peso: "6%"}
+  - {fecha: "2026-09-21", entregable: "Examen 1 (inferencia, 1-2 poblaciones)", peso: "25%"}
   - {fecha: "2026-09-23", entregable: "Quiz 3", peso: "6%"}
   - {fecha: "2026-10-07", entregable: "Quiz 4", peso: "6%"}
   - {fecha: "2026-11-04", entregable: "Quiz 5", peso: "6%"}
@@ -18,7 +19,7 @@ El curso reporta las fechas por número de semana, no por fecha calendario. Esta
 |---|---|---|---|
 | 2026-08-26 (semana 4, inferido — pospuesto desde 2026-08-19/semana 3 según aviso del usuario 2026-08-21; sigue cubriendo solo contenido de semanas 1-2) | [[Cursos/Estadistica/repasos/quiz-1-semanas-1-2\|Quiz 1]] | 6% | entregado (2026-08-27) |
 | 2026-09-03 (jueves, corregido por aviso del usuario 2026-09-01 — se asumía miércoles/semana 5, el profesor lo tomó jueves) | [[Cursos/Estadistica/repasos/quiz-2-semanas-3-4\|Quiz 2]] (semanas 3-4: IC proporción + IC varianza + pruebas de hipótesis) | 6% | pendiente |
-| Fecha pendiente | [[Cursos/Estadistica/apuntes/inferencia-estadistica-guia-unidades1-2\|Examen 1 (inferencia, 1-2 poblaciones)]] | 25% | pendiente |
+| 2026-09-21 (lunes, confirmado por el usuario 2026-09-15) | [[Cursos/Estadistica/apuntes/inferencia-estadistica-guia-unidades1-2\|Examen 1 (inferencia, 1-2 poblaciones)]] | 25% | pendiente |
 | 2026-09-23 (semana 8) | Quiz 3 | 6% | pendiente |
 | 2026-10-07 (semana 10) | Quiz 4 | 6% | pendiente |
 | Fecha pendiente | [[Cursos/Estadistica/apuntes/inferencia-estadistica-guia-unidades1-2\|Examen 2 (inferencia, 1-2 poblaciones)]] | 25% | pendiente |

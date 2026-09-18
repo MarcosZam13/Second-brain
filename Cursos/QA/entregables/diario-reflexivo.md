@@ -14,7 +14,7 @@ Ver también: [[Cursos/QA/apuntes/proyecto-qa-guia|Guía del Proyecto]] · [[Cur
 
 **Peso:** 5% (parte del Proyecto, 50% del curso).
 **Modalidad:** individual, en paralelo al resto de fases del proyecto en equipo.
-**Formato:** documento digital publicado en un sitio accesible (plataforma libre — Word/Drive/blog/Notion, etc.), visible para la profesora y el resto de estudiantes desde la semana 1. El enlace debe quedar publicado en TEC-Digital antes de la semana 6.
+**Formato:** documento digital publicado en un sitio accesible (plataforma libre — Word/Drive/blog/Notion, etc.), visible para el profesor y el resto de estudiantes desde la semana 1. El enlace debe quedar publicado en TEC-Digital antes de la semana 6.
 **Cadencia real (corregida):** entradas **quincenales**, no semanales — cada entrada cubre **dos semanas**. Se requieren mínimo **8 entradas** en total a lo largo del curso (16 semanas ÷ 2).
 **Estado real (actualizado 2026-08-17):** este diario está atado a las fases del proyecto (ver [[Cursos/QA/apuntes/proyecto-qa-guia|Guía del Proyecto]]). El proyecto **ya arrancó** — el equipo eligió repositorio el 2026-08-17: [firefly-iii/firefly-iii](https://github.com/firefly-iii/firefly-iii) (ver [[Cursos/QA/entregables/seleccion-repositorio-proyecto]]).
 
@@ -48,7 +48,7 @@ Qué se hizo en el proyecto + autocrítica + habilidades sociales + apoyo visual
 - [x] Apropiación de aprendizaje: reflexión autocrítica real, no genérica (30 pts) — las 3 autocríticas son específicas y en voz propia
 - [~] Búsqueda de información complementaria: citas/referencias de calidad cuando aplique (20 pts) — Semana 1 y 2 tienen referencia real; **"Avance del proyecto" no tiene ninguna** — falta agregar una
 - [~] Apoyo visual: imágenes, diagramas, capturas, etc. (15 pts) — Semana 1 y 2 tienen imagen real; **"Avance del proyecto" no tiene ninguna**; además la imagen de Semana 1 (@jrgsanta, 2019) no lleva crédito en el texto — la rúbrica pide respetar derechos de autor explícitamente
-- [~] Accesibilidad: publicado y accesible para profesora y compañeros (5 pts) — ya existe carpeta de Drive con link; falta confirmar que esté compartida también con compañeros, no solo la profesora
+- [~] Accesibilidad: publicado y accesible para profesor y compañeros (5 pts) — ya existe carpeta de Drive con link; falta confirmar que esté compartida también con compañeros, no solo el profesor
 - [ ] Enlace publicado en TEC-Digital antes de semana 6
 
 ## Formato por entrada (machote)
@@ -227,11 +227,11 @@ Comunicación con el equipo para coordinar la búsqueda y decisión del reposito
 - [ ] **Corregir en el documento real** (no solo acá): "si me hizo" → "sí me hizo"; "lo cual un hábito" → "lo cual es un hábito" (Semana 2)
 - [ ] Agregar referencia + imagen al apartado "Avance del proyecto" (hoy es el único de los 3 sin ninguna de las dos)
 - [ ] Agregar crédito de la imagen de Semana 1 ("Ilustración: @jrgsanta, 2019") — respeta el punto de derechos de autor de la rúbrica
-- [ ] Confirmar que la carpeta de Drive esté compartida también con los compañeros, no solo la profesora
+- [ ] Confirmar que la carpeta de Drive esté compartida también con los compañeros, no solo el profesor
 - [ ] Agregar un índice corto al inicio del documento
 - [ ] Publicar el enlace en TEC-Digital antes de semana 6
 - [ ] Confirmar si la evaluación entre pares del Informe de pruebas también aplica al Diario (la guía no lo aclara — parece que no)
-- [ ] Confirmar con la profesora/TEC-Digital la fecha real de la primera entrada, ya que depende de que arranque el proyecto (ver corrección arriba)
+- [ ] Confirmar con el profesor/TEC-Digital la fecha real de la primera entrada, ya que depende de que arranque el proyecto (ver corrección arriba)
 - [ ] **Entrada 2 (Semanas 3-4), armada 2026-08-27:** revisar y reescribir las 3 autocríticas en voz propia de Marcos (hoy son borrador de Claude Code basado en el contenido de clase, no reflexión personal real todavía)
 - [ ] Entrada 2: agregar imágenes reales (hoy solo hay sugerencias de qué mostrar) y confirmar/cambiar las referencias sugeridas
 - [ ] Entrada 2: exportar a Drive/PDF una vez revisada, igual que se hizo con la Entrada 1

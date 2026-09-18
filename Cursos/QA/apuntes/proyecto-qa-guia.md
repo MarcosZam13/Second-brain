@@ -26,7 +26,7 @@ Si hace falta ver el PPT directamente para entender esta diferencia, está en `C
 
 Experimentar los procesos de calidad del software (planeación, validación, verificación) aplicados a un **repositorio de GitHub que el equipo elige y que cumple los 9 criterios de [[Cursos/QA/apuntes/criterios-seleccion-repositorio-github|Criterios para Seleccionar Proyectos en GitHub]]** (debe ser una aplicación web, mantenimiento activo, login/autenticación, issues activos, popularidad, documentación, buenas prácticas, dependencias claras, accesibilidad), en **equipos de 3 a 4 personas** (confirmado por el PPT oficial — corrige el "hasta 4" que decía esta nota antes), diseñando y ejecutando un plan de pruebas sobre ese repo. Ver candidatos evaluados en [[Cursos/QA/entregables/seleccion-repositorio-proyecto|Selección de repositorio]].
 
-> **Corrección (2026-08-15):** el documento fuente (guía institucional genérica) describe esto como un "proyecto real de software de una empresa" con reunión con contraparte y posible convenio de confidencialidad — eso **no aplica a esta edición del curso**. La versión real es más simple: buscar/elegir un repositorio de GitHub que cumpla los requisitos que pida la profesora y aplicarle los procesos de calidad del curso, sin empresa ni contraparte externa de por medio. Ojo: la rúbrica oficial de Presentación (más abajo) todavía trae textual "resultados relevantes **para la empresa**" — es lenguaje de plantilla institucional que no se actualizó para esta edición basada en repos de GitHub; en la presentación real hay que leerlo como "resultados relevantes para el proyecto/repositorio".
+> **Corrección (2026-08-15):** el documento fuente (guía institucional genérica) describe esto como un "proyecto real de software de una empresa" con reunión con contraparte y posible convenio de confidencialidad — eso **no aplica a esta edición del curso**. La versión real es más simple: buscar/elegir un repositorio de GitHub que cumpla los requisitos que pida el profesor y aplicarle los procesos de calidad del curso, sin empresa ni contraparte externa de por medio. Ojo: la rúbrica oficial de Presentación (más abajo) todavía trae textual "resultados relevantes **para la empresa**" — es lenguaje de plantilla institucional que no se actualizó para esta edición basada en repos de GitHub; en la presentación real hay que leerlo como "resultados relevantes para el proyecto/repositorio".
 
 ## Las 5 fases (semanas de entrega confirmadas por el PPT oficial)
 
@@ -36,9 +36,9 @@ Marcos confirmó el 2026-08-29 que la semana 5 del curso arrancó el lunes 31 de
 |---|---|---|---|---|
 | 1. Identificación del problema y definición de objetivos | Plan del proyecto | Equipo (3-4 personas) | **Semana 6** | 2026-09-09 |
 | 2. Planeación | Plan de pruebas (≥60 casos de prueba, **3 tipos de prueba distintos**, ver corrección abajo) | Equipo | **Semana 11**. Máximo 10% de las pruebas pueden ser manuales | 2026-10-14 |
-| 3. Diseño, Desarrollo y Evaluación | Proyecto de pruebas (código, ≥90% automatizado) | Equipo | **Semana 15** según la tabla de evaluación (el diagrama de fases del mismo PPT dice "Semana 16 y 17" para proyecto de pruebas e informe combinados, no se pudo reconciliar esa diferencia entre ambas fuentes del mismo PPT, confirmar con la profesora si hace falta precisión) | 2026-11-11 |
+| 3. Diseño, Desarrollo y Evaluación | Proyecto de pruebas (código, ≥90% automatizado) | Equipo | **Semana 15** según la tabla de evaluación (el diagrama de fases del mismo PPT dice "Semana 16 y 17" para proyecto de pruebas e informe combinados, no se pudo reconciliar esa diferencia entre ambas fuentes del mismo PPT, confirmar con el profesor si hace falta precisión) | 2026-11-11 |
 | 3. (cont.) | Informe de pruebas | Equipo (sumativa) + evaluación entre pares (otro equipo evalúa el informe) | **Semana 16** según la tabla de evaluación | 2026-11-18 |
-| 4. Comunicación | Presentación de resultados | Equipo | **Semana 16** según la tabla de evaluación (17 según el diagrama de fases, mismo desfase que la fila anterior). Exposición **en inglés** ante profesora y docente de inglés, parte de la estrategia FUI (Fomento del Uso del Inglés) | 2026-11-18 |
+| 4. Comunicación | Presentación de resultados | Equipo | **Semana 16** según la tabla de evaluación (17 según el diagrama de fases, mismo desfase que la fila anterior). Exposición **en inglés** ante profesor y docente de inglés, parte de la estrategia FUI (Fomento del Uso del Inglés) | 2026-11-18 |
 | 5. Reflexión | Diario reflexivo | **Individual**, en paralelo | Semana 2 a Semana 16, entradas cada 2 semanas como mínimo, ver [[Cursos/QA/entregables/diario-reflexivo|nota aparte]], no se profundiza acá | 10 de agosto al 22 de noviembre de 2026 |
 
 **Corrección importante (2026-08-29):** la rúbrica oficial de Plan de pruebas puntúa explícitamente "utilizando 3 tipos diferentes de pruebas" (10 pts) — la guía genérica anterior y el borrador de [[Cursos/QA/entregables/plan-del-proyecto|plan-del-proyecto.md]] decían "≥2 tipos", que ya quedaba corregido a "3" en el resumen de rúbricas más abajo pero no se había propagado a la tabla de fases ni al entregable. Corregido en ambos lugares.
@@ -67,7 +67,7 @@ Para Plan de pruebas e Informe de pruebas, sin lista de estructura oficial expl�
 
 ## Formato IEEE vs. APA — resuelto
 
-Confirmado por las rúbricas oficiales (antes era una duda pendiente marcada como "inconsistencia del documento fuente, verificar con la profesora"):
+Confirmado por las rúbricas oficiales (antes era una duda pendiente marcada como "inconsistencia del documento fuente, verificar con el profesor"):
 
 - **Plan del proyecto:** IEEE.
 - **Plan de pruebas:** IEEE.
@@ -197,6 +197,6 @@ No trae el split "contenido 60 + inglés 40" que decía esta nota antes — es u
 
 - Foro en TEC-Digital abierto de semana 1 a semana 16 para consultas del proyecto.
 - Grupo de WhatsApp del curso desde el inicio del semestre.
-- Reunión corta con la profesora a media planeación para revisar avances (en la plantilla de ejemplo, semana 9).
-- Revisión preliminar del diario reflexivo por la profesora a mitad de curso (en la plantilla de ejemplo, semana 10), con retroalimentación por correo.
+- Reunión corta con el profesor a media planeación para revisar avances (en la plantilla de ejemplo, semana 9).
+- Revisión preliminar del diario reflexivo por el profesor a mitad de curso (en la plantilla de ejemplo, semana 10), con retroalimentación por correo.
 - Evaluación entre pares: cada estudiante evalúa el informe de pruebas de un equipo distinto al propio.

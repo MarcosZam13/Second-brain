@@ -30,6 +30,30 @@ Rules:
 - Max lifetime: 1-2 days. If it's growing longer, the ticket is probably too big — split it.
 - Rebase or sync with `develop`/`main` before opening the PR, not after.
 
+## 1b. Variante: modelo de Entregables (cuando el curso/empresa entrega por hitos)
+
+Algunos cursos/empresas (Tacha, Asistencias TEC) usan un modelo distinto al de arriba: en vez de mergear features directo a `main`/`develop`, cada entrega/hito se congela en su propia rama de integración que pasa por un ciclo de QA antes de llegar a `main`.
+
+```
+main                        → versión entregada/en producción
+  ↑ merge cuando QA aprueba la entrega
+entregable-{N}               → integración de todo lo que va en esa entrega/hito, se corta de develop
+  ↑ merge de fixes encontrados en QA de esa entrega
+  qa-fix/{TICKET-ID}-...      → sale de entregable-{N}, arregla bugs encontrados al validar esa entrega, vuelve a entregable-{N}
+develop                      → integración continua de todo lo que ya está terminado
+  ↑ merge cuando el ticket está listo
+  ticket/{TICKET-ID}-...      → una HU/tarea, sale de develop, vuelve a develop
+
+hotfix/{TICKET-ID}-...        → sale de main directo (nunca pasa por develop/entregable), arregla algo urgente ya entregado, vuelve a main
+```
+
+Reglas de esta variante:
+- `ticket/{TICKET-ID}-...` (o `feature/`/`fix/` según lo que pida el curso) sale y vuelve a `develop` — igual que el modelo base.
+- Cuando se congela el alcance de una entrega, se corta `entregable-{N}` desde `develop`. De ahí en adelante, bugs encontrados en QA sobre esa entrega van en `qa-fix/{TICKET-ID}-...` cortado de `entregable-{N}`, nunca directo sobre `entregable-{N}`.
+- `entregable-{N}` solo mergea a `main` cuando QA la aprueba — eso es lo que "entregar" significa en este modelo.
+- `hotfix/*` es la única rama que sale de `main` directo, y es la única excepción a "todo pasa por develop primero" — para algo ya entregado que se rompe en producción y no puede esperar al siguiente ciclo.
+- No asumir que este es el modelo del curso/empresa sin confirmarlo — preguntar o revisar qué documenta el profesor/equipo. Ver [[Sistema/aprendizaje/git-workflow-diagrama|git-workflow-diagrama.md]] para la comparación completa contra Gitflow clásico y trunk-based.
+
 ## 2. Ticket/requirement codes
 
 Every piece of work needs a code before a branch exists. `Sistema/tickets.md` is the single source of truth for which prefix belongs to which course/project and what the next free number is — check it before naming a branch or writing a commit, and update the "Último usado" column in the same commit that consumes the number. Never invent or guess a number by re-reading git log; the table is authoritative (log is only the fallback if the table has drifted).
@@ -82,9 +106,35 @@ PR description template:
 ```
 
 Rules:
-- PR merges only into `develop`/`main` — never work-in-progress branch into another WIP branch.
+- PR merges only into `develop`/`main` (or `entregable-{N}` under the variant in §1b) — never work-in-progress branch into another WIP branch.
 - Even working solo, open the PR anyway before merging — it's the checkpoint where Claude Code (or a teammate) reviews before it lands. This is also the habit that transfers directly to a job.
 - Squash-merge when the branch has messy intermediate commits; keep them separate when each commit is independently meaningful.
+
+### 4b. PR format variant — Jira + Playwright projects (e.g. Asistencias TEC)
+
+When the project tracks work in Jira and tests with Playwright, use this format instead of the generic one above — it's what gets checked against the ticket and the QA evidence directly:
+
+```markdown
+## Qué hace
+
+
+## Cómo se testea
+
+
+## Ticket de Jira
+(link)
+
+## Screenshots UI
+
+
+## Screenshots Playwright
+
+```
+
+Rules specific to this variant:
+- "Cómo se testea" gives manual repro steps even if Playwright tests exist — a reviewer without the branch checked out should be able to verify from the description alone.
+- "Screenshots Playwright" means evidence from the actual test run (trace viewer screenshot, report, or terminal output showing pass), not a UI screenshot duplicated under a different heading.
+- The Jira link is the ticket, never a paraphrase of it — the PR title still carries the ticket code per §3's commit convention.
 
 ## 5. QA-specific flow (when the course/project calls for it)
 

@@ -1,0 +1,113 @@
+---
+name: qa-testing-practices
+description: Use this skill whenever writing test plans, test cases, bug reports, or reviewing code/features for quality assurance. Covers professional-grade QA documentation, test case design, and bug reporting so it reads like enterprise QA work, not an afterthought. Trigger this for any request involving testing, QA, test coverage, bug tracking, or "how do I verify this works."
+---
+
+# QA & Testing Practices
+
+The standard: **QA artifacts (test plans, cases, bug reports) should be usable by someone who never saw the feature being built** — reproducible, unambiguous, and traceable to a ticket.
+
+## 1. Test case structure
+
+Every test case needs, at minimum:
+
+```markdown
+### TC-{TICKET-ID}-{count}: {short title}
+
+**Preconditions:** what state the system/data must be in before starting
+**Steps:**
+1.
+2.
+3.
+**Expected result:** exactly what should happen
+**Actual result:** (filled in during execution)
+**Status:** Pass / Fail / Blocked
+```
+
+Rules:
+- One test case verifies one thing. If "expected result" needs "and," it's probably two test cases.
+- Steps are numbered and literal — no "test the login flow," but "1. Open app. 2. Enter valid email. 3. Enter valid password. 4. Tap Login."
+- Cover the happy path AND at least: one invalid-input case, one boundary case, one empty/null case.
+
+## 2. Test case categories to cover (don't just test happy paths)
+
+| Category | What it checks |
+|---|---|
+| Functional | Does the feature do what the ticket says |
+| Boundary | Min/max values, empty lists, exactly-at-limit cases |
+| Negative/invalid input | Wrong types, malformed data, unauthorized access attempts |
+| Regression | Did this change break something that worked before |
+| Integration | Does this feature behave correctly with the systems around it (DB rules, role-based access) |
+| Usability | Can someone unfamiliar complete the flow without confusion |
+
+For a ticket to be considered "QA-covered," it needs at least functional + one negative case + one boundary case — not just the demo-happy-path.
+
+## 3. Bug reports
+
+```markdown
+### BUG-{n}: {short, specific title — not "button broken"}
+
+**Severity:** Critical / High / Medium / Low
+**Environment:** OS, browser/app version, device
+**Steps to reproduce:**
+1.
+2.
+**Expected:**
+**Actual:**
+**Evidence:** screenshot/video/log
+**Related ticket:** {TICKET-ID}
+```
+
+Severity guide:
+- **Critical:** data loss, security issue, app crash, blocks core flow entirely
+- **High:** feature broken with no workaround
+- **Medium:** feature broken but workaround exists
+- **Low:** cosmetic, doesn't affect function
+
+Rules:
+- Title describes the actual failure, not the symptom's vibe: "Checkout fails with 500 error when cart has 0 items" not "checkout is broken."
+- Never file a bug without reproduction steps — if it can't be reliably reproduced, note that explicitly and describe conditions observed instead.
+- One bug per report — don't bundle unrelated issues found during the same session.
+
+## 4. Test plan (for a feature or milestone, not a single case)
+
+```markdown
+# Test Plan: {feature/milestone name}
+
+## Scope
+What's being tested / explicitly out of scope
+
+## Tickets covered
+{TICKET-ID}s this plan validates
+
+## Test approach
+Manual / automated (end-to-end) / mixed, and why
+
+## Test cases
+Link or list of TC-IDs included
+
+## Risk areas
+What's most likely to break, and why it matters most
+
+## Exit criteria
+What "done testing" means (e.g. all critical/high cases pass, no open Critical bugs)
+```
+
+## 5. Automating UI test cases — Page Object Model
+
+When a test case from §1 gets automated (Playwright, Cypress, or equivalent), don't let the automation script scatter raw element queries and clicks inline in the test body. Separate **how to interact with the screen** from **what the test asserts**:
+
+- A Page Object owns locators (by role/label, not brittle CSS selectors) and user actions (`fillEmail`, `submit`) as a small readable API.
+- The test itself only calls the Page Object's actions and asserts on its queries — it reads like the numbered steps from the manual test case, not like a sequence of low-level DOM calls.
+- The Page Object never contains assertions; the test owns those.
+
+This keeps automated tests mapping 1:1 back to the manual test case they replace, and means a UI change only breaks one Page Object instead of every test file that touched that screen.
+
+## 6. Applying this in practice
+
+When asked to do QA work under this skill:
+1. Identify the ticket first — every test case and bug report ties back to one.
+2. Write test cases covering functional + negative + boundary at minimum before calling coverage "done."
+3. For bug reports, always include reproduction steps — if you can't reproduce it yourself, say so explicitly rather than guessing.
+4. Cross-reference with `GITFLOW.md`: `qa-fix/{TICKET-ID}-...` branches and their test cases should map to the same ticket as the feature they're fixing.
+5. When automating a UI test case, apply the Page Object Model from §5 — don't scatter raw queries across the suite.

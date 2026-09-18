@@ -1,9 +1,9 @@
 ---
 curso: QA
-tema: Diario de Aprendizaje Semanal (carpeta de Drive compartida con la profesora)
+tema: Diario de Aprendizaje Semanal (carpeta de Drive compartida con el profesor)
 fecha: 2026-08-15
 tipo: entregable
-entregable_de: "asignación verbal de la profesora — superado 2026-08-18, ver nota abajo"
+entregable_de: "asignación verbal del profesor — superado 2026-08-18, ver nota abajo"
 estado: superado por diario-reflexivo.md
 tags: [diario-aprendizaje, drive, reflexion-semanal, historial, superado]
 ---
@@ -16,10 +16,10 @@ Ver también: [[Cursos/QA/temario]] · [[Cursos/QA/apuntes/calidad-semana-1|Cali
 
 ## Formato y logística
 
-- **Medio:** carpeta de Google Drive compartida con la profesora.
+- **Medio:** carpeta de Google Drive compartida con el profesor.
 - **Estructura:** una subcarpeta por semana (`Semana 1`, `Semana 2`, `Semana 3`, ...), cada una con un PDF de esa semana.
 - **Contenido de cada PDF:** qué se enseñó esa semana, qué entendí, qué no entendí, y qué aprendí — reflexión personal sobre el contenido y la experiencia de la clase, no un resumen técnico (eso ya está en los apuntes de cada semana).
-- **Nombre de archivo sugerido (a confirmar con la profesora si pide uno específico):** `S{n}_DiarioAprendizaje_MarcosZamoraSanchez.pdf`.
+- **Nombre de archivo sugerido (a confirmar con el profesor si pide uno específico):** `S{n}_DiarioAprendizaje_MarcosZamoraSanchez.pdf`.
 
 **Origen del contenido (corrección 2026-08-15):** Marcos ya había respondido las 5 preguntas de la Entrada 1 del [[Cursos/QA/entregables/diario-reflexivo|Diario Reflexivo del Proyecto]] pensando que era este mismo diario — fue una confusión entre los dos documentos. En vez de descartar esas respuestas, la parte de contenido de curso (no la parte de proyecto/equipo, que sí pertenece solo al otro diario) se reutilizó acá, dividida por semana. Ver [[Cursos/QA/entregables/diario-aprendizaje-semana-1|Semana 1]] y [[Cursos/QA/entregables/diario-aprendizaje-semana-2|Semana 2]].
 
@@ -28,7 +28,7 @@ Ver también: [[Cursos/QA/temario]] · [[Cursos/QA/apuntes/calidad-semana-1|Cali
 ## Pendiente
 
 - [x] Crear la carpeta de Drive con la estructura de subcarpetas por semana
-- [x] Compartir la carpeta con la profesora (permiso de lectura/comentario)
+- [x] Compartir la carpeta con el profesor (permiso de lectura/comentario)
 - [ ] Confirmar si hay una fecha límite específica de entrega/publicación del enlace, o si es continuo semana a semana
 - [x] Exportar Semana 1 y Semana 2 a PDF y subirlas a Drive (2026-08-17)
 - [x] Corregir Semana 1 y 2 contra la rúbrica: autocrítica, referencias, apoyo visual (2026-08-18)
