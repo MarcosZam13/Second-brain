@@ -20,22 +20,24 @@ Repo base: `https://github.com/yarield/ParqueRecreativoMiPueblo.git`, clonado en
 
 Confirmado por inspección directa: el repo **no tiene ninguna infraestructura de logging/auditoría** — sin librería tipo winston/pino/morgan en `backend/package.json`, sin tabla de logs en `backend/prisma/schema.prisma`, sin ningún registro de eventos en ningún middleware o ruta. La rúbrica exige Logs/Auditoría como uno de los 4 módulos obligatorios (fijo, no negociable con 4 integrantes), así que **hay que construirlo desde cero**, no solo auditarlo. Encaja con el espíritu del curso: primero se construye/asegura una capa mínima de auditoría, y sobre esa misma capa se demuestra la vulnerabilidad de **Audit Poisoning** (Fase 2, punto 3) y después se remedia (Fase 3).
 
-## Reasignación de módulos — pendiente de confirmar con el equipo
+## Reasignación de módulos — CONFIRMADA con el equipo (2026-09-21)
 
-La rúbrica pide 4 módulos de negocio (Autenticación, Gestión de Usuarios, Operaciones/Transacciones, Logs/Auditoría). Mapeo propuesto contra los módulos reales de la app:
+La rúbrica pide 4 módulos de negocio (Autenticación, Gestión de Usuarios, Operaciones/Transacciones, Logs/Auditoría). Mapeo confirmado contra los módulos reales de la app:
 
 | # | Persona | Módulo de rúbrica | Dominio real de la app |
 |---|---|---|---|
-| 1 | Persona 1 | Gestión de Usuarios | Clientes |
-| 2 | Persona 2 | Operaciones/Transacciones (parte 1) | Paquetes + Categorías |
-| 3 | Persona 3 | Operaciones/Transacciones (parte 2) | Facturación |
-| 4 | Persona 4 | Autenticación + Logs/Auditoría | Autenticación (+ construir logging) |
+| 1 | Rachel | Gestión de Usuarios | Clientes |
+| 2 | Wesley | Operaciones/Transacciones (parte 1) | Paquetes + Categorías |
+| 3 | Marcos | Operaciones/Transacciones (parte 2) | Facturación |
+| 4 | Dereck | Autenticación + Logs/Auditoría | Autenticación (+ construir logging) |
+
+En la reunión del equipo se había propuesto inicialmente "Estadísticas y autenticación" para el cuarto módulo — se corrigió a Logs/Auditoría porque es uno de los 4 módulos fijos de la rúbrica (no negociable) y porque el vector obligatorio de Audit Poisoning (Fase 2, punto 3) depende de que esa capa exista para los 4 integrantes, no solo para Dereck.
 
 **Estadísticas (`estadisticas.routes.ts`) queda fuera del alcance de seguridad de esta entrega** — puede seguir existiendo en el código pero no es módulo de nadie a efectos de la rúbrica.
 
 ## Tabla módulo → persona → archivos reales del repo
 
-### Persona 1 — Clientes
+### Rachel — Clientes
 
 | Capa | Archivos/carpetas |
 |---|---|
@@ -44,7 +46,7 @@ La rúbrica pide 4 módulos de negocio (Autenticación, Gestión de Usuarios, Op
 
 Todos los endpoints (`GET/POST/PUT/DELETE /api/clientes`, más `GET /proximos-a-vencer` y `GET /en-mora`) están detrás de `authMiddleware`. Campo `observaciones` es texto libre — candidato natural a XSS Stored si el frontend lo renderiza sin sanitizar.
 
-### Persona 2 — Paquetes + Categorías
+### Wesley — Paquetes + Categorías
 
 | Capa | Archivos/carpetas |
 |---|---|
@@ -53,7 +55,7 @@ Todos los endpoints (`GET/POST/PUT/DELETE /api/clientes`, más `GET /proximos-a-
 
 **Hallazgo de Broken Access Control ya real y gratis:** `GET /api/paquetes`, `GET /api/paquetes/:id`, `GET /api/categorias` y `GET /api/categorias/:id` **no llevan `authMiddleware`** — son de lectura pública sin autenticación, a diferencia de todos los demás módulos. Buen punto de partida para el vector de PoC de servidor (control de acceso, OWASP A01) de esta persona, sin tener que fabricar uno.
 
-### Persona 3 — Facturación
+### Marcos — Facturación
 
 | Capa | Archivos/carpetas |
 |---|---|
@@ -62,7 +64,7 @@ Todos los endpoints (`GET/POST/PUT/DELETE /api/clientes`, más `GET /proximos-a-
 
 Los montos se recalculan en servidor (`resolverBase`/`calcularImporte`), pero el ángulo realista de PoC es manipulación de parámetros fuera de rango (`precio_base`, `comision_valor`, `noches`) o CSV/Excel injection con fórmulas (`=...`) en `facturasExcel.ts` si algún campo de texto libre (`origen`) se vuelca sin sanitizar a la celda.
 
-### Persona 4 — Autenticación + Logs/Auditoría (a construir)
+### Dereck — Autenticación + Logs/Auditoría (a construir)
 
 | Capa | Archivos/carpetas |
 |---|---|
@@ -85,10 +87,10 @@ Los montos se recalculan en servidor (`resolverBase`/`calcularImporte`), pero el
 
 ### Fase 1 — Mapeo NIST CSF 2.0 + Matriz de Gobernanza (20 pts)
 
-- [ ] Persona 1 (Clientes) — activos críticos (PII: cédula, teléfono, observaciones), funciones GOVERN/IDENTIFY/PROTECT/DETECT, subcategorías (ej. `PR.AA-01` control de acceso, `PR.DS-01` protección de datos en reposo), control de línea base faltante, riesgo inherente Alto/Medio/Bajo
-- [ ] Persona 2 (Paquetes + Categorías) — mismo formato; activo crítico incluye el hallazgo de endpoints GET sin auth
-- [ ] Persona 3 (Facturación) — mismo formato; activo crítico son los montos/comisiones y el archivo Excel exportado
-- [ ] Persona 4 (Auth + Logs) — mismo formato; activo crítico `password_hash`, `JWT_SECRET`, token en `localStorage`; `DE.CM-01` (monitoreo continuo) con riesgo Alto por ausencia total de logging
+- [ ] Rachel (Clientes) — activos críticos (PII: cédula, teléfono, observaciones), funciones GOVERN/IDENTIFY/PROTECT/DETECT, subcategorías (ej. `PR.AA-01` control de acceso, `PR.DS-01` protección de datos en reposo), control de línea base faltante, riesgo inherente Alto/Medio/Bajo
+- [ ] Wesley (Paquetes + Categorías) — mismo formato; activo crítico incluye el hallazgo de endpoints GET sin auth
+- [ ] Marcos (Facturación) — mismo formato; activo crítico son los montos/comisiones y el archivo Excel exportado
+- [ ] Dereck (Auth + Logs) — mismo formato; activo crítico `password_hash`, `JWT_SECRET`, token en `localStorage`; `DE.CM-01` (monitoreo continuo) con riesgo Alto por ausencia total de logging
 - [ ] Consolidar las 4 filas en una sola Matriz General de Gobernanza coherente
 
 ### Fase 2 — 3 PoCs obligatorias por persona (30 pts)

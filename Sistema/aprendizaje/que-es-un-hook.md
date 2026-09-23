@@ -1,6 +1,6 @@
 # Qué es un hook (React)
 
-Ver también: [[Sistema/aprendizaje/README|Aprendizaje]] · [[Sistema/aprendizaje/principios-solid#S — Single Responsibility Principle (Responsabilidad Única)|SRP]] · [[Sistema/skills/component-architecture/SKILL|component-architecture]]
+Ver también: [[Sistema/aprendizaje/README|Aprendizaje]] · [[Sistema/aprendizaje/principios-solid#S — Single Responsibility Principle (Responsabilidad Única)|SRP]] · [[Sistema/skills/component-architecture/SKILL|component-architecture]] · [[Proyectos/Tacha/README|Tacha]] (fuente de los ejemplos de abajo)
 
 ## La definición corta
 
@@ -17,6 +17,16 @@ Los problemas reales que esto generaba:
 3. **`this` en JavaScript es una fuente constante de bugs** (el binding de `this` en callbacks de clases).
 
 Los hooks resuelven los tres a la vez: permiten que una función normal tenga estado propio, agrupan la lógica relacionada en un solo lugar (efecto + su limpieza, juntos), y se pueden extraer y reutilizar como funciones normales (hooks personalizados) sin herencia ni wrappers.
+
+## El modelo mental correcto (y tres confusiones comunes al empezar)
+
+**La analogía que funciona:** React es como la recepción de un hotel, y cada componente montado en pantalla es un huésped con una libreta a su nombre en el mostrador. Mientras el huésped esté hospedado (el componente esté en pantalla), la recepción le guarda lo que le pida (`useState`) y se lo devuelve igual en cada visita a su cuarto (cada render). Si el huésped se va (el componente se desmonta) o recargás la página, la libreta se tira.
+
+Tres cosas que **no** es, aunque tienten como comparación:
+
+1. **No es "como una cookie".** Una cookie sobrevive a que cierres el navegador y se manda al servidor. El estado de `useState` vive solo mientras el componente está montado — un F5 lo borra. Para que algo sobreviva de verdad (el "tachado" de un producto, por ejemplo) hace falta guardarlo en la base de datos aparte, no solo en `useState`.
+2. **`useEffect` no espera a que "cargue toda la app".** Corre después de que **ese componente puntual** terminó de pintarse, no en un momento global. Cada componente tiene sus propios efectos, ligados a su propio render.
+3. **Un hook no "orquesta" a otros hooks en un orden que él decide.** "Hook" es solo el nombre de cualquier función que empieza con `use` (`useState`, `useEffect`, o una tuya). El orden en que se ejecutan lo definís vos, al escribirlos uno después del otro en el cuerpo del componente — React solo exige que ese orden sea siempre el mismo entre renders.
 
 ## Cómo funcionan por dentro (la parte que sorprende)
 
@@ -87,6 +97,98 @@ function useAsistenciasDisponibles(sede: string) {
 ```
 
 Cualquier componente que necesite la lista de asistencias por sede llama a este hook — la lógica de fetch/estado vive en un solo lugar, testeable aparte del JSX.
+
+## Ejemplos completos, con el vocabulario de Tacha
+
+Cheat sheet de cada hook común, en palabras simples + un ejemplo ligado al dominio de Tacha (household, lista de compras, tachar producto, dashboard de gasto).
+
+**`useState`** — "acordate de este valor entre pantallazos". El caso más literal del nombre del proyecto: tachar un producto.
+```tsx
+function ItemLista({ producto }: { producto: ProductoLista }) {
+  const [tachado, setTachado] = useState(producto.comprado);
+  return (
+    <div onClick={() => setTachado(!tachado)} className={tachado ? "tachado" : ""}>
+      {producto.nombre}
+    </div>
+  );
+}
+```
+
+**`useEffect`** — "cuando termines de pintar, hacé esto" (algo que no es puro dibujo: pedir datos, suscribirte, un timer).
+```tsx
+function PantallaListaCompras({ listaId }: { listaId: string }) {
+  const [productos, setProductos] = useState<ProductoLista[]>([]);
+  useEffect(() => {
+    fetch(`/api/listas/${listaId}/productos`).then((r) => r.json()).then(setProductos);
+  }, [listaId]); // se repite solo si listaId cambia (household ↔ lista privada)
+  return <ul>{productos.map((p) => <ItemLista key={p.id} producto={p} />)}</ul>;
+}
+```
+
+**`useRef`** — "guardame un valor entre pantallazos, pero que cambiarlo NO repinte nada".
+```tsx
+const inputBusquedaProductoRef = useRef<HTMLInputElement>(null);
+// más adelante: inputBusquedaProductoRef.current?.focus()
+```
+
+**`useMemo`** — "no recalcules esto en cada render, solo si cambian estas dependencias".
+```tsx
+const gastoTotal = useMemo(
+  () => productos.reduce((acc, p) => acc + p.precio, 0),
+  [productos]
+); // total del dashboard financiero, recalcula solo si productos cambió
+```
+
+**`useCallback`** — como `useMemo` pero para funciones: "no crees una función nueva en cada render, solo si cambian las dependencias".
+```tsx
+const tacharProducto = useCallback((id: string) => {
+  setProductos((prev) => prev.map((p) => (p.id === id ? { ...p, comprado: !p.comprado } : p)));
+}, []);
+```
+
+**`useContext`** — "leeme un valor que alguien más arriba del árbol dejó disponible, sin pasarlo por props en cada nivel".
+```tsx
+const { household } = useContext(HouseholdContext); // el household activo, disponible en cualquier componente hijo
+```
+
+**`useReducer`** — como `useState` pero para estado con varias acciones posibles (ej. los pasos de "modo compra": elegir súper → tachar → confirmar).
+```tsx
+const [estado, dispatch] = useReducer(reducerModoCompra, { paso: "elegir-super" });
+dispatch({ tipo: "producto-tachado", id: "123" });
+```
+
+**Hook personalizado (`useAlgo`)** — una función propia que junta varios de los de arriba, para reusar la misma lógica en más de un componente (ej. tanto en "Mi lista" como en la lista del household).
+```tsx
+function useListaDeCompras(listaId: string) {
+  const [productos, setProductos] = useState<ProductoLista[]>([]);
+  const [cargando, setCargando] = useState(true);
+
+  useEffect(() => {
+    let cancelado = false;
+    setCargando(true);
+    fetch(`/api/listas/${listaId}/productos`)
+      .then((r) => r.json())
+      .then((data) => { if (!cancelado) setProductos(data); })
+      .finally(() => { if (!cancelado) setCargando(false); });
+    return () => { cancelado = true; };
+  }, [listaId]);
+
+  function tacharProducto(productoId: string) {
+    setProductos((prev) => prev.map((p) => (p.id === productoId ? { ...p, comprado: !p.comprado } : p)));
+    fetch(`/api/listas/${listaId}/productos/${productoId}/tachar`, { method: "PATCH" });
+  }
+
+  return { productos, cargando, tacharProducto };
+}
+```
+El componente que lo usa queda liviano, sin saber nada de `fetch`:
+```tsx
+function PantallaListaCompras({ listaId }: { listaId: string }) {
+  const { productos, cargando, tacharProducto } = useListaDeCompras(listaId);
+  if (cargando) return <p>Cargando...</p>;
+  return <ul>{productos.map((p) => <li key={p.id} onClick={() => tacharProducto(p.id)}>{p.nombre}</li>)}</ul>;
+}
+```
 
 ## Errores comunes
 
