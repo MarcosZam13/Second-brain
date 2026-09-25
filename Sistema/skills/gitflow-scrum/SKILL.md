@@ -54,6 +54,27 @@ Reglas de esta variante:
 - `hotfix/*` es la única rama que sale de `main` directo, y es la única excepción a "todo pasa por develop primero" — para algo ya entregado que se rompe en producción y no puede esperar al siguiente ciclo.
 - No asumir que este es el modelo del curso/empresa sin confirmarlo — preguntar o revisar qué documenta el profesor/equipo. Ver [[Sistema/aprendizaje/git-workflow-diagrama|git-workflow-diagrama.md]] para la comparación completa contra Gitflow clásico y trunk-based.
 
+## 1c. Labels de estado de PR (van con la variante de Entregables)
+
+Confirmado en Tacha (2026-09-24/25) y empaquetado en `Proyectos/AsistenciasTEC/dev-template/` (`GITFLOW.md` + skill `gitflow`). Si el repo tiene su propia skill de gitflow, esa manda; esto es la versión de referencia.
+
+| Label | Significado | Estado en el tracker |
+|---|---|---|
+| `in progress` | Se está trabajando | En curso |
+| `waiting qa` | Completo, CI en verde, esperando QA | Waiting QA |
+| `qa accepted` | QA (otra persona) aprobó: se puede mergear | QA Accepted |
+| `qa denied` | QA encontró problemas: vuelve al autor | QA Denied |
+| `on hold` | Bloqueado, o esperando que se mergee otra historia | On Hold (en el Jira de Tacha es un **estado**, no un flag; verificar en cada tracker) |
+
+Reglas:
+- **La PR se abre al empezar la historia, no al terminarla.** Cada historia propia del sprint tiene PR desde el inicio: con la SPEC, o con un commit vacío (`git commit --allow-empty`). Así el equipo ve en GitHub quién trabaja en qué.
+- **Exactamente un label**, puesto en el mismo `gh pr create --label ...`. Los labels se reemplazan, nunca se acumulan.
+- **Una sola PR `in progress` por persona.** Las demás en `on hold`, `waiting qa`, `qa accepted` o `qa denied`. Revisar con `gh pr list --author "@me" --state open` antes de abrir o retomar una.
+- **No apilar ramas.** Si B depende de A sin mergear, B nace igual de `develop` y queda `on hold`; cuando A se mergea, B se rebasea sobre `develop` y pasa a `in progress`.
+- **Label y tarjeta siempre coinciden:** cada cambio de label va con su transición en el tracker en el mismo momento.
+- **Solo se mergea con `qa accepted`**, puesto por alguien que no es el autor. Un agente nunca se pone `qa accepted` a sí mismo ni mergea sin que se lo pidan.
+- Idealmente un check de CI lo hace cumplir (ramas, título, un label, una `in progress` por autor, y un `qa-gate` en rojo hasta `qa accepted`): ver `.github/workflows/gitflow.yml` del repo de Tacha o del `dev-template`.
+
 ## 2. Ticket/requirement codes
 
 Every piece of work needs a code before a branch exists. `Sistema/tickets.md` is the single source of truth for which prefix belongs to which course/project and what the next free number is — check it before naming a branch or writing a commit, and update the "Último usado" column in the same commit that consumes the number. Never invent or guess a number by re-reading git log; the table is authoritative (log is only the fallback if the table has drifted).
@@ -146,5 +167,6 @@ Rules specific to this variant:
 
 When asked to help with git operations under this skill:
 1. Ask for (or infer from context) the ticket/requirement code before naming a branch or writing a commit — don't invent branches without one.
+   In a repo using the Entregables variant, also apply §1c before opening or relabeling any PR: open it when the story starts, exactly one label, at most one `in progress` per person, tracker in sync.
 2. Default to the short-lived branch model above unless the user explicitly says the course requires full GitFlow with `release/*` branches — in that case, follow the required model but still enforce the ticket-code and commit-message conventions on top of it.
 3. When reviewing a PR, check first that the title/commits map cleanly to one ticket — flag scope creep before line-level comments.

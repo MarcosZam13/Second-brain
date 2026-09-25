@@ -9,6 +9,8 @@ tags: [gitflow, github, jira, pr-template, tacha]
 
 # Flujo de Git, labels de PR y tablero — Tacha
 
+> **Vigente desde 2026-09-24 (SCRUM-118):** la versión oficial vive en el repo, `CONTRIBUTING.md` + skill `.agents/skills/gitflow/SKILL.md`, y la hace cumplir el check `gitflow` del CI. Cambios respecto a esta nota: la clave es `SCRUM-{n}` (Jira), no `TACHA-{n}`; **`entregable-{n}` se crea al cierre de cada sprint** (Sprint 1 → `entregable-1` el lun 28 sep), no solo en las 2 entregas del curso; después de mergear un entregable a `main` se sincroniza `main` → `develop`; todo PR lleva exactamente un label desde que se abre y solo se mergea con `qa accepted`. Esta nota queda como historia de cómo se definió.
+
 Ver también: [[Proyectos/Tacha/README|README]] · [[Sistema/skills/gitflow-scrum/SKILL|gitflow-scrum]] · [[Sistema/tickets|tickets.md]]
 
 Repo de código: `MarcosZam13/tacha` (privado, GitHub). Este documento es lo que se le explica al resto del equipo cuando se una al repo.
@@ -41,6 +43,11 @@ Todo PR lleva exactamente un label de estos cinco, y se actualiza a mano según 
 | `on hold` | Bloqueado por algo externo (dependencia, decisión pendiente) | `#B60205` (rojo) |
 
 Flujo esperado: `in progress` → `waiting qa` → (`qa accepted` → merge) o (`qa denied` → vuelve a `in progress`). `on hold` puede aplicarse desde cualquier estado.
+
+**Reglas agregadas 2026-09-25 (SCRUM-119, PR #6):**
+- La PR se abre **al empezar** la historia, no al terminarla: con la SPEC o con un commit vacío, para que el equipo vea en GitHub quién trabaja en qué.
+- **Una sola PR `in progress` por persona**; las demás en `on hold`, `waiting qa`, `qa accepted` o `qa denied`. El check `gitflow` del CI lo verifica.
+- Historia que depende de otra sin mergear: nace igual de `develop` y queda `on hold` (no se apilan ramas); cuando la otra se mergea, se rebasea y pasa a `in progress`.
 
 Ya están creados en el repo (`gh label list` para verificar).
 
@@ -84,7 +91,7 @@ No hay integración de Jira disponible en este entorno todavía, así que este p
 To Do → In Progress → Waiting QA → (QA Denied → vuelve a In Progress) → QA Accepted → Done
 ```
 
-`On Hold` no es columna — es un estado/flag que se marca sobre la tarjeta sin moverla de columna (evita perder el progreso visual).
+~~`On Hold` no es columna — es un estado/flag que se marca sobre la tarjeta sin moverla de columna.~~ **Corregido 2026-09-25:** en el Jira real de Tacha `On Hold` es un **estado** propio (transición "On Hold" desde cualquier columna), no un flag. Los docs del repo se alinearon en SCRUM-119.
 
 Una vez creado el proyecto en Jira:
 1. Actualizar esta sección con la URL del proyecto y la clave (ej. `TACHA`).

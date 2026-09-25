@@ -22,7 +22,10 @@ Every UI feature lives in its own kebab-case folder (`components/<feature-name>/
     FeatureNameProps.interface.ts
   store/                       ← feature-level shared state, only if actually shared
   constants/                   ← feature-only constants (still follow constants-standards)
-  specs/SPEC.md                ← contract for the feature, see §2
+  specs/                       ← Spec-Driven Development, see §2
+    SPEC.md                    ← what and why (the contract)
+    plan.md                    ← how: files, data, flow, decisions
+    tasks.md                   ← ordered implementation steps
   tests/
     FeatureName.page.ts        ← Page Object, see unit-testing-standards
     FeatureName.test.tsx
@@ -57,7 +60,15 @@ Reuse existing components/constants/store patterns; which skills apply.
 - [ ] …
 ```
 
-Workflow: **Specify → Plan → Tasks → Implement → Validate.** Implement task by task; before calling the work done, check the result against the acceptance criteria — not against a re-guessed version of the requirement. If requirements change mid-implementation, update the spec first, then the code.
+Workflow: **Specify → Plan → Tasks → Implement → Validate**, and each of the first three stages leaves its own file in `specs/` (in the professor's reference repo `plan.md`/`tasks.md` are listed as optional; in Tacha and AsistenciasTEC all three are used):
+
+1. **Specify → `SPEC.md`** (template above): the *what* and *why*.
+2. **Plan → `plan.md`**: the *how*, derived from the spec and the applicable skills: file tree with each file's responsibility; data (tables, columns, access rules, RPCs/endpoints, anything still to verify against the real DB); the flow of one user action through the files; a `Decision | Alternative | Why this one` table whose "why" names a concrete consequence.
+3. **Tasks → `tasks.md`**: ordered checklist of small units, blocked ones marked with what they wait on; grouped by ticket if the feature spans several stories.
+4. **Implement** task by task, ticking `tasks.md`.
+5. **Validate** against the acceptance criteria in `SPEC.md`, not against a re-guessed version of the requirement.
+
+If requirements change mid-implementation, update `SPEC.md` first (and `plan.md` if the how changes), then the code. The three files ship in the same PR as the feature. Worked example: `components/shopping-list/specs/` in the Tacha repo (SCRUM-62).
 
 This is the same shape as the AI-agent workflow given in the course: spec written 100% by a human → agent interview to sharpen it → agent builds the component → unit tests → QA. `SPEC.md` is where step 2 (the spec) actually lives instead of staying only in someone's head or a Slack message.
 
@@ -140,7 +151,7 @@ Forbidden defaults: god component/ViewModel (unrelated responsibilities piled to
 
 ## 6. Checklist
 
-- [ ] Non-trivial work has `specs/SPEC.md` (or the acceptance criteria the user already gave, persisted there) and was validated against it
+- [ ] Non-trivial work has `specs/SPEC.md`, `specs/plan.md` and `specs/tasks.md` (acceptance criteria the user already gave are persisted in `SPEC.md`), and was validated against the spec
 - [ ] Feature lives under its own kebab-case folder with colocated `hooks/`, `models/`, `specs/`, `tests/`
 - [ ] Main `.tsx` return is a short composition of local minis / shared primitives, not a long monolith
 - [ ] No `useState`/`useEffect`/fetch/non-trivial handlers left in `.tsx` — logic lives in `use<Name>ViewModel.ts`
