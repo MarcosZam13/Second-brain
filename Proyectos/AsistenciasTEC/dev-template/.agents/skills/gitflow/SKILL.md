@@ -17,6 +17,17 @@ The model (branches, labels, tracker states, PR format) is defined in `GITFLOW.m
 3. If the story depends on another story that is not merged into `develop` yet: **don't** branch from the other ticket branch. Tell the person the story goes `on hold` until the other one merges.
 4. Uncommitted work from another ticket is committed on its own branch first (or left untouched); it never travels into the new branch.
 
+## Open the PR as soon as the story starts
+
+Every story the person owns in the current sprint gets its PR right away, before the code is written. Right after creating the branch:
+
+```bash
+git commit --allow-empty -m "chore({TICKET-ID}): open story PR"   # or commit the feature's spec
+git push -u origin ticket/{TICKET-ID}-short-description
+```
+
+Then open it as below: `in progress` if it's the story being worked on now, `on hold` if it can't start yet. Fill the body with what's known (intent, ticket, assignee) and complete it before `waiting qa`.
+
 ## Before opening a PR (or moving one to `in progress`)
 
 ```bash
@@ -46,6 +57,7 @@ Only with `qa accepted` set by someone other than the author. An agent never set
 
 ## Checklist before reporting a git operation as done
 
+- [ ] Every story the person owns in the sprint has an open PR with a status label
 - [ ] Branch has an allowed prefix and a ticket ID that exists in the tracker
 - [ ] Branch started from the base `GITFLOW.md` says (ticket branches: updated `develop`)
 - [ ] PR targets the right base and has exactly one status label

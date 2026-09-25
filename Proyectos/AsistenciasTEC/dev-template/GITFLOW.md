@@ -52,6 +52,8 @@ gitGraph
 
 ## PR status labels
 
+**The PR opens when the story starts, not when it's finished.** Every story a person owns in the current sprint has an open PR from the first moment, so the whole team can see on GitHub who is working on what. It opens even with no code yet: with the feature's spec, or with an empty commit (`git commit --allow-empty`). Label `in progress` if it's the story being worked on now, `on hold` if it can't start yet. The description is completed before moving it to `waiting qa`.
+
 Every PR carries **exactly one** status label from the moment it is opened, added in the same command (`gh pr create --label "in progress" ...`). There is no "open it now, label it later".
 
 | Label | Meaning | Who sets it | Tracker status |
