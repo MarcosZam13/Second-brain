@@ -47,6 +47,31 @@ gitGraph
 - `release-{N}` only merges into `main` once QA approves it — that's what "delivering" means in this model.
 - `hotfix/*` is the only branch type that comes directly from `main` — for something already delivered that breaks in production and can't wait for the next cycle. It never goes through `develop`/`release-{N}`.
 - Semantic commits: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`, with the ticket code in parentheses: `feat(TICKET-101): add feature`.
+- If there is no ticket for the work yet, create it in the tracker first, then branch.
+- Never commit or push directly to `main`, `develop`, or `release-{N}`. Everything enters through a PR.
+
+## PR status labels
+
+Every PR carries **exactly one** status label from the moment it is opened, added in the same command (`gh pr create --label "in progress" ...`). There is no "open it now, label it later".
+
+| Label | Meaning | Who sets it | Tracker status |
+|---|---|---|---|
+| `in progress` | Still being worked on | Author | In Progress |
+| `waiting qa` | Code complete, CI green, waiting for someone to test it | Author | Waiting QA |
+| `qa accepted` | Tested and approved: ready to merge | Reviewer (never the author) | QA Accepted |
+| `qa denied` | Problems found: back to the author | Reviewer | QA Denied |
+| `on hold` | Blocked by something external, or waiting for another story to merge | Anyone | On Hold |
+
+Flow: `in progress` → `waiting qa` → (`qa accepted` → merge) or (`qa denied` → back to `in progress`). `on hold` can replace any state. Labels replace each other, they never stack.
+
+Rules:
+
+- **Merge only with `qa accepted`**, set by someone who is not the author. An AI agent never sets `qa accepted` on its own work and never merges unless a person explicitly asks.
+- **One PR `in progress` per person.** All of that person's other open PRs are `on hold`, `waiting qa`, `qa accepted`, or `qa denied`. To resume an `on hold` PR, first move the current one to another state.
+- **No stacked branches.** If story B needs code from story A that is not in `develop` yet, B stays `on hold` until A gets `qa accepted` and merges; then B branches from the updated `develop`. Work on something else meanwhile.
+- **Label and tracker always agree.** Every label change comes with the equivalent transition on the ticket, at the same moment. Check how the tracker models each state before writing it down (e.g. whether "On Hold" is a real status or just a flag on the card) and keep this table in sync with it.
+
+These rules are enforced by `.github/workflows/gitflow.yml` (branch combinations, title format, exactly one label, one `in progress` per author) plus a `qa-gate` check that stays red until `qa accepted`. Make both checks required in the branch protection of `develop` and `main`.
 
 ## PR format
 

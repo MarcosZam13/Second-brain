@@ -1,0 +1,83 @@
+name: Gitflow
+
+# Enforces GITFLOW.md: branch source/target combinations, PR title format,
+# exactly one status label, and one "in progress" PR per author.
+# Set TICKET_PREFIX to the tracker's project key (e.g. "ABC" for ABC-123).
+on:
+  pull_request:
+    types: [opened, reopened, edited, synchronize, labeled, unlabeled]
+    branches: [develop, main, "release-*"]
+
+permissions:
+  pull-requests: read
+
+env:
+  TICKET_PREFIX: "TICKET"
+
+jobs:
+  gitflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate branches, title and labels
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          BASE_REF: ${{ github.base_ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Labels are read live (not from the event payload) so a re-run sees the current state.
+          LABELS=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json labels -q '[.labels[].name]')
+          errors=0
+          fail() { echo "::error::$1"; errors=$((errors+1)); }
+
+          slug="${TICKET_PREFIX}-[0-9]+-[a-z0-9]+(-[a-z0-9]+)*"
+          case "$BASE_REF" in
+            develop)
+              [[ "$HEAD_REF" =~ ^ticket/$slug$ || "$HEAD_REF" == "main" ]] \
+                || fail "Only ticket/${TICKET_PREFIX}-{n}-description (or main, to sync) can target develop. Branch: $HEAD_REF" ;;
+            release-*)
+              [[ "$HEAD_REF" =~ ^qa-fix/$slug$ ]] \
+                || fail "Only qa-fix/${TICKET_PREFIX}-{n}-description can target $BASE_REF. Branch: $HEAD_REF" ;;
+            main)
+              [[ "$HEAD_REF" =~ ^release-[0-9]+$ || "$HEAD_REF" =~ ^hotfix/$slug$ ]] \
+                || fail "Only release-{N} or hotfix/${TICKET_PREFIX}-{n}-description can target main. Branch: $HEAD_REF" ;;
+          esac
+
+          [[ "$PR_TITLE" =~ ^(feat|fix|docs|refactor|test|chore|style|perf|ci)\((${TICKET_PREFIX}-[0-9]+|release-[0-9]+)\):\ .+ ]] \
+            || fail "Invalid title. Format: {type}(${TICKET_PREFIX}-{n}): description  (or chore(release-{N}): ... for release PRs)"
+
+          count=$(echo "$LABELS" | jq '[.[] | select(. == "in progress" or . == "waiting qa" or . == "qa accepted" or . == "qa denied" or . == "on hold")] | length')
+          [[ "$count" -eq 1 ]] \
+            || fail "A PR needs exactly one status label (in progress, waiting qa, qa accepted, qa denied, on hold). It has $count."
+
+          # One "in progress" PR per author: the rest go on hold / waiting qa / qa accepted / qa denied.
+          if echo "$LABELS" | jq -e 'index("in progress")' > /dev/null; then
+            others=$(gh pr list --repo "$REPO" --author "$PR_AUTHOR" --state open --label "in progress" \
+              --json number --jq "[.[] | select(.number != $PR_NUMBER) | \"#\\(.number)\"] | join(\", \")")
+            [[ -z "$others" ]] \
+              || fail "$PR_AUTHOR already has another PR in 'in progress' ($others). Only one per person: move it to 'on hold' or 'waiting qa' first."
+          fi
+
+          [[ $errors -eq 0 ]] || exit 1
+          echo "Gitflow OK: $HEAD_REF -> $BASE_REF"
+
+  qa-gate:
+    # Stays red until a reviewer sets "qa accepted": do not merge while it fails.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require qa accepted label
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          LABELS=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json labels -q '[.labels[].name]')
+          if echo "$LABELS" | jq -e 'index("qa accepted")' > /dev/null; then
+            echo "QA accepted, OK to merge."
+          else
+            echo "::error::No 'qa accepted' label yet. Do not merge (GITFLOW.md)."
+            exit 1
+          fi

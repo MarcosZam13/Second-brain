@@ -24,7 +24,7 @@ See also: `SCRUM.md` · `USER_STORIES.md`
 
 ## 4. Repository structure
 
-(real map of the repo's folders — keep this updated, don't leave a generic example)
+(real map of the repo's folders, following `project-structure`: `app/` for routing only, shared folders as its siblings. Keep this updated, don't leave a generic example. Project-relative paths only.)
 
 ## 5. Data model (high level)
 

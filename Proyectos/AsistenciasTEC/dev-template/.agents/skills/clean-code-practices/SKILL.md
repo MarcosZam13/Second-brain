@@ -54,22 +54,18 @@ Rule of thumb: **don't introduce a pattern to look sophisticated.** Introduce it
 
 ## 4. Repository structure — the part that determines if someone "gets lost"
 
-A stranger should be able to predict where a file lives without searching. Baseline (adapt names, keep the logic):
+A stranger should be able to predict where a file lives without searching. The exact folder layout (routing-only `app/`, shared folders as its siblings, import alias, how to write paths in docs) is defined in `project-structure` (`.agents/skills/project-structure/SKILL.md`); load it whenever a file's location is in question. Summary:
 
 ```
-repo/
-├── README.md                 ← what this is, how to run it, how to deploy it. Always first thing anyone opens.
-├── ARCHITECTURE.md            ← architecture decisions, data model, diagrams
-├── app/ or src/
-│   ├── app/ or pages/         ← routes only, thin — no business logic here
-│   ├── components/            ← UI, organized by domain when it grows
-│   ├── features/ or modules/  ← business logic grouped by domain, not by technical layer
-│   ├── services/               ← API clients, third-party wrappers, pure utility functions
-│   ├── hooks/                 ← reusable stateful logic (React)
-│   ├── types/                 ← shared TypeScript types
-│   └── constants/              ← env-derived config, magic strings/numbers named
-├── tests/                     ← mirrors src/ structure, includes end-to-end tests
-└── .github/workflows/         ← CI/CD
+<project root>/
+├── README.md          ← what this is, how to run it, how to deploy it. Always first thing anyone opens.
+├── ARCHITECTURE.md    ← architecture decisions, data model, diagrams
+├── app/               ← routes only, thin, no business logic and no shared folders inside
+├── components/        ← UI, one folder per feature/domain
+├── constants/ hooks/ providers/ services/ store/ types/ utils/
+│                      ← shared code, siblings of app/ (never nested in it)
+├── e2e/ or tests/     ← end-to-end tests (unit tests colocated with the feature if the repo says so)
+└── .github/workflows/ ← CI/CD
 ```
 
 Key structural rules:
@@ -96,6 +92,6 @@ Key structural rules:
 
 When asked to write or review code with this skill active:
 1. Check naming and function size first — these are the cheapest fixes with the highest readability payoff.
-2. Check whether the file is in the right place per the structure above; suggest a move if not.
+2. Check whether the file is in the right place per `project-structure`; suggest a move if not.
 3. Only suggest a design pattern if there's a concrete duplication/complexity problem it solves — name the problem, not just the pattern.
 4. If reviewing an existing repo, flag structural issues before line-level nitpicks — structure is what determines whether someone gets lost.

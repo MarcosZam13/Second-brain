@@ -38,4 +38,4 @@ Use plain language: `As a {role}, I want {action}, so that {benefit}.` with Gher
 1. If a section in any of the three files is still a placeholder, don't invent content (stack, roles, epics) that hasn't actually been confirmed by the team/stakeholders.
 2. When a new epic or major scope decision lands, update `SCRUM.md`'s epic table before writing stories for it.
 3. When writing a story, check whether it implies an architecture decision not yet in `ARCHITECTURE.md` §6 — flag it rather than silently leaving the doc stale.
-4. Cross-reference `clean-code-practices` for repo structure conventions the architecture doc should reflect accurately, and `GITFLOW.md` for how stories map to ticket codes.
+4. Cross-reference `project-structure` for the folder layout and path conventions `ARCHITECTURE.md` §4 must reflect accurately, and `GITFLOW.md` for how stories map to ticket codes.
